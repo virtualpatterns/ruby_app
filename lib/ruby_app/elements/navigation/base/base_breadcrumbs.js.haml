@@ -1,0 +1,10 @@
+- self.rendered?(__FILE__) do
+  :plain
+    // #{__FILE__}
+    $(document).ready(function() {
+      $("div.breadcrumbs a").click(function(event) {
+        event.preventDefault();
+        RubyApp.sendEvent({_class:'RubyApp::Elements::Navigation::Breadcrumbs::NavigatedEvent', source_id:$(this).parent().attr('id'), page_id:$(this).attr('page_id')});
+      });
+    });
+= yield

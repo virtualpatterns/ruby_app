@@ -1,0 +1,7 @@
+/ 
+  #{__FILE__}
+%div.breadcrumbs{attributes}
+  - if RubyApp::Session.pages.length > 1
+    - page = RubyApp::Session.pages[-2]
+    %a.breadcrumb{:href => '', :page_id => page.element_id}
+      = RubyApp::Elements::Navigation::Base::BaseBreadcrumbs.translate.back

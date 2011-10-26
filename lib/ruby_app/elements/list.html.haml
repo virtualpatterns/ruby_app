@@ -1,0 +1,9 @@
+/
+  #{__FILE__}
+%ul.list{attributes}
+  - is_even = true
+  - self.items.each_with_index do |item, index|
+    %li.item{:class => is_even ? 'even' : 'odd'}
+      %a.item{:href => '', :index => index}
+        = yield(:item, item, index) || item
+    - is_even = !is_even

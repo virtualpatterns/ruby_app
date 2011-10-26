@@ -1,0 +1,9 @@
+- self.content_for(:body) do
+  /
+    #{__FILE__}
+  %div.title
+    = yield :title
+  %div.content
+    = yield :content
+  %div.footer
+    = yield :footer

@@ -1,0 +1,13 @@
+- self.content_for(:body) do
+  /
+    #{__FILE__}
+  %div.header
+    %div.left
+      = @breadcrumbs.render(:html)
+    %div.center
+      = self.translate.title
+    %div.right
+      - unless RubyApp::Session.pages.last.class == @settings.page
+        = @settings.render(:html)
+  %div.content
+    = yield :content

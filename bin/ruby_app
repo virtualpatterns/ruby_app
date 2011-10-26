@@ -1,0 +1,168 @@
+#!/usr/bin/env ruby
+require 'rubygems'
+require 'bundler/setup'
+
+require 'fileutils'
+require 'rack'
+require 'term/ansicolor'
+
+require 'ruby_app'
+require 'yaml'
+
+extend Term::ANSIColor
+
+def usage
+  <<-USAGE
+usage: ruby_app <command> <arguments>
+
+Available commands include:
+  create application    Create a basic application in the current folder named <arguments>.
+  create page           DISABLED: Create a baisc page consisting of .rb, .html, .css. and .js files (not implemented)
+  console               Open an interactive console
+  run                   Run the application identified by the config.ru in <arguments>
+
+USAGE
+end
+
+def create_folder(destination, replacements = [])
+  _destination = destination
+  replacements.each do |replacement|
+    _destination = _destination.gsub(replacement[:pattern], replacement[:text])
+  end
+  unless File.exists?(File.dirname(_destination))
+    create_folder(File.dirname(_destination))
+  end
+  unless File.exists?(_destination)
+    action = :created
+    FileUtils.mkdir(_destination)
+  else
+    action = :skipped
+  end
+  puts "#{_destination.sub(FileUtils.pwd, '.')} ... #{bold}#{action}#{clear}"
+end
+
+def copy_file(source, destination, replacements = [])
+  _destination = File.join(destination, File.basename(source))
+  replacements.each do |replacement|
+    _destination = _destination.gsub(replacement[:pattern], replacement[:text])
+  end
+  action = nil
+  if File.exists?(_destination)
+    if File.mtime(source) > File.mtime(_destination)
+      action = :replaced
+    else
+      action = :skipped
+    end
+  else
+    action = :created
+  end
+  unless action == :skipped
+    FileUtils.mv(_destination, "#{_destination}.replaced", :force => true) if action == :replaced
+    FileUtils.cp(source, File.dirname(_destination))
+    FileUtils.mv(File.join(File.dirname(_destination), File.basename(source)), _destination) unless File.join(File.dirname(_destination), File.basename(source)) == _destination
+    replacements.each do |replacement|
+      system "sed 's/#{replacement[:pattern].source}/#{replacement[:text]}/' < '#{_destination}' > '#{_destination}.out'"
+      FileUtils.rm(_destination)
+      FileUtils.mv("#{_destination}.out", _destination)
+    end
+  end
+  puts "#{_destination.sub(FileUtils.pwd, '.')} ... #{bold}#{action}#{clear}"
+end
+
+def copy_folder(source, destination, replacements = [])
+  create_folder(destination, replacements)
+  Dir.new(source).each do |item|
+    unless item.start_with?('.')
+      if File.directory?(File.join(source, item))
+        copy_folder(File.join(source, item), File.join(destination, File.basename(item)), replacements)
+      else
+        copy_file(File.join(source, item), destination, replacements)
+      end
+    end
+  end
+end
+
+def create_application
+  argument = $*[2]
+  _class = upcode(argument)
+  folder = downcode(argument)
+  full_folder = File.join(FileUtils.pwd, downcode(argument))
+  replacements =  [
+                    {
+                      :pattern => /_APPLICATION_DOWNCODE_/,
+                      :text => folder
+                    },
+                    {
+                      :pattern => /_APPLICATION_UPCODE_/,
+                      :text => _class
+                    }
+                  ]
+  source = File.join(File.dirname(__FILE__), %w[.. lib ruby_app templates application])
+  copy_folder(source, full_folder, replacements)
+end
+
+#def create_page
+#  argument = $*[2]
+#  folder = File.dirname(File.join(File.join(FileUtils.pwd, %w[elements arguments]), downcode(argument).split('/')))
+#  namespace_class = "#{upcode(File.basename(FileUtils.pwd))}::Elements::Pages::#{upcode(argument)}"
+#  _class = namespace_class.split('::').last
+#  replacements =  [
+#                   {
+#                     :pattern => /_PAGE_DOWNCODE_/,
+#                     :text => downcode(_class)
+#                   },
+#                   {
+#                     :pattern => /_PAGE_UPCODE_/,
+#                     :text => _class
+#                   }
+#                 ]
+#  source = File.join(File.dirname(__FILE__), %w[.. lib ruby_app templates argument])
+#  copy_folder(source, folder, replacements)
+#end
+
+def console
+  argument = $*[1]
+  system("irb --back-trace-limit 100 -r #{argument || ( File.exists?(File.join(FileUtils.pwd, %w[console.rb])) ? File.join(FileUtils.pwd, %w[console.rb]) : File.join(File.dirname(__FILE__), %w[console.rb]) )}")
+end
+
+def run
+  argument = $*[1]
+  Rack::Server.start(:config => argument || File.join(FileUtils.pwd, %w[config.ru]))
+end
+
+def downcode(value)
+  value = value.gsub(/::/, '/')
+  value = value.gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2')
+  value = value.gsub(/([a-z\d])([A-Z])/,'\1_\2')
+  value = value.tr("-", "_")
+  value.downcase
+end
+
+def upcode(value)
+  value = value.gsub(/\/(.?)/) { "::#{$1.upcase}" }
+  value.gsub(/(?:^|_)(.)/) { $1.upcase }
+end
+
+unless $*[0]
+  puts usage
+else
+  case $*[0].downcase
+    when 'create'
+      case $*[1].downcase
+        when 'application'
+          create_application
+        # when 'page'
+        #  create_page
+        else
+          puts "Blank or unrecognized command '#{$*[1].downcase}'"
+          puts usage
+      end
+    when 'console'
+      console
+    when 'run'
+      run
+    else
+      puts "Blank or unrecognized command '#{$*[0].downcase}'"
+      puts usage
+  end
+end

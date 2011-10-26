@@ -1,0 +1,10 @@
+- self.rendered?(__FILE__) do
+  :plain
+    // #{__FILE__}
+    $(document).ready(function() {
+      $('div.markdown a').live('click', function(event) {
+        event.preventDefault();
+        RubyApp.sendEvent({_class:'RubyApp::Elements::Markdown::NavigatedEvent', source_id:$(this).parents('div.markdown').attr('id'), name:$(this).attr('href')});
+      });
+    });
+= yield

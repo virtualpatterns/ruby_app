@@ -1,0 +1,12 @@
+- self.rendered?(__FILE__) do
+  :sass
+    /* #{__FILE__}
+    body 
+      > div.overlay 
+        > div.dialog 
+          > div.title
+            font-weight: bold
+            padding-bottom: 10px
+          > div.footer
+            padding-top: 10px
+= yield

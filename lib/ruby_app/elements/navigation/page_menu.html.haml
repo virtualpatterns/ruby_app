@@ -1,0 +1,12 @@
+/ 
+  #{__FILE__}
+%div.menu{attributes}
+  - self.pages.each do |page|
+    - if page == self.current_page
+      %div.current
+        %span.current{:page => page}
+          = page.translate.title
+    - else
+      %div.page
+        %a.page{:href => '', :page => page}
+          = page.translate.title

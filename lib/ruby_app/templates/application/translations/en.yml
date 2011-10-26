@@ -1,0 +1,5 @@
+_APPLICATION_DOWNCODE_:
+  elements:
+    pages:
+      default_page:
+        title: Home

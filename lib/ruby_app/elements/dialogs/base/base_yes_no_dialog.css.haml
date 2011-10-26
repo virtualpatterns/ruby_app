@@ -1,0 +1,15 @@
+- self.rendered?(__FILE__) do
+  :sass
+    /* #{__FILE__}
+    body
+      > div.overlay
+        > div.dialog
+          > div.footer
+            text-align: right
+            width: 100%
+            a:first-child
+              padding-left: 0px
+            a
+              padding-left: 10px
+= RubyApp::Elements::Link.render(:css)
+= yield

@@ -1,0 +1,125 @@
+ruby_app:
+  elements:
+    dialogs:
+      base:
+        base_close_dialog:
+          close:
+            body: Close
+        base_yes_no_dialog:
+          _yes:
+            body: 'Yes'
+          _no:
+            body: 'No'
+      calendars:
+        month_dialog:
+          today:
+            body: Today
+          cancel:
+            body: Cancel
+    navigation:
+      base:
+        base_breadcrumbs:
+          back: Back
+      back_button:
+        body: Back
+    page:
+      quit: Quit
+    pages:
+      base:
+        base_blank_page:
+          settings:
+            body: Settings
+      test_pages:
+        default_test_page:
+          title: Test Pages
+          content:
+            body: |
+              [`DialogTestPage`](RubyApp::Elements::Pages::TestPages::DialogTestPage) ... show a variety of dialogs (e.g. busy dialog, exception dialog, message dialog, month dialog, etc.)
+
+              [`ListTestPage`](RubyApp::Elements::Pages::TestPages::ListTestPage) ... pick from a list of items
+
+              [`GoogleAuthenticationPage`](go_google_authentication) ... re/authenticate using Google
+
+              [`MyOpenIDAuthenticationPage`](go_my_open_id_authentication) ... re/authenticate using myOpenID
+
+              [`YahooAuthenticationPage`](go_yahoo_authentication) ... re/authenticate using Yahoo!
+
+              [`InputTestPage`](RubyApp::Elements::Pages::TestPages::InputTestPage) ... show a variety of input controls (e.g. simple input, duration input, etc.)
+
+          busy_dialog:
+            message: Retrieving authentication information ...
+        dialog_test_page:
+          title: Dialog Test Page
+          content:
+            body: |
+              [`BusyDialog`](do_busy_dialog) ... show and then hide a 'busy' dialog for 30 seconds.
+
+              [`ConfirmationDialog`](do_confirmation_dialog) ... ask for confirmation.
+
+              [`ExceptionDialog`](do_exception_dialog) ... raise an exception and show the `class` and `message` properties.
+
+              [`MessageDialog`](do_message_dialog) ... show a sample message dialog.
+
+              [`MonthDialog`](do_month_dialog) ... show a calendar month dialog, hide it when a date is selected, and then show the selected date (the last date you selected was <span id='last_value'>(nothing)</span>).
+          busy_dialog:
+            message: Busy dialog ...
+          confirmation_dialog:
+            title: Confirmation Dialog
+            message: Are you sure?
+            message_dialog:
+              title: You selected ...
+              message: %1
+          exception: Exception dialog
+          message_dialog:
+            message:
+              title: Message Dialog
+              message: This is a Message Dialog
+          month_dialog:
+            title: Month Dialog
+            message_dialog:
+              title: You selected ...
+              message: %1
+        input_test_page:
+          title: Input Test Page
+          label:
+            input: Input
+            duration_input: DurationInput
+          message_dialog:
+            message:
+              title: Input Test
+              message: You input '%1'.
+        list_test_page:
+          title: List Test Page
+          message_dialog:
+            message:
+              title: List Test
+              message: You selected the item '%1'.
+      default_page:
+        title: Home
+        content:
+          body: |
+            This is the default start page for your application.  Click [here](go_test) to go to the test pages.
+      authentication:
+        open_id:
+          authentication_page:
+            busy_dialog:
+              message: Please wait ...
+          google_authentication_page:
+            title: Google Authentication
+          my_open_id_authentication_page:
+            title: myOpenID Authentication
+          yahoo_authentication_page:
+            title: Yahoo! Authentication
+      settings_page:
+        title: Settings
+        content:
+          body: |
+            You are currently logged in as #{(RubyApp::Session.identity ? RubyApp::Session.identity.url : '(not logged in)')}
+
+            Load or reload the [Mobile](do_load_theme_mobile) theme.
+
+            [Refresh](do_reload_translations) the translation file(s).
+
+            [Quit](do_quit) the session.
+      quit_page:
+        title: Quit

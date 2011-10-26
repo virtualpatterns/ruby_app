@@ -1,0 +1,18 @@
+- self.content_for(:title) do
+  /
+    #{__FILE__}
+  = @title
+- self.content_for(:content) do
+  /
+    #{__FILE__}
+  = @month.render(:html)
+- self.content_for(:footer) do
+  /
+    #{__FILE__}
+  %div.buttons
+    %div.left
+      = @today.render(:html) do |element|
+        - element.content_for(:body, RubyApp::Elements::Dialogs::Calendars::MonthDialog.translate.today.body)
+    %div.right
+      = @cancel.render(:html) do |element|
+        - element.content_for(:body, RubyApp::Elements::Dialogs::Calendars::MonthDialog.translate.cancel.body)

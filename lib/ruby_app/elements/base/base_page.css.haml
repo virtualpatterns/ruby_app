@@ -1,0 +1,13 @@
+- self.rendered?(__FILE__) do
+  :sass
+    /* #{__FILE__}
+    body 
+      > div.overlay
+        display: none
+        height: 100%
+        left: 0px
+        position: absolute
+        top: 0px
+        width: 100%
+        z-index: 1
+= yield

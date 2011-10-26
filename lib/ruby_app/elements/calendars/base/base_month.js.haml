@@ -1,0 +1,18 @@
+- self.rendered?(__FILE__) do
+  :plain
+    // #{__FILE__}
+    $(document).ready(function() {
+      $("div.month table thead tr td a.previous").live('click', function(event) {
+        event.preventDefault();
+        RubyApp.sendEvent({_class:'RubyApp::Elements::Calendars::Month::MovedEvent', source_id:$(this).parents('div.month').attr('id'), unit:'month', amount:-1});
+      });
+      $("div.month table thead tr td a.next").live('click', function(event) {
+        event.preventDefault();
+        RubyApp.sendEvent({_class:'RubyApp::Elements::Calendars::Month::MovedEvent', source_id:$(this).parents('div.month').attr('id'), unit:'month', amount:1});
+      });
+      $("div.month table tbody tr td a.day").live('click', function(event) {
+        event.preventDefault();
+        RubyApp.sendEvent({_class:'RubyApp::Elements::Calendars::Month::ChangedEvent', source_id:$(this).parents('div.month').attr('id'), date:$(this).attr('date')});
+      });
+    });
+= yield

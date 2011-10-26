@@ -1,0 +1,10 @@
+- self.rendered?(__FILE__) do
+  :plain
+    // #{__FILE__}
+    $(document).ready(function() {
+      $('.click').live('click', function(event) {
+        event.preventDefault();
+        RubyApp.sendEvent({_class:'RubyApp::Elements::Click::ClickedEvent', source_id:$(this).attr('id')});
+      });
+    });
+= yield

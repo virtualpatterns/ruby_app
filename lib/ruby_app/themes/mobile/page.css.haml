@@ -1,0 +1,18 @@
+- self.rendered?(__FILE__) do
+  :sass
+    /* #{__FILE__}
+    @import '#{File.join(File.dirname(__FILE__), %w[colors.sass])}'
+    body
+      background-color: $page_background
+      color: $page_foreground
+      font:
+        family: Verdana
+        size: 12pt
+      margin: 0px
+      > div.overlay
+        background-color: $overlay_background
+    a
+      color: $page_link
+      font-weight: bold
+      text-decoration: inherit
+= yield

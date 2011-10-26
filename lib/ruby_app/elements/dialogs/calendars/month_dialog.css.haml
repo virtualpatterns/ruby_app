@@ -1,0 +1,19 @@
+- self.rendered?(__FILE__) do
+  :sass
+    /* #{__FILE__}
+    body
+      > div.overlay
+        > div.dialog
+          > div.footer
+            > div.buttons
+              display: table
+              width: 100%
+              > div
+                display: table-cell
+              > div.left
+                text-align: left
+              > div.right
+                text-align: right
+= RubyApp::Elements::Calendars::Month.render(:css)
+= RubyApp::Elements::Link.render(:css)
+= yield

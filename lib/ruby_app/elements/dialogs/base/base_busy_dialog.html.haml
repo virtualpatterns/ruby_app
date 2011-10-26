@@ -1,0 +1,7 @@
+- self.content_for(:body) do
+  /
+    #{__FILE__}
+  %div.image
+    %img{:src => '/ruby_app/resources/elements/dialogs/base/base_busy_dialog.gif'}
+  %div.content
+    = @message

@@ -1,0 +1,18 @@
+- self.rendered?(__FILE__) do
+  :sass
+    /* #{__FILE__}
+    body 
+      > div.body 
+        > div.header 
+          display: table
+          width: 100%
+          > div
+            display: table-cell
+            width: 33%
+          > div.center
+            text-align: center
+          > div.right
+            text-align: right
+= RubyApp::Elements::Navigation::Breadcrumbs.render(:css)
+= RubyApp::Elements::Navigation::PageLink.render(:css)
+= yield

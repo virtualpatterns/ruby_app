@@ -1,0 +1,97 @@
+- self.rendered?(__FILE__) do
+  :plain
+    // #{__FILE__}
+    var RubyApp = new function() {
+      this.translation = {code:'#{RubyApp::Language.locale.code}', title:'#{RubyApp::Language.locale.title}'},
+      this.interval = #{self.interval * 1000};
+      this._interval = 0;
+      this.sendEvent = function(event) {
+        response = $.post(location.href, event);
+        response
+          .success( function(event) {
+            $.each(event.statements, function(index, statement) {
+              eval(statement);
+            } );
+          } )
+      },
+      this.alert = function(message) {
+        alert(message);
+      },
+      this.refresh = function() {
+        location.assign(location.pathname);
+      },
+      this.go = function(url) {
+        location.assign(url);
+      },
+      this.show = function(id) {
+        response = $.get('/#{RubyApp::Language.locale.code}/elements/' + id + '.html');
+        response
+          .success( function(dialog) {
+            var overlay = $('body div.overlay');
+            overlay.append(dialog);
+            overlay.show();
+            centerOverlay = function() {
+              var overlay = $('body div.overlay');
+              var _document = $(document);
+              overlay.css('width', '0px');
+              overlay.css('height', '0px');
+              overlay.css('width', _document.width() + 'px');
+              overlay.css('height', _document.height() + 'px');
+            };
+            centerDialog = function(id) {
+              var dialog = $('#'+id);
+              var _window = $(window);
+              dialog.css('top', _window.scrollTop() + (_window.height() - dialog.outerHeight(true)) / 2 + 'px');
+              dialog.css('left', _window.scrollLeft() + (_window.width() - dialog.outerWidth(true)) / 2 + 'px');
+            };
+            centerOverlay();
+            centerDialog(id);
+            $(window).bind('resize', function() {
+              centerOverlay();
+              centerDialog(id);
+            } );
+            $(window).bind('scroll', function() {
+              centerDialog(id);
+            } );
+            RubyApp.sendEvent({_class:'RubyApp::Elements::Dialog::ShownEvent', source_id:id});
+          } );
+      },
+      this.hide = function(id) {
+        $(window).unbind('scroll');
+        $(window).unbind('resize');
+        $('body div.overlay').hide();
+        $('#'+id).remove();
+        RubyApp.sendEvent({_class:'RubyApp::Elements::Dialog::HiddenEvent', source_id:id});
+      },
+      this.updateElement = function(id) {
+        response = $.get('/#{RubyApp::Language.locale.code}/elements/' + id + '.html');
+        response
+          .success( function(content) {
+            $('#'+id).replaceWith(content);
+          } );
+      },
+      this.updateText = function(selector, value) {
+        $(selector).text(value);
+      },
+      this.updateValue = function(selector, value) {
+        $(selector).val(value);
+      }
+    };
+
+    $(window).load(function() {
+      RubyApp.sendEvent({_class:'RubyApp::Elements::Page::LoadedEvent', source_id:$('html').attr('id')});
+      if ( RubyApp.interval > 0 ) {
+        RubyApp._interval = window.setInterval(function() {
+          RubyApp.sendEvent({_class:'RubyApp::Elements::Page::TriggeredEvent', source_id:$('html').attr('id')});
+        }, RubyApp.interval);
+      }
+    });
+
+    $(window).unload(function() {
+      if ( RubyApp.interval > 0 ) {
+        window.clearInterval(RubyApp._interval);
+      }
+      RubyApp.sendEvent({_class:'RubyApp::Elements::Page::ReleasedEvent', source_id:$('html').attr('id')});
+    });
+
+= yield

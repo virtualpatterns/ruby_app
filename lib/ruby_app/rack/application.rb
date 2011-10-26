@@ -1,0 +1,24 @@
+module RubyApp
+
+  module Rack
+    require 'ruby_app/application'
+    require 'ruby_app/log'
+
+    class Application
+
+      def initialize(application, options = {})
+        @application = application
+        RubyApp::Application.create(options)
+      end
+
+      def call(environment)
+        RubyApp::Application.execute(environment) do
+          return @application.call(environment)
+        end
+      end
+
+    end
+
+  end
+
+end
