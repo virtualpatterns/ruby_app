@@ -1,7 +1,5 @@
 #\ --warn --port 8008 --pid ./rack.pid
-
-$ROOT = File.expand_path(File.join(File.dirname(__FILE__), %w[.]))
-$LOAD_PATH.unshift $ROOT unless $LOAD_PATH.include?($ROOT)
+$LOAD_PATH.unshift File.expand_path(File.join(File.dirname(__FILE__), %w[lib]))
 
 require 'rubygems'
 require 'bundler/setup'
@@ -12,9 +10,9 @@ require 'ruby_app/rack/application'
 require 'ruby_app/rack/route'
 require 'ruby_app/version'
 
-require 'application'
-require 'session'
-require 'version'
+require '_APPLICATION_DOWNCODE_/application'
+require '_APPLICATION_DOWNCODE_/session'
+require '_APPLICATION_DOWNCODE_/version'
 
 use Rack::ShowExceptions
 use Rack::Session::Pool
