@@ -28,13 +28,10 @@ module RubyApp
         protected
 
           def on_changed(event)
-            duration = ChronicDuration.parse(event.value)
-            if duration
-              @duration = duration
-              @value = ChronicDuration.output(@duration)
-              event.update_value("##{self.element_id}", @value)
-              changed(event)
-            end
+            @duration = event.value ? ChronicDuration.parse(event.value) : nil
+            @value = @duration ? ChronicDuration.output(@duration) : nil
+            event.update_value("##{self.element_id}", @value)
+            changed(event)
           end
 
       end
