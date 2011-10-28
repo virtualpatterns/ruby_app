@@ -1,3 +1,8 @@
+require 'rubygems'
+require 'bundler/setup'
+
+require 'haml'
+
 require 'ruby_app/mixins/render'
 require 'ruby_app/mixins/template'
 
@@ -7,6 +12,8 @@ describe RubyApp::Mixins::Render do
 
     class TestA
       extend RubyApp::Mixins::Template
+      include Haml::Helpers
+      extend Haml::Helpers
       extend RubyApp::Mixins::Render
       include RubyApp::Mixins::Render
       template_path(:all, File.dirname(__FILE__))
@@ -27,6 +34,8 @@ describe RubyApp::Mixins::Render do
 
     class TestE
       extend RubyApp::Mixins::Template
+      include Haml::Helpers
+      extend Haml::Helpers
       extend RubyApp::Mixins::Render
       include RubyApp::Mixins::Render
       template_path(:all, File.dirname(__FILE__))
