@@ -1,10 +1,10 @@
-*.gem
 .bundle
 .DS_Store
 .idea
 .sass-cache
-chromedriver.log
-rack.pid
+*.gem
+*.log
+*.pid
 lib/ruby_app/elements/pages/authentication/open_id/associations
 lib/ruby_app/elements/pages/authentication/open_id/nonces
 lib/ruby_app/elements/pages/authentication/open_id/temp
