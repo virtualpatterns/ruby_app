@@ -18,6 +18,16 @@ module RubyApp
       @environment = {}
     end
 
+    def start!
+      RubyApp::Log.open!
+      RubyApp::Configuration.load!
+    end
+
+    def stop!
+      RubyApp::Configuration.unload!
+      RubyApp::Log.close!
+    end
+
     def self.get
       @@_application ||= nil
     end
@@ -32,13 +42,11 @@ module RubyApp
       _options.configuration_paths = [File.join(RubyApp::ROOT, %w[config.yml])] + ( _options.configuration_paths.is_a?(Array) ? _options.configuration_paths : [_options.configuration_paths] )
       _options.translations_paths = [File.join(RubyApp::ROOT, %w[translations])] + ( _options.translations_paths.is_a?(Array) ? _options.translations_paths : [_options.translations_paths] )
       @@_application = _options.application_class.new(_options)
-      RubyApp::Log.open!
-      RubyApp::Configuration.load!
+      @@_application.start!
     end
 
     def self.destroy!
-      RubyApp::Configuration.unload!
-      RubyApp::Log.close!
+      @@_application.stop!
       @@_application = nil
     end
 
