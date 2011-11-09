@@ -1,5 +1,5 @@
 Feature: Default Page
 
   Scenario: View the default page
-    Given I am viewing "/en"
-    Then I should see "This is the default start page"
+    Given I am viewing "/"
+    Then I should see "Click here to go to the test pages"

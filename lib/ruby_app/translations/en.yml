@@ -34,40 +34,59 @@ ruby_app:
           title: Test Pages
           content:
             body: |
-              [`DialogTestPage`](RubyApp::Elements::Pages::TestPages::DialogTestPage) ... show a variety of dialogs (e.g. busy dialog, exception dialog, message dialog, month dialog, etc.)
+              [`ButtonTestPage`](RubyApp::Elements::Pages::TestPages::ButtonTestPage) ... A page with a single, clickable button
 
-              [`ListTestPage`](RubyApp::Elements::Pages::TestPages::ListTestPage) ... pick from a list of items
+              [`DialogTestPage`](RubyApp::Elements::Pages::TestPages::DialogTestPage) ... A page with links to show a variety of dialogs (e.g. busy dialog, exception dialog, message dialog, month dialog, etc.)
 
-              [`GoogleAuthenticationPage`](go_google_authentication) ... re/authenticate using Google
+              [`ExceptionTestPage`](RubyApp::Elements::Pages::TestPages::ExceptionTestPage) ... A page that raises an exception when rendered
 
-              [`MyOpenIDAuthenticationPage`](go_my_open_id_authentication) ... re/authenticate using myOpenID
+              [`InputTestPage`](RubyApp::Elements::Pages::TestPages::InputTestPage) ... A page with a variety of input controls (e.g. simple input, duration input, etc.)
 
-              [`YahooAuthenticationPage`](go_yahoo_authentication) ... re/authenticate using Yahoo!
+              [`LinkTestPage`](RubyApp::Elements::Pages::TestPages::LinkTestPage) ... A page with a single, clickable link
 
-              [`InputTestPage`](RubyApp::Elements::Pages::TestPages::InputTestPage) ... show a variety of input controls (e.g. simple input, duration input, etc.)
+              [`ListTestPage`](RubyApp::Elements::Pages::TestPages::ListTestPage) ... A page with a variety of lists (e.g. simple list, select list, etc.)
+
+              [`MarkdownTestPage`](RubyApp::Elements::Pages::TestPages::MarkdownTestPage) ... A page with markdown containing a single, clickable link
+
+              [`TestPage`](RubyApp::Elements::Pages::TestPages::TestPage) ... A test page showing load, release, and trigger events.
+
+              ---
+
+              [`GoogleAuthenticationPage`](RubyApp::Elements::Pages::Authentication::OpenID::GoogleAuthenticationPage) ... re/authenticate using Google
+
+              [`MyOpenIDAuthenticationPage`](RubyApp::Elements::Pages::Authentication::OpenID::MyOpenIDAuthenticationPage) ... re/authenticate using myOpenID
+
+              [`YahooAuthenticationPage`](RubyApp::Elements::Pages::Authentication::OpenID::YahooAuthenticationPage) ... re/authenticate using Yahoo!
 
           busy_dialog:
             message: Retrieving authentication information ...
+        button_test_page:
+          title: Button Test Page
+          content:
+            body: |
+              Click the button below to go to another page.
+          button:
+            body: Click
         dialog_test_page:
           title: Dialog Test Page
           content:
             body: |
-              [`BusyDialog`](do_busy_dialog) ... show and then hide a 'busy' dialog for 30 seconds.
+              [`BusyDialog`](do_busy_dialog) ... Show and then hide a 'busy' dialog for 30 seconds.
 
-              [`ConfirmationDialog`](do_confirmation_dialog) ... ask for confirmation.
+              [`ConfirmationDialog`](do_confirmation_dialog) ... Ask for confirmation.
 
-              [`ExceptionDialog`](do_exception_dialog) ... raise an exception and show the `class` and `message` properties.
+              [`ExceptionDialog`](do_exception_dialog) ... Raise an exception and show the `class` and `message` properties.
 
-              [`MessageDialog`](do_message_dialog) ... show a sample message dialog.
+              [`MessageDialog`](do_message_dialog) ... Show a sample message dialog.
 
-              [`MonthDialog`](do_month_dialog) ... show a calendar month dialog, hide it when a date is selected, and then show the selected date (the last date you selected was <span id='last_value'>(nothing)</span>).
+              [`MonthDialog`](do_month_dialog) ... Show a calendar month dialog, hide it when a date is clicked, and then show the clicked date (the last date clicked was <span id='last_value'>(nothing)</span>).
           busy_dialog:
             message: Busy dialog ...
           confirmation_dialog:
             title: Confirmation Dialog
             message: Are you sure?
             message_dialog:
-              title: You selected ...
+              title: You clicked ...
               message: %1
           exception: Exception dialog
           message_dialog:
@@ -77,10 +96,19 @@ ruby_app:
           month_dialog:
             title: Month Dialog
             message_dialog:
-              title: You selected ...
+              title: You clicked ...
               message: %1
+        exception_test_page:
+          title: Exception Test Page
+          content:
+            body: |
+              Rendering this page raises an exception.
+          exception: Exception page
         input_test_page:
           title: Input Test Page
+          content:
+            body: |
+              Enter a value in the input fields below.  When changed a dialog will show the entered value.
           label:
             input: Input
             duration_input: DurationInput
@@ -88,17 +116,51 @@ ruby_app:
             message:
               title: Input Test
               message: You input '%1'.
+        link_test_page:
+          title: Link Test Page
+          content:
+            body: |
+              Click the link below to go to another page.
+          link:
+            body: Click
+        linked_test_page:
+          title: Linked Test Page
+          content:
+            body: |
+              This is the other page.
         list_test_page:
           title: List Test Page
+          content:
+            body: |
+              Click an item below.
           message_dialog:
             message:
               title: List Test
-              message: You selected the item '%1'.
+              message: You clicked '%1'.
+        markdown_test_page:
+          title: Markdown Test Page
+          content:
+            body: |
+              Click [here](go) to go to another page.
+          link:
+            body: Click
+        test_page:
+          title: Test Page
+          content:
+            body: |
+              The list below will populate as the page is rendered (immediate), loaded (once fully loaded in the browser), triggered (once 2 seconds have elapsed), and unloaded (once another page is loaded).
+          rendered: Rendered
+          loaded: Loaded
+          triggered: Triggered
+          unloaded: Unloaded
+          not_loaded: (not loaded)
+          not_triggered: (not triggered)
+          not_unloaded: (not unloaded)
       default_page:
         title: Home
         content:
           body: |
-            This is the default start page for your application.  Click [here](go_test) to go to the test pages.
+            Click [here](go_test) to go to the test pages.
       authentication:
         open_id:
           authentication_page:

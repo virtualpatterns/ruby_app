@@ -6,29 +6,33 @@ require 'json'
 require 'ruby-event'
 
 module RubyApp
-  require 'ruby_app/mixins/configuration'
-  require 'ruby_app/mixins/render'
-  require 'ruby_app/mixins/template'
-  require 'ruby_app/mixins/translate'
+  require 'ruby_app/mixins/configure_mixin'
+  require 'ruby_app/mixins/render_mixin'
+  require 'ruby_app/mixins/template_mixin'
+  require 'ruby_app/mixins/translate_mixin'
 
   class Element
-    extend RubyApp::Mixins::Configuration
-    include RubyApp::Mixins::Configuration
-    extend RubyApp::Mixins::Translate
-    include RubyApp::Mixins::Translate
-    extend RubyApp::Mixins::Template
-    include Haml::Helpers
+    extend RubyApp::Mixins::ConfigureMixin
+    include RubyApp::Mixins::ConfigureMixin
+    extend RubyApp::Mixins::TranslateMixin
+    include RubyApp::Mixins::TranslateMixin
+    extend RubyApp::Mixins::TemplateMixin
     extend Haml::Helpers
-    extend RubyApp::Mixins::Render
-    include RubyApp::Mixins::Render
+    include Haml::Helpers
+    extend RubyApp::Mixins::RenderMixin
+    include RubyApp::Mixins::RenderMixin
 
     class Event
 
       attr_reader :source
 
-      def initialize(data = nil)
-        @source = data ? RubyApp::Element.get_element(data['source_id']) : nil
+      def initialize(data)
+        @source = RubyApp::Element.get_element(data['source_id'])
         @statements = []
+      end
+
+      def process!
+        source.send(:on_event, self)
       end
 
       def alert(message)
@@ -60,31 +64,31 @@ module RubyApp
       end
 
       def go(url)
-        execute("RubyApp.go('#{url}');")
+        execute("RubyApp.go(#{url.to_json});")
       end
 
       def execute(statement)
         @statements << statement
       end
 
-      def self.from_hash(data)
-        eval(data['_class']).new(data)
-      end
-
       def to_hash
         {
           '_class' => self.class.to_s,
-          'source_id' => @source ? @source.element_id : nil,
+          'source_id' => @source.element_id,
           'statements' => @statements
         }
+      end
+
+      def self.from_hash(data)
+        eval(data['_class']).new(data)
       end
 
     end
 
     class ExceptionEvent < RubyApp::Element::Event
 
-      def initialize(exception)
-        super()
+      def initialize(data, exception)
+        super(data)
         self.alert(exception.message)
       end
 
@@ -97,7 +101,7 @@ module RubyApp
     event :evented
 
     def initialize
-      @attributes = {:id => element_id}
+      @attributes = {:id => self.element_id}
     end
 
     def element_id

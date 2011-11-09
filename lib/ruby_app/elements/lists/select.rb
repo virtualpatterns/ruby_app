@@ -13,8 +13,6 @@ module RubyApp
 
         attr_accessor :selected_index, :selected_item
 
-        event :selected
-
         def initialize
           super
         end
@@ -31,7 +29,7 @@ module RubyApp
 
         protected
 
-          def on_selected(event)
+          def on_clicked(event)
             @selected_index = event.index
             @selected_item = event.item
             event.update_element(self)

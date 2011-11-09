@@ -14,12 +14,12 @@ module RubyApp
           super
 
           @markdown = RubyApp::Elements::Markdown.new
-          @markdown.navigated do |element, event|
+          @markdown.clicked do |element, event|
             case event.name
               when 'do_load_theme_mobile'
                 require 'ruby_app/themes/mobile'
               when 'do_reload_translations'
-                RubyApp::Language.reload
+                RubyApp::Language.reload!
               when 'do_quit'
                 RubyApp::Session.quit
             end

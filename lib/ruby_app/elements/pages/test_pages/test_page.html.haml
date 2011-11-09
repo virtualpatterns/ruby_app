@@ -1,0 +1,14 @@
+- self.content_for(:content) do
+  /
+    #{__FILE__}
+  = @markdown.render(:html) do |element|
+    - element.content_for(:body, self.translate.content.body)
+  %ul
+    %li#rendered
+      = self.translate.rendered
+    %li#loaded
+      = self.translate.not_loaded
+    %li#triggered
+      = self.translate.not_triggered
+    %li#unloaded
+      = self.translate.not_unloaded

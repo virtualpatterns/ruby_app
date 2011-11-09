@@ -21,22 +21,11 @@ namespace :ruby_app do
     system("cd ./lib/ruby_app; clear; bundle exec ../../bin/ruby_app run")
   end
 
-  namespace :clear do
-
-    desc 'Clear OpenID files'
-    task :open_id do |task|
-      system("rm -rf ./lib/ruby_app/elements/pages/authentication/open_id/associations")
-      system("rm -rf ./lib/ruby_app/elements/pages/authentication/open_id/nonces")
-      system("rm -rf ./lib/ruby_app/elements/pages/authentication/open_id/temp")
-    end
-
-  end
-
   namespace :test do
 
     desc 'Run feature tests for the given feature file or all features files if no argument is provided'
     task :features, :file do |task, arguments|
-      system("bundle exec cucumber --format pretty --tags ~@broken #{arguments.file}")
+      system("bundle exec cucumber --format pretty --tags ~@broken --require features #{arguments.file}")
     end
 
     desc 'Run RSpec tests'

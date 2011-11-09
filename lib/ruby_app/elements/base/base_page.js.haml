@@ -91,7 +91,7 @@
       if ( RubyApp.interval > 0 ) {
         window.clearInterval(RubyApp._interval);
       }
-      RubyApp.sendEvent({_class:'RubyApp::Elements::Page::ReleasedEvent', source_id:$('html').attr('id')});
+      RubyApp.sendEvent({_class:'RubyApp::Elements::Page::UnloadedEvent', source_id:$('html').attr('id')});
     });
 
 = yield

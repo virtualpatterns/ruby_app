@@ -22,7 +22,7 @@ module RubyApp
             super
 
             @markdown = RubyApp::Elements::Markdown.new
-            @markdown.navigated do |element, event|
+            @markdown.clicked do |element, event|
               case event.name
               when 'do_busy_dialog'
                 RubyApp::Session.show(event, RubyApp::Elements::Dialogs::BusyDialog.new(self.translate.busy_dialog.message)) do |_event|

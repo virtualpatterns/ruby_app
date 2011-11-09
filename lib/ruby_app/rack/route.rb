@@ -12,17 +12,17 @@ module RubyApp
     require 'ruby_app/elements/pages/exception_page'
     require 'ruby_app/elements/pages/quit_page'
     require 'ruby_app/log'
-    require 'ruby_app/mixins/route'
+    require 'ruby_app/mixins/route_mixin'
     require 'ruby_app/request'
 
     class Route
-      extend RubyApp::Mixins::Route
+      extend RubyApp::Mixins::RouteMixin
 
       def call(environment)
         self.class.do_route(RubyApp::Request.request_method, RubyApp::Request.path)
       end
 
-      route(RubyApp::Mixins::Route::GET, /\/quit/) do |method, path|
+      route(RubyApp::Mixins::RouteMixin::GET, /\/quit/) do |method, path|
         RubyApp::Log.debug("#{self}.route method=#{method.inspect} path=#{path.inspect}")
         begin
           [
@@ -31,11 +31,7 @@ module RubyApp
             [ RubyApp::Elements::Pages::QuitPage.new.render(:html) ]
           ]
         rescue Exception => exception
-          RubyApp::Log.error('-' * 80)
-          RubyApp::Log.error("exception=#{exception.class.inspect} #{exception.message}")
-          RubyApp::Log.error('-' * 80)
-          RubyApp::Log.error(exception.backtrace.join("\n"))
-          RubyApp::Log.error('-' * 80)
+          RubyApp::Log.exception(exception)
           [
             200,
             { 'content-type' => 'text/html' },
@@ -44,7 +40,7 @@ module RubyApp
         end
       end
 
-      route(RubyApp::Mixins::Route::GET, /\/elements\/([^\.]+)\.([^\.\?]+)/) do |method, path, element_id, format|
+      route(RubyApp::Mixins::RouteMixin::GET, /\/elements\/([^\.]+)\.([^\.\?]+)/) do |method, path, element_id, format|
         RubyApp::Log.debug("#{self}.route method=#{method.inspect} path=#{path.inspect} element_id=#{element_id.inspect} format=#{format.to_sym.inspect}")
         begin
           [
@@ -53,11 +49,7 @@ module RubyApp
             [ RubyApp::Element.get_element(element_id).render(format.to_sym) ]
           ]
         rescue Exception => exception
-          RubyApp::Log.error('-' * 80)
-          RubyApp::Log.error("exception=#{exception.class.inspect} #{exception.message}")
-          RubyApp::Log.error('-' * 80)
-          RubyApp::Log.error(exception.backtrace.join("\n"))
-          RubyApp::Log.error('-' * 80)
+          RubyApp::Log.exception(exception)
           [
             200,
             { 'content-type' => RubyApp::Rack::Route.get_content_type(format) },
@@ -66,7 +58,7 @@ module RubyApp
         end
       end
 
-      route(RubyApp::Mixins::Route::GET, /\.([^\.\?]+)/) do |method, path, format|
+      route(RubyApp::Mixins::RouteMixin::GET, /\.([^\.\?]+)/) do |method, path, format|
         RubyApp::Log.debug("#{self}.route method=#{method.inspect} path=#{path.inspect} format=#{format.to_sym.inspect}")
         begin
           [
@@ -75,11 +67,7 @@ module RubyApp
             [ RubyApp::Session.pages.last.render(format.to_sym) ]
           ]
         rescue Exception => exception
-          RubyApp::Log.error('-' * 80)
-          RubyApp::Log.error("exception=#{exception.class.inspect} #{exception.message}")
-          RubyApp::Log.error('-' * 80)
-          RubyApp::Log.error(exception.backtrace.join("\n"))
-          RubyApp::Log.error('-' * 80)
+          RubyApp::Log.exception(exception)
           [
             200,
             { 'content-type' => RubyApp::Rack::Route.get_content_type(format) },
@@ -88,31 +76,27 @@ module RubyApp
         end
       end
 
-      route(RubyApp::Mixins::Route::GET, /.*/) do |method, path|
+      route(RubyApp::Mixins::RouteMixin::GET, /.*/) do |method, path|
         RubyApp::Log.debug("#{self}.route method=#{method.inspect} path=#{path.inspect}")
-        do_route(RubyApp::Mixins::Route::GET, '/.html')
+        do_route(RubyApp::Mixins::RouteMixin::GET, '/.html')
       end
 
-      route(RubyApp::Mixins::Route::POST, /.*/) do |method, path|
+      route(RubyApp::Mixins::RouteMixin::POST, /.*/) do |method, path|
         RubyApp::Log.debug("#{self}.post(...) method=#{method.inspect} path=#{path.inspect} POST=#{RubyApp::Request.POST.inspect}")
         begin
           event = RubyApp::Element::Event.from_hash(RubyApp::Request.POST)
-          RubyApp::Session.process(event)
+          event.process!
           [
             200,
             { 'content-type' => 'application/json' },
             [ Yajl::Encoder.new.encode(event.to_hash) ]
           ]
         rescue Exception => exception
-          RubyApp::Log.error('-' * 80)
-          RubyApp::Log.error("exception=#{exception.class.inspect} #{exception.message}")
-          RubyApp::Log.error('-' * 80)
-          RubyApp::Log.error(exception.backtrace.join("\n"))
-          RubyApp::Log.error('-' * 80)
+          RubyApp::Log.exception(exception)
           [
             200,
             { 'content-type' => 'application/json' },
-            [ Yajl::Encoder.new.encode(RubyApp::Element::ExceptionEvent.new(exception).to_hash) ]
+            [ Yajl::Encoder.new.encode(RubyApp::Element::ExceptionEvent.new(RubyApp::Request.POST, exception).to_hash) ]
           ]
         end
       end

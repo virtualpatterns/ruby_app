@@ -7,7 +7,7 @@ module RubyApp
 
       class PageMenu < RubyApp::Element
 
-        class NavigatedEvent < RubyApp::Element::Event
+        class ClickedEvent < RubyApp::Element::Event
 
           attr_reader :page
 
@@ -38,11 +38,11 @@ module RubyApp
         protected
 
           def on_event(event)
-            on_navigated(event) if event.is_a?(RubyApp::Elements::Navigation::PageMenu::NavigatedEvent)
+            on_clicked(event) if event.is_a?(RubyApp::Elements::Navigation::PageMenu::ClickedEvent)
             super(event)
           end
 
-          def on_navigated(event)
+          def on_clicked(event)
             RubyApp::Session.pages.pop
             RubyApp::Session.pages.push(event.page.new)
             event.refresh

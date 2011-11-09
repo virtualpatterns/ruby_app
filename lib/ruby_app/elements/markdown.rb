@@ -10,7 +10,7 @@ module RubyApp
 
     class Markdown < RubyApp::Element
 
-      class NavigatedEvent < RubyApp::Element::Event
+      class ClickedEvent < RubyApp::Element::Event
 
         attr_reader :name
 
@@ -27,7 +27,7 @@ module RubyApp
 
       template_path(:all, File.dirname(__FILE__))
 
-      event :navigated
+      event :clicked
 
       def initialize
         super
@@ -36,12 +36,12 @@ module RubyApp
       protected
 
         def on_event(event)
-          on_navigated(event) if event.is_a?(RubyApp::Elements::Markdown::NavigatedEvent)
+          on_clicked(event) if event.is_a?(RubyApp::Elements::Markdown::ClickedEvent)
           super(event)
         end
 
-        def on_navigated(event)
-          navigated(event)
+        def on_clicked(event)
+          clicked(event)
         end
 
     end

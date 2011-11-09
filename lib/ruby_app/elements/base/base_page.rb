@@ -29,7 +29,7 @@ module RubyApp
 
         end
 
-        class ReleasedEvent < RubyApp::Element::Event
+        class UnloadedEvent < RubyApp::Element::Event
 
           def initialize(data)
             super(data)
@@ -43,7 +43,7 @@ module RubyApp
 
         event :loaded
         event :triggered
-        event :released
+        event :unloaded
 
         def initialize
           super
@@ -55,7 +55,7 @@ module RubyApp
           def on_event(event)
             on_loaded(event) if event.is_a?(RubyApp::Elements::Base::BasePage::LoadedEvent)
             on_triggered(event) if event.is_a?(RubyApp::Elements::Base::BasePage::TriggeredEvent)
-            on_released(event) if event.is_a?(RubyApp::Elements::Base::BasePage::ReleasedEvent)
+            on_unloaded(event) if event.is_a?(RubyApp::Elements::Base::BasePage::UnloadedEvent)
             super(event)
           end
 
@@ -67,8 +67,8 @@ module RubyApp
             triggered(event)
           end
 
-          def on_released(event)
-            released(event)
+          def on_unloaded(event)
+            unloaded(event)
           end
 
       end

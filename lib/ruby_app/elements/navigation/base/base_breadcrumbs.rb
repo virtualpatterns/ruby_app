@@ -14,7 +14,7 @@ module RubyApp
 
         class BaseBreadcrumbs < RubyApp::Element
 
-          class NavigatedEvent < RubyApp::Element::Event
+          class ClickedEvent < RubyApp::Element::Event
 
             attr_reader :page
 
@@ -38,11 +38,11 @@ module RubyApp
           protected
 
             def on_event(event)
-              on_navigated(event) if event.is_a?(RubyApp::Elements::Navigation::Base::BaseBreadcrumbs::NavigatedEvent)
+              on_clicked(event) if event.is_a?(RubyApp::Elements::Navigation::Base::BaseBreadcrumbs::ClickedEvent)
               super(event)
             end
 
-            def on_navigated(event)
+            def on_clicked(event)
               RubyApp::Session.pages.slice!(RubyApp::Session.pages.index(event.page) + 1, RubyApp::Session.pages.length - ( RubyApp::Session.pages.index(event.page) + 1 ))
               event.refresh
             end

@@ -19,6 +19,8 @@ module RubyApp
           def initialize
             super
 
+            @markdown = RubyApp::Elements::Markdown.new
+
             @input = RubyApp::Elements::Input.new
             @input.changed do |element, event|
               RubyApp::Session.show(event, RubyApp::Elements::Dialogs::MessageDialog.new(self.translate.message_dialog.message.title,

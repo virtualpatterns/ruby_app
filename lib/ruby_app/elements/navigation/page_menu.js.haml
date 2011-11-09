@@ -4,7 +4,7 @@
     $(document).ready(function() {
       $("div.menu a.page").click(function(event) {
         event.preventDefault();
-        RubyApp.sendEvent({_class:'RubyApp::Elements::Navigation::PageMenu::NavigatedEvent', source_id:$(this).parent().parent().attr('id'), page:$(this).attr('page')});
+        RubyApp.sendEvent({_class:'RubyApp::Elements::Navigation::PageMenu::ClickedEvent', source_id:$(this).parent().parent().attr('id'), page:$(this).attr('page')});
       });
     });
 = yield

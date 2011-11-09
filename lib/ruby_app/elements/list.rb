@@ -10,7 +10,7 @@ module RubyApp
 
     class List < RubyApp::Element
 
-      class SelectedEvent < RubyApp::Element::Event
+      class ClickedEvent < RubyApp::Element::Event
 
         attr_reader :index, :item
 
@@ -30,7 +30,7 @@ module RubyApp
 
       attr_accessor :items
 
-      event :selected
+      event :clicked
 
       def initialize
         super
@@ -40,12 +40,12 @@ module RubyApp
       protected
 
         def on_event(event)
-          on_selected(event) if event.is_a?(RubyApp::Elements::List::SelectedEvent)
+          on_clicked(event) if event.is_a?(RubyApp::Elements::List::ClickedEvent)
           super(event)
         end
 
-        def on_selected(event)
-          selected(event)
+        def on_clicked(event)
+          clicked(event)
         end
 
     end

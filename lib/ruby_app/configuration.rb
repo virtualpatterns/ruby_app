@@ -1,12 +1,12 @@
 require 'yaml'
 
 module RubyApp
-  require 'ruby_app/log'
-  require 'ruby_app/mixins/delegate'
-  require 'ruby_app/mixins/hash'
+  require 'ruby_app/application'
+  require 'ruby_app/mixins/delegate_mixin'
+  require 'ruby_app/mixins/hash_mixin'
 
   class Configuration
-    extend RubyApp::Mixins::Delegate
+    extend RubyApp::Mixins::DelegateMixin
 
     attr_reader :document
 
@@ -14,31 +14,23 @@ module RubyApp
       @@_configuration
     end
 
-    def self.load(configuration_paths)
-      @@_configuration = RubyApp::Configuration.new(configuration_paths)
+    def self.load!
+      @@_configuration = RubyApp::Configuration.new(RubyApp::Application.options.configuration_paths)
     end
 
-    def self.unload
+    def self.unload!
       @@_configuration = nil
     end
 
     private
 
-      def initialize(configuration_paths)
-
+      def initialize(paths)
         @document = {}
-
-        configuration_paths.each do |path|
-          RubyApp::Log.debug("#{self.class}##{__method__}(...) path=#{path.inspect}")
+        paths.each do |path|
           @document.merge!(YAML::load(File.open(path)))
         end
-
       end
 
   end
 
-end
-
-class Hash
-  include RubyApp::Mixins::Hash
 end

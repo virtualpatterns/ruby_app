@@ -8,57 +8,49 @@ require 'ruby_app/elements/pages/test_pages/default_test_page'
 require 'ruby_app/session'
 
 describe RubyApp::Elements::Navigation::Breadcrumbs do
-  include_context 'RubyApp::Elements'
+  include_context 'RubyApp::Request'
 
   describe 'positive' do
 
-    describe 'render class' do
+    describe 'class' do
 
-      describe 'render :css' do
-        specify { RubyApp::Application.execute(environment) { RubyApp::Elements::Navigation::Breadcrumbs.render(:css).should be_nil } }
-      end
-
-      describe 'render :js' do
-        specify { RubyApp::Application.execute(environment) { RubyApp::Elements::Navigation::Breadcrumbs.render(:js).should_not be_nil } }
-      end
+      specify { RubyApp::Elements::Navigation::Breadcrumbs.render(:css).should be_nil }
+      specify { RubyApp::Elements::Navigation::Breadcrumbs.render(:js).should_not be_nil }
 
     end
 
-    describe 'render instance' do
+    describe 'instance' do
 
       let(:breadcrumbs) { RubyApp::Elements::Navigation::Breadcrumbs.new }
 
-      describe 'render :html' do
-        specify { RubyApp::Application.execute(environment) { breadcrumbs.render(:html).should_not be_nil } }
-      end
+      specify { breadcrumbs.render(:html).should_not be_nil }
 
     end
 
-    describe 'breadcrumb pages' do
+    describe 'pages' do
 
       before(:all) do
-        RubyApp::Application.execute(environment) { RubyApp::Session.pages.push(RubyApp::Elements::Pages::TestPages::DefaultTestPage.new) }
+        RubyApp::Session.pages.push(RubyApp::Elements::Pages::TestPages::DefaultTestPage.new)
       end
 
       let(:breadcrumbs) { RubyApp::Elements::Navigation::Breadcrumbs.new }
       let(:first_page) { RubyApp::Session.pages.first }
       let(:second_page) { RubyApp::Session.pages.last }
 
-      specify { RubyApp::Application.execute(environment) { breadcrumbs.render(:html).should include(first_page.translate.title) } }
-      specify { RubyApp::Application.execute(environment) { breadcrumbs.render(:html).should include(second_page.translate.title) } }
+      specify { RubyApp::Session.pages.length.should == 2 }
+      specify { breadcrumbs.render(:html).should include(first_page.translate.title) }
+      specify { breadcrumbs.render(:html).should include(second_page.translate.title) }
 
-      describe 'send navigated event' do
+      describe 'event' do
 
         before(:all) do
-          RubyApp::Application.execute(environment) do
-            RubyApp::Session.process(RubyApp::Element::Event.from_hash({ '_class' => 'RubyApp::Elements::Navigation::Base::BaseBreadcrumbs::NavigatedEvent',
-                                                                         'source_id' => breadcrumbs.element_id,
-                                                                         'page_id' => first_page.element_id }))
-          end
+          RubyApp::Element::Event.from_hash({ '_class' => 'RubyApp::Elements::Navigation::Base::BaseBreadcrumbs::ClickedEvent',
+                                              'source_id' => breadcrumbs.element_id,
+                                              'page_id' => first_page.element_id }).process!
         end
 
-        specify { RubyApp::Application.execute(environment) { RubyApp::Session.pages.length.should == 1 } }
-        specify { RubyApp::Application.execute(environment) { RubyApp::Session.pages.last.should == first_page } }
+        specify { RubyApp::Session.pages.length.should == 1 }
+        specify { RubyApp::Session.pages.last.should == first_page }
 
       end
 

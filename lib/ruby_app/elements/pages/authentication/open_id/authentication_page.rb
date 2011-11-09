@@ -2,7 +2,6 @@ require 'rubygems'
 require 'bundler/setup'
 
 require 'openid'
-require 'openid/store/filesystem'
 
 module RubyApp
 
@@ -28,7 +27,8 @@ module RubyApp
               self.loaded do |element, event|
                 RubyApp::Session.show(event, RubyApp::Elements::Dialogs::BusyDialog.new(RubyApp::Elements::Pages::Authentication::OpenID::AuthenticationPage.translate.busy_dialog.message)) do |_event|
                   if RubyApp::Request.query.empty?
-                    @consumer = ::OpenID::Consumer.new(RubyApp::Session.data, ::OpenID::Store::Filesystem.new(File.dirname(__FILE__)))
+                    @consumer = ::OpenID::Consumer.new(RubyApp::Session.data, nil)
+                    RubyApp::Log.debug("#{self.class}#loaded identifier=#{identifier.inspect}")
                     request = @consumer.begin(identifier)
                     self.process_request(request)
                     _event.go(request.redirect_url(RubyApp::Request.url, RubyApp::Request.url))

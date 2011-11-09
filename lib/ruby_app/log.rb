@@ -1,25 +1,35 @@
 require 'logger'
 
 module RubyApp
-  require 'ruby_app/mixins/delegate'
+  require 'ruby_app/application'
+  require 'ruby_app/mixins/delegate_mixin'
 
   class Log < ::Logger
-    extend RubyApp::Mixins::Delegate
+    extend RubyApp::Mixins::DelegateMixin
+
+    def exception(exception)
+      self.error('-' * 80)
+      self.error("exception=#{exception.class.inspect} #{exception.message}")
+      self.error('-' * 80)
+      self.error(exception.backtrace.join("\n"))
+      self.error('-' * 80)
+    end
 
     def self.get
-      @@_logger
+      @@_log
     end
 
-    def self.open(path)
+    def self.open!
+      path = RubyApp::Application.options.log_path
       directory = File.dirname(path)
       Dir.mkdir(directory) unless File.exists?(directory)
-      @@_logger = RubyApp::Log.new(path)
-      @@_logger.debug("#{self}##{__method__} path=#{path.inspect}")
+      @@_log = RubyApp::Log.new(path)
+      @@_log.debug("#{self}##{__method__} path=#{path.inspect}")
     end
 
-    def self.close
-      @@_logger.close
-      @@_logger = nil
+    def self.close!
+      @@_log.close if @@_log
+      @@_log = nil
     end
 
     private

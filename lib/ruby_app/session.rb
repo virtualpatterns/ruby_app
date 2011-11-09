@@ -1,18 +1,18 @@
 module RubyApp
-  require 'ruby_app/mixins/configuration'
-  require 'ruby_app/mixins/delegate'
-  require 'ruby_app/mixins/translate'
+  require 'ruby_app/application'
+  require 'ruby_app/mixins/configure_mixin'
+  require 'ruby_app/mixins/delegate_mixin'
+  require 'ruby_app/mixins/translate_mixin'
   require 'ruby_app/request'
 
   class Session
-    extend RubyApp::Mixins::Delegate
-    include RubyApp::Mixins::Hash
-    extend RubyApp::Mixins::Configuration
-    include RubyApp::Mixins::Configuration
-    extend RubyApp::Mixins::Translate
+    extend RubyApp::Mixins::DelegateMixin
+    include RubyApp::Mixins::HashMixin
+    include RubyApp::Mixins::ConfigureMixin
+    extend RubyApp::Mixins::TranslateMixin
 
     class Identity
-      include RubyApp::Mixins::Hash
+      include RubyApp::Mixins::HashMixin
 
       attr_reader :url
 
@@ -27,12 +27,12 @@ module RubyApp
 
     end
 
-    attr_reader :pages, :data
-    attr_accessor :identity
+    attr_reader :pages
+    attr_accessor :identity, :data
 
     def initialize(page = nil)
       require 'ruby_app/elements/pages/default_page'
-      @pages = [page || RubyApp::Elements::Pages::DefaultPage.new]
+      @pages = [ page || RubyApp::Elements::Pages::DefaultPage.new ]
       @dialogs = []
       @identity = nil
       @data = {}
@@ -67,10 +67,6 @@ module RubyApp
 
     end
 
-    def process(event)
-      event.source.send(:on_event, event)
-    end
-
     def quit
       RubyApp::Request.env['rack.session.options'][:drop] = true
     end
@@ -79,20 +75,18 @@ module RubyApp
       Thread.current[:_session]
     end
 
-    def self.create(_class)
-      session = RubyApp::Request.session[:_session] || _class.new
-      RubyApp::Request.session[:_session] = session
-      Thread.current[:_session] = session
+    def self.create!
+      Thread.current[:_session] = RubyApp::Request.session[:_session] ||= RubyApp::Application.options.session_class.new
       if block_given?
         begin
-          yield session
+          yield
         ensure
-          Thread.current[:_session] = nil
+          self.destroy!
         end
       end
     end
 
-    def self.destroy
+    def self.destroy!
       Thread.current[:_session] = nil
     end
 

@@ -15,7 +15,7 @@ module RubyApp
           super
 
           @markdown = RubyApp::Elements::Markdown.new
-          @markdown.navigated do |element, event|
+          @markdown.clicked do |element, event|
             case event.name
               when 'go_test'
                 RubyApp::Session.pages.push(RubyApp::Elements::Pages::TestPages::DefaultTestPage.new)
