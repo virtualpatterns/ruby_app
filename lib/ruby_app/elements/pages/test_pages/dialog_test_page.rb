@@ -35,10 +35,8 @@ module RubyApp
                                                                                               self.translate.confirmation_dialog.message_dialog.message(response)))
                 end
               when 'do_exception_dialog'
-                begin
+                RubyApp::Elements::Dialogs::ExceptionDialog.show(event) do
                   raise self.translate.exception
-                rescue Exception => exception
-                  RubyApp::Session.show(event, RubyApp::Elements::Dialogs::ExceptionDialog.new(exception))
                 end
               when 'do_message_dialog'
                 RubyApp::Session.show(event, RubyApp::Elements::Dialogs::MessageDialog.new(self.translate.message_dialog.message.title,

@@ -13,4 +13,4 @@ options = { :application_class => _APPLICATION_UPCODE_::Application,
             :default_language => :en,
             :translations_paths => File.join(_APPLICATION_UPCODE_::ROOT, %w[translations]) }
 
-_APPLICATION_UPCODE_::Application.create options
+_APPLICATION_UPCODE_::Application.create! options

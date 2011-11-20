@@ -2,9 +2,9 @@
   :plain
     // #{__FILE__}
     $(document).ready(function() {
-      $("span.link a.page").click(function(event) {
+      $('span.link > a.page').click(function(event) {
         event.preventDefault();
-        RubyApp.sendEvent({_class:'RubyApp::Elements::Navigation::PageLink::ClickedEvent', source_id:$(this).parent().attr('id'), page:$(this).attr('page')});
+        RubyApp.sendEvent({_class:'RubyApp::Elements::Navigation::PageLink::ClickedEvent', source_id:$(this).parents('span.link').attr('id'), page:$(this).attr('page')});
       });
     });
 = yield
