@@ -4,6 +4,7 @@ module RubyApp
 
     module Dialogs
       require 'ruby_app/elements/dialogs/close_dialog'
+      require 'ruby_app/log'
       require 'ruby_app/session'
 
       class ExceptionDialog < RubyApp::Elements::Dialogs::CloseDialog
@@ -19,6 +20,7 @@ module RubyApp
           begin
             yield
           rescue Exception => exception
+            RubyApp::Log.exception(exception)
             RubyApp::Session.show(event, RubyApp::Elements::Dialogs::ExceptionDialog.new(exception))
           end
         end
