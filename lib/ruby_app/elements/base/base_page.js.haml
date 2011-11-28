@@ -10,6 +10,7 @@
         response
           .success( function(event) {
             $.each(event.statements, function(index, statement) {
+              // alert(statement);
               eval(statement);
             } );
           } )
@@ -75,6 +76,9 @@
       },
       this.updateValue = function(selector, value) {
         $(selector).val(value);
+      },
+      this.setCookie = function(name, value, expires) {
+        document.cookie = name + '=' + value + '; expires=' + expires.toUTCString();
       }
     };
 

@@ -149,13 +149,21 @@ ruby_app:
           content:
             body: |
               The list below will populate as the page is rendered (immediate), loaded (once fully loaded in the browser), triggered (once 2 seconds have elapsed), and unloaded (once another page is loaded).
+
+              The cookie value is '%1'.
           rendered: Rendered
+          label:
+            input: Enter a new cookie value
           loaded: Loaded
-          triggered: Triggered
-          unloaded: Unloaded
+          message_dialog:
+            message:
+              title: Cookie Test
+              message: The cookie value is '%1'.
           not_loaded: (not loaded)
           not_triggered: (not triggered)
           not_unloaded: (not unloaded)
+          triggered: Triggered
+          unloaded: Unloaded
       default_page:
         title: Home
         content:

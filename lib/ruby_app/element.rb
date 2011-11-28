@@ -67,6 +67,10 @@ module RubyApp
         execute("RubyApp.go(#{url.to_json});")
       end
 
+      def set_cookie(name, value, expires)
+        execute("RubyApp.setCookie(#{name.to_json}, #{value.to_json}, new Date(#{expires.year}, #{expires.month - 1}, #{expires.day}, #{expires.hour}, #{expires.min}, #{expires.sec}));")
+      end
+
       def execute(statement)
         @statements << statement
       end

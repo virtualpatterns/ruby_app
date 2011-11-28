@@ -8,3 +8,16 @@ Feature: A page
     When I wait 4 seconds
     Then I should see "Triggered"
     Then I quit
+
+  Scenario: Saving and retrieving a cookie
+    Given I go to the test pages
+    When I click "TestPage"
+    Then I should see "Rendered"
+    When I fill in the "Enter a new cookie value" field with "value" and I press enter
+    Then I should see "The cookie value is 'value'."
+    Then I click "Close"
+    Then I quit
+    When I go to the test pages
+    And I click "TestPage"
+    Then I should see "The cookie value is 'value'."
+    Then I quit
