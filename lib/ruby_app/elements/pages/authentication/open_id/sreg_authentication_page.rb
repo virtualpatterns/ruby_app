@@ -12,10 +12,10 @@ module RubyApp
       module Authentication
 
         module OpenID
-          require 'ruby_app/elements/pages/authentication/open_id/authentication_page'
+          require 'ruby_app/elements/pages/authentication/open_id/email_authentication_page'
           require 'ruby_app/session'
 
-          class SRegAuthenticationPage < RubyApp::Elements::Pages::Authentication::OpenID::AuthenticationPage
+          class SRegAuthenticationPage < RubyApp::Elements::Pages::Authentication::OpenID::EmailAuthenticationPage
 
             template_path(:all, File.dirname(__FILE__))
 
@@ -32,7 +32,7 @@ module RubyApp
             def create_identity_from_response(response)
               sreg_response = ::OpenID::SReg::Response.from_success_response(response)
               unless sreg_response.empty?
-                RubyApp::Session::Identity.new(sreg_response.data['email'])
+                self.create_identity_from_email(sreg_response.data['email'])
               else
                 super(response)
               end
