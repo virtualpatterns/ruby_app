@@ -57,11 +57,7 @@ module RubyApp
             end
 
             def create_identity_from_response(response)
-              self.create_identity_from_url(response.identity_url)
-            end
-
-            def create_identity_from_url(url, data = {})
-              RubyApp::Session::Identity.new(url, data)
+              RubyApp::Session::Identity.new(response.identity_url)
             end
 
           end

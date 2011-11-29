@@ -32,8 +32,7 @@ module RubyApp
             def create_identity_from_response(response)
               ax_response = ::OpenID::AX::FetchResponse.from_success_response(response)
               if ax_response
-                self.create_identity_from_url(response.identity_url,
-                                              :email => ax_response.data[self.configure.attributes.email].first)
+                RubyApp::Session::Identity.new(ax_response.data[self.configure.attributes.email].first)
               else
                 super(response)
               end

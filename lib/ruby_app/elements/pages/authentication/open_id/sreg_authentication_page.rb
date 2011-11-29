@@ -32,8 +32,7 @@ module RubyApp
             def create_identity_from_response(response)
               sreg_response = ::OpenID::SReg::Response.from_success_response(response)
               unless sreg_response.empty?
-                create_identity_from_url(response.identity_url,
-                                         :email => sreg_response.data['email'])
+                RubyApp::Session::Identity.new(sreg_response.data['email'])
               else
                 super(response)
               end

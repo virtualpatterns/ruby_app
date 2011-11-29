@@ -12,17 +12,11 @@ module RubyApp
     extend RubyApp::Mixins::TranslateMixin
 
     class Identity
-      include RubyApp::Mixins::HashMixin
 
       attr_reader :url
 
-      def initialize(url, data = {})
+      def initialize(url)
         @url = url
-        @data = data
-      end
-
-      def [](key)
-        @data[key]
       end
 
     end
