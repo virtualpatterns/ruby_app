@@ -36,7 +36,7 @@ module RubyApp
 
             @input = RubyApp::Elements::Input.new
             @input.changed do |element, event|
-              event.set_cookie('_cookie', @input.value, Time.now + 60*60*24)
+              event.set_cookie('_cookie', @input.value)
               RubyApp::Session.show(event, RubyApp::Elements::Dialogs::MessageDialog.new(self.translate.message_dialog.message.title,
                                                                                          self.translate.message_dialog.message.message(@input.value)))
             end
