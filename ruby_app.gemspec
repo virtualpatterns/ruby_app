@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_dependency 'BlueCloth'
+  s.add_dependency 'chronic'
   s.add_dependency 'chronic_duration'
   s.add_dependency 'facets'
   s.add_dependency 'fileutils'
