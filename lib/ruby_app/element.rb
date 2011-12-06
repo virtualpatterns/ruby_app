@@ -24,9 +24,10 @@ module RubyApp
 
     class Event
 
-      attr_reader :source
+      attr_reader :now, :source
 
       def initialize(data)
+        @now = Time.parse(data['now'])
         @source = RubyApp::Element.get_element(data['source_id'])
         @statements = []
       end

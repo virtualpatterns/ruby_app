@@ -154,7 +154,7 @@ ruby_app:
           rendered: Rendered
           label:
             input: Enter a new cookie value
-          loaded: Loaded
+          loaded: Loaded at %1
           message_dialog:
             message:
               title: Cookie Test
@@ -162,8 +162,8 @@ ruby_app:
           not_loaded: (not loaded)
           not_triggered: (not triggered)
           not_unloaded: (not unloaded)
-          triggered: Triggered
-          unloaded: Unloaded
+          triggered: Triggered at %1
+          unloaded: Unloaded at %1
       default_page:
         title: Home
         content:

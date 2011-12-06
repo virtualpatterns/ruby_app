@@ -25,13 +25,13 @@ module RubyApp
             @markdown = RubyApp::Elements::Markdown.new
 
             self.loaded do |element, event|
-              event.update_text('li#loaded', self.translate.loaded)
+              event.update_text('li#loaded', self.translate.loaded(event.now))
             end
             self.triggered do |element, event|
-              event.update_text('li#triggered', self.translate.triggered)
+              event.update_text('li#triggered', self.translate.triggered(event.now))
             end
             self.unloaded do |element, event|
-              event.update_text('li#unloaded', self.translate.unloaded)
+              event.update_text('li#unloaded', self.translate.unloaded(event.now))
             end
 
             @input = RubyApp::Elements::Input.new

@@ -44,7 +44,8 @@ describe RubyApp::Elements::Navigation::Breadcrumbs do
       describe 'event' do
 
         before(:all) do
-          RubyApp::Element::Event.from_hash({ '_class' => 'RubyApp::Elements::Navigation::Base::BaseBreadcrumbs::ClickedEvent',
+          RubyApp::Element::Event.from_hash({ 'now' => Time.now.to_s,
+                                              '_class' => 'RubyApp::Elements::Navigation::Base::BaseBreadcrumbs::ClickedEvent',
                                               'source_id' => breadcrumbs.element_id,
                                               'page_id' => first_page.element_id }).process!
         end

@@ -18,8 +18,9 @@ describe RubyApp::Element do
       describe 'instance' do
 
         let(:element) { RubyApp::Element.new }
-        let(:event) { RubyApp::Element::Event.new('source_id' => element.element_id) }
+        let(:event) { RubyApp::Element::Event.new('now' => Time.now.to_s, 'source_id' => element.element_id) }
 
+        specify { event.should respond_to('now') }
         specify { event.should respond_to('source') }
         specify { event.source.should_not be_nil }
         specify { event.source.should == element }
