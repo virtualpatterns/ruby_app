@@ -42,7 +42,7 @@ module RubyApp
                 RubyApp::Session.show(event, RubyApp::Elements::Dialogs::MessageDialog.new(self.translate.message_dialog.message.title,
                                                                                            self.translate.message_dialog.message.message))
               when 'do_month_dialog'
-                RubyApp::Session.show(event, RubyApp::Elements::Dialogs::Calendars::MonthDialog.new(self.translate.month_dialog.title)) do |_event, response|
+                RubyApp::Session.show(event, RubyApp::Elements::Dialogs::Calendars::MonthDialog.new(self.translate.month_dialog.title, event.today)) do |_event, response|
                   RubyApp::Session.show(_event, RubyApp::Elements::Dialogs::MessageDialog.new(self.translate.month_dialog.message_dialog.title,
                                                                                               self.translate.month_dialog.message_dialog.message(response))) do |__event, _response|
                     __event.execute("$('#last_value').text('#{response}');")

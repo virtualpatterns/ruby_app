@@ -32,6 +32,10 @@ module RubyApp
         @statements = []
       end
 
+      def today
+        @now.send(:to_date)
+      end
+
       def process!
         source.send(:on_event, self)
       end
