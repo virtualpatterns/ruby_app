@@ -1,5 +1,8 @@
 ruby_app:
   elements:
+    base:
+      base_page:
+        error:  An error occurred sending the event.  Refresh the page and try again.,
     dialogs:
       base:
         base_close_dialog:
@@ -22,8 +25,6 @@ ruby_app:
           back: Back
       back_button:
         body: Back
-    page:
-      quit: Quit
     pages:
       base:
         base_blank_page:

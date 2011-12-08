@@ -15,6 +15,9 @@
               eval(statement);
             } );
           } )
+          .error( function(request, message, exception) {
+            alert(#{RubyApp::Elements::Base::BasePage.translate.error.to_json});
+          } )
       },
       this.alert = function(message) {
         alert(message);
