@@ -6,7 +6,7 @@
       this.interval = #{self.interval * 1000};
       this._interval = 0;
       this.sendEvent = function(event) {
-        event.now = new Date().toUTCString();
+        event.now = new Date().toString();
         response = $.post(location.href, event);
         response
           .success( function(event) {
