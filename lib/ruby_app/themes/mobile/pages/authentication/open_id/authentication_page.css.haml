@@ -1,0 +1,13 @@
+- self.rendered?(__FILE__) do
+  :sass
+    /* #{__FILE__}
+    @import '#{File.join(File.dirname(__FILE__), %w[.. .. .. colors.sass])}'
+    div.wait
+      background-color: $dialog_background
+      color: $dialog_foreground
+      border-radius: 10px
+      padding: 10px 15px
+      width: 80%
+      > div.image
+        padding-right: 10px
+= yield

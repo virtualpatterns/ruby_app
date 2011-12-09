@@ -172,9 +172,9 @@ ruby_app:
             Click [here](go_test) to go to the test pages.
       authentication:
         open_id:
-          authentication_page:
-            busy_dialog:
-              message: Please wait ...
+          base:
+            base_authentication_page:
+              message: Authenticating ...
           google_authentication_page:
             title: Google Authentication
           my_open_id_authentication_page:

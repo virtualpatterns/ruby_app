@@ -1,0 +1,8 @@
+- self.content_for(:body) do
+  /
+    #{__FILE__}
+  %div.wait
+    %div.image
+      %img{:src => '/ruby_app/resources/elements/pages/authentication/open_id/base/base_authentication_page.gif'}
+    %div.content
+      = RubyApp::Elements::Pages::Authentication::OpenID::Base::BaseAuthenticationPage.translate.message
