@@ -11,7 +11,9 @@ module RubyApp
       self.error('-' * 80)
       self.error("exception=#{exception.class.inspect} #{exception.message}")
       self.error('-' * 80)
-      self.error(exception.backtrace.join("\n"))
+      exception.backtrace.each do |line|
+        self.error(line)
+      end
       self.error('-' * 80)
     end
 

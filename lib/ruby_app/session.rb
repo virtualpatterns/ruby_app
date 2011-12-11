@@ -1,5 +1,6 @@
 module RubyApp
   require 'ruby_app/application'
+  require 'ruby_app/log'
   require 'ruby_app/mixins/configure_mixin'
   require 'ruby_app/mixins/delegate_mixin'
   require 'ruby_app/mixins/translate_mixin'
@@ -21,15 +22,19 @@ module RubyApp
 
     end
 
-    attr_reader :pages
+    attr_reader :session_id, :pages
     attr_accessor :identity, :data
 
-    def initialize(page = nil)
-      require 'ruby_app/elements/pages/default_page'
-      @pages = [ page || RubyApp::Elements::Pages::DefaultPage.new ]
+    def initialize(session_id, page = nil)
+      @session_id = session_id
+      @pages = []
       @dialogs = []
       @identity = nil
       @data = {}
+
+      require 'ruby_app/elements/pages/default_page'
+      @pages.push(page || RubyApp::Elements::Pages::DefaultPage.new)
+
     end
 
     def [](key)
@@ -70,7 +75,8 @@ module RubyApp
     end
 
     def self.create!
-      Thread.current[:_session] = RubyApp::Request.session[:_session] ||= RubyApp::Application.options.session_class.new
+      RubyApp::Request.session[:_initialize] = true
+      Thread.current[:_session] = RubyApp::Request.session[:_session] ||= RubyApp::Application.options.session_class.new(RubyApp::Request.env['rack.session.options'] ? RubyApp::Request.env['rack.session.options'][:id] : nil)
       if block_given?
         begin
           yield

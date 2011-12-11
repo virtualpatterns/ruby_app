@@ -26,9 +26,14 @@ module RubyApp
 
       attr_reader :now, :source
 
-      def initialize(data)
-        @now = Time.parse(data['now'])
-        @source = RubyApp::Element.get_element(data['source_id'])
+      def initialize(data = nil)
+        if data
+          @now = Time.parse(data['now'])
+          @source = RubyApp::Element.get_element(data['source_id'])
+        else
+          @now = Time.now
+          @source = nil
+        end
         @statements = []
       end
 
@@ -83,7 +88,8 @@ module RubyApp
       def to_hash
         {
           '_class' => self.class.to_s,
-          'source_id' => @source.element_id,
+          'now' => @now,
+          'source_id' => @source ? @source.element_id : nil,
           'statements' => @statements
         }
       end
@@ -96,8 +102,8 @@ module RubyApp
 
     class ExceptionEvent < RubyApp::Element::Event
 
-      def initialize(data, exception)
-        super(data)
+      def initialize(exception)
+        super()
         self.alert(exception.message)
       end
 

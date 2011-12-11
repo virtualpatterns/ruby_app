@@ -194,3 +194,6 @@ ruby_app:
             [Quit](do_quit) the session.
       quit_page:
         title: Quit
+  exceptions:
+    session_invalid_exception:
+      message: The session is invalid or has expired.  Refresh the page and try again.

@@ -18,7 +18,7 @@ module RubyApp
           end
 
           def render(format)
-            raise self.translate.exception
+            raise self.translate.exception if format == :html
             super(format)
           end
 
