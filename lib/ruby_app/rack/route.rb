@@ -9,7 +9,6 @@ module RubyApp
   module Rack
     require 'ruby_app/element'
     require 'ruby_app/elements/exception_element'
-    require 'ruby_app/elements/pages/exception_page'
     require 'ruby_app/elements/pages/quit_page'
     require 'ruby_app/exceptions/session_invalid_exception'
     require 'ruby_app/log'
@@ -34,11 +33,7 @@ module RubyApp
           ]
         rescue Exception => exception
           RubyApp::Log.exception(exception)
-          [
-            200,
-            { 'content-type' => 'text/html' },
-            [ RubyApp::Elements::Pages::ExceptionPage.new(exception).render(:html) ]
-          ]
+          raise exception
         end
       end
 
@@ -70,11 +65,7 @@ module RubyApp
           ]
         rescue Exception => exception
           RubyApp::Log.exception(exception)
-          [
-            200,
-            { 'content-type' => RubyApp::Rack::Route.get_content_type(format) },
-            [ RubyApp::Elements::Pages::ExceptionPage.new(exception).render(format.to_sym) ]
-          ]
+          raise exception
         end
       end
 

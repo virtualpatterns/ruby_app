@@ -1,5 +1,10 @@
-- self.content_for(:body) do
-  /
-    #{__FILE__}
-  :javascript
-     location.assign('/');
+/
+  #{__FILE__}
+!!! 5
+%html{attributes}
+  %head
+    %title
+      = yield(:title) || self.translate.title
+  %body
+    :javascript
+       location.assign('/');

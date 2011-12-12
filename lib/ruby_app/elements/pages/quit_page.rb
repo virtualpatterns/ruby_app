@@ -9,6 +9,7 @@ module RubyApp
       class QuitPage < RubyApp::Elements::Page
 
         template_path(:all, File.dirname(__FILE__))
+        exclude_parent_template(:all)
 
         def initialize
           super

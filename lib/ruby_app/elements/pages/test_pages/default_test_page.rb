@@ -14,7 +14,6 @@ module RubyApp
         require 'ruby_app/elements/pages/blank_page'
         require 'ruby_app/elements/pages/test_pages/button_test_page'
         require 'ruby_app/elements/pages/test_pages/dialog_test_page'
-        require 'ruby_app/elements/pages/test_pages/exception_test_page'
         require 'ruby_app/elements/pages/test_pages/input_test_page'
         require 'ruby_app/elements/pages/test_pages/link_test_page'
         require 'ruby_app/elements/pages/test_pages/list_test_page'

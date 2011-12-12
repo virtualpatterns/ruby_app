@@ -75,6 +75,12 @@
             $('#'+id).replaceWith(content);
           } );
       },
+      this.addClass = function(selector, _class) {
+        $(selector).addClass(_class);
+      },
+      this.removeClass = function(selector, _class) {
+        $(selector).removeClass(_class);
+      },
       this.updateText = function(selector, value) {
         $(selector).text(value);
       },

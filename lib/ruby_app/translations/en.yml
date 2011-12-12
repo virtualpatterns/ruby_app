@@ -39,8 +39,6 @@ ruby_app:
 
               [`DialogTestPage`](RubyApp::Elements::Pages::TestPages::DialogTestPage) ... A page with links to show a variety of dialogs (e.g. busy dialog, exception dialog, message dialog, month dialog, etc.)
 
-              [`ExceptionTestPage`](RubyApp::Elements::Pages::TestPages::ExceptionTestPage) ... A page that raises an exception when rendered
-
               [`InputTestPage`](RubyApp::Elements::Pages::TestPages::InputTestPage) ... A page with a variety of input controls (e.g. simple input, duration input, etc.)
 
               [`LinkTestPage`](RubyApp::Elements::Pages::TestPages::LinkTestPage) ... A page with a single, clickable link
@@ -181,6 +179,8 @@ ruby_app:
             title: myOpenID Authentication
           yahoo_authentication_page:
             title: Yahoo! Authentication
+      quit_page:
+        title: Quit
       settings_page:
         title: Settings
         content:

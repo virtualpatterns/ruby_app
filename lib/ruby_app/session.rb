@@ -67,7 +67,7 @@ module RubyApp
     end
 
     def quit
-      RubyApp::Request.env['rack.session.options'][:drop] = true
+      RubyApp::Request.env['rack.session.options'][:drop] = true if RubyApp::Request.env['rack.session.options']
     end
 
     def self.get
