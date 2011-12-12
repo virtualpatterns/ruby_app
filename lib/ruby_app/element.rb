@@ -66,11 +66,11 @@ module RubyApp
       end
 
       def add_class(selector, _class)
-        execute("RubyApp.add_class(#{selector.to_json}, #{_class.to_json});")
+        execute("RubyApp.addClass(#{selector.to_json}, #{_class.to_json});")
       end
 
       def remove_class(selector, _class)
-        execute("RubyApp.remove_class(#{selector.to_json}, #{_class.to_json});")
+        execute("RubyApp.removeClass(#{selector.to_json}, #{_class.to_json});")
       end
 
       def update_text(selector, value)
