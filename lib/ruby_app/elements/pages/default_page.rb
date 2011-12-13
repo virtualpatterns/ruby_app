@@ -14,6 +14,10 @@ module RubyApp
         def initialize
           super
 
+          self.loaded do |element, event|
+            event.update_text('div#loaded', self.translate.loaded(event.now))
+          end
+
           @markdown = RubyApp::Elements::Markdown.new
           @markdown.clicked do |element, event|
             case event.name

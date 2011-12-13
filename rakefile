@@ -8,17 +8,17 @@ namespace :ruby_app do
 
   desc 'Monitor RubyApp'
   task :monitor do |task|
-    system("cd ./lib/ruby_app; > ./log/application.log; clear; tail -f ./log/application.log")
+    system("cd ./lib/ruby_app && > ./log/application.log && clear && tail -f ./log/application.log")
   end
 
   desc 'Create RubyApp console'
   task :console do |task|
-    system("cd ./lib/ruby_app; clear; bundle exec ../../bin/ruby_app console")
+    system("cd ./lib/ruby_app && clear && bundle exec ../../bin/ruby_app console")
   end
 
   desc 'Run RubyApp'
   task :run do |task|
-    system("cd ./lib/ruby_app; clear; bundle exec ../../bin/ruby_app run")
+    system("cd ./lib/ruby_app && clear && bundle exec ../../bin/ruby_app run")
   end
 
   namespace :test do

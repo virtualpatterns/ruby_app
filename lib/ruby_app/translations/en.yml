@@ -168,7 +168,9 @@ ruby_app:
         content:
           body: |
             Click [here](go_test) to go to the test pages.
-      authentication:
+        loaded:
+           Loaded at %1
+        authentication:
         open_id:
           base:
             base_authentication_page:
