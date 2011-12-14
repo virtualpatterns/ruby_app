@@ -37,7 +37,7 @@ module RubyApp
     private
 
       def initialize(path)
-        super(path, :daily)
+        super(path)
       end
 
   end

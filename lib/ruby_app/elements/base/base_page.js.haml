@@ -16,7 +16,10 @@
             } );
           } )
           .error( function(request, message, exception) {
-            alert(#{RubyApp::Elements::Base::BasePage.translate.error.to_json});
+            if (confirm(#{RubyApp::Elements::Base::BasePage.translate.error.to_json}))
+            {
+              RubyApp.refresh();
+            }
           } )
       },
       this.alert = function(message) {

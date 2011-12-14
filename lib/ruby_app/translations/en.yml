@@ -2,7 +2,7 @@ ruby_app:
   elements:
     base:
       base_page:
-        error:  An error occurred sending the event.  Refresh the page and try again.,
+        error:  An error occurred sending the event.  Do you want to refresh the page and try again?
     dialogs:
       base:
         base_close_dialog:
