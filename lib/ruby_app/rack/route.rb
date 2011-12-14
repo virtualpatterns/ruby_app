@@ -75,8 +75,7 @@ module RubyApp
       end
 
       route(RubyApp::Mixins::RouteMixin::POST, /.*/) do |method, path|
-        RubyApp::Log.debug("#{self}.post(...) method=#{method.inspect} path=#{path.inspect} POST=#{RubyApp::Request.POST.inspect}")
-        RubyApp::Log.debug("#{self}.post(...) RubyApp::Session.session_id=#{RubyApp::Session.session_id}")
+        RubyApp::Log.debug("#{self}.route method=#{method.inspect} path=#{path.inspect} POST=#{RubyApp::Request.POST.inspect}")
         begin
           if RubyApp::Session.session_id == RubyApp::Request.POST['session_id']
             event = RubyApp::Element::Event.from_hash(RubyApp::Request.POST)
@@ -89,7 +88,6 @@ module RubyApp
           else
             raise RubyApp::Exceptions::SessionInvalidException.new(RubyApp::Request.POST['session_id'])
           end
-
         rescue Exception => exception
           RubyApp::Log.exception(exception)
           [
