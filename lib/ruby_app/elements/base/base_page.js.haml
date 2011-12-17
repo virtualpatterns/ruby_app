@@ -8,8 +8,8 @@
       this.sendEvent = function(event) {
         event.session_id = '#{RubyApp::Session.session_id}';
         event.now = new Date().toString();
-        response = $.post(location.href, event);
-        response
+        request = $.post(location.href, event);
+        request
           .success( function(event) {
             $.each(event.statements, function(index, statement) {
               eval(statement);
