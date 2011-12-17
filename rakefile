@@ -28,7 +28,7 @@ namespace :ruby_app do
 
   desc 'Update version, commit, and push to master'
   task :push, :version do |task, arguments|
-    version_file = File.join(RubyApp::ROOT, %w[lib ruby_app version.rb])
+    version_file = File.join(RubyApp::ROOT, %w[version.rb])
     system "sed 's|[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*|#{arguments.version}|g' < '#{version_file}' > '#{version_file}.out' && rm '#{version_file}' && mv '#{version_file}.out' '#{version_file}' && git commit --all --message='Incrementing version' && git push origin master"
   end
 
