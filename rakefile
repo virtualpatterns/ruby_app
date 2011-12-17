@@ -26,10 +26,10 @@ namespace :ruby_app do
     puts RubyApp::VERSION
   end
 
-  desc 'Update version, commit, and push to master'
-  task :push, :version do |task, arguments|
+  desc 'Update version, commit, push to master, release'
+  task :release, :version do |task, arguments|
     version_file = File.join(RubyApp::ROOT, %w[version.rb])
-    system "sed 's|[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*|#{arguments.version}|g' < '#{version_file}' > '#{version_file}.out' && rm '#{version_file}' && mv '#{version_file}.out' '#{version_file}' && git commit --all --message='Incrementing version' && git push origin master"
+    system "sed 's|[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*|#{arguments.version}|g' < '#{version_file}' > '#{version_file}.out' && rm '#{version_file}' && mv '#{version_file}.out' '#{version_file}' && git commit --all --message='Incrementing version' && git push origin master; rake release"
   end
 
   namespace :test do
