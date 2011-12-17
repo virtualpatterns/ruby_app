@@ -6,19 +6,25 @@ require 'rake'
 
 namespace :ruby_app do
 
-  desc 'Monitor RubyApp'
+  desc 'Monitor log'
   task :monitor do |task|
     system("cd ./lib/ruby_app && > ./log/application.log && clear && tail -f ./log/application.log")
   end
 
-  desc 'Create RubyApp console'
+  desc 'Create console'
   task :console do |task|
     system("cd ./lib/ruby_app && clear && bundle exec ../../bin/ruby_app console")
   end
 
-  desc 'Run RubyApp'
+  desc 'Run'
   task :run do |task|
     system("cd ./lib/ruby_app && clear && bundle exec ../../bin/ruby_app run")
+  end
+
+  desc 'Update version, commit, and push to master'
+  task :push, :version do |task, arguments|
+    version_file = File.join(ruby_app::ROOT, %w[lib ruby_app version.rb])
+    system "sed 's|[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*|#{arguments.version}|g' < '#{version_file}' > '#{version_file}.out' && rm '#{version_file}' && mv '#{version_file}.out' '#{version_file}' && git commit --all --message='Incrementing version' && git push origin master"
   end
 
   namespace :test do
