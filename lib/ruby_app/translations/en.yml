@@ -1,4 +1,7 @@
 ruby_app:
+  element:
+    exception_event:
+      message: %1.  Do you want to refresh the page and try again?
   elements:
     base:
       base_page:
@@ -75,6 +78,8 @@ ruby_app:
               [`ConfirmationDialog`](do_confirmation_dialog) ... Ask for confirmation.
 
               [`ExceptionDialog`](do_exception_dialog) ... Raise an exception and show the `class` and `message` properties.
+
+              [`Exception`](do_unhandled_exception_dialog) ... Raise an unhandled exception.
 
               [`MessageDialog`](do_message_dialog) ... Show a sample message dialog.
 
@@ -170,7 +175,7 @@ ruby_app:
             Click [here](go_test) to go to the test pages.
         loaded:
            Loaded at %1
-        authentication:
+      authentication:
         open_id:
           base:
             base_authentication_page:
@@ -198,4 +203,4 @@ ruby_app:
         title: Quit
   exceptions:
     session_invalid_exception:
-      message: The session is invalid or has expired.  Refresh the page and try again.
+      message: The session is invalid or has expired

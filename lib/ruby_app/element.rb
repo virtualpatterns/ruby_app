@@ -23,6 +23,7 @@ module RubyApp
     include RubyApp::Mixins::RenderMixin
 
     class Event
+      extend RubyApp::Mixins::TranslateMixin
 
       attr_reader :now, :source
 
@@ -51,6 +52,10 @@ module RubyApp
 
       def refresh
         execute("RubyApp.refresh();")
+      end
+
+      def confirm_refresh(message)
+        execute("RubyApp.confirm_refresh(#{message.to_json});")
       end
 
       def show(dialog)
@@ -112,7 +117,7 @@ module RubyApp
 
       def initialize(exception)
         super()
-        self.alert(exception.message)
+        self.confirm_refresh(RubyApp::Element::ExceptionEvent.translate.message(exception.message))
       end
 
     end

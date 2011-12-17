@@ -38,6 +38,8 @@ module RubyApp
                 RubyApp::Elements::Dialogs::ExceptionDialog.show(event) do
                   raise self.translate.exception
                 end
+              when 'do_unhandled_exception_dialog'
+                raise self.translate.exception
               when 'do_message_dialog'
                 RubyApp::Session.show(event, RubyApp::Elements::Dialogs::MessageDialog.new(self.translate.message_dialog.message.title,
                                                                                            self.translate.message_dialog.message.message))

@@ -16,10 +16,7 @@
             } );
           } )
           .error( function(request, message, exception) {
-            if (confirm(#{RubyApp::Elements::Base::BasePage.translate.error.to_json}))
-            {
-              RubyApp.refresh();
-            }
+            RubyApp.confirm_refresh(#{RubyApp::Elements::Base::BasePage.translate.error.to_json});
           } )
       },
       this.alert = function(message) {
@@ -27,6 +24,12 @@
       },
       this.refresh = function() {
         location.assign(location.pathname);
+      },
+      this.confirm_refresh = function(message) {
+        if (confirm(message))
+        {
+          RubyApp.refresh();
+        }
       },
       this.go = function(url) {
         location.assign(url);
