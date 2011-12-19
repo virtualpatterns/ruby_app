@@ -55,7 +55,7 @@ module RubyApp
             super()
             @today = today
             @display = display || today
-            @value = value || today
+            @value = value || @display
           end
 
           def display_first_date
