@@ -29,21 +29,12 @@ module RubyApp
 
         end
 
-        class UnloadedEvent < RubyApp::Element::Event
-
-          def initialize(data)
-            super(data)
-          end
-
-        end
-
         template_path(:all, File.dirname(__FILE__))
 
         attr_accessor :interval
 
         event :loaded
         event :triggered
-        event :unloaded
 
         def initialize
           super
@@ -55,7 +46,6 @@ module RubyApp
           def on_event(event)
             on_loaded(event) if event.is_a?(RubyApp::Elements::Base::BasePage::LoadedEvent)
             on_triggered(event) if event.is_a?(RubyApp::Elements::Base::BasePage::TriggeredEvent)
-            on_unloaded(event) if event.is_a?(RubyApp::Elements::Base::BasePage::UnloadedEvent)
             super(event)
           end
 
@@ -65,10 +55,6 @@ module RubyApp
 
           def on_triggered(event)
             triggered(event)
-          end
-
-          def on_unloaded(event)
-            unloaded(event)
           end
 
       end

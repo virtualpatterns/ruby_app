@@ -13,7 +13,10 @@
           request
             .success( function(event) {
               $.each(event.statements, function(index, statement) {
-                eval(statement);
+                $(window).queue( function() {
+                  eval(statement);
+                  $(window).dequeue();
+                } );
               } );
             } )
             .error( function(request, message, exception) {
@@ -28,6 +31,7 @@
         alert(message);
       },
       this.refresh = function() {
+        $(window).clearQueue();
         location.assign(location.pathname);
       },
       this.confirm_refresh = function(message) {
@@ -37,11 +41,12 @@
         }
       },
       this.go = function(url) {
+        $(window).clearQueue();
         location.assign(url);
       },
       this.show = function(id) {
-        response = $.get('/#{RubyApp::Language.locale.code}/elements/' + id + '.html');
-        response
+        request = $.get('/#{RubyApp::Language.locale.code}/elements/' + id + '.html');
+        request
           .success( function(dialog) {
             var overlay = $('body div.overlay');
             overlay.append(dialog);
@@ -80,8 +85,8 @@
         RubyApp.queueEvent({_class:'RubyApp::Elements::Dialog::HiddenEvent', source_id:id});
       },
       this.updateElement = function(id) {
-        response = $.get('/#{RubyApp::Language.locale.code}/elements/' + id + '.html');
-        response
+        request = $.get('/#{RubyApp::Language.locale.code}/elements/' + id + '.html');
+        request
           .success( function(content) {
             $('#'+id).replaceWith(content);
           } );
@@ -115,8 +120,8 @@
     $(window).unload(function() {
       if ( RubyApp.interval > 0 ) {
         window.clearInterval(RubyApp._interval);
+        $(window).clearQueue();
       }
-      // RubyApp.queueEvent({_class:'RubyApp::Elements::Page::UnloadedEvent', source_id:$('html').attr('id')});
     });
 
 = yield
