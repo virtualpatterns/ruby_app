@@ -14,7 +14,7 @@ module RubyApp
 
         template_path(:all, File.dirname(__FILE__))
 
-        def initialize
+        def initialize(today = Date.today, display = nil, value = nil)
           super
         end
 

@@ -13,16 +13,14 @@ module RubyApp
 
           template_path(:all, File.dirname(__FILE__))
 
-          def initialize(title, value = Date.today)
+          def initialize(title, today = Date.today, display = nil, value = nil)
             super()
 
             attributes.merge!(:style => 'width: auto;')
 
             @title = title
 
-            @month = RubyApp::Elements::Calendars::Month.new
-            @month.display = value;
-            @month.value = value;
+            @month = RubyApp::Elements::Calendars::Month.new(today, display, value)
             @month.changed do |element, event|
               @response = event.value
               event.hide(self)

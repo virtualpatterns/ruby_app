@@ -28,7 +28,7 @@
               - if date == self.value
                 %td.current
                   = date.day
-              - elsif date == Date.today
+              - elsif date == self.today
                 %td.today
                   %a.day{:href => '', :date => date.strftime}
                     = date.day

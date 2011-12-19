@@ -47,14 +47,15 @@ module RubyApp
 
           template_path(:all, File.dirname(__FILE__))
 
-          attr_accessor :display, :value
+          attr_accessor :today, :display, :value
 
           event :changed
 
-          def initialize
-            super
-            @display = Date.today
-            @value = @display
+          def initialize(today = Date.today, display = nil, value = nil)
+            super()
+            @today = today
+            @display = display || today
+            @value = value || today
           end
 
           def display_first_date
