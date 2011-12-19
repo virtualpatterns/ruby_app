@@ -5,19 +5,24 @@
       this.translation = {code:'#{RubyApp::Language.locale.code}', title:'#{RubyApp::Language.locale.title}'},
       this.interval = #{self.interval * 1000};
       this._interval = 0;
-      this.sendEvent = function(event) {
+      this.queueEvent = function(event) {
         event.session_id = '#{RubyApp::Session.session_id}';
         event.now = new Date().toString();
-        request = $.post(location.href, event);
-        request
-          .success( function(event) {
-            $.each(event.statements, function(index, statement) {
-              eval(statement);
-            } );
-          } )
-          .error( function(request, message, exception) {
-            RubyApp.confirm_refresh(#{RubyApp::Elements::Base::BasePage.translate.error.to_json});
-          } )
+        $(window).queue( function() {
+          request = $.post(location.href, event);
+          request
+            .success( function(event) {
+              $.each(event.statements, function(index, statement) {
+                eval(statement);
+              } );
+            } )
+            .error( function(request, message, exception) {
+              RubyApp.confirm_refresh(#{RubyApp::Elements::Base::BasePage.translate.error.to_json});
+            } )
+            .complete( function() {
+              $(window).dequeue();
+            } )
+        } );
       },
       this.alert = function(message) {
         alert(message);
@@ -64,7 +69,7 @@
             $(window).bind('scroll', function() {
               centerDialog(id);
             } );
-            RubyApp.sendEvent({_class:'RubyApp::Elements::Dialog::ShownEvent', source_id:id});
+            RubyApp.queueEvent({_class:'RubyApp::Elements::Dialog::ShownEvent', source_id:id});
           } );
       },
       this.hide = function(id) {
@@ -72,7 +77,7 @@
         $(window).unbind('resize');
         $('body div.overlay').hide();
         $('#'+id).remove();
-        RubyApp.sendEvent({_class:'RubyApp::Elements::Dialog::HiddenEvent', source_id:id});
+        RubyApp.queueEvent({_class:'RubyApp::Elements::Dialog::HiddenEvent', source_id:id});
       },
       this.updateElement = function(id) {
         response = $.get('/#{RubyApp::Language.locale.code}/elements/' + id + '.html');
@@ -99,10 +104,10 @@
     };
 
     $(window).load(function() {
-      RubyApp.sendEvent({_class:'RubyApp::Elements::Page::LoadedEvent', source_id:$('html').attr('id')});
+      RubyApp.queueEvent({_class:'RubyApp::Elements::Page::LoadedEvent', source_id:$('html').attr('id')});
       if ( RubyApp.interval > 0 ) {
         RubyApp._interval = window.setInterval(function() {
-          RubyApp.sendEvent({_class:'RubyApp::Elements::Page::TriggeredEvent', source_id:$('html').attr('id')});
+          RubyApp.queueEvent({_class:'RubyApp::Elements::Page::TriggeredEvent', source_id:$('html').attr('id')});
         }, RubyApp.interval);
       }
     });
@@ -111,7 +116,7 @@
       if ( RubyApp.interval > 0 ) {
         window.clearInterval(RubyApp._interval);
       }
-      // RubyApp.sendEvent({_class:'RubyApp::Elements::Page::UnloadedEvent', source_id:$('html').attr('id')});
+      // RubyApp.queueEvent({_class:'RubyApp::Elements::Page::UnloadedEvent', source_id:$('html').attr('id')});
     });
 
 = yield

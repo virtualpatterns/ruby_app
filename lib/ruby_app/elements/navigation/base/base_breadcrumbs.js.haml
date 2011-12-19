@@ -4,7 +4,7 @@
     $(document).ready(function() {
       $('div.breadcrumbs > a.breadcrumb').click(function(event) {
         event.preventDefault();
-        RubyApp.sendEvent({_class:'RubyApp::Elements::Navigation::Breadcrumbs::ClickedEvent', source_id:$(this).parents('div.breadcrumbs').attr('id'), page_id:$(this).attr('page_id')});
+        RubyApp.queueEvent({_class:'RubyApp::Elements::Navigation::Breadcrumbs::ClickedEvent', source_id:$(this).parents('div.breadcrumbs').attr('id'), page_id:$(this).attr('page_id')});
       });
     });
 = yield

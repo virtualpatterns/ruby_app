@@ -4,7 +4,7 @@
     $(document).ready(function() {
       $('input[type="text"]').live('change', function(event) {
         event.preventDefault();
-        RubyApp.sendEvent({_class:'RubyApp::Elements::Input::ChangedEvent', source_id:$(this).attr('id'), value:$(this).val()});
+        RubyApp.queueEvent({_class:'RubyApp::Elements::Input::ChangedEvent', source_id:$(this).attr('id'), value:$(this).val()});
       });
     });
 = yield
