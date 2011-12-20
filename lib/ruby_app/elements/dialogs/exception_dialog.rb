@@ -16,12 +16,12 @@ module RubyApp
           @exception = exception
         end
 
-        def self.show(event)
+        def self.show_dialog(event)
           begin
             yield
           rescue Exception => exception
             RubyApp::Log.exception(exception)
-            RubyApp::Session.show(event, RubyApp::Elements::Dialogs::ExceptionDialog.new(exception))
+            RubyApp::Session.show_dialog(event, RubyApp::Elements::Dialogs::ExceptionDialog.new(exception))
           end
         end
 

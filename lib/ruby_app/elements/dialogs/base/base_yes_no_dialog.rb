@@ -18,13 +18,13 @@ module RubyApp
             @yes = RubyApp::Elements::Link.new
             @yes.clicked do |element, event|
               @response = true
-              event.hide(self)
+              event.hide_dialog(self)
             end
 
             @no = RubyApp::Elements::Link.new
             @no.clicked do |element, event|
               @response = false
-              event.hide(self)
+              event.hide_dialog(self)
             end
 
           end

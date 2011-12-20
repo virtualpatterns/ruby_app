@@ -23,18 +23,18 @@ module RubyApp
             @month = RubyApp::Elements::Calendars::Month.new(today, display, value)
             @month.changed do |element, event|
               @response = event.value
-              event.hide(self)
+              event.hide_dialog(self)
             end
 
             @today = RubyApp::Elements::Link.new
             @today.clicked do |element, event|
               @response = event.today
-              event.hide(self)
+              event.hide_dialog(self)
             end
 
             @cancel = RubyApp::Elements::Link.new
             @cancel.clicked do |element, event|
-              event.hide(self)
+              event.hide_dialog(self)
             end
 
           end

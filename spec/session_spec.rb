@@ -26,7 +26,7 @@ describe RubyApp::Session do
       specify { session.should respond_to('[]=') }
       specify { session.should respond_to('identity') }
       specify { session.should respond_to('identity=') }
-      specify { session.should respond_to('show') }
+      specify { session.should respond_to('show_dialog') }
       specify { session.should respond_to('quit') }
 
     end

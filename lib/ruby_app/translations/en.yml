@@ -40,7 +40,7 @@ ruby_app:
             body: |
               [`ButtonTestPage`](RubyApp::Elements::Pages::TestPages::ButtonTestPage) ... A page with a single, clickable button
 
-              [`DialogTestPage`](RubyApp::Elements::Pages::TestPages::DialogTestPage) ... A page with links to show a variety of dialogs (e.g. busy dialog, exception dialog, message dialog, month dialog, etc.)
+              [`DialogTestPage`](RubyApp::Elements::Pages::TestPages::DialogTestPage) ... A page with links to show a variety of dialogs (e.g. exception dialog, message dialog, month dialog, etc.)
 
               [`InputTestPage`](RubyApp::Elements::Pages::TestPages::InputTestPage) ... A page with a variety of input controls (e.g. simple input, duration input, etc.)
 
@@ -60,8 +60,6 @@ ruby_app:
 
               [`YahooAuthenticationPage`](RubyApp::Elements::Pages::Authentication::OpenID::YahooAuthenticationPage) ... re/authenticate using Yahoo!
 
-          busy_dialog:
-            message: Retrieving authentication information ...
         button_test_page:
           title: Button Test Page
           content:
@@ -73,7 +71,17 @@ ruby_app:
           title: Dialog Test Page
           content:
             body: |
-              [`BusyDialog`](do_busy_dialog) ... Show and then hide a 'busy' dialog for 30 seconds.
+              [`ConfirmationDialog`](do_confirmation_dialog) ... Ask for confirmation.
+
+              [`ExceptionDialog`](do_exception_dialog) ... Raise an exception and show the `class` and `message` properties.
+
+              [`Exception`](do_unhandled_exception_dialog) ... Raise an unhandled exception.
+
+              [`MessageDialog`](do_message_dialog) ... Show a sample message dialog.
+
+              [`MonthDialog`](do_month_dialog) ... Show a calendar month dialog, hide it when a date is clicked, and then show the clicked date (the last date clicked was <span id='last_value'>(nothing)</span>).
+
+              ---
 
               [`ConfirmationDialog`](do_confirmation_dialog) ... Ask for confirmation.
 
@@ -84,8 +92,18 @@ ruby_app:
               [`MessageDialog`](do_message_dialog) ... Show a sample message dialog.
 
               [`MonthDialog`](do_month_dialog) ... Show a calendar month dialog, hide it when a date is clicked, and then show the clicked date (the last date clicked was <span id='last_value'>(nothing)</span>).
-          busy_dialog:
-            message: Busy dialog ...
+
+              ---
+
+              [`ConfirmationDialog`](do_confirmation_dialog) ... Ask for confirmation.
+
+              [`ExceptionDialog`](do_exception_dialog) ... Raise an exception and show the `class` and `message` properties.
+
+              [`Exception`](do_unhandled_exception_dialog) ... Raise an unhandled exception.
+
+              [`MessageDialog`](do_message_dialog) ... Show a sample message dialog.
+
+              [`MonthDialog`](do_month_dialog) ... Show a calendar month dialog, hide it when a date is clicked, and then show the clicked date (the last date clicked was <span id='last_value'>(nothing)</span>).
           confirmation_dialog:
             title: Confirmation Dialog
             message: Are you sure?

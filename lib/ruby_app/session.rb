@@ -45,14 +45,14 @@ module RubyApp
       @data[key] = value
     end
 
-    def show(event, dialog, &block)
+    def show_dialog(event, dialog, &block)
 
       @dialogs.push(dialog)
 
       if block_given? and block.arity == 1
         dialog.shown do |element, _event|
           yield _event
-          _event.hide(element)
+          _event.hide_dialog(element)
         end
       end
       dialog.hidden do |element, _event|
@@ -62,7 +62,7 @@ module RubyApp
         @dialogs.delete(dialog)
       end
 
-      event.show(dialog)
+      event.show_dialog(dialog)
 
     end
 

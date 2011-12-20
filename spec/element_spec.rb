@@ -28,8 +28,8 @@ describe RubyApp::Element do
         specify { event.should respond_to('process!') }
         specify { event.should respond_to('alert') }
         specify { event.should respond_to('refresh') }
-        specify { event.should respond_to('show') }
-        specify { event.should respond_to('hide') }
+        specify { event.should respond_to('show_dialog') }
+        specify { event.should respond_to('hide_dialog') }
         specify { event.should respond_to('update_element') }
         specify { event.should respond_to('update_text') }
         specify { event.should respond_to('update_value') }

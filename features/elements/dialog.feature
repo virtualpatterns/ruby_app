@@ -1,15 +1,5 @@
 Feature: Dialog Test Page
 
-  @broken
-  Scenario: Show a busy dialog
-    Given I go to the test pages
-    When I click "DialogTestPage"
-    When I click "BusyDialog"
-    Then I should see "Busy dialog"
-    When I wait 30 seconds
-    Then I should not see "Busy dialog"
-    Then I quit
-
   Scenario: Show a confirmation dialog
     Given I go to the test pages
     When I click "DialogTestPage"

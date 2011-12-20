@@ -5,7 +5,6 @@ module RubyApp
     module Pages
 
       module TestPages
-        require 'ruby_app/elements/dialogs/busy_dialog'
         require 'ruby_app/elements/dialogs/exception_dialog'
         require 'ruby_app/elements/markdown'
         require 'ruby_app/elements/pages/authentication/open_id/google_authentication_page'

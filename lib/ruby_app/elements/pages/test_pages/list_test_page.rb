@@ -28,7 +28,7 @@ module RubyApp
                              'Item 04',
                              'Item 05' ]
             @list.clicked do |element, event|
-              RubyApp::Session.show(event, RubyApp::Elements::Dialogs::MessageDialog.new(self.translate.message_dialog.message.title,
+              RubyApp::Session.show_dialog(event, RubyApp::Elements::Dialogs::MessageDialog.new(self.translate.message_dialog.message.title,
                                                                                          self.translate.message_dialog.message.message(event.item)))
             end
 
@@ -39,7 +39,7 @@ module RubyApp
                                'Item 14',
                                'Item 15' ]
             @select.clicked do |element, event|
-              RubyApp::Session.show(event, RubyApp::Elements::Dialogs::MessageDialog.new(self.translate.message_dialog.message.title,
+              RubyApp::Session.show_dialog(event, RubyApp::Elements::Dialogs::MessageDialog.new(self.translate.message_dialog.message.title,
                                                                                          self.translate.message_dialog.message.message(@select.selected_item)))
             end
 

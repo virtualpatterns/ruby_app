@@ -58,12 +58,12 @@ module RubyApp
         execute("RubyApp.confirm_refresh(#{message.to_json});")
       end
 
-      def show(dialog)
-        execute("RubyApp.show('#{dialog.element_id}');")
+      def show_dialog(dialog)
+        execute("RubyApp.showDialog('#{dialog.element_id}');")
       end
 
-      def hide(dialog)
-        execute("RubyApp.hide('#{dialog.element_id}');")
+      def hide_dialog(dialog)
+        execute("RubyApp.hideDialog('#{dialog.element_id}');")
       end
 
       def update_element(element)

@@ -23,13 +23,13 @@ module RubyApp
 
             @input = RubyApp::Elements::Input.new
             @input.changed do |element, event|
-              RubyApp::Session.show(event, RubyApp::Elements::Dialogs::MessageDialog.new(self.translate.message_dialog.message.title,
+              RubyApp::Session.show_dialog(event, RubyApp::Elements::Dialogs::MessageDialog.new(self.translate.message_dialog.message.title,
                                                                                          self.translate.message_dialog.message.message(@input.value)))
             end
 
             @duration_input = RubyApp::Elements::Inputs::DurationInput.new
             @duration_input.changed do |element, event|
-              RubyApp::Session.show(event, RubyApp::Elements::Dialogs::MessageDialog.new(self.translate.message_dialog.message.title,
+              RubyApp::Session.show_dialog(event, RubyApp::Elements::Dialogs::MessageDialog.new(self.translate.message_dialog.message.title,
                                                                                          self.translate.message_dialog.message.message(@duration_input.duration)))
             end
 

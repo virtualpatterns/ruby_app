@@ -3,12 +3,39 @@
     // #{__FILE__}
     var RubyApp = new function() {
       this.translation = {code:'#{RubyApp::Language.locale.code}', title:'#{RubyApp::Language.locale.title}'},
-      this.interval = #{self.interval * 1000};
-      this._interval = 0;
+      this.interval = #{self.interval * 1000},
+      this._interval = 0,
+      this.maximize = function(selector) {
+        var element = $(selector);
+        var _document = $(document);
+        element.css('width', '0px');
+        element.css('height', '0px');
+        element.css('width', _document.width() + 'px');
+        element.css('height', _document.height() + 'px');
+      },
+      this.center = function(selector) {
+        var element = $(selector);
+        var _window = $(window);
+        element.css('top', _window.scrollTop() + (_window.height() - element.outerHeight(true)) / 2 + 'px');
+        element.css('left', _window.scrollLeft() + (_window.width() - element.outerWidth(true)) / 2 + 'px');
+      },
+      this.maximizeWait = function() {
+        RubyApp.maximize('body div.wait');
+      },
+      this.centerWaitImage = function() {
+        RubyApp.center('body div.wait > div.image');
+      },
+      this.maximizeOverlay = function() {
+        RubyApp.maximize('body div.overlay');
+      },
+      this.centerDialog = function(id) {
+        RubyApp.center('#'+id);
+      },
       this.queueEvent = function(event) {
         event.session_id = '#{RubyApp::Session.session_id}';
         event.now = new Date().toString();
         $(window).queue( function() {
+          RubyApp.showWait();
           request = $.post(location.href, event);
           request
             .success( function(event) {
@@ -18,8 +45,10 @@
                   $(window).dequeue();
                 } );
               } );
+              RubyApp.hideWait();
             } )
             .error( function(request, message, exception) {
+              RubyApp.hideWait();
               RubyApp.confirm_refresh(#{RubyApp::Elements::Base::BasePage.translate.error.to_json});
             } )
             .complete( function() {
@@ -44,42 +73,44 @@
         $(window).clearQueue();
         location.assign(url);
       },
-      this.show = function(id) {
+      this.showWait = function() {
+        var wait = $('body div.wait');
+        wait.show();
+        RubyApp.maximizeWait();
+        RubyApp.centerWaitImage();
+        $(window).bind('resize.wait', function() {
+          RubyApp.maximizeWait();
+          RubyApp.centerWaitImage();
+        } );
+        $(window).bind('scroll.wait', function() {
+          RubyApp.centerWaitImage();
+        } );
+      },
+      this.hideWait = function() {
+        $(window).unbind('.wait');
+        $('body div.wait').hide();
+      },
+      this.showDialog = function(id) {
         request = $.get('/#{RubyApp::Language.locale.code}/elements/' + id + '.html');
         request
           .success( function(dialog) {
             var overlay = $('body div.overlay');
             overlay.append(dialog);
             overlay.show();
-            centerOverlay = function() {
-              var overlay = $('body div.overlay');
-              var _document = $(document);
-              overlay.css('width', '0px');
-              overlay.css('height', '0px');
-              overlay.css('width', _document.width() + 'px');
-              overlay.css('height', _document.height() + 'px');
-            };
-            centerDialog = function(id) {
-              var dialog = $('#'+id);
-              var _window = $(window);
-              dialog.css('top', _window.scrollTop() + (_window.height() - dialog.outerHeight(true)) / 2 + 'px');
-              dialog.css('left', _window.scrollLeft() + (_window.width() - dialog.outerWidth(true)) / 2 + 'px');
-            };
-            centerOverlay();
-            centerDialog(id);
-            $(window).bind('resize', function() {
-              centerOverlay();
-              centerDialog(id);
+            RubyApp.maximizeOverlay();
+            RubyApp.centerDialog(id);
+            $(window).bind('resize.dialog', function() {
+              RubyApp.maximizeOverlay();
+              RubyApp.centerDialog(id);
             } );
-            $(window).bind('scroll', function() {
-              centerDialog(id);
+            $(window).bind('scroll.dialog', function() {
+              RubyApp.centerDialog(id);
             } );
             RubyApp.queueEvent({_class:'RubyApp::Elements::Dialog::ShownEvent', source_id:id});
           } );
       },
-      this.hide = function(id) {
-        $(window).unbind('scroll');
-        $(window).unbind('resize');
+      this.hideDialog = function(id) {
+        $(window).unbind('.dialog');
         $('body div.overlay').hide();
         $('#'+id).remove();
         RubyApp.queueEvent({_class:'RubyApp::Elements::Dialog::HiddenEvent', source_id:id});

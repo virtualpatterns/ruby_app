@@ -9,7 +9,6 @@ require 'ruby_app/elements/base/base_page'
 require 'ruby_app/elements/calendars/month'
 require 'ruby_app/elements/dialog'
 require 'ruby_app/elements/dialogs/blank_dialog'
-require 'ruby_app/elements/dialogs/busy_dialog'
 require 'ruby_app/elements/dialogs/close_dialog'
 require 'ruby_app/elements/dialogs/yes_no_dialog'
 require 'ruby_app/elements/list'
@@ -25,7 +24,6 @@ RubyApp::Elements::Base::BasePage.template_path(:html, File.join(File.dirname(__
 RubyApp::Elements::Calendars::Month.template_path(:css, File.join(File.dirname(__FILE__), %w[mobile calendars]))
 RubyApp::Elements::Dialog.template_path(:css, File.join(File.dirname(__FILE__), %w[mobile]))
 RubyApp::Elements::Dialogs::BlankDialog.template_path(:css, File.join(File.dirname(__FILE__), %w[mobile dialogs]))
-RubyApp::Elements::Dialogs::BusyDialog.template_path(:css, File.join(File.dirname(__FILE__), %w[mobile dialogs]))
 RubyApp::Elements::Dialogs::CloseDialog.template_path(:css, File.join(File.dirname(__FILE__), %w[mobile dialogs]))
 RubyApp::Elements::Dialogs::YesNoDialog.template_path(:css, File.join(File.dirname(__FILE__), %w[mobile dialogs]))
 RubyApp::Elements::List.template_path(:css, File.join(File.dirname(__FILE__), %w[mobile]))

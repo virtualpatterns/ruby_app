@@ -17,7 +17,7 @@ module RubyApp
 
             @close = RubyApp::Elements::Link.new
             @close.clicked do |element, event|
-              event.hide(self)
+              event.hide_dialog(self)
             end
 
           end
