@@ -30,9 +30,6 @@ module RubyApp
             self.triggered do |element, event|
               event.update_text('li#triggered', self.translate.triggered(event.now))
             end
-            self.unloaded do |element, event|
-              event.update_text('li#unloaded', self.translate.unloaded(event.now))
-            end
 
             @input = RubyApp::Elements::Input.new
             @input.changed do |element, event|

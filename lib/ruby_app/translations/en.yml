@@ -50,7 +50,7 @@ ruby_app:
 
               [`MarkdownTestPage`](RubyApp::Elements::Pages::TestPages::MarkdownTestPage) ... A page with markdown containing a single, clickable link
 
-              [`TestPage`](RubyApp::Elements::Pages::TestPages::TestPage) ... A test page showing load, release, and trigger events.
+              [`_TestPage`](RubyApp::Elements::Pages::TestPages::TestPage) ... A test page showing load, release, and trigger events.
 
               ---
 

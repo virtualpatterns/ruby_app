@@ -28,7 +28,7 @@ module RubyApp
 
             @today = RubyApp::Elements::Link.new
             @today.clicked do |element, event|
-              @response = Date.today
+              @response = event.today
               event.hide(self)
             end
 
