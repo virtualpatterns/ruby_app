@@ -5,6 +5,7 @@
       this.translation = {code:'#{RubyApp::Language.locale.code}', title:'#{RubyApp::Language.locale.title}'},
       this.interval = #{self.interval * 1000},
       this._interval = 0,
+      this._waitCount = 0,
       this.maximize = function(selector) {
         var element = $(selector);
         var _document = $(document);
@@ -35,20 +36,14 @@
         event.session_id = '#{RubyApp::Session.session_id}';
         event.now = new Date().toString();
         $(window).queue( function() {
-          RubyApp.showWait();
           request = $.post(location.href, event);
           request
             .success( function(event) {
               $.each(event.statements, function(index, statement) {
-                $(window).queue( function() {
-                  eval(statement);
-                  $(window).dequeue();
-                } );
+                eval(statement);
               } );
-              RubyApp.hideWait();
             } )
             .error( function(request, message, exception) {
-              RubyApp.hideWait();
               RubyApp.confirm_refresh(#{RubyApp::Elements::Base::BasePage.translate.error.to_json});
             } )
             .complete( function() {
@@ -60,6 +55,7 @@
         alert(message);
       },
       this.refresh = function() {
+        RubyApp.showWait();
         $(window).clearQueue();
         location.assign(location.pathname);
       },
@@ -70,25 +66,34 @@
         }
       },
       this.go = function(url) {
+        RubyApp.showWait();
         $(window).clearQueue();
         location.assign(url);
       },
       this.showWait = function() {
-        var wait = $('body div.wait');
-        wait.show();
-        RubyApp.maximizeWait();
-        RubyApp.centerWaitImage();
-        $(window).bind('resize.wait', function() {
+        if (RubyApp._waitCount <= 0)
+        {
+          var wait = $('body div.wait');
+          wait.show();
           RubyApp.maximizeWait();
           RubyApp.centerWaitImage();
-        } );
-        $(window).bind('scroll.wait', function() {
-          RubyApp.centerWaitImage();
-        } );
+          $(window).bind('resize.wait', function() {
+            RubyApp.maximizeWait();
+            RubyApp.centerWaitImage();
+          } );
+          $(window).bind('scroll.wait', function() {
+            RubyApp.centerWaitImage();
+          } );
+        }
+        RubyApp._waitCount ++;
       },
       this.hideWait = function() {
-        $(window).unbind('.wait');
-        $('body div.wait').hide();
+        if (RubyApp._waitCount == 1)
+        {
+          $(window).unbind('.wait');
+          $('body div.wait').hide();
+        }
+        RubyApp._waitCount --;
       },
       this.showDialog = function(id) {
         request = $.get('/#{RubyApp::Language.locale.code}/elements/' + id + '.html');
@@ -106,14 +111,14 @@
             $(window).bind('scroll.dialog', function() {
               RubyApp.centerDialog(id);
             } );
-            RubyApp.queueEvent({_class:'RubyApp::Elements::Dialog::ShownEvent', source_id:id});
+            RubyApp.queueEvent({_class:'RubyApp::Elements::Dialog::ShownEvent', source_id:id}, false);
           } );
       },
       this.hideDialog = function(id) {
         $(window).unbind('.dialog');
         $('body div.overlay').hide();
         $('#'+id).remove();
-        RubyApp.queueEvent({_class:'RubyApp::Elements::Dialog::HiddenEvent', source_id:id});
+        RubyApp.queueEvent({_class:'RubyApp::Elements::Dialog::HiddenEvent', source_id:id}, false);
       },
       this.updateElement = function(id) {
         request = $.get('/#{RubyApp::Language.locale.code}/elements/' + id + '.html');
@@ -139,11 +144,21 @@
       }
     };
 
+    $(document).ready(function() {
+      $('body div.wait')
+        .bind('ajaxSend', function() {
+          RubyApp.showWait();
+        } )
+        .bind('ajaxComplete', function() {
+          RubyApp.hideWait();
+        } );
+    });
+
     $(window).load(function() {
-      RubyApp.queueEvent({_class:'RubyApp::Elements::Page::LoadedEvent', source_id:$('html').attr('id')});
+      RubyApp.queueEvent({_class:'RubyApp::Elements::Page::LoadedEvent', source_id:$('html').attr('id')}, false);
       if ( RubyApp.interval > 0 ) {
         RubyApp._interval = window.setInterval(function() {
-          RubyApp.queueEvent({_class:'RubyApp::Elements::Page::TriggeredEvent', source_id:$('html').attr('id')});
+          RubyApp.queueEvent({_class:'RubyApp::Elements::Page::TriggeredEvent', source_id:$('html').attr('id')}, false);
         }, RubyApp.interval);
       }
     });

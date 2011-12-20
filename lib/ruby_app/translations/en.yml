@@ -75,7 +75,7 @@ ruby_app:
 
               [`ExceptionDialog`](do_exception_dialog) ... Raise an exception and show the `class` and `message` properties.
 
-              [`Exception`](do_unhandled_exception_dialog) ... Raise an unhandled exception.
+              [`_Exception`](do_unhandled_exception_dialog) ... Raise an unhandled exception.
 
               [`MessageDialog`](do_message_dialog) ... Show a sample message dialog.
 
@@ -87,19 +87,7 @@ ruby_app:
 
               [`ExceptionDialog`](do_exception_dialog) ... Raise an exception and show the `class` and `message` properties.
 
-              [`Exception`](do_unhandled_exception_dialog) ... Raise an unhandled exception.
-
-              [`MessageDialog`](do_message_dialog) ... Show a sample message dialog.
-
-              [`MonthDialog`](do_month_dialog) ... Show a calendar month dialog, hide it when a date is clicked, and then show the clicked date (the last date clicked was <span id='last_value'>(nothing)</span>).
-
-              ---
-
-              [`ConfirmationDialog`](do_confirmation_dialog) ... Ask for confirmation.
-
-              [`ExceptionDialog`](do_exception_dialog) ... Raise an exception and show the `class` and `message` properties.
-
-              [`Exception`](do_unhandled_exception_dialog) ... Raise an unhandled exception.
+              [`_Exception`](do_unhandled_exception_dialog) ... Raise an unhandled exception.
 
               [`MessageDialog`](do_message_dialog) ... Show a sample message dialog.
 

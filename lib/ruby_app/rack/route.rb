@@ -76,9 +76,6 @@ module RubyApp
 
       route(RubyApp::Mixins::RouteMixin::POST, /.*/) do |method, path|
         RubyApp::Log.debug("#{self}.route method=#{method.inspect} path=#{path.inspect} POST=#{RubyApp::Request.POST.inspect}")
-        #RubyApp::Log.debug("#{self}.route sleeping ...")
-        #sleep(5)
-        #RubyApp::Log.debug("#{self}.route ... done")
         begin
           if RubyApp::Session.session_id == RubyApp::Request.POST['session_id']
             event = RubyApp::Element::Event.from_hash(RubyApp::Request.POST)
