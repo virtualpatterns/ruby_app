@@ -20,6 +20,9 @@ module RubyApp
       extend RubyApp::Mixins::RouteMixin
 
       def call(environment)
+        #RubyApp::Log.debug("#{self.class}##{__method__} sleeping ...")
+        #sleep(5)
+        #RubyApp::Log.debug("#{self.class}##{__method__} ... done")
         self.class.do_route(RubyApp::Request.request_method, RubyApp::Request.path)
       end
 

@@ -4,7 +4,7 @@
     $(document).ready(function() {
       $('span.link > a.page').click(function(event) {
         event.preventDefault();
-        RubyApp.queueEvent({_class:'RubyApp::Elements::Navigation::PageLink::ClickedEvent', source_id:$(this).parents('span.link').attr('id'), page:$(this).attr('page')});
+        RubyApp.queueEvent({_class:'RubyApp::Elements::Navigation::PageLink::ClickedEvent', source_id:$(this).parents('span.link').attr('id'), page:$(this).attr('page')}, true);
       });
     });
 = yield

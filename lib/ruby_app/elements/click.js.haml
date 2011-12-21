@@ -4,7 +4,7 @@
     $(document).ready(function() {
       $('.click').live('click', function(event) {
         event.preventDefault();
-        RubyApp.queueEvent({_class:'RubyApp::Elements::Click::ClickedEvent', source_id:$(this).attr('id')});
+        RubyApp.queueEvent({_class:'RubyApp::Elements::Click::ClickedEvent', source_id:$(this).attr('id')}, true);
       });
     });
 = yield

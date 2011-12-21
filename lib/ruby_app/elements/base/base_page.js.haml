@@ -32,11 +32,12 @@
       this.centerDialog = function(id) {
         RubyApp.center('#'+id);
       },
-      this.queueEvent = function(event) {
+      this.queueEvent = function(event, wait) {
         event.session_id = '#{RubyApp::Session.session_id}';
         event.now = new Date().toString();
         $(window).queue( function() {
-          request = $.post(location.href, event);
+          //request = $.post(location.href, event);
+          request = $.ajax({type:'POST', url:location.href, data:event, wait:wait});
           request
             .success( function(event) {
               $.each(event.statements, function(index, statement) {
@@ -44,7 +45,7 @@
               } );
             } )
             .error( function(request, message, exception) {
-              RubyApp.confirm_refresh(#{RubyApp::Elements::Base::BasePage.translate.error.to_json});
+              RubyApp.confirm_refresh(#{RubyApp::Elements::Base::BasePage.translate.error.to_json}, true);
             } )
             .complete( function() {
               $(window).dequeue();
@@ -96,7 +97,8 @@
         RubyApp._waitCount --;
       },
       this.showDialog = function(id) {
-        request = $.get('/#{RubyApp::Language.locale.code}/elements/' + id + '.html');
+        //request = $.get('/#{RubyApp::Language.locale.code}/elements/' + id + '.html');
+        request = $.ajax({type:'GET', url:'/#{RubyApp::Language.locale.code}/elements/' + id + '.html', wait:true});
         request
           .success( function(dialog) {
             var overlay = $('body div.overlay');
@@ -121,7 +123,8 @@
         RubyApp.queueEvent({_class:'RubyApp::Elements::Dialog::HiddenEvent', source_id:id}, false);
       },
       this.updateElement = function(id) {
-        request = $.get('/#{RubyApp::Language.locale.code}/elements/' + id + '.html');
+        //request = $.get('/#{RubyApp::Language.locale.code}/elements/' + id + '.html');
+        request = $.ajax({type:'GET', url:'/#{RubyApp::Language.locale.code}/elements/' + id + '.html', wait:true});
         request
           .success( function(content) {
             $('#'+id).replaceWith(content);
@@ -146,11 +149,13 @@
 
     $(document).ready(function() {
       $('body div.wait')
-        .bind('ajaxSend', function() {
-          RubyApp.showWait();
+        .bind('ajaxSend', function(event, request, options) {
+          if (options.wait)
+            RubyApp.showWait();
         } )
-        .bind('ajaxComplete', function() {
-          RubyApp.hideWait();
+        .bind('ajaxComplete', function(event, request, options) {
+          if (options.wait)
+            RubyApp.hideWait();
         } );
     });
 
