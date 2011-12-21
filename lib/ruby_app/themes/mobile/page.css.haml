@@ -14,11 +14,15 @@
       > div.wait
         background-color: $overlay_background
         > div.image
-          background-color: $dialog_background
-          color: $dialog_foreground
+          background-color: $wait_background
+          background:
+            image: url('/ruby_app/resources/themes/mobile/page.gif')
+            position: center center
+            repeat: no-repeat
           border-radius: 10px
-          padding: 20px
-          width: 42px
+          color: $wait_foreground
+          height: 88px
+          width: 88px
     a
       color: $page_link
       font-weight: bold

@@ -1,7 +1,7 @@
 - self.rendered?(__FILE__) do
   :sass
     /* #{__FILE__}
-    body 
+    body
       > div.overlay
         display: none
         height: 100%
@@ -19,7 +19,11 @@
         width: 100%
         z-index: 2
         > div.image
-          text-align: center
+          background:
+            image: url('/ruby_app/resources/elements/base/base_page.gif')
+            position: center center
+            repeat: no-repeat
+          height: 48px
           position: absolute
-          width: 16px
+          width: 48px
 = yield
