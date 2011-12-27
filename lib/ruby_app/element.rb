@@ -137,7 +137,7 @@ module RubyApp
     end
 
     def self.get_element(element_id)
-      element_id =~ /(\d+)/
+      element_id =~ /(-?\d+)/
       ObjectSpace._id2ref($1.to_i)
     end
 
