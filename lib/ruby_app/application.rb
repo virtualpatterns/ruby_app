@@ -43,9 +43,11 @@ module RubyApp
       _options.translations_paths = [File.join(RubyApp::ROOT, %w[translations])] + ( _options.translations_paths.is_a?(Array) ? _options.translations_paths : [_options.translations_paths] )
       @@_application = _options.application_class.new(_options)
       @@_application.start!
+      RubyApp::Log.debug("#{self}##{__method__} options=#{_options.inspect}")
     end
 
     def self.destroy!
+      RubyApp::Log.debug("#{self}##{__method__}")
       @@_application.stop!
       @@_application = nil
     end

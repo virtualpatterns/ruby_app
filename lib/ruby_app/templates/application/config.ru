@@ -19,6 +19,14 @@ use Rack::Session::Pool
 use Rack::Reloader
 use Rack::ContentLength
 
+use RubyApp::Rack::Application, :application_class => _APPLICATION_UPCODE_::Application,
+                                :session_class => _APPLICATION_UPCODE_::Session,
+                                :log_path => File.join(_APPLICATION_UPCODE_::ROOT, %w[log application.log]),
+                                :configuration_paths => File.join(_APPLICATION_UPCODE_::ROOT, %w[config.yml]),
+                                :default_language => :en,
+                                :translations_paths => File.join(_APPLICATION_UPCODE_::ROOT, %w[translations])
+run RubyApp::Rack::Route.new
+
 map '/favicon.ico' do
   run Rack::File.new(File.join(RubyApp::ROOT, %w[resources favicon.ico]))
 end
@@ -29,14 +37,4 @@ end
 
 map '/_APPLICATION_DOWNCODE_/resources' do
   run Rack::File.new(File.join(_APPLICATION_UPCODE_::ROOT, %w[resources]))
-end
-
-map '/' do
-  use RubyApp::Rack::Application, :application_class => _APPLICATION_UPCODE_::Application,
-                                  :session_class => _APPLICATION_UPCODE_::Session,
-                                  :log_path => File.join(_APPLICATION_UPCODE_::ROOT, %w[log application.log]),
-                                  :configuration_paths => File.join(_APPLICATION_UPCODE_::ROOT, %w[config.yml]),
-                                  :default_language => :en,
-                                  :translations_paths => File.join(_APPLICATION_UPCODE_::ROOT, %w[translations])
-  run RubyApp::Rack::Route.new
 end

@@ -30,6 +30,7 @@ module RubyApp
     end
 
     def self.close!
+      @@_log.debug("#{self}##{__method__}")
       @@_log.close if @@_log
       @@_log = nil
     end

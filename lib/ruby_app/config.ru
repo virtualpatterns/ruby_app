@@ -1,4 +1,4 @@
-#\ --warn --port 8008 --pid ./rack.pid
+#\ --warn --port 8008 --pid ./rack.pid --debug true
 require 'rubygems'
 require 'bundler/setup'
 
@@ -13,15 +13,13 @@ use Rack::Session::Pool
 use Rack::Reloader
 use Rack::ContentLength
 
+use RubyApp::Rack::Application
+run RubyApp::Rack::Route.new
+
 map '/favicon.ico' do
   run Rack::File.new(File.join(RubyApp::ROOT, %w[resources favicon.ico]))
 end
 
 map '/ruby_app/resources' do
   run Rack::File.new(File.join(RubyApp::ROOT, %w[resources]))
-end
-
-map '/' do
-  use RubyApp::Rack::Application
-  run RubyApp::Rack::Route.new
 end
