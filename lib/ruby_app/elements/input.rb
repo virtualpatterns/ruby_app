@@ -16,7 +16,8 @@ module RubyApp
 
         def initialize(data)
           super(data)
-          @value = data['value']
+          @value = data['value'].strip
+          @value = @value.empty? ? nil : @value
         end
 
         def to_hash
@@ -33,6 +34,7 @@ module RubyApp
 
       def initialize
         super
+        @value = nil
       end
 
       protected

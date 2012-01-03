@@ -6,6 +6,8 @@ Feature: Input elements
     Then I should see "Input"
     And I fill in the "Input" field with "value" and I press enter
     Then I should see "You input 'value'."
+    When I fill in the "Input" field with "" and I press enter
+    Then I should see "You input '(nil)'."
     Then I click "Close"
     Then I quit
 
