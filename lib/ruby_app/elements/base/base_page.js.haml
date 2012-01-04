@@ -32,11 +32,15 @@
       this.centerDialog = function(id) {
         RubyApp.center('#'+id);
       },
+      this.log = function(message) {
+        $('ul.log').append('<li>' + message + '</li>');
+      },
       this.queueEvent = function(event, wait) {
         event.session_id = '#{RubyApp::Session.session_id}';
         event.now = new Date().toString();
+        RubyApp.log('RubyApp.queueEvent ENQUEUE event.class=' + event._class + ' wait=' + wait);
         $(window).queue( function() {
-          //request = $.post(location.href, event);
+          RubyApp.log('RubyApp.queueEvent DEQUEUE event.class=' + event._class + ' wait=' + wait);
           request = $.ajax({type:'POST', url:location.href, data:event, wait:wait});
           request
             .success( function(event) {

@@ -30,7 +30,7 @@ module RubyApp
             @duration_input = RubyApp::Elements::Inputs::DurationInput.new
             @duration_input.changed do |element, event|
               RubyApp::Session.show_dialog(event, RubyApp::Elements::Dialogs::MessageDialog.new(self.translate.message_dialog.message.title,
-                                                                                                self.translate.message_dialog.message.message(@duration_input.duration)))
+                                                                                                self.translate.message_dialog.message.message(@duration_input.duration || '(nil)')))
             end
 
           end
