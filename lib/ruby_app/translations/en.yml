@@ -1,11 +1,11 @@
 ruby_app:
   element:
     exception_event:
-      message: %1.  Do you want to refresh the page and try again?
+      message: %1.  The page will refresh so you can try again.
   elements:
     base:
       base_page:
-        error:  An error occurred sending the event.  Do you want to refresh the page and try again?
+        error:  An error occurred sending the event.  The page will refresh so you can try again.
     dialogs:
       base:
         base_close_dialog:
