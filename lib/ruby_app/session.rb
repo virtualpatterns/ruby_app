@@ -25,16 +25,14 @@ module RubyApp
     attr_reader :session_id, :pages
     attr_accessor :identity, :data
 
-    def initialize(session_id, page = nil)
+    def initialize(session_id, page = nil, data = {})
+      require 'ruby_app/elements/pages/default_page'
       @session_id = session_id
       @pages = []
-      @dialogs = []
-      @identity = nil
-      @data = {}
-
-      require 'ruby_app/elements/pages/default_page'
       @pages.push(page || RubyApp::Elements::Pages::DefaultPage.new)
-
+      @dialogs = []
+      @data = data
+      @identity = nil
     end
 
     def [](key)
@@ -76,7 +74,7 @@ module RubyApp
 
     def self.create!
       RubyApp::Request.session[:_initialize] = true
-      Thread.current[:_session] = RubyApp::Request.session[:_session] ||= RubyApp::Application.options.session_class.new(RubyApp::Request.env['rack.session.options'] ? RubyApp::Request.env['rack.session.options'][:id] : nil)
+      Thread.current[:_session] = RubyApp::Request.session[:_session] ||= RubyApp::Application.options.session_class.new(RubyApp::Request.env['rack.session.options'] ? RubyApp::Request.env['rack.session.options'][:id] : nil, nil, RubyApp::Request.query)
       if block_given?
         begin
           yield

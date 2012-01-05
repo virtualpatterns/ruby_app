@@ -49,7 +49,8 @@
               } );
             } )
             .error( function(request, message, exception) {
-              RubyApp.confirm_refresh(#{RubyApp::Elements::Base::BasePage.translate.error.to_json}, true);
+              if (#{RubyApp::Session['show_event_error'] || 'false'} == true)
+                RubyApp.confirm_refresh(#{RubyApp::Elements::Base::BasePage.translate.error.to_json});
             } )
             .complete( function() {
               $(window).dequeue();

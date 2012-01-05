@@ -1,5 +1,5 @@
 Given /^I am viewing "([^"]*)"$/ do |url|
-  visit(url)
+  visit("#{url}?show_event_error=false")
 end
 
 When /^I refresh the page$/ do
