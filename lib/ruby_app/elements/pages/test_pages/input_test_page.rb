@@ -9,6 +9,7 @@ module RubyApp
         require 'ruby_app/elements/markdown'
         require 'ruby_app/elements/input'
         require 'ruby_app/elements/inputs/duration_input'
+        require 'ruby_app/elements/inputs/multiline_input'
         require 'ruby_app/elements/pages/blank_page'
         require 'ruby_app/session'
 
@@ -31,6 +32,12 @@ module RubyApp
             @duration_input.changed do |element, event|
               RubyApp::Session.show_dialog(event, RubyApp::Elements::Dialogs::MessageDialog.new(self.translate.message_dialog.message.title,
                                                                                                 self.translate.message_dialog.message.message(@duration_input.duration || '(nil)')))
+            end
+
+            @multiline_input = RubyApp::Elements::Inputs::MultilineInput.new
+            @multiline_input.changed do |element, event|
+              RubyApp::Session.show_dialog(event, RubyApp::Elements::Dialogs::MessageDialog.new(self.translate.message_dialog.message.title,
+                                                                                                self.translate.message_dialog.message.message(@multiline_input.value || '(nil)')))
             end
 
           end

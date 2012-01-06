@@ -9,7 +9,6 @@ module RubyApp
 
       def initialize
         super
-        attributes.merge!(:type => :button)
       end
 
     end

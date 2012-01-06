@@ -122,6 +122,7 @@ ruby_app:
           label:
             input: Input
             duration_input: DurationInput
+            multiline_input: MultilineInput
           message_dialog:
             message:
               title: Input Test

@@ -13,7 +13,7 @@ Feature: A page
     Given I go to the test pages
     When I click "_TestPage"
     Then I should see "Rendered"
-    When I fill in the "Enter a new cookie value" field with "value" and I press enter
+    When I fill in the "Enter a new cookie value" field with "value" and I change focus
     Then I should see "The cookie value is 'value'."
     Then I click "Close"
     Then I quit

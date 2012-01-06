@@ -19,10 +19,10 @@ When /^I click "([^"]*)"$/ do |text|
   #sleep 1
 end
 
-When /^I fill in the "([^"]*)" field with "([^"]*)"( and I press enter)?$/ do |field, value, enter|
+When /^I fill in the "([^"]*)" field with "([^"]*)"( and I change focus)?$/ do |field, value, change_focus|
   fill_in(field, :with => value)
-  if enter
-    find_field(field).native.send_key(:enter)
+  if change_focus
+    find('body').click
     #sleep 1
   end
 end
