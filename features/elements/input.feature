@@ -33,3 +33,15 @@ Feature: Input elements
     Then I should see "You input '(nil)'."
     Then I click "Close"
     Then I quit
+
+  Scenario: Render a email input element and process its event
+    Given I go to the test pages
+    When I click "InputTestPage"
+    Then I should see "EmailInput"
+    And I fill in the "EmailInput" field with "value" and I change focus
+    Then I should see "You input 'value'."
+    When I click "Close"
+    And I fill in the "EmailInput" field with "" and I change focus
+    Then I should see "You input '(nil)'."
+    Then I click "Close"
+    Then I quit

@@ -2,7 +2,7 @@
   :plain
     // #{__FILE__}
     $(document).ready(function() {
-      $('input[type="text"]').live('change', function(event) {
+      $('input').live('change', function(event) {
         event.preventDefault();
         RubyApp.queueEvent({_class:'RubyApp::Elements::Input::ChangedEvent', source_id:$(this).attr('id'), value:$(this).val()}, true);
       });

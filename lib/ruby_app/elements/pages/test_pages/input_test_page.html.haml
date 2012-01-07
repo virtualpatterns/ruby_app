@@ -14,3 +14,7 @@
   %label{:for => @multiline_input.element_id}
     = self.translate.label.multiline_input
   = @multiline_input.render(:html)
+  %br
+  %label{:for => @email_input.element_id}
+    = self.translate.label.email_input
+  = @email_input.render(:html)

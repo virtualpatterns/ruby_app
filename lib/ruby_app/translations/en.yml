@@ -122,6 +122,7 @@ ruby_app:
           label:
             input: Input
             duration_input: DurationInput
+            email_input: EmailInput
             multiline_input: MultilineInput
           message_dialog:
             message:
