@@ -46,6 +46,10 @@ module RubyApp
         source.send(:on_event, self)
       end
 
+      def log(message)
+        execute("RubyApp.log(#{message.to_json});")
+      end
+
       def alert(message)
         execute("RubyApp.alert(#{message.to_json});")
       end
