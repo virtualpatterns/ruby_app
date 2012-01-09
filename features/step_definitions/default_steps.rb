@@ -16,14 +16,12 @@ end
 
 When /^I click "([^"]*)"$/ do |text|
   click_on(text)
-  #sleep 1
 end
 
 When /^I fill in the "([^"]*)" field with "([^"]*)"( and I change focus)?$/ do |field, value, change_focus|
   fill_in(field, :with => value)
   if change_focus
     find('body').click
-    #sleep 1
   end
 end
 
