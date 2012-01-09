@@ -17,6 +17,13 @@ module RubyApp
       self.error('-' * 80)
     end
 
+    def duration(message)
+      start = Time.now
+      result = yield if block_given?
+      self.debug("#{message} duration=#{Time.now - start}s")
+      return result
+    end
+
     def self.get
       @@_log
     end

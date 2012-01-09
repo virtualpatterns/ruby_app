@@ -24,7 +24,7 @@ module RubyApp
       end
 
       route(RubyApp::Mixins::RouteMixin::GET, /\/quit/) do |method, path|
-        RubyApp::Log.debug("#{self}.route method=#{method.inspect} path=#{path.inspect}")
+        #RubyApp::Log.debug("#{self}.route method=#{method.inspect} path=#{path.inspect}")
         begin
           [
             200,
@@ -38,7 +38,7 @@ module RubyApp
       end
 
       route(RubyApp::Mixins::RouteMixin::GET, /\/elements\/([^\.]+)\.([^\.\?]+)/) do |method, path, element_id, format|
-        RubyApp::Log.debug("#{self}.route method=#{method.inspect} path=#{path.inspect} element_id=#{element_id.inspect} format=#{format.to_sym.inspect}")
+        #RubyApp::Log.debug("#{self}.route method=#{method.inspect} path=#{path.inspect} element_id=#{element_id.inspect} format=#{format.to_sym.inspect}")
         begin
           [
             200,
@@ -56,12 +56,16 @@ module RubyApp
       end
 
       route(RubyApp::Mixins::RouteMixin::GET, /\.([^\.\?]+)/) do |method, path, format|
-        RubyApp::Log.debug("#{self}.route method=#{method.inspect} path=#{path.inspect} format=#{format.to_sym.inspect}")
+        #RubyApp::Log.debug("#{self}.route method=#{method.inspect} path=#{path.inspect} format=#{format.to_sym.inspect}")
         begin
           [
             200,
             { 'content-type' => RubyApp::Rack::Route.get_content_type(format) },
-            [ RubyApp::Session.pages.last.render(format.to_sym) ]
+            [
+              RubyApp::Log.duration("#{self}##{__method__} method=#{method.inspect} path=#{path.inspect} format=#{format.to_sym.inspect}") do
+                RubyApp::Session.pages.last.render(format.to_sym)
+              end
+            ]
           ]
         rescue Exception => exception
           RubyApp::Log.exception(exception)
@@ -70,7 +74,7 @@ module RubyApp
       end
 
       route(RubyApp::Mixins::RouteMixin::GET, /.*/) do |method, path|
-        RubyApp::Log.debug("#{self}.route method=#{method.inspect} path=#{path.inspect}")
+        #RubyApp::Log.debug("#{self}.route method=#{method.inspect} path=#{path.inspect}")
         do_route(RubyApp::Mixins::RouteMixin::GET, '/.html')
       end
 
