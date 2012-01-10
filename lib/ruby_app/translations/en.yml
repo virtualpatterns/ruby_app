@@ -124,6 +124,7 @@ ruby_app:
             duration_input: DurationInput
             email_input: EmailInput
             multiline_input: MultilineInput
+            toggle_input: ToggleInput
           message_dialog:
             message:
               title: Input Test

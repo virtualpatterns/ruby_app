@@ -62,7 +62,7 @@ module RubyApp
             200,
             { 'content-type' => RubyApp::Rack::Route.get_content_type(format) },
             [
-              RubyApp::Log.duration("#{self}##{__method__} method=#{method.inspect} path=#{path.inspect} format=#{format.to_sym.inspect}") do
+              RubyApp::Log.duration("#{self}.#{__method__} method=#{method.inspect} path=#{path.inspect} format=#{format.to_sym.inspect}") do
                 RubyApp::Session.pages.last.render(format.to_sym)
               end
             ]
