@@ -1,0 +1,15 @@
+- self.rendered?(__FILE__) do
+  :sass
+    /* #{__FILE__}
+    @import '#{File.join(File.dirname(__FILE__), %w[.. colors.sass])}'
+    input[type="checkbox"]
+      -webkit-appearance: none
+      border: 2px solid $page_foreground
+      border-radius: 5px
+      width: 25px
+      height: 25px
+      background-position: center center
+      background-repeat: no-repeat
+      &:checked
+        background-image: url('/ruby_app/resources/themes/mobile/inputs/toggle.png')
+= yield

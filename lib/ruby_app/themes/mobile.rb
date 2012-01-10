@@ -11,6 +11,7 @@ require 'ruby_app/elements/dialog'
 require 'ruby_app/elements/dialogs/blank_dialog'
 require 'ruby_app/elements/dialogs/close_dialog'
 require 'ruby_app/elements/dialogs/yes_no_dialog'
+require 'ruby_app/elements/inputs/toggle_input'
 require 'ruby_app/elements/list'
 require 'ruby_app/elements/lists/select'
 require 'ruby_app/elements/markdown'
@@ -26,6 +27,7 @@ RubyApp::Elements::Dialog.template_path(:css, File.join(File.dirname(__FILE__), 
 RubyApp::Elements::Dialogs::BlankDialog.template_path(:css, File.join(File.dirname(__FILE__), %w[mobile dialogs]))
 RubyApp::Elements::Dialogs::CloseDialog.template_path(:css, File.join(File.dirname(__FILE__), %w[mobile dialogs]))
 RubyApp::Elements::Dialogs::YesNoDialog.template_path(:css, File.join(File.dirname(__FILE__), %w[mobile dialogs]))
+RubyApp::Elements::Inputs::ToggleInput.template_path(:css, File.join(File.dirname(__FILE__), %w[mobile inputs]))
 RubyApp::Elements::List.template_path(:css, File.join(File.dirname(__FILE__), %w[mobile]))
 RubyApp::Elements::Lists::Select.template_path(:css, File.join(File.dirname(__FILE__), %w[mobile lists]))
 RubyApp::Elements::Markdown.template_path(:css, File.join(File.dirname(__FILE__), %w[mobile]))
