@@ -29,6 +29,22 @@ Then /^the "([^\"]*)" field should contain "([^\"]*)"$/ do |field, value|
   field_labeled(field).value.should =~ /#{value}/
 end
 
+When /^I (un)?check the "([^"]*)" field?$/ do |uncheck, field|
+  unless uncheck
+    check(field)
+  else
+    uncheck(field)
+  end
+end
+
+Then /^the "([^\"]*)" field should be (un)?checked$/ do |field, unchecked|
+  unless unchecked
+    page.should have_checked_field(field)
+  else
+    page.should_not have_checked_field(field)
+  end
+end
+
 Then /^show me the page$/ do
   save_and_open_page
 end

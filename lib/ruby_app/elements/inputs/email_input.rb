@@ -9,7 +9,7 @@ module RubyApp
 
         template_path(:all, File.dirname(__FILE__))
 
-        exclude_parent_template(:html)
+        exclude_parent_template(:html, :js)
 
         def initialize
           super

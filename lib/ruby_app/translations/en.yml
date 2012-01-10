@@ -128,7 +128,7 @@ ruby_app:
           message_dialog:
             message:
               title: Input Test
-              message: You input '%1'.
+              message: You input '%1' of type %2.
         link_test_page:
           title: Link Test Page
           content:
