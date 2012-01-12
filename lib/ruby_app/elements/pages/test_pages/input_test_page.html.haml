@@ -7,6 +7,10 @@
     = self.translate.label.input
   = @input.render(:html)
   %br
+  %label{:for => @toggle_input.element_id}
+    = self.translate.label.toggle_input
+  = @toggle_input.render(:html)
+  %br
   %label{:for => @duration_input.element_id}
     = self.translate.label.duration_input
   = @duration_input.render(:html)
@@ -18,7 +22,3 @@
   %label{:for => @email_input.element_id}
     = self.translate.label.email_input
   = @email_input.render(:html)
-  %br
-  %label{:for => @toggle_input.element_id}
-    = self.translate.label.toggle_input
-  = @toggle_input.render(:html)

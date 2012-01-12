@@ -8,6 +8,9 @@ ruby_app:
         error:  An error occurred sending the event.  The page will refresh so you can try again.
     dialogs:
       base:
+        base_ok_dialog:
+          ok:
+            body: 'OK'
         base_close_dialog:
           close:
             body: Close
@@ -81,6 +84,8 @@ ruby_app:
 
               [`MonthDialog`](do_month_dialog) ... Show a calendar month dialog, hide it when a date is clicked, and then show the clicked date (the last date clicked was <span id='last_value'>(nothing)</span>).
 
+              [`AcknowledgementDialog`](do_acknowledgement_dialog) ... Expect acknowledgementment.
+
               ---
 
               [`ConfirmationDialog`](do_confirmation_dialog) ... Ask for confirmation.
@@ -92,6 +97,14 @@ ruby_app:
               [`MessageDialog`](do_message_dialog) ... Show a sample message dialog.
 
               [`MonthDialog`](do_month_dialog) ... Show a calendar month dialog, hide it when a date is clicked, and then show the clicked date (the last date clicked was <span id='last_value'>(nothing)</span>).
+
+              [`AcknowledgementDialog`](do_acknowledgement_dialog) ... Expect acknowledgementment.
+          acknowledgement_dialog:
+            title: Acknowledgement Dialog
+            message: This will happen.
+            message_dialog:
+              title: You clicked ...
+              message: %1
           confirmation_dialog:
             title: Confirmation Dialog
             message: Are you sure?

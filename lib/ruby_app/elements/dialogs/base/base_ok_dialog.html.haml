@@ -1,0 +1,6 @@
+- self.content_for(:footer) do
+  /
+    #{__FILE__}
+  = @ok.render(:html) do |element|
+    - element.content_for(:body, RubyApp::Elements::Dialogs::Base::BaseOkDialog.translate.ok.body)
+= yield

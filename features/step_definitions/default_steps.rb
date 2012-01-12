@@ -29,7 +29,7 @@ Then /^the "([^\"]*)" field should contain "([^\"]*)"$/ do |field, value|
   field_labeled(field).value.should =~ /#{value}/
 end
 
-When /^I (un)?check the "([^"]*)" field?$/ do |uncheck, field|
+When /^I (un)?check the "([^"]*)" field$/ do |uncheck, field|
   unless uncheck
     check(field)
   else

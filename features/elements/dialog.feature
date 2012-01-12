@@ -50,3 +50,17 @@ Feature: Dialog Test Page
     And I should not see "15/"
     And I should see "-15"
     Then I quit
+
+  Scenario: Show an acknowledgement dialog
+    Given I go to the test pages
+    When I click "DialogTestPage"
+    And I click "AcknowledgementDialog"
+    Then I should see "Acknowledgement Dialog"
+    And I should see "This will happen."
+    When I click "OK"
+    Then I should not see "Acknowledgement Dialog"
+    And I should not see "This will happen."
+    And I should see "You clicked"
+    And I should see "true"
+    Then I click "Close"
+    Then I quit
