@@ -33,11 +33,9 @@ module RubyApp
       directory = File.dirname(path)
       Dir.mkdir(directory) unless File.exists?(directory)
       @@_log = RubyApp::Log.new(path)
-      @@_log.debug("#{self}.#{__method__} path=#{path.inspect}")
     end
 
     def self.close!
-      @@_log.debug("#{self}.#{__method__}")
       @@_log.close if @@_log
       @@_log = nil
     end

@@ -17,11 +17,9 @@ module RubyApp
 
     def self.load!
       @@_configuration = RubyApp::Configuration.new(RubyApp::Application.options.configuration_paths)
-      RubyApp::Log.debug("#{self}.#{__method__} paths=#{RubyApp::Application.options.configuration_paths.inspect}")
     end
 
     def self.unload!
-      RubyApp::Log.debug("#{self}.#{__method__}")
       @@_configuration = nil
     end
 

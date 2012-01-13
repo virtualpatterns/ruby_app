@@ -24,7 +24,6 @@ module RubyApp
       end
 
       route(RubyApp::Mixins::RouteMixin::GET, /\/quit/) do |method, path|
-        #RubyApp::Log.debug("#{self}.route method=#{method.inspect} path=#{path.inspect}")
         begin
           [
             200,
@@ -38,7 +37,6 @@ module RubyApp
       end
 
       route(RubyApp::Mixins::RouteMixin::GET, /\/elements\/([^\.]+)\.([^\.\?]+)/) do |method, path, element_id, format|
-        #RubyApp::Log.debug("#{self}.route method=#{method.inspect} path=#{path.inspect} element_id=#{element_id.inspect} format=#{format.to_sym.inspect}")
         begin
           [
             200,
@@ -56,7 +54,6 @@ module RubyApp
       end
 
       route(RubyApp::Mixins::RouteMixin::GET, /\.([^\.\?]+)/) do |method, path, format|
-        #RubyApp::Log.debug("#{self}.route method=#{method.inspect} path=#{path.inspect} format=#{format.to_sym.inspect}")
         begin
           [
             200,
@@ -74,12 +71,11 @@ module RubyApp
       end
 
       route(RubyApp::Mixins::RouteMixin::GET, /.*/) do |method, path|
-        #RubyApp::Log.debug("#{self}.route method=#{method.inspect} path=#{path.inspect}")
         do_route(RubyApp::Mixins::RouteMixin::GET, '/.html')
       end
 
       route(RubyApp::Mixins::RouteMixin::POST, /.*/) do |method, path|
-        RubyApp::Log.debug("#{self}.route method=#{method.inspect} path=#{path.inspect} POST=#{RubyApp::Request.POST.inspect}")
+        RubyApp::Log.debug("#{self}.route method=#{method.inspect} path=#{path.inspect} POST['_class']=#{RubyApp::Request.POST['_class']}")
         begin
           if RubyApp::Session.session_id == RubyApp::Request.POST['session_id']
             event = RubyApp::Element::Event.from_hash(RubyApp::Request.POST)

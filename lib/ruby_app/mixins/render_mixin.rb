@@ -9,7 +9,6 @@ module RubyApp
   module Mixins
 
     module RenderMixin
-      require 'ruby_app/log'
 
       def rendered?(template)
         unless ( Thread.current[:_rendered] ||= {} ).key?(template)
@@ -44,7 +43,6 @@ module RubyApp
 
           templates = self.is_a?(Class) ? self.get_templates(format) : self.class.get_templates(format)
           templates.each_with_index do |template, index|
-            #RubyApp::Log.debug("#{self.is_a?(Class) ? self : self.class}##{__method__} template=#{File.expand_path(template)}")
             content = Haml::Engine.new(File.read(template), :filename => template).render(self) do |*arguments|
               if arguments.empty?
                 index == 0 ? nil : self.content_for(templates[index - 1])

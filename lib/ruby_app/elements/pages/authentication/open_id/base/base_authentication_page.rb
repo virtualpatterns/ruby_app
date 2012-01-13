@@ -29,16 +29,13 @@ module RubyApp
                 self.loaded do |element, event|
                   if RubyApp::Request.query.empty?
                     @consumer = ::OpenID::Consumer.new(RubyApp::Session.data, nil)
-                    RubyApp::Log.debug("#{self.class}#loaded identifier=#{identifier.inspect}")
                     request = @consumer.begin(identifier)
                     self.process_request(request)
                     event.go(request.redirect_url(RubyApp::Request.url, RubyApp::Request.url))
                   else
                     response = @consumer.complete(RubyApp::Request.query, RubyApp::Request.url)
-                    RubyApp::Log.debug("#{self.class}#loaded response.class=#{response.class}")
                     case response.status
                       when ::OpenID::Consumer::SUCCESS
-                        RubyApp::Log.debug("#{self.class}#loaded response.identity_url=#{response.identity_url.inspect}")
                         RubyApp::Session.identity = self.create_identity_from_response(response)
                         RubyApp::Session.pages.pop
                         event.refresh
