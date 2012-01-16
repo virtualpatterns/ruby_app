@@ -59,7 +59,7 @@ module RubyApp
             200,
             { 'content-type' => RubyApp::Rack::Route.get_content_type(format) },
             [
-              RubyApp::Log.duration("#{self}.route method=#{method.inspect} path=#{path.inspect} format=#{format.to_sym.inspect}") do
+              RubyApp::Log.duration("#{self}.route method=#{method.inspect} path=#{path.inspect} format=#{format.to_sym.inspect} RubyApp::Session.pages.last=#{RubyApp::Session.pages.last.class}") do
                 RubyApp::Session.pages.last.render(format.to_sym)
               end
             ]
@@ -75,7 +75,6 @@ module RubyApp
       end
 
       route(RubyApp::Mixins::RouteMixin::POST, /.*/) do |method, path|
-        RubyApp::Log.debug("#{self}.route method=#{method.inspect} path=#{path.inspect} POST['_class']=#{RubyApp::Request.POST['_class']}")
         begin
           if RubyApp::Session.session_id == RubyApp::Request.POST['session_id']
             event = RubyApp::Element::Event.from_hash(RubyApp::Request.POST)
@@ -83,7 +82,11 @@ module RubyApp
             [
               200,
               { 'content-type' => 'application/json' },
-              [ Yajl::Encoder.new.encode(event.to_hash) ]
+              [
+                RubyApp::Log.duration("#{self}.route method=#{method.inspect} path=#{path.inspect} POST['_class']=#{RubyApp::Request.POST['_class']}") do
+                  Yajl::Encoder.new.encode(event.to_hash)
+                end
+              ]
             ]
           else
             raise RubyApp::Exceptions::SessionInvalidException.new(RubyApp::Request.POST['session_id'])
