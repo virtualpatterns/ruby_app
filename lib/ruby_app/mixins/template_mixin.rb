@@ -26,9 +26,18 @@ module RubyApp
         @_exclude_parent_template_formats = formats
       end
 
+      def get_template(format)
+        (@_template_path[format] || @_template_path[:all]).gsub(/\*/,format.to_s)
+      end
+
+      def get_cache(format)
+        template = self.get_template(format)
+        File.join(File.dirname(template), '.cache', File.basename(template))
+      end
+
       def get_templates(format)
-        templates = Dir.glob((@_template_path[format] || @_template_path[:all] || "#{File.join(File.dirname(__FILE__), self.template_name)}.*.haml").gsub(/\*/,format.to_s))
-        ( templates.length > 0 ? [templates.first] : [] ).concat( ( !self.exclude_parent_template?(format) and self.superclass.respond_to?(:get_templates) ) ? self.superclass.get_templates(format) : [] )
+        template = self.get_template(format)
+        (File.exists?(template) ? [template] : []).concat((!self.exclude_parent_template?(format) && self.superclass.respond_to?(:get_templates) ) ? self.superclass.get_templates(format) : [])
       end
 
     end
