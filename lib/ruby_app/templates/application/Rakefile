@@ -1,0 +1,36 @@
+require 'rubygems'
+require 'bundler/setup'
+
+require 'rake'
+
+$LOAD_PATH.unshift File.expand_path(File.join(File.dirname(__FILE__), %w[lib]))
+
+require '_APPLICATION_DOWNCODE_/application'
+
+namespace :_APPLICATION_DOWNCODE_ do
+
+  desc 'Create console'
+  task :console do |task|
+    system("clear; bundle exec ruby_app console")
+  end
+
+  desc 'Run'
+  task :run do |task|
+    system("clear; bundle exec ruby_app run")
+  end
+
+  namespace :cache do
+
+    desc 'Create element cache'
+    task :create do |task|
+      _APPLICATION_UPCODE_::Application.create_cache(File.join(File.dirname(__FILE__), %w[lib _APPLICATION_DOWNCODE_ elements]), File.join(File.dirname(__FILE__), %w[lib]))
+    end
+
+    desc 'Delete element cache'
+    task :destroy do |task|
+      _APPLICATION_UPCODE_::Application.destroy_cache(File.join(File.dirname(__FILE__), %w[lib _APPLICATION_DOWNCODE_ elements]))
+    end
+
+  end
+
+end
