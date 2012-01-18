@@ -15,7 +15,7 @@ namespace :ruby_app do
   end
 
   desc 'Run'
-  task :run => ['ruby_app:cache:create'] do |task|
+  task :run do |task|
     system("cd ./lib/ruby_app && clear && bundle exec ../../bin/ruby_app run")
   end
 
@@ -25,7 +25,7 @@ namespace :ruby_app do
   end
 
   desc 'Push to master, release, and increment version'
-  task :release => ['ruby_app:cache:create'] do |task|
+  task :release do |task|
       system "git push origin master && rake release"
       version_file = File.join(RubyApp::ROOT, %w[version.rb])
       RubyApp::VERSION =~ /(\d+)\.(\d+)\.(\d+)/
@@ -78,13 +78,11 @@ namespace :ruby_app do
     desc 'Create element cache'
     task :create do |task|
       RubyApp::Application.create_cache(File.join(File.dirname(__FILE__), %w[lib ruby_app elements]), File.join(File.dirname(__FILE__), %w[lib]))
-      system "find . -name '.cache' | xargs git add; git commit --all --message='Creating element cache'"
     end
 
     desc 'Delete element cache'
     task :destroy do |task|
       RubyApp::Application.destroy_cache(File.join(File.dirname(__FILE__), %w[lib ruby_app elements]))
-      system "git commit --all --message='Deleting element cache'"
     end
 
   end

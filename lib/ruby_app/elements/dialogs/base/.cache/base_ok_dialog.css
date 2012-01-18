@@ -1,8 +1,0 @@
-/* /Users/fficnar/Dropbox/Projects/gems/ruby_app/lib/ruby_app/elements/base/base_dialog.css.haml */
-body > div.overlay > div.dialog {
-  position: absolute;
-  width: 40%; }
-/* /Users/fficnar/Dropbox/Projects/gems/ruby_app/lib/ruby_app/elements/dialogs/base/base_ok_dialog.css.haml */
-body > div.overlay > div.dialog > div.footer {
-  text-align: right;
-  width: 100%; }
