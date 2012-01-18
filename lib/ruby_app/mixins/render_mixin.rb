@@ -25,8 +25,10 @@ module RubyApp
       def render(format)
         cache = self.is_a?(Class) ? self.get_cache(format) : self.class.get_cache(format)
         if File.exists?(cache)
-          RubyApp::Log.debug("#{RubyApp::Log.prefix(self, __method__)} File.read(#{cache.inspect})")
-          File.read(cache)
+          self.rendered?(cache) do
+            RubyApp::Log.debug("#{RubyApp::Log.prefix(self, __method__)} File.read(#{cache.inspect})")
+            File.read(cache)
+          end
         end
         templates = self.is_a?(Class) ? self.get_templates(format) : self.class.get_templates(format)
         unless templates.empty?

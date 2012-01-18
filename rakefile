@@ -78,7 +78,7 @@ namespace :ruby_app do
     desc 'Create element cache'
     task :create do |task|
       RubyApp::Application.create_cache(File.join(File.dirname(__FILE__), %w[lib ruby_app elements]), File.join(File.dirname(__FILE__), %w[lib]))
-      system "git commit --all --message='Creating element cache'"
+      system "find . -name '.cache' | xargs git add; git commit --all --message='Creating element cache'"
     end
 
     desc 'Delete element cache'
