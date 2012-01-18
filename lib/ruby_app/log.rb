@@ -28,6 +28,10 @@ module RubyApp
       @@_log
     end
 
+    def self.prefix(object, method)
+      return "#{object.is_a?(Class) ? object : object.class}#{object.is_a?(Class) ? '.' : '#'}#{method}"
+    end
+
     def self.open!
       path = RubyApp::Application.options.log_path
       directory = File.dirname(path)

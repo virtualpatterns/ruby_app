@@ -57,11 +57,11 @@ ruby_app:
 
               ---
 
-              [`GoogleAuthenticationPage`](RubyApp::Elements::Pages::Authentication::OpenID::GoogleAuthenticationPage) ... re/authenticate using Google
+              [`GoogleAuthenticationPage`](RubyApp::Elements::Pages::Authentication::OpenId::GoogleAuthenticationPage) ... re/authenticate using Google
 
-              [`MyOpenIDAuthenticationPage`](RubyApp::Elements::Pages::Authentication::OpenID::MyOpenIDAuthenticationPage) ... re/authenticate using myOpenID
+              [`MyOpenIdAuthenticationPage`](RubyApp::Elements::Pages::Authentication::OpenId::MyOpenIdAuthenticationPage) ... re/authenticate using myOpenId
 
-              [`YahooAuthenticationPage`](RubyApp::Elements::Pages::Authentication::OpenID::YahooAuthenticationPage) ... re/authenticate using Yahoo!
+              [`YahooAuthenticationPage`](RubyApp::Elements::Pages::Authentication::OpenId::YahooAuthenticationPage) ... re/authenticate using Yahoo!
 
         button_test_page:
           title: Button Test Page
@@ -205,7 +205,7 @@ ruby_app:
           google_authentication_page:
             title: Google Authentication
           my_open_id_authentication_page:
-            title: myOpenID Authentication
+            title: myOpenId Authentication
           yahoo_authentication_page:
             title: Yahoo! Authentication
       quit_page:

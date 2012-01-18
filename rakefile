@@ -4,6 +4,9 @@ require 'bundler/setup'
 
 require 'rake'
 
+require 'ruby_app/application'
+require 'ruby_app/request'
+
 namespace :ruby_app do
 
   desc 'Monitor log'
@@ -72,6 +75,49 @@ namespace :ruby_app do
     desc 'Run all tests'
     task :all => ['ruby_app:test:specs',
                   'ruby_app:test:features:all']
+
+  end
+
+  namespace :cache do
+
+    desc 'Create element caches'
+    task :create do |task|
+      RubyApp::Application.create!
+      begin
+        Dir.glob(File.join(File.dirname(__FILE__), %w[lib ruby_app elements ** *.rb])).each do |element_file|
+          RubyApp::Request.create!
+          begin
+            RubyApp::Request.cache = true
+            require element_file
+            element_class = element_file.gsub(File.join(File.dirname(__FILE__), %w[lib]), '')
+            element_class = element_class.gsub(/^\//, '')
+            element_class = element_class.gsub(/\.rb$/, '')
+            element_class = upcode(element_class)
+            begin
+              element_class = eval(element_class)
+              element_class.render(:css) rescue puts "#{element_class}.render(:css) failed"
+              element_class.render(:js) rescue puts "#{element_class}.render(:js) failed"
+            rescue Exception => exception
+              puts "#{element_class.inspect} failed - #{exception.message}"
+            end
+          ensure
+            RubyApp::Request.destroy!
+          end
+        end
+      ensure
+        RubyApp::Application.destroy!
+      end
+    end
+
+    desc 'Clear element caches'
+    task :destroy_all do |task|
+      system('find . -name ".cache" -print | xargs rm -rf')
+    end
+
+    def upcode(value)
+      value = value.gsub(/\/(.?)/) { "::#{$1.upcase}" }
+      value.gsub(/(?:^|_)(.)/) { $1.upcase }
+    end
 
   end
 

@@ -14,6 +14,8 @@ module RubyApp
   class Request < ::Rack::Request
     extend RubyApp::Mixins::DelegateMixin
 
+    attr_accessor :cache
+
     def language
       self.fullpath =~ /^\/([^\/\?]+)/
       $1 || RubyApp::Application.options.default_language
@@ -25,6 +27,10 @@ module RubyApp
 
     def parameters
       self.params
+    end
+
+    def cache?
+      return self.cache
     end
 
     def rendered?(template)

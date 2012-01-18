@@ -6,11 +6,11 @@ module RubyApp
 
       module Authentication
 
-        module OpenID
+        module OpenId
           require 'ruby_app/elements/pages/authentication/open_id/authentication_page'
           require 'ruby_app/session'
 
-          class EmailAuthenticationPage < RubyApp::Elements::Pages::Authentication::OpenID::AuthenticationPage
+          class EmailAuthenticationPage < RubyApp::Elements::Pages::Authentication::OpenId::AuthenticationPage
 
             template_path(:all, File.dirname(__FILE__))
 

@@ -6,10 +6,10 @@ module RubyApp
 
       module Authentication
 
-        module OpenID
+        module OpenId
           require 'ruby_app/elements/pages/authentication/open_id/ax_authentication_page'
 
-          class YahooAuthenticationPage < RubyApp::Elements::Pages::Authentication::OpenID::AXAuthenticationPage
+          class YahooAuthenticationPage < RubyApp::Elements::Pages::Authentication::OpenId::AxAuthenticationPage
 
             template_path(:all, File.dirname(__FILE__))
 

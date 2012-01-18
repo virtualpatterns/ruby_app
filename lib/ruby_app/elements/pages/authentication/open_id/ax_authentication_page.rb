@@ -11,11 +11,11 @@ module RubyApp
 
       module Authentication
 
-        module OpenID
+        module OpenId
           require 'ruby_app/elements/pages/authentication/open_id/email_authentication_page'
           require 'ruby_app/session'
 
-          class AXAuthenticationPage < RubyApp::Elements::Pages::Authentication::OpenID::EmailAuthenticationPage
+          class AxAuthenticationPage < RubyApp::Elements::Pages::Authentication::OpenId::EmailAuthenticationPage
 
             template_path(:all, File.dirname(__FILE__))
 
@@ -24,13 +24,13 @@ module RubyApp
             end
 
             def process_request(request)
-              ax_request = ::OpenID::AX::FetchRequest.new
-              ax_request.add(::OpenID::AX::AttrInfo.new(self.configure.attributes.email, 'Email', true))
+              ax_request = ::OpenId::AX::FetchRequest.new
+              ax_request.add(::OpenId::AX::AttrInfo.new(self.configure.attributes.email, 'Email', true))
               request.add_extension(ax_request)
             end
 
             def create_identity_from_response(response)
-              ax_response = ::OpenID::AX::FetchResponse.from_success_response(response)
+              ax_response = ::OpenId::AX::FetchResponse.from_success_response(response)
               if ax_response
                 self.create_identity_from_email(ax_response.data[self.configure.attributes.email].first)
               else

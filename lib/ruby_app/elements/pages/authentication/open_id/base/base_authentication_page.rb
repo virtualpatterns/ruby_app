@@ -11,7 +11,7 @@ module RubyApp
 
       module Authentication
 
-        module OpenID
+        module OpenId
 
           module Base
             require 'ruby_app/elements/page'
@@ -28,21 +28,21 @@ module RubyApp
 
                 self.loaded do |element, event|
                   if RubyApp::Request.query.empty?
-                    @consumer = ::OpenID::Consumer.new(RubyApp::Session.data, nil)
+                    @consumer = ::OpenId::Consumer.new(RubyApp::Session.data, nil)
                     request = @consumer.begin(identifier)
                     self.process_request(request)
                     event.go(request.redirect_url(RubyApp::Request.url, RubyApp::Request.url))
                   else
                     response = @consumer.complete(RubyApp::Request.query, RubyApp::Request.url)
                     case response.status
-                      when ::OpenID::Consumer::SUCCESS
+                      when ::OpenId::Consumer::SUCCESS
                         RubyApp::Session.identity = self.create_identity_from_response(response)
                         RubyApp::Session.pages.pop
                         event.refresh
-                      when ::OpenID::Consumer::CANCEL
+                      when ::OpenId::Consumer::CANCEL
                         RubyApp::Session.pages.pop
                         event.refresh
-                      when ::OpenID::Consumer::FAILURE
+                      when ::OpenId::Consumer::FAILURE
                         RubyApp::Log.debug("#{self.class}#loaded response=#{response.inspect}")
                     end
                   end
