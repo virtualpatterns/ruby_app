@@ -31,8 +31,9 @@ module RubyApp
       end
 
       def get_cache(format)
-        template = self.get_template(format)
-        File.join(File.dirname(template), '.cache', File.basename(template))
+        cache = self.get_template(format)
+        cache = cache.gsub(/\.haml/, '')
+        File.join(File.dirname(cache), '.cache', File.basename(cache))
       end
 
       def get_templates(format)

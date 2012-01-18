@@ -40,14 +40,11 @@ Feature: Dialog Test Page
     Given I go to the test pages
     When I click "DialogTestPage"
     And I click "MonthDialog"
-    Then I should see "Wed"
-    When I click "15"
-    Then I should not see "Wed"
-    And I should see "You clicked"
+    And I click "15"
+    Then I should see "You clicked"
     And I should see "15/"
     When I click "Close"
-    Then I should not see "You clicked"
-    And I should not see "15/"
+    Then I should not see "15/"
     And I should see "-15"
     Then I quit
 

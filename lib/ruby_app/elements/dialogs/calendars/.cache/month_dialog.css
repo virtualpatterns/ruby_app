@@ -1,0 +1,14 @@
+/* /Users/fficnar/Dropbox/Projects/gems/ruby_app/lib/ruby_app/elements/dialogs/calendars/month_dialog.css.haml */
+body > div.overlay > div.dialog > div.footer > div.buttons {
+  display: table;
+  width: 100%; }
+  body > div.overlay > div.dialog > div.footer > div.buttons > div {
+    display: table-cell; }
+  body > div.overlay > div.dialog > div.footer > div.buttons > div.left {
+    text-align: left; }
+  body > div.overlay > div.dialog > div.footer > div.buttons > div.right {
+    text-align: right; }
+/* /Users/fficnar/Dropbox/Projects/gems/ruby_app/lib/ruby_app/elements/calendars/base/base_month.css.haml */
+div.month td {
+  text-align: center;
+  vertical-align: middle; }
