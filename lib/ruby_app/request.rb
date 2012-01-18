@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'bundler/setup'
 
+require 'facets/string/interpolate'
 require 'rack'
 
 module RubyApp
@@ -26,13 +27,34 @@ module RubyApp
       self.params
     end
 
+    def rendered?(template)
+      @rendered.key?(template)
+    end
+
+    def rendered(template)
+      @rendered[template] = true
+    end
+
+    def content_for(element, name, value = nil, &block)
+      @content[element] ||= {}
+      @content[element][name] = block_given? ? block : String.interpolate { value }
+    end
+
+    def get_content(element, name)
+      @content[element] ||= {}
+      return @content[element][name]
+    end
+
+    def clear_content(element)
+      @content[element] ||= {}
+    end
+
     def self.get
       Thread.current[:_request]
     end
 
     def self.create!(environment = RubyApp::Application.environment)
       Thread.current[:_request] = RubyApp::Request.new(environment)
-      Thread.current[:_rendered] = {}
 
       if block_given?
         begin
@@ -62,7 +84,6 @@ module RubyApp
     end
 
     def self.destroy!
-      Thread.current[:_rendered] = nil
       Thread.current[:_request] = nil
     end
 
@@ -70,6 +91,8 @@ module RubyApp
 
       def initialize(environment)
         super(environment)
+        @rendered = {}
+        @content = {}
       end
 
   end

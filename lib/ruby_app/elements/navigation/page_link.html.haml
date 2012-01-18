@@ -3,7 +3,7 @@
 %span.link{attributes}
   - if self.current_page?
     %span.current{:href => '', :page => self.page}
-      = self.content_for(self.page) || self.page.translate.title
+      = yield(self.page) || self.page.translate.title
   - else
     %a.page{:href => '', :page => self.page}
-      = self.content_for(self.page) || self.page.translate.title
+      = yield(self.page) || self.page.translate.title
