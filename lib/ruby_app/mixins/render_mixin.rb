@@ -27,44 +27,44 @@ module RubyApp
         if File.exists?(cache)
           self.rendered?(cache) do
             RubyApp::Log.debug("#{RubyApp::Log.prefix(self, __method__)} File.read(#{cache.inspect})")
-            File.read(cache)
+            return File.read(cache)
           end
-        end
-        templates = self.is_a?(Class) ? self.get_templates(format) : self.class.get_templates(format)
-        unless templates.empty?
-          self.init_haml_helpers
-          begin
-            yield(self) if block_given?
-            templates.each_with_index do |template, index|
-              content = Haml::Engine.new(File.read(template), :filename => template).render(self) do |*arguments|
-                if arguments.empty?
-                  index == 0 ? nil : RubyApp::Request.get_content(self, templates[index - 1])
-                else
-                  _content = RubyApp::Request.get_content(self, arguments[0])
-                  if self.block_is_haml?(_content)
-                    self.capture_haml(arguments, &_content)
+        else
+          templates = self.is_a?(Class) ? self.get_templates(format) : self.class.get_templates(format)
+          unless templates.empty?
+            self.init_haml_helpers
+            begin
+              yield(self) if block_given?
+              templates.each_with_index do |template, index|
+                content = Haml::Engine.new(File.read(template), :filename => template).render(self) do |*arguments|
+                  if arguments.empty?
+                    index == 0 ? nil : RubyApp::Request.get_content(self, templates[index - 1])
                   else
-                    _content
+                    _content = RubyApp::Request.get_content(self, arguments[0])
+                    if self.block_is_haml?(_content)
+                      self.capture_haml(arguments, &_content)
+                    else
+                      _content
+                    end
                   end
                 end
+                RubyApp::Request.content_for(self, template, content)
               end
-              RubyApp::Request.content_for(self, template, content)
-            end
-            if cache && RubyApp::Request.cache?
-              RubyApp::Log.debug("#{RubyApp::Log.prefix(self, __method__)} File.open(#{cache.inspect}, 'w')")
-              cache_directory = File.dirname(cache)
-              Dir.mkdir(cache_directory) unless File.exists?(cache_directory)
-              File.open(cache, 'w') do |file|
-                file.write(RubyApp::Request.get_content(self, templates.last))
-                file.flush
+              if cache && RubyApp::Request.cache?
+                RubyApp::Log.debug("#{RubyApp::Log.prefix(self, __method__)} File.open(#{cache.inspect}, 'w')")
+                cache_directory = File.dirname(cache)
+                Dir.mkdir(cache_directory) unless File.exists?(cache_directory)
+                File.open(cache, 'w') do |file|
+                  file.write(RubyApp::Request.get_content(self, templates.last))
+                  file.flush
+                end
               end
+              return RubyApp::Request.get_content(self, templates.last)
+            ensure
+              RubyApp::Request.clear_content(self)
             end
-            return RubyApp::Request.get_content(self, templates.last)
-          ensure
-            RubyApp::Request.clear_content(self)
           end
         end
-
       end
 
     end

@@ -46,6 +46,10 @@ body > div.overlay > div.dialog {
 body > div.overlay > div.dialog > div.footer {
   text-align: right;
   width: 100%; }
+/* /Users/fficnar/Dropbox/Projects/gems/ruby_app/lib/ruby_app/elements/base/base_dialog.css.haml */
+body > div.overlay > div.dialog {
+  position: absolute;
+  width: 40%; }
 /* /Users/fficnar/Dropbox/Projects/gems/ruby_app/lib/ruby_app/elements/dialogs/base/base_yes_no_dialog.css.haml */
 body > div.overlay > div.dialog > div.footer {
   text-align: right;
@@ -54,11 +58,26 @@ body > div.overlay > div.dialog > div.footer {
     padding-left: 0px; }
   body > div.overlay > div.dialog > div.footer > a {
     padding-left: 10px; }
+/* /Users/fficnar/Dropbox/Projects/gems/ruby_app/lib/ruby_app/elements/base/base_dialog.css.haml */
+body > div.overlay > div.dialog {
+  position: absolute;
+  width: 40%; }
 /* /Users/fficnar/Dropbox/Projects/gems/ruby_app/lib/ruby_app/elements/dialogs/base/base_close_dialog.css.haml */
 body > div.overlay > div.dialog > div.footer {
   text-align: right;
   width: 100%; }
-
+/* /Users/fficnar/Dropbox/Projects/gems/ruby_app/lib/ruby_app/elements/base/base_dialog.css.haml */
+body > div.overlay > div.dialog {
+  position: absolute;
+  width: 40%; }
+/* /Users/fficnar/Dropbox/Projects/gems/ruby_app/lib/ruby_app/elements/dialogs/base/base_close_dialog.css.haml */
+body > div.overlay > div.dialog > div.footer {
+  text-align: right;
+  width: 100%; }
+/* /Users/fficnar/Dropbox/Projects/gems/ruby_app/lib/ruby_app/elements/base/base_dialog.css.haml */
+body > div.overlay > div.dialog {
+  position: absolute;
+  width: 40%; }
 /* /Users/fficnar/Dropbox/Projects/gems/ruby_app/lib/ruby_app/elements/dialogs/calendars/month_dialog.css.haml */
 body > div.overlay > div.dialog > div.footer > div.buttons {
   display: table;
