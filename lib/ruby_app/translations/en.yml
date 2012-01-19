@@ -5,7 +5,7 @@ ruby_app:
   elements:
     base:
       base_page:
-        error:  An error occurred sending the event.  The page will refresh so you can try again.
+        event_error_message:  An error occurred sending the event.  The page will refresh so you can try again.
     dialogs:
       base:
         base_ok_dialog:

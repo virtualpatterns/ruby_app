@@ -76,8 +76,8 @@ namespace :ruby_app do
   namespace :cache do
 
     desc 'Create element cache'
-    task :create do |task|
-      RubyApp::Application.create_cache(File.join(File.dirname(__FILE__), %w[lib ruby_app elements]), File.join(File.dirname(__FILE__), %w[lib]))
+    task :create => ['ruby_app:cache:destroy'] do |task|
+      RubyApp::Application.create_cache(File.join(File.dirname(__FILE__), %w[lib ruby_app elements pages]), File.join(File.dirname(__FILE__), %w[lib]))
     end
 
     desc 'Delete element cache'

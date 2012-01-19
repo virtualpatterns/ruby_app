@@ -24,6 +24,21 @@
             :type => 'text/javascript'}
     %title
       = yield(:title) || self.translate.title
+    /
+      RubyApp::Session.data
+    %meta{:name => :session_id, :content => RubyApp::Session.session_id}
+    - RubyApp::Session.data.each do |name, value|
+      %meta{:name => name, :content => value}
+    /
+      RubyApp::Language
+    %meta{:name => :locale, :content => RubyApp::Language.locale.code}
+    /
+      RubyApp::Elements::Base::BasePage#data
+    - self.data.each do |name, value|
+      %meta{:name => name, :content => value}
+    /
+      (other)
+    %meta{:name => :event_error_message, :content => RubyApp::Elements::Base::BasePage.translate.event_error_message}
   %body
     %div.body
       = yield :body

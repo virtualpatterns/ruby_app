@@ -10,8 +10,10 @@ module RubyApp
     module Base
       require 'ruby_app/element'
       require 'ruby_app/language'
+      require 'ruby_app/mixins/hash_mixin'
 
       class BasePage < RubyApp::Element
+        include RubyApp::Mixins::HashMixin
 
         class LoadedEvent < RubyApp::Element::Event
 
@@ -31,14 +33,30 @@ module RubyApp
 
         template_path(:all, File.dirname(__FILE__))
 
-        attr_accessor :interval
+        attr_reader :data
 
         event :loaded
         event :triggered
 
         def initialize
           super
-          @interval = 0
+          @data = {}
+        end
+
+        def [](key)
+          @data[key]
+        end
+
+        def []=(key, value)
+          @data[key] = value
+        end
+
+        def interval
+          return data[:interval]
+        end
+
+        def interval=(value)
+          data[:interval] = value
         end
 
         protected

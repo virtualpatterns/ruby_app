@@ -3,6 +3,7 @@ module RubyApp
   require 'ruby_app/log'
   require 'ruby_app/mixins/configure_mixin'
   require 'ruby_app/mixins/delegate_mixin'
+  require 'ruby_app/mixins/hash_mixin'
   require 'ruby_app/mixins/translate_mixin'
   require 'ruby_app/request'
 
@@ -22,8 +23,8 @@ module RubyApp
 
     end
 
-    attr_reader :session_id, :pages
-    attr_accessor :identity, :data
+    attr_reader :session_id, :pages, :data
+    attr_accessor :identity
 
     def initialize(session_id, page = nil, data = {})
       require 'ruby_app/elements/pages/default_page'

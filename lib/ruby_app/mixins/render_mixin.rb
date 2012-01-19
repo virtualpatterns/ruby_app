@@ -22,7 +22,7 @@ module RubyApp
         RubyApp::Request.content_for(self, name, value, &block)
       end
 
-      def render(format)
+      def render(format, write_cache = false)
         cache = self.is_a?(Class) ? self.get_cache(format) : self.class.get_cache(format)
         if File.exists?(cache)
           self.rendered?(cache) do
@@ -50,7 +50,7 @@ module RubyApp
                 end
                 RubyApp::Request.content_for(self, template, content)
               end
-              if cache && RubyApp::Request.cache?
+              if cache && write_cache
                 RubyApp::Log.debug("#{RubyApp::Log.prefix(self, __method__)} File.open(#{cache.inspect}, 'w')")
                 cache_directory = File.dirname(cache)
                 Dir.mkdir(cache_directory) unless File.exists?(cache_directory)

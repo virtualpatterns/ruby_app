@@ -55,14 +55,12 @@ module RubyApp
       @@_application = nil
     end
 
-    def self.create_cache(path, root, *formats)
-      RubyApp::Application.destroy_cache(path)
+    def self.create_cache(path, root)
       RubyApp::Application.create!
       begin
         Dir.glob(File.join(path, %w[** *.rb])).each do |element_file|
           RubyApp::Request.create!
           begin
-            RubyApp::Request.cache = true
             require element_file
             element_class = element_file.gsub(root, '')
             element_class = element_class.gsub(/^\//, '')
@@ -70,9 +68,9 @@ module RubyApp
             element_class = RubyApp::Application.upcode(element_class)
             begin
               element_class = eval(element_class)
-              (formats.empty? ? [:css, :js] : formats).each do |format|
+              [:css, :js].each do |format|
                 begin
-                  element_class.render(format)
+                  element_class.render(format, true)
                 rescue Exception => exception
                   puts "#{element_class}.render(#{format.inspect}) exception=#{exception.message}"
                 end
@@ -90,9 +88,8 @@ module RubyApp
     end
 
     def self.destroy_cache(path)
-      Dir.glob(File.join(path, %w[** .cache *])).each do |file|
-        puts "Removing #{file.inspect}"
-        FileUtils.rm(file)
+      Dir.glob(File.join(path, %w[** .cache])).each do |directory|
+        FileUtils.rm_r(directory)
       end
     end
 
