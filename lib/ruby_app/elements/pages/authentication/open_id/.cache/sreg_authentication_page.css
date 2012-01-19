@@ -1,0 +1,27 @@
+/* /Users/fficnar/Dropbox/Projects/gems/ruby_app/lib/ruby_app/elements/base/base_page.css.haml */
+body > div.overlay {
+  display: none;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  z-index: 1; }
+body > div.wait {
+  display: none;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  z-index: 2; }
+  body > div.wait > div.image {
+    background-image: url("/ruby_app/resources/elements/base/base_page.gif");
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 48px;
+    position: absolute;
+    width: 48px; }
+body > ul.log {
+  display: none; }
+
