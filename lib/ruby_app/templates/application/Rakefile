@@ -23,7 +23,7 @@ namespace :_APPLICATION_DOWNCODE_ do
 
     desc 'Create element cache'
     task :create do |task|
-      _APPLICATION_UPCODE_::Application.create_cache(File.join(File.dirname(__FILE__), %w[lib _APPLICATION_DOWNCODE_ elements]), File.join(File.dirname(__FILE__), %w[lib]))
+      _APPLICATION_UPCODE_::Application.create_cache(File.join(File.dirname(__FILE__), %w[lib _APPLICATION_DOWNCODE_ elements pages]), File.join(File.dirname(__FILE__), %w[lib]))
     end
 
     desc 'Delete element cache'

@@ -56,7 +56,7 @@
             } )
             .error( function(request, message, exception) {
               RubyApp.log('RubyApp.queueEvent ERROR event.class=' + event._class + ' wait=' + wait);
-              if (RubyApp.getData('event_error', true) == true)
+              if (RubyApp.getData('event_error_shown', true) == true)
                 RubyApp.confirm_refresh(RubyApp.getData('event_error_message', null));
             } )
             .complete( function() {
