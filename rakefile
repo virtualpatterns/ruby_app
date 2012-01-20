@@ -68,7 +68,6 @@ namespace :ruby_app do
     desc 'Create element cache'
     task :create => ['ruby_app:cache:destroy'] do |task|
       RubyApp::Application.create_cache(File.join(File.dirname(__FILE__), %w[lib ruby_app elements pages]), File.join(File.dirname(__FILE__), %w[lib]))
-      system("find . -name '.cache' | xargs git add && git commit --all --message='Updating element cache'")
     end
 
     desc 'Delete element cache'
