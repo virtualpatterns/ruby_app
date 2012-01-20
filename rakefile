@@ -15,7 +15,7 @@ namespace :ruby_app do
   end
 
   desc 'Run'
-  task :run => ['ruby_app:cache:create'] do |task|
+  task :run => ['ruby_app:cache:destroy'] do |task|
     system("cd ./lib/ruby_app && clear && bundle exec ../../bin/ruby_app run")
   end
 

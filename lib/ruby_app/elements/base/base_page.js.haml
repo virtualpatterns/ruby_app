@@ -38,8 +38,6 @@
         $('ul.log > li.status').text(new Date().toString() + ' - ' + message);
         $('ul.log').append('<li>' + new Date().toString() + ' - ' + message + '</li>');
       },
-      this.status = function(message) {
-      },
       this.queueEvent = function(event, wait) {
         event.session_id = RubyApp.getData('session_id', null);
         event.now = new Date().toString();
@@ -56,7 +54,7 @@
             } )
             .error( function(request, message, exception) {
               RubyApp.log('RubyApp.queueEvent ERROR event.class=' + event._class + ' wait=' + wait);
-              if (RubyApp.getData('event_error_shown', true) == true)
+              if ($.parseJSON(RubyApp.getData('event_error', 'true')) == true)
                 RubyApp.confirm_refresh(RubyApp.getData('event_error_message', null));
             } )
             .complete( function() {
@@ -71,7 +69,7 @@
       this.refresh = function() {
         RubyApp.showWait();
         $(window).clearQueue();
-        location.assign(location.pathname);
+        location.assign(location.href);
       },
       this.confirm_refresh = function(message) {
         if (confirm(message))

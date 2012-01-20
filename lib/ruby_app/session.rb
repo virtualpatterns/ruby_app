@@ -75,7 +75,7 @@ module RubyApp
 
     def self.create!
       RubyApp::Request.session[:_initialize] = true
-      Thread.current[:_session] = RubyApp::Request.session[:_session] ||= RubyApp::Application.options.session_class.new(RubyApp::Request.env['rack.session.options'] ? RubyApp::Request.env['rack.session.options'][:id] : nil, nil, RubyApp::Request.query)
+      Thread.current[:_session] = RubyApp::Request.session[:_session] ||= RubyApp::Application.options.session_class.new(RubyApp::Request.env['rack.session.options'] ? RubyApp::Request.env['rack.session.options'][:id] : nil)
       if block_given?
         begin
           yield
