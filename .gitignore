@@ -3,13 +3,11 @@
 .DS_Store
 .idea
 .sass-cache
-*.gem
-*.log
-*.pid
-failures_in.txt
-failures_out.txt
 lib/ruby_app/elements/pages/authentication/open_id/associations
 lib/ruby_app/elements/pages/authentication/open_id/nonces
 lib/ruby_app/elements/pages/authentication/open_id/temp
 log
 sandbox
+*.gem
+*.log
+*.pid
