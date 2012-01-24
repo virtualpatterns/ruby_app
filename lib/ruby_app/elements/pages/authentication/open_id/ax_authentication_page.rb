@@ -25,14 +25,14 @@ module RubyApp
 
             def process_request(request)
               ax_request = ::OpenId::AX::FetchRequest.new
-              ax_request.add(::OpenId::AX::AttrInfo.new(self.configure.attributes.email, 'Email', true))
+              ax_request.add(::OpenId::AX::AttrInfo.new(self.configuration.attributes.email, 'Email', true))
               request.add_extension(ax_request)
             end
 
             def create_identity_from_response(response)
               ax_response = ::OpenId::AX::FetchResponse.from_success_response(response)
               if ax_response
-                self.create_identity_from_email(ax_response.data[self.configure.attributes.email].first)
+                self.create_identity_from_email(ax_response.data[self.configuration.attributes.email].first)
               else
                 super(response)
               end

@@ -6,14 +6,14 @@ require 'json'
 require 'ruby-event'
 
 module RubyApp
-  require 'ruby_app/mixins/configure_mixin'
+  require 'ruby_app/mixins/configuration_mixin'
   require 'ruby_app/mixins/render_mixin'
   require 'ruby_app/mixins/template_mixin'
   require 'ruby_app/mixins/translate_mixin'
 
   class Element
-    extend RubyApp::Mixins::ConfigureMixin
-    include RubyApp::Mixins::ConfigureMixin
+    extend RubyApp::Mixins::ConfigurationMixin
+    include RubyApp::Mixins::ConfigurationMixin
     extend RubyApp::Mixins::TranslateMixin
     include RubyApp::Mixins::TranslateMixin
     extend RubyApp::Mixins::TemplateMixin

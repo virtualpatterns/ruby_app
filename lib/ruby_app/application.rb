@@ -6,7 +6,7 @@ require 'fileutils'
 module RubyApp
   require 'ruby_app/configuration'
   require 'ruby_app/log'
-  require 'ruby_app/mixins/configure_mixin'
+  require 'ruby_app/mixins/configuration_mixin'
   require 'ruby_app/mixins/delegate_mixin'
   require 'ruby_app/mixins/hash_mixin'
   require 'ruby_app/session'
@@ -14,7 +14,7 @@ module RubyApp
 
   class Application
     extend RubyApp::Mixins::DelegateMixin
-    include RubyApp::Mixins::ConfigureMixin
+    include RubyApp::Mixins::ConfigurationMixin
 
     attr_reader :options, :environment
 

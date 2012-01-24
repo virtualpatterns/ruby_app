@@ -13,7 +13,7 @@ module RubyApp
 
             template_path(:all, File.dirname(__FILE__))
 
-            def initialize(identifier = self.configure.identifier)
+            def initialize(identifier = self.configuration.identifier)
               super(identifier)
             end
 

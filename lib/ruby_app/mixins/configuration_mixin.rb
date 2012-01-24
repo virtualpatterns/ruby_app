@@ -2,10 +2,10 @@ module RubyApp
 
   module Mixins
 
-    module ConfigureMixin
+    module ConfigurationMixin
       require 'ruby_app/configuration'
 
-      def configure
+      def configuration
 
         name = self.is_a?(Class) ? self.to_s : self.class.to_s
         name.gsub!(/([A-Z]+)([A-Z][a-z])/,'\1_\2')

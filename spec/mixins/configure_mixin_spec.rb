@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-require 'ruby_app/mixins/configure_mixin'
+require 'ruby_app/mixins/configuration_mixin'
 
-describe RubyApp::Mixins::ConfigureMixin do
+describe RubyApp::Mixins::ConfigurationMixin do
   include_context 'RubyApp::Request'
 
   describe 'positive' do
@@ -10,7 +10,7 @@ describe RubyApp::Mixins::ConfigureMixin do
     before(:all) do
 
       class TestConfigureMixin
-        include RubyApp::Mixins::ConfigureMixin
+        include RubyApp::Mixins::ConfigurationMixin
       end
 
     end
