@@ -9,15 +9,15 @@ describe RubyApp::Mixins::ConfigurationMixin do
 
     before(:all) do
 
-      class TestConfigureMixin
+      class TestConfigurationMixin
         include RubyApp::Mixins::ConfigurationMixin
       end
 
     end
 
-    let(:instance_a) { TestConfigureMixin.new }
+    let(:instance_a) { TestConfigurationMixin.new }
 
-    specify { instance_a.should respond_to(:configure) }
+    specify { instance_a.should respond_to(:configuration) }
 
   end
 
