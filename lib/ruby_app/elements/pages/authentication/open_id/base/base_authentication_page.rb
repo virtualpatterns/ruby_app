@@ -27,22 +27,23 @@ module RubyApp
                 super()
 
                 self.loaded do |element, event|
-                  if RubyApp::Request.query.empty?
-                    @consumer = ::OpenId::Consumer.new(RubyApp::Session.data, nil)
+
+                  unless @consumer
+                    @consumer = ::OpenID::Consumer.new(RubyApp::Session.data, nil)
                     request = @consumer.begin(identifier)
                     self.process_request(request)
                     event.go(request.redirect_url(RubyApp::Request.url, RubyApp::Request.url))
                   else
                     response = @consumer.complete(RubyApp::Request.query, RubyApp::Request.url)
                     case response.status
-                      when ::OpenId::Consumer::SUCCESS
+                      when ::OpenID::Consumer::SUCCESS
                         RubyApp::Session.identity = self.create_identity_from_response(response)
                         RubyApp::Session.pages.pop
-                        event.refresh
-                      when ::OpenId::Consumer::CANCEL
+                        event.go('/')
+                      when ::OpenID::Consumer::CANCEL
                         RubyApp::Session.pages.pop
-                        event.refresh
-                      when ::OpenId::Consumer::FAILURE
+                        event.go('/')
+                      when ::OpenID::Consumer::FAILURE
                         RubyApp::Log.debug("#{self.class}#loaded response=#{response.inspect}")
                     end
                   end
