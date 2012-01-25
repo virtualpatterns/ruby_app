@@ -23,16 +23,6 @@ module RubyApp
       @environment = {}
     end
 
-    def start!
-      RubyApp::Log.open!
-      RubyApp::Configuration.load!
-    end
-
-    def stop!
-      RubyApp::Configuration.unload!
-      RubyApp::Log.close!
-    end
-
     def self.get
       @@_application ||= nil
     end
@@ -40,18 +30,20 @@ module RubyApp
     def self.create!(options = {})
       _options = { :application_class => RubyApp::Application,
                    :session_class => RubyApp::Session,
-                   :log_path => File.join(RubyApp::ROOT, %w[log application.log]),
+                   :log_path => File.join(RubyApp::ROOT, %w[process log application.log]),
                    :configuration_paths => [],
                    :default_language => :en,
                    :translations_paths => [] }.merge(options)
-      _options.configuration_paths = [File.join(RubyApp::ROOT, %w[config.yml])] + ( _options.configuration_paths.is_a?(Array) ? _options.configuration_paths : [_options.configuration_paths] )
-      _options.translations_paths = [File.join(RubyApp::ROOT, %w[translations])] + ( _options.translations_paths.is_a?(Array) ? _options.translations_paths : [_options.translations_paths] )
+      _options[:configuration_paths] = [File.join(RubyApp::ROOT, %w[config.yml])] + ( _options[:configuration_paths].is_a?(Array) ? _options[:configuration_paths] : [_options[:configuration_paths]] )
+      _options[:translations_paths] = [File.join(RubyApp::ROOT, %w[translations])] + ( _options[:translations_paths].is_a?(Array) ? _options[:translations_paths] : [_options[:translations_paths]] )
+      RubyApp::Log.open!(_options[:log_path])
+      RubyApp::Configuration.load!(_options[:configuration_paths])
       @@_application = _options.application_class.new(_options)
-      @@_application.start!
     end
 
     def self.destroy!
-      @@_application.stop!
+      RubyApp::Configuration.unload!
+      RubyApp::Log.close!
       @@_application = nil
     end
 

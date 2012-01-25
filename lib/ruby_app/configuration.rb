@@ -1,8 +1,6 @@
 require 'yaml'
 
 module RubyApp
-  require 'ruby_app/application'
-  require 'ruby_app/log'
   require 'ruby_app/mixins/delegate_mixin'
   require 'ruby_app/mixins/hash_mixin'
 
@@ -15,8 +13,8 @@ module RubyApp
       @@_configuration
     end
 
-    def self.load!
-      @@_configuration = RubyApp::Configuration.new(RubyApp::Application.options.configuration_paths)
+    def self.load!(paths)
+      @@_configuration = RubyApp::Configuration.new(paths)
     end
 
     def self.unload!

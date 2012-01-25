@@ -1,7 +1,10 @@
+require 'rubygems'
+require 'bundler/setup'
+
+require 'fileutils'
 require 'logger'
 
 module RubyApp
-  require 'ruby_app/application'
   require 'ruby_app/mixins/delegate_mixin'
 
   class Log < ::Logger
@@ -32,10 +35,9 @@ module RubyApp
       return "#{object.is_a?(Class) ? object : object.class}#{object.is_a?(Class) ? '.' : '#'}#{method}"
     end
 
-    def self.open!
-      path = RubyApp::Application.options.log_path
+    def self.open!(path)
       directory = File.dirname(path)
-      Dir.mkdir(directory) unless File.exists?(directory)
+      FileUtils.mkdir_p(directory)
       @@_log = RubyApp::Log.new(path)
     end
 
