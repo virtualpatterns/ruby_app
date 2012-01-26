@@ -26,7 +26,9 @@ module RubyApp
       def initialize(paths)
         @document = {}
         paths.each do |path|
-          @document.merge!(YAML::load(File.open(path)))
+          File.open(path, 'r') do |file|
+            @document.merge!(YAML::load(file)[ENV['RUBY_APP_CONFIGURATION'] || 'default'] || {})
+          end
         end
       end
 
