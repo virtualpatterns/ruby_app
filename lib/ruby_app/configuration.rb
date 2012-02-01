@@ -31,6 +31,8 @@ module RubyApp
           end
         end
         @document.symbolize_keys!
+        require 'pp'
+        pp @document
       end
 
   end
