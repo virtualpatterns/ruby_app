@@ -27,9 +27,10 @@ module RubyApp
         @document = {}
         paths.each do |path|
           File.open(path, 'r') do |file|
-            @document.merge!(YAML::load(file)[ENV['RUBY_APP_CONFIGURATION'] || 'default'].symbolize_keys! || {})
+            @document.merge!(YAML::load(file)[ENV['RUBY_APP_CONFIGURATION'] || 'default'] || {})
           end
         end
+        @document.symbolize_keys!
       end
 
   end
