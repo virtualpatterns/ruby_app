@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    RubyApp (0.0.80)
+    RubyApp (0.0.81)
       BlueCloth
       chronic
       chronic_duration
@@ -33,7 +33,7 @@ GEM
       xpath (~> 0.1.4)
     childprocess (0.3.0)
       ffi (~> 1.0.6)
-    chronic (0.6.6)
+    chronic (0.6.7)
     chronic_duration (0.9.6)
       numerizer (~> 0.1.1)
     cucumber (1.1.4)
@@ -75,7 +75,7 @@ GEM
     ruby-openid (2.1.8)
     rubyzip (0.9.5)
     sass (3.1.12)
-    selenium-webdriver (2.17.0)
+    selenium-webdriver (2.18.0)
       childprocess (>= 0.2.5)
       ffi (~> 1.0.9)
       multi_json (~> 1.0.4)
