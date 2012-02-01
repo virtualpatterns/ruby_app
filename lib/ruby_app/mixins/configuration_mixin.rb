@@ -17,7 +17,7 @@ module RubyApp
 
         value = RubyApp::Configuration.document
         names.each do |name|
-          value = value[name]
+          value = value[name.to_sym]
         end
 
         return value
