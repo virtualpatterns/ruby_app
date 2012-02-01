@@ -22,18 +22,14 @@ end
 class Hash
   include RubyApp::Mixins::HashMixin
 
-  def symbolize_keys!
+  def symbolize!
     copy=self.dup
     self.clear
     copy.each do |name, value|
-      puts "name=#{name.inspect} value.class=#{value.class}"
-      if value.is_a?(Hash)
-        value.symbolize_keys!
-      end
-      puts "self[#{name.to_sym.inspect}] = #{value.class}"
+      value.symbolize! if value.is_a?(Hash)
       self[name.to_sym] = value
     end
-    self
+    return self
   end
 
 end

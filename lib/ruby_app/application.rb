@@ -38,7 +38,7 @@ module RubyApp
       _options[:translations_paths] = [File.join(RubyApp::ROOT, %w[translations])] + ( _options[:translations_paths].is_a?(Array) ? _options[:translations_paths] : [_options[:translations_paths]] )
       RubyApp::Log.open!(_options[:log_path])
       RubyApp::Configuration.load!(_options[:configuration_paths])
-      @@_application = _options.application_class.new(_options)
+      @@_application = _options[:application_class].new(_options)
     end
 
     def self.destroy!

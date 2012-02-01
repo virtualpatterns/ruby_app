@@ -20,6 +20,17 @@ module RubyApp
       self.error('-' * 80)
     end
 
+    def debug_hash(hash, indent = 0)
+      hash.each do |name, value|
+        if value.is_a?(Hash)
+          self.debug("#{' ' * 2 * indent}#{name.inspect}")
+          self.debug_hash(value, indent + 1)
+        else
+          self.debug("#{' ' * 2 * indent}#{name.inspect} = #{value.inspect}")
+        end
+      end
+    end
+
     def duration(message)
       start = Time.now
       result = yield if block_given?

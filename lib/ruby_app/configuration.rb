@@ -1,6 +1,7 @@
 require 'yaml'
 
 module RubyApp
+  require 'ruby_app/log'
   require 'ruby_app/mixins/delegate_mixin'
   require 'ruby_app/mixins/hash_mixin'
 
@@ -30,7 +31,9 @@ module RubyApp
             @document.merge!(YAML::load(file)[ENV['RUBY_APP_CONFIGURATION'] || 'default'] || {})
           end
         end
-        @document.symbolize_keys!
+        @document.symbolize!
+        RubyApp::Log.debug("#{self.class}##{__method__} @document = ...")
+        RubyApp::Log.debug_hash(@document)
       end
 
   end
