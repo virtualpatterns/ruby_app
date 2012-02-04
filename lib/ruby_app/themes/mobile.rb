@@ -15,6 +15,7 @@ require 'ruby_app/elements/input'
 require 'ruby_app/elements/inputs/toggle_input'
 require 'ruby_app/elements/list'
 require 'ruby_app/elements/lists/select'
+require 'ruby_app/elements/mail'
 require 'ruby_app/elements/markdown'
 require 'ruby_app/elements/navigation/base/base_breadcrumbs'
 require 'ruby_app/elements/page'
@@ -32,6 +33,7 @@ RubyApp::Elements::Input.template_path(:css, File.join(File.dirname(__FILE__), %
 RubyApp::Elements::Inputs::ToggleInput.template_path(:css, File.join(File.dirname(__FILE__), %w[mobile inputs]))
 RubyApp::Elements::List.template_path(:css, File.join(File.dirname(__FILE__), %w[mobile]))
 RubyApp::Elements::Lists::Select.template_path(:css, File.join(File.dirname(__FILE__), %w[mobile lists]))
+RubyApp::Elements::Mail.template_path(:css, File.join(File.dirname(__FILE__), %w[mobile]))
 RubyApp::Elements::Markdown.template_path(:css, File.join(File.dirname(__FILE__), %w[mobile]))
 RubyApp::Elements::Navigation::Base::BaseBreadcrumbs.template_path(:html, File.join(File.dirname(__FILE__), %w[mobile navigation base]))
 RubyApp::Elements::Page.template_path(:css, File.join(File.dirname(__FILE__), %w[mobile]))

@@ -1,9 +1,9 @@
 module RubyApp
 
   module Elements
-    require 'ruby_app/elements/base/base_page'
+    require 'ruby_app/elements/base/base_mail'
 
-    class Page < RubyApp::Elements::Base::BasePage
+    class Mail < RubyApp::Elements::Base::BaseMail
 
       template_path(:all, File.dirname(__FILE__))
 

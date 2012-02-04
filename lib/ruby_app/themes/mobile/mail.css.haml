@@ -1,0 +1,22 @@
+- self.rendered?(__FILE__) do
+  :sass
+    /* #{__FILE__}
+    @import '#{File.join(File.dirname(__FILE__), %w[colors.sass])}'
+    body
+      background-color: $mail_background
+      color: $mail_foreground
+      margin: 0px
+      font:
+        family: Verdana
+        size: 12pt
+      > div.body
+        border: 2px solid $mail_foreground
+        border-radius: 10px
+        margin: 40px
+        padding: 10px 25px
+        text-align: center
+        a
+          color: $mail_link
+          font-weight: bold
+          text-decoration: inherit
+= yield
