@@ -27,13 +27,17 @@ module RubyApp
     attr_accessor :identity
 
     def initialize(session_id, page = nil, data = {})
-      require 'ruby_app/elements/pages/default_page'
       @session_id = session_id
       @pages = []
-      @pages.push(page || RubyApp::Elements::Pages::DefaultPage.new)
       @dialogs = []
       @data = data
       @identity = nil
+
+      require 'ruby_app/elements/pages/default_page'
+      @pages.push(page || RubyApp::Elements::Pages::DefaultPage.new)
+
+      RubyApp::Log.memory("#{self.class}##{__method__}")
+
     end
 
     def [](key)

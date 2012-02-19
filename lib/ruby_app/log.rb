@@ -10,6 +10,13 @@ module RubyApp
   class Log < ::Logger
     extend RubyApp::Mixins::DelegateMixin
 
+    def duration(message)
+      start = Time.now
+      result = yield if block_given?
+      self.debug("#{message} duration=#{Time.now - start}s")
+      return result
+    end
+
     def exception(exception)
       self.error('-' * 80)
       self.error("exception=#{exception.class.inspect} #{exception.message}")
@@ -20,7 +27,11 @@ module RubyApp
       self.error('-' * 80)
     end
 
-    def debug_hash(hash, indent = 0)
+    def memory(message)
+      self.debug("#{message} memory_usage=#{`ps -o rss= -p #{$$}`.to_i}")
+    end
+
+    def hash(hash, indent = 0)
       hash.each do |name, value|
         if value.is_a?(Hash)
           self.debug("#{' ' * 2 * indent}#{name.inspect}")
@@ -29,13 +40,6 @@ module RubyApp
           self.debug("#{' ' * 2 * indent}#{name.inspect} = #{value.inspect}")
         end
       end
-    end
-
-    def duration(message)
-      start = Time.now
-      result = yield if block_given?
-      self.debug("#{message} duration=#{Time.now - start}s")
-      return result
     end
 
     def self.get

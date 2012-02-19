@@ -2,6 +2,7 @@ module RubyApp
 
   module Rack
     require 'ruby_app/application'
+    require 'ruby_app/log'
     require 'ruby_app/request'
 
     class Application

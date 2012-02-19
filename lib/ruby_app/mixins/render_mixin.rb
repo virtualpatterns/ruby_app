@@ -8,7 +8,6 @@ module RubyApp
   module Mixins
 
     module RenderMixin
-      require 'ruby_app/log'
       require 'ruby_app/request'
 
       def rendered?(template)
@@ -26,7 +25,6 @@ module RubyApp
         cache = self.is_a?(Class) ? self.get_cache(format) : self.class.get_cache(format)
         if File.exists?(cache)
           self.rendered?(cache) do
-            RubyApp::Log.debug("#{RubyApp::Log.prefix(self, __method__)} File.read(#{cache.inspect})")
             return File.read(cache)
           end
         else
@@ -51,7 +49,6 @@ module RubyApp
                 RubyApp::Request.content_for(self, template, content)
               end
               if cache && write_cache
-                RubyApp::Log.debug("#{RubyApp::Log.prefix(self, __method__)} File.open(#{cache.inspect}, 'w')")
                 cache_directory = File.dirname(cache)
                 Dir.mkdir(cache_directory) unless File.exists?(cache_directory)
                 File.open(cache, 'w') do |file|
