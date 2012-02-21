@@ -9,7 +9,7 @@ require 'ruby_app/rack/route'
 require 'ruby_app/version'
 
 use Rack::ShowExceptions
-use Rack::Session::Pool, :expire_after => 60 * 60 * 24 # expire after 1 day
+use Rack::Session::Pool, :expire_after => 15 * 60 # 15 minutes
 use Rack::Reloader
 use Rack::ContentLength
 

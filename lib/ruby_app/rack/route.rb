@@ -71,6 +71,7 @@ module RubyApp
       end
 
       route(RubyApp::Mixins::RouteMixin::GET, /.*/) do |method, path|
+        RubyApp::Log.debug("#{self}.route method=#{method.inspect} path=#{path.inspect}")
         do_route(RubyApp::Mixins::RouteMixin::GET, '/.html')
       end
 
