@@ -27,7 +27,10 @@ module RubyApp
         begin
           [
             200,
-            { 'content-type' => 'text/html' },
+            {
+                'cache-control' => 'no-cache',
+                'content-type' => 'text/html'
+            },
             [ RubyApp::Elements::Pages::QuitPage.new.render(:html) ]
           ]
         rescue Exception => exception
@@ -40,14 +43,20 @@ module RubyApp
         begin
           [
             200,
-            { 'content-type' => RubyApp::Rack::Route.get_content_type(format) },
+            {
+              'cache-control' => 'no-cache',
+              'content-type' => RubyApp::Rack::Route.get_content_type(format)
+            },
             [ RubyApp::Element.get_element(element_id).render(format.to_sym) ]
           ]
         rescue Exception => exception
           RubyApp::Log.exception(exception)
           [
             200,
-            { 'content-type' => RubyApp::Rack::Route.get_content_type(format) },
+            {
+              'cache-control' => 'no-cache',
+              'content-type' => RubyApp::Rack::Route.get_content_type(format)
+            },
             [ RubyApp::Elements::ExceptionElement.new(exception).render(format.to_sym) ]
           ]
         end
@@ -57,7 +66,10 @@ module RubyApp
         begin
           [
             200,
-            { 'content-type' => RubyApp::Rack::Route.get_content_type(format) },
+            {
+              'cache-control' => 'no-cache',
+              'content-type' => RubyApp::Rack::Route.get_content_type(format)
+            },
             [
               RubyApp::Log.duration("#{self}.route method=#{method.inspect} path=#{path.inspect} format=#{format.to_sym.inspect} RubyApp::Session.pages.last=#{RubyApp::Session.pages.last.class}") do
                 RubyApp::Session.pages.last.render(format.to_sym)
@@ -82,7 +94,10 @@ module RubyApp
             event.process!
             [
               200,
-              { 'content-type' => 'application/json' },
+              {
+                'cache-control' => 'no-cache',
+                'content-type' => 'application/json'
+              },
               [
                 RubyApp::Log.duration("#{self}.route method=#{method.inspect} path=#{path.inspect} POST['_class']=#{RubyApp::Request.POST['_class']}") do
                   Yajl::Encoder.new.encode(event.to_hash)
@@ -96,7 +111,10 @@ module RubyApp
           RubyApp::Log.exception(exception)
           [
             200,
-            { 'content-type' => 'application/json' },
+            {
+              'cache-control' => 'no-cache',
+              'content-type' => 'application/json'
+            },
             [ Yajl::Encoder.new.encode(RubyApp::Element::ExceptionEvent.new(exception).to_hash) ]
           ]
         end
