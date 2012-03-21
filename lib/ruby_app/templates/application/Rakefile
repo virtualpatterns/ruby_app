@@ -5,7 +5,7 @@ require 'rake'
 
 $LOAD_PATH.unshift File.expand_path(File.join(File.dirname(__FILE__), %w[lib]))
 
-require '_APPLICATION_DOWNCODE_/application'
+require '_APPLICATION_DOWNCODE_'
 
 namespace :_APPLICATION_DOWNCODE_ do
 

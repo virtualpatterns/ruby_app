@@ -5,10 +5,8 @@ module RubyApp
     module Pages
 
       module TestPages
-        require 'ruby_app/elements/markdown'
-        require 'ruby_app/elements/pages/blank_page'
-        require 'ruby_app/elements/pages/test_pages/linked_test_page'
-        require 'ruby_app/session'
+        require 'ruby_app'
+        require 'ruby_app/elements'
 
         class MarkdownTestPage < RubyApp::Elements::Pages::BlankPage
 
@@ -20,6 +18,7 @@ module RubyApp
             @markdown = RubyApp::Elements::Markdown.new
             @markdown.clicked do |element, event|
               if event.name == "go"
+                require 'ruby_app/elements/pages/test_pages/linked_test_page'
                 RubyApp::Session.pages.push(RubyApp::Elements::Pages::TestPages::LinkedTestPage.new)
                 event.refresh
               end

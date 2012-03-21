@@ -3,9 +3,9 @@ module RubyApp
   module Elements
 
     module Pages
+      require 'ruby_app'
       require 'ruby_app/elements/markdown'
       require 'ruby_app/elements/pages/blank_page'
-      require 'ruby_app/elements/pages/test_pages/default_test_page'
 
       class DefaultPage < RubyApp::Elements::Pages::BlankPage
 
@@ -22,6 +22,7 @@ module RubyApp
           @markdown.clicked do |element, event|
             case event.name
               when 'go_test'
+                require 'ruby_app/elements/pages/test_pages'
                 RubyApp::Session.pages.push(RubyApp::Elements::Pages::TestPages::DefaultTestPage.new)
                 event.refresh
             end

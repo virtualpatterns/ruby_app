@@ -7,8 +7,8 @@ module RubyApp
       module Authentication
 
         module OpenId
+          require 'ruby_app'
           require 'ruby_app/elements/pages/authentication/open_id/authentication_page'
-          require 'ruby_app/session'
 
           class EmailAuthenticationPage < RubyApp::Elements::Pages::Authentication::OpenId::AuthenticationPage
 

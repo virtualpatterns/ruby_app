@@ -3,6 +3,7 @@ module RubyApp
   module Elements
 
     module Navigation
+      require 'ruby_app'
       require 'ruby_app/element'
 
       class PageLink < RubyApp::Element

@@ -3,7 +3,7 @@ module RubyApp
   module Mixins
 
     module ConfigurationMixin
-      require 'ruby_app/configuration'
+      require 'ruby_app'
 
       def configuration
 

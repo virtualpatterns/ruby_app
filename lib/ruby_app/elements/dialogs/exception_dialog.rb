@@ -3,9 +3,8 @@ module RubyApp
   module Elements
 
     module Dialogs
+      require 'ruby_app'
       require 'ruby_app/elements/dialogs/close_dialog'
-      require 'ruby_app/log'
-      require 'ruby_app/session'
 
       class ExceptionDialog < RubyApp::Elements::Dialogs::CloseDialog
 

@@ -1,20 +1,35 @@
 require 'rubygems'
 require 'bundler/setup'
 
+require 'facets/string/interpolate'
 require 'fileutils'
 require 'logger'
 
 module RubyApp
-  require 'ruby_app/mixins/delegate_mixin'
+  require 'ruby_app/mixins'
 
   class Log < ::Logger
+    extend RubyApp::Mixins::ConfigurationMixin
     extend RubyApp::Mixins::DelegateMixin
 
     def duration(message)
       start = Time.now
-      result = yield if block_given?
-      self.debug("#{message} duration=#{Time.now - start}s")
-      return result
+      begin
+        return yield if block_given?
+      ensure
+        self.debug("#{message} #{Time.now - start}s")
+      end
+    end
+
+    def memory(message)
+      begin
+        return yield if block_given?
+      ensure
+        GC.start
+        count = ObjectSpace.each_object { |item| }
+        self.debug("#{message}  count=#{count}")
+        self.debug("#{message} memory=#{`ps -o rss= -p #{$$}`.to_i}")
+      end
     end
 
     def exception(exception)
@@ -27,38 +42,27 @@ module RubyApp
       self.error('-' * 80)
     end
 
-    def memory(message)
-      self.debug("#{message} memory_usage=#{`ps -o rss= -p #{$$}`.to_i}")
-    end
-
-    def hash(hash, indent = 0)
-      hash.each do |name, value|
-        if value.is_a?(Hash)
-          self.debug("#{' ' * 2 * indent}#{name.inspect}")
-          self.debug_hash(value, indent + 1)
-        else
-          self.debug("#{' ' * 2 * indent}#{name.inspect} = #{value.inspect}")
-        end
-      end
-    end
-
-    def self.get
-      @@_log
-    end
-
     def self.prefix(object, method)
       return "#{object.is_a?(Class) ? object : object.class}#{object.is_a?(Class) ? '.' : '#'}#{method}"
     end
 
-    def self.open!(path)
-      directory = File.dirname(path)
-      FileUtils.mkdir_p(directory)
-      @@_log = RubyApp::Log.new(path)
+    def self.get
+      ( @@_log ||= nil ) || ( @@_standard_log ||= RubyApp::Log.new($stdout) )
+    end
+
+    def self.open!
+      unless @@_log ||= nil
+        path = String.interpolate { RubyApp::Log.configuration.path }
+        FileUtils.mkdir_p(File.dirname(path))
+        @@_log = RubyApp::Log.new(path)
+      end
     end
 
     def self.close!
-      @@_log.close if @@_log
-      @@_log = nil
+      if @@_log ||= nil
+        @@_log.close
+        @@_log = nil
+      end
     end
 
     private

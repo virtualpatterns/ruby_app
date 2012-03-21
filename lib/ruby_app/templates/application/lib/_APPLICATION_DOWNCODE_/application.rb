@@ -1,14 +1,14 @@
 require 'rubygems'
 require 'bundler/setup'
 
-require 'ruby_app/application'
+require 'ruby_app'
 
 module _APPLICATION_UPCODE_
 
   class Application < RubyApp::Application
 
-    def initialize(options)
-      super(options)
+    def initialize
+      super
     end
 
   end

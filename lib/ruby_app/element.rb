@@ -3,13 +3,12 @@ require 'bundler/setup'
 
 require 'haml'
 require 'json'
+require 'mime/types'
 require 'ruby-event'
 
 module RubyApp
-  require 'ruby_app/mixins/configuration_mixin'
-  require 'ruby_app/mixins/render_mixin'
-  require 'ruby_app/mixins/template_mixin'
-  require 'ruby_app/mixins/translate_mixin'
+  require 'ruby_app/exceptions'
+  require 'ruby_app/mixins'
 
   class Element
     extend RubyApp::Mixins::ConfigurationMixin
@@ -25,13 +24,15 @@ module RubyApp
     class Event
       extend RubyApp::Mixins::TranslateMixin
 
-      attr_reader :now, :source
+      attr_reader :session_id, :now, :source
 
       def initialize(data = nil)
         if data
+          @session_id = data['session_id']
           @now = Time.parse(data['now'])
           @source = RubyApp::Element.get_element(data['source_id'])
         else
+          @session_id = nil
           @now = Time.now
           @source = nil
         end
@@ -43,6 +44,7 @@ module RubyApp
       end
 
       def process!
+        raise RubyApp::Exceptions::SessionInvalidException.new(RubyApp::Request.POST['session_id']) unless self.session_id == RubyApp::Session.session_id
         source.send(:on_event, self)
       end
 
@@ -59,7 +61,7 @@ module RubyApp
       end
 
       def confirm_refresh(message)
-        execute("RubyApp.confirm_refresh(#{message.to_json});")
+        execute("RubyApp.confirmRefresh(#{message.to_json});")
       end
 
       def show_dialog(dialog)
@@ -138,6 +140,10 @@ module RubyApp
 
     def element_id
       "id_#{object_id}"
+    end
+
+    def self.get_content_type(format)
+      ( mime_type = MIME::Types.type_for(format)[0] ) ? mime_type.content_type : 'text/plain'
     end
 
     def self.get_element(element_id)

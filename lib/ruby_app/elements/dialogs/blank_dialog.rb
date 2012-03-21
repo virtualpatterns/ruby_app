@@ -3,7 +3,7 @@ module RubyApp
   module Elements
 
     module Dialogs
-      require 'ruby_app/elements/dialog'
+      require 'ruby_app/elements'
 
       class BlankDialog < RubyApp::Elements::Dialog
 

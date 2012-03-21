@@ -1,0 +1,7 @@
+require 'ruby_app/mixins/configuration_mixin'
+require 'ruby_app/mixins/delegate_mixin'
+require 'ruby_app/mixins/hash_mixin'
+require 'ruby_app/mixins/render_mixin'
+require 'ruby_app/mixins/route_mixin'
+require 'ruby_app/mixins/template_mixin'
+require 'ruby_app/mixins/translate_mixin'

@@ -4,7 +4,6 @@ module RubyApp
 
     module Pages
       require 'ruby_app/elements/page'
-      require 'ruby_app/session'
 
       class QuitPage < RubyApp::Elements::Page
 
@@ -13,7 +12,6 @@ module RubyApp
 
         def initialize
           super
-          RubyApp::Session.quit
         end
 
       end

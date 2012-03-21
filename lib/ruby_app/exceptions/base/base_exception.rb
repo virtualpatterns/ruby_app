@@ -3,7 +3,7 @@ module RubyApp
   module Exceptions
 
     module Base
-      require 'ruby_app/mixins/translate_mixin'
+      require 'ruby_app/mixins'
 
       class BaseException < Exception
         extend RubyApp::Mixins::TranslateMixin

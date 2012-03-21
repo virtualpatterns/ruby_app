@@ -1,20 +1,24 @@
 module RubyApp
 
   module Rack
-    require 'ruby_app/application'
-    require 'ruby_app/log'
-    require 'ruby_app/request'
+    require 'ruby_app'
 
     class Application
 
       def initialize(application, options = {})
         @application = application
-        RubyApp::Application.create!(options)
+        RubyApp::Configuration.load!(options[:configuration_paths])
+        RubyApp::Log.open!
+        RubyApp::Application.create!
+        RubyApp::Session.start_thread!
       end
 
       def call(environment)
-        RubyApp::Request.create!(environment) do
+        begin
           return @application.call(environment)
+        rescue Exception => exception
+          RubyApp::Log.exception(exception)
+          raise exception
         end
       end
 

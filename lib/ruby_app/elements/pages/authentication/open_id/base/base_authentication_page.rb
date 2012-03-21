@@ -14,10 +14,8 @@ module RubyApp
         module OpenId
 
           module Base
+            require 'ruby_app'
             require 'ruby_app/elements/page'
-            require 'ruby_app/log'
-            require 'ruby_app/request'
-            require 'ruby_app/session'
 
             class BaseAuthenticationPage < RubyApp::Elements::Page
 

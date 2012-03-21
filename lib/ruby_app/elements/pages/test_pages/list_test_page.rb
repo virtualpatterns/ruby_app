@@ -5,12 +5,8 @@ module RubyApp
     module Pages
 
       module TestPages
-        require 'ruby_app/elements/dialogs/message_dialog'
-        require 'ruby_app/elements/markdown'
-        require 'ruby_app/elements/pages/blank_page'
-        require 'ruby_app/elements/list'
-        require 'ruby_app/elements/lists/select'
-        require 'ruby_app/session'
+        require 'ruby_app'
+        require 'ruby_app/elements'
 
         class ListTestPage < RubyApp::Elements::Pages::BlankPage
 
@@ -29,7 +25,7 @@ module RubyApp
                              'Item 05' ]
             @list.clicked do |element, event|
               RubyApp::Session.show_dialog(event, RubyApp::Elements::Dialogs::MessageDialog.new(self.translate.message_dialog.message.title,
-                                                                                         self.translate.message_dialog.message.message(event.item)))
+                                                                                                self.translate.message_dialog.message.message(event.item)))
             end
 
             @select = RubyApp::Elements::Lists::Select.new
@@ -40,7 +36,7 @@ module RubyApp
                                'Item 15' ]
             @select.clicked do |element, event|
               RubyApp::Session.show_dialog(event, RubyApp::Elements::Dialogs::MessageDialog.new(self.translate.message_dialog.message.title,
-                                                                                         self.translate.message_dialog.message.message(@select.selected_item)))
+                                                                                                self.translate.message_dialog.message.message(@select.selected_item)))
             end
 
           end

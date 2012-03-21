@@ -5,13 +5,8 @@ module RubyApp
     module Pages
 
       module TestPages
-        require 'ruby_app/elements/dialogs/exception_dialog'
-        require 'ruby_app/elements/dialogs/message_dialog'
-        require 'ruby_app/elements/input'
-        require 'ruby_app/elements/markdown'
-        require 'ruby_app/elements/pages/blank_page'
-        require 'ruby_app/request'
-        require 'ruby_app/session'
+        require 'ruby_app'
+        require 'ruby_app/elements'
 
         class TestPage < RubyApp::Elements::Pages::BlankPage
 
@@ -35,7 +30,7 @@ module RubyApp
             @input.changed do |element, event|
               event.set_cookie('_cookie', @input.value)
               RubyApp::Session.show_dialog(event, RubyApp::Elements::Dialogs::MessageDialog.new(self.translate.message_dialog.message.title,
-                                                                                         self.translate.message_dialog.message.message(@input.value)))
+                                                                                                self.translate.message_dialog.message.message(@input.value)))
             end
 
           end

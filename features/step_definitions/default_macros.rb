@@ -8,9 +8,6 @@ end
 
 Then /^I quit$/ do
   steps %Q{
-    When I click "Settings"
-    Then I should see "Quit the session"
-    When I click "Quit"
-    Then I should see "Click here to go to the test pages"
+    Given I am viewing "/quit"
   }
 end

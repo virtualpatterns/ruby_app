@@ -1,8 +1,7 @@
 require 'yaml'
 
 module RubyApp
-  require 'ruby_app/mixins/delegate_mixin'
-  require 'ruby_app/mixins/hash_mixin'
+  require 'ruby_app/mixins'
 
   class Configuration
     extend RubyApp::Mixins::DelegateMixin
@@ -10,7 +9,7 @@ module RubyApp
     attr_reader :document
 
     def self.get
-      @@_configuration
+      @@_configuration ||= nil
     end
 
     def self.load!(paths)

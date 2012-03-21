@@ -3,6 +3,7 @@ module RubyApp
   module Elements
 
     module Pages
+      require 'ruby_app'
       require 'ruby_app/elements/markdown'
       require 'ruby_app/elements/pages/blank_page'
 
@@ -21,7 +22,7 @@ module RubyApp
               when 'do_reload_translations'
                 RubyApp::Language.reload!
               when 'do_quit'
-                RubyApp::Session.quit
+                RubyApp::Session.quit!
             end
             event.refresh
           end

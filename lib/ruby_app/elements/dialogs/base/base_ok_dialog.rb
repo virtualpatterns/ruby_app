@@ -6,7 +6,6 @@ module RubyApp
 
       module Base
         require 'ruby_app/elements/dialogs/blank_dialog'
-        require 'ruby_app/elements/link'
 
         class BaseOkDialog < RubyApp::Elements::Dialogs::BlankDialog
 

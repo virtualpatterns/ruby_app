@@ -5,23 +5,7 @@ require 'sass/plugin'
 
 Sass::Plugin.options[:load_paths] = [File.expand_path(File.join(File.dirname(__FILE__), %w[mobile]))]
 
-require 'ruby_app/elements/base/base_page'
-require 'ruby_app/elements/calendars/month'
-require 'ruby_app/elements/dialog'
-require 'ruby_app/elements/dialogs/blank_dialog'
-require 'ruby_app/elements/dialogs/close_dialog'
-require 'ruby_app/elements/dialogs/yes_no_dialog'
-require 'ruby_app/elements/input'
-require 'ruby_app/elements/inputs/toggle_input'
-require 'ruby_app/elements/list'
-require 'ruby_app/elements/lists/select'
-require 'ruby_app/elements/mail'
-require 'ruby_app/elements/markdown'
-require 'ruby_app/elements/navigation/base/base_breadcrumbs'
-require 'ruby_app/elements/page'
-require 'ruby_app/elements/pages/authentication/open_id/authentication_page'
-require 'ruby_app/elements/pages/base/base_blank_page'
-require 'ruby_app/elements/pages/blank_page'
+require 'ruby_app/elements'
 
 RubyApp::Elements::Base::BasePage.template_path(:html, File.join(File.dirname(__FILE__), %w[mobile base]))
 RubyApp::Elements::Calendars::Month.template_path(:css, File.join(File.dirname(__FILE__), %w[mobile calendars]))

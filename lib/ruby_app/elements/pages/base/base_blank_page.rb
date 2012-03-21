@@ -19,7 +19,6 @@ module RubyApp
             @breadcrumbs = RubyApp::Elements::Navigation::Breadcrumbs.new
 
             require 'ruby_app/elements/pages/settings_page'
-
             @settings = RubyApp::Elements::Navigation::PageLink.new
             @settings.page = RubyApp::Elements::Pages::SettingsPage
 

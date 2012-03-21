@@ -8,9 +8,9 @@ module RubyApp
   module Elements
 
     module Base
+      require 'ruby_app'
       require 'ruby_app/element'
-      require 'ruby_app/language'
-      require 'ruby_app/mixins/hash_mixin'
+      require 'ruby_app/mixins'
 
       class BasePage < RubyApp::Element
         include RubyApp::Mixins::HashMixin

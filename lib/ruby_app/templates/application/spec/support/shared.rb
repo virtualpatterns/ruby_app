@@ -1,18 +1,43 @@
-require File.join(File.dirname(__FILE__), %w[.. .. application])
-require File.join(File.dirname(__FILE__), %w[.. .. session])
+require 'rubygems'
+require 'bundler/setup'
 
-shared_context '_APPLICATION_UPCODE_::Application' do
+require 'ruby_app'
+
+require '_APPLICATION_DOWNCODE_'
+
+shared_context 'application' do
 
   before(:all) do
-    options = {:application_class => _APPLICATION_UPCODE_::Application,
-               :session_class => _APPLICATION_UPCODE_::Session,
-               :log_path => File.join(File.dirname(__FILE__), %w[.. .. log application.log]),
-               :configuration_paths => File.join(File.dirname(__FILE__), %w[.. .. config.yml])}
-    _APPLICATION_UPCODE_::Application.create(options)
+    RubyApp::Configuration.load!([ File.join(RubyApp::ROOT, %w[configuration.yml]),
+                                   File.join(_APPLICATION_UPCODE_::ROOT, %w[configuration.yml])])
+    RubyApp::Log.open!
+    RubyApp::Application.create!
   end
 
   after(:all) do
-    Pike::Application.destroy
+    RubyApp::Application.destroy!
+    RubyApp::Log.close!
+    RubyApp::Configuration.unload!
   end
 
 end
+
+shared_context 'request' do
+  include_context 'application'
+
+  before(:each) do
+    RubyApp::Request.create!
+    RubyApp::Response.create!
+    RubyApp::Language.load!
+    RubyApp::Session.load!
+  end
+
+  after(:each) do
+    RubyApp::Session.unload!
+    RubyApp::Language.unload!
+    RubyApp::Response.destroy!
+    RubyApp::Request.destroy!
+  end
+
+end
+

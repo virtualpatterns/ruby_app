@@ -55,7 +55,7 @@
             .error( function(request, message, exception) {
               RubyApp.log('RubyApp.queueEvent ERROR event.class=' + event._class + ' wait=' + wait);
               if ($.parseJSON(RubyApp.getData('event_error', 'true')) == true)
-                RubyApp.confirm_refresh(RubyApp.getData('event_error_message', null));
+                RubyApp.confirmRefresh(RubyApp.getData('event_error_message', null));
             } )
             .complete( function() {
               RubyApp.log('RubyApp.queueEvent COMPLETE event.class=' + event._class + ' wait=' + wait);
@@ -71,7 +71,7 @@
         $(window).clearQueue();
         location.assign(location.href);
       },
-      this.confirm_refresh = function(message) {
+      this.confirmRefresh = function(message) {
         if (confirm(message))
         {
           RubyApp.refresh();

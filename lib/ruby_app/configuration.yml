@@ -1,0 +1,28 @@
+default:
+  ruby_app:
+    application:
+      _class: "RubyApp::Application"
+    language:
+      default: "en"
+      paths:
+        - "#{RubyApp::ROOT}/translations"
+    log:
+      path: "#{RubyApp::ROOT}/process/log/application.log"
+    session:
+      _class: "RubyApp::Session"
+      expires: 60
+      interval: 15
+    elements:
+      pages:
+        authentication:
+          open_id:
+            google_authentication_page:
+              attributes:
+                email: "http://schema.openid.net/contact/email"
+              identifier: "https://www.google.com/accounts/o8/id"
+            my_open_id_authentication_page:
+              identifier: "http://myopenid.com"
+            yahoo_authentication_page:
+              attributes:
+                email: "http://axschema.org/contact/email"
+              identifier: "https://www.yahoo.com"

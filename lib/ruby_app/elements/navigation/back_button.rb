@@ -3,8 +3,8 @@ module RubyApp
   module Elements
 
     module Navigation
+      require 'ruby_app'
       require 'ruby_app/elements/button'
-      require 'ruby_app/session'
 
       class BackButton < RubyApp::Elements::Button
 

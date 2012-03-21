@@ -3,7 +3,7 @@ module RubyApp
   module Mixins
 
     module TranslateMixin
-      require 'ruby_app/language'
+      require 'ruby_app'
 
       def translate
 

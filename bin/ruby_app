@@ -17,9 +17,8 @@ usage: ruby_app <command> <arguments>
 
 Available commands include:
   create application    Create a basic application in the current folder named <arguments>.
-  create page           DISABLED: Create a baisc page consisting of .rb, .html, .css. and .js files (not implemented)
   console               Open an interactive console
-  run                   Run the application identified by the config.ru in <arguments>
+  run                   Run the application identified by the configuration.ru in <arguments>
 
 USAGE
 end
@@ -101,25 +100,6 @@ def create_application
   copy_folder(source, full_folder, replacements)
 end
 
-#def create_page
-#  argument = $*[2]
-#  folder = File.dirname(File.join(File.join(FileUtils.pwd, %w[elements arguments]), downcode(argument).split('/')))
-#  namespace_class = "#{upcode(File.basename(FileUtils.pwd))}::Elements::Pages::#{upcode(argument)}"
-#  _class = namespace_class.split('::').last
-#  replacements =  [
-#                   {
-#                     :pattern => /_PAGE_DOWNCODE_/,
-#                     :text => downcode(_class)
-#                   },
-#                   {
-#                     :pattern => /_PAGE_UPCODE_/,
-#                     :text => _class
-#                   }
-#                 ]
-#  source = File.join(File.dirname(__FILE__), %w[.. lib ruby_app templates argument])
-#  copy_folder(source, folder, replacements)
-#end
-
 def console
   argument = $*[1]
   system("irb --back-trace-limit 100 -r #{argument || ( File.exists?(File.join(FileUtils.pwd, %w[console.rb])) ? File.join(FileUtils.pwd, %w[console.rb]) : File.join(File.dirname(__FILE__), %w[console.rb]) )}")
@@ -127,7 +107,7 @@ end
 
 def run
   argument = $*[1]
-  Rack::Server.start(:config => argument || File.join(FileUtils.pwd, %w[config.ru]))
+  Rack::Server.start(:config => argument || File.join(FileUtils.pwd, %w[configuration.ru]))
 end
 
 def downcode(value)
@@ -151,8 +131,6 @@ else
       case $*[1].downcase
         when 'application'
           create_application
-        # when 'page'
-        #  create_page
         else
           puts "Blank or unrecognized command '#{$*[1].downcase}'"
           puts usage

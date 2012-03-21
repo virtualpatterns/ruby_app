@@ -5,20 +5,8 @@ module RubyApp
     module Pages
 
       module TestPages
-        require 'ruby_app/elements/dialogs/exception_dialog'
-        require 'ruby_app/elements/markdown'
-        require 'ruby_app/elements/pages/authentication/open_id/google_authentication_page'
-        require 'ruby_app/elements/pages/authentication/open_id/my_open_id_authentication_page'
-        require 'ruby_app/elements/pages/authentication/open_id/yahoo_authentication_page'
-        require 'ruby_app/elements/pages/blank_page'
-        require 'ruby_app/elements/pages/test_pages/button_test_page'
-        require 'ruby_app/elements/pages/test_pages/dialog_test_page'
-        require 'ruby_app/elements/pages/test_pages/input_test_page'
-        require 'ruby_app/elements/pages/test_pages/link_test_page'
-        require 'ruby_app/elements/pages/test_pages/list_test_page'
-        require 'ruby_app/elements/pages/test_pages/markdown_test_page'
-        require 'ruby_app/elements/pages/test_pages/test_page'
-        require 'ruby_app/session'
+        require 'ruby_app'
+        require 'ruby_app/elements'
 
         class DefaultTestPage < RubyApp::Elements::Pages::BlankPage
 
@@ -29,7 +17,14 @@ module RubyApp
 
             @markdown = RubyApp::Elements::Markdown.new
             @markdown.clicked do |element, event|
-              RubyApp::Session.pages.push(eval(event.name).new)
+              require 'ruby_app/elements/pages/test_pages/button_test_page'
+              require 'ruby_app/elements/pages/test_pages/dialog_test_page'
+              require 'ruby_app/elements/pages/test_pages/input_test_page'
+              require 'ruby_app/elements/pages/test_pages/link_test_page'
+              require 'ruby_app/elements/pages/test_pages/list_test_page'
+              require 'ruby_app/elements/pages/test_pages/markdown_test_page'
+              require 'ruby_app/elements/pages/test_pages/test_page'
+              RubyApp::Session.pages.push(Kernel.eval(event.name).new)
               event.refresh
             end
 

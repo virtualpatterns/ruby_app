@@ -10,6 +10,7 @@ module RubyApp
     module Navigation
 
       module Base
+        require 'ruby_app'
         require 'ruby_app/element'
 
         class BaseBreadcrumbs < RubyApp::Element

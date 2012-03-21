@@ -1,29 +1,23 @@
 require 'rubygems'
 require 'bundler/setup'
 
+require 'facets/string/interpolate'
 require 'r18n-core'
 
 module RubyApp
-  require 'ruby_app/application'
-  require 'ruby_app/mixins/delegate_mixin'
-  require 'ruby_app/request'
+  require 'ruby_app/mixins'
 
   class Language < R18n::I18n
+    extend RubyApp::Mixins::ConfigurationMixin
     extend RubyApp::Mixins::DelegateMixin
 
     def self.get
-      R18n.get
+      return R18n.get
     end
 
-    def self.load!
-      R18n.thread_set(RubyApp::Language.new(RubyApp::Request.language, RubyApp::Application.options.translations_paths))
-      if block_given?
-        begin
-          yield
-        ensure
-          self.unload!
-        end
-      end
+    def self.load!(language = nil)
+      paths = RubyApp::Language.configuration.paths.collect { |path| String.interpolate { path } }
+      R18n.thread_set(RubyApp::Language.new(language || RubyApp::Language.configuration.default, paths))
     end
 
     def self.unload!
@@ -32,8 +26,8 @@ module RubyApp
 
     private
 
-      def initialize(language, translations_paths)
-        super(language, translations_paths)
+      def initialize(language, paths)
+        super(language, paths)
       end
 
   end

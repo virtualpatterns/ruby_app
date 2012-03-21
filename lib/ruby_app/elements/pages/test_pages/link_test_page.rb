@@ -5,11 +5,8 @@ module RubyApp
     module Pages
 
       module TestPages
-        require 'ruby_app/elements/link'
-        require 'ruby_app/elements/markdown'
-        require 'ruby_app/elements/pages/blank_page'
-        require 'ruby_app/elements/pages/test_pages/linked_test_page'
-        require 'ruby_app/session'
+        require 'ruby_app'
+        require 'ruby_app/elements'
 
         class LinkTestPage < RubyApp::Elements::Pages::BlankPage
 
@@ -22,6 +19,7 @@ module RubyApp
 
             @link = RubyApp::Elements::Link.new
             @link.clicked do |element, event|
+              require 'ruby_app/elements/pages/test_pages/linked_test_page'
               RubyApp::Session.pages.push(RubyApp::Elements::Pages::TestPages::LinkedTestPage.new)
               event.refresh
             end

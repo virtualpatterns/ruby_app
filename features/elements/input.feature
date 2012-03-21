@@ -56,3 +56,5 @@ Feature: Input elements
     When I click "Close"
     And I uncheck the "ToggleInput" field
     Then I should see "You input 'false'"
+    Then I click "Close"
+    Then I quit
