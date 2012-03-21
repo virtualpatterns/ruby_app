@@ -21,12 +21,3 @@ Feature: A page
     And I click "_TestPage"
     Then I should see "The cookie value is 'value'."
     Then I quit
-
-  Scenario Outline: Loading the home page
-    Given I am viewing "/"
-    And I should see "Loaded"
-
-    Scenarios: Count
-      | count |
-      | X     |
-      | X     |
