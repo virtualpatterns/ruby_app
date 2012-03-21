@@ -28,6 +28,19 @@ module RubyApp
       @@_application = nil
     end
 
+    def self.create_context!(configuration_paths = [File.join(RubyApp::ROOT, %w[configuration.yml])])
+      RubyApp::Configuration.load!(configuration_paths)
+      RubyApp::Log.open!
+      RubyApp::Application.create!
+      begin
+        yield
+      ensure
+        RubyApp::Application.destroy!
+        RubyApp::Log.close!
+        RubyApp::Configuration.unload!
+      end
+    end
+
   end
 
 end

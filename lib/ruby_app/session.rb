@@ -1,4 +1,5 @@
 require 'securerandom'
+require 'thread'
 
 module RubyApp
   require 'ruby_app/mixins'
@@ -74,7 +75,7 @@ module RubyApp
     end
 
     def self.lock_sessions
-      ( @@_lock ||= Mutex.new ).synchronize do
+      ( @@_lock ||= ::Mutex.new ).synchronize do
         yield
       end
     end

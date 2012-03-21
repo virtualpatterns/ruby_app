@@ -38,6 +38,21 @@ module RubyApp
       Thread.current[:_request] = nil
     end
 
+    def self.create_context!
+      RubyApp::Request.create!
+      RubyApp::Response.create!
+      RubyApp::Language.load!
+      RubyApp::Session.load!
+      begin
+        yield
+      ensure
+        RubyApp::Session.unload!
+        RubyApp::Language.unload!
+        RubyApp::Response.destroy!
+        RubyApp::Request.destroy!
+      end
+    end
+
     private
 
       def initialize(environment)
