@@ -9,7 +9,7 @@ module RubyApp
         name.gsub!(/([A-Z]+)([A-Z][a-z])/,'\1_\2')
         name.gsub!(/([a-z\d])([A-Z])/,'\1_\2')
         name.tr!("-", "_")
-        name.downcase
+        return name.downcase
       end
 
       def template_path(format, path)
@@ -17,7 +17,7 @@ module RubyApp
       end
 
       def exclude_parent_template?(format)
-        ( @_exclude_parent_template_formats ||= [] ).include?(:all) || @_exclude_parent_template_formats.include?(format)
+        return ( @_exclude_parent_template_formats ||= [] ).include?(:all) || @_exclude_parent_template_formats.include?(format)
       end
 
       def exclude_parent_template(*formats)
@@ -25,18 +25,12 @@ module RubyApp
       end
 
       def get_template(format)
-        (@_template_path[format] || @_template_path[:all]).gsub(/\*/,format.to_s)
+        return (@_template_path[format] || @_template_path[:all]).gsub(/\*/,format.to_s)
       end
 
       def get_templates(format)
         template = self.get_template(format)
-        (File.exists?(template) ? [template] : []).concat((!self.exclude_parent_template?(format) && self.superclass.respond_to?(:get_templates) ) ? self.superclass.get_templates(format) : [])
-      end
-
-      def get_cache(format)
-        cache = self.get_template(format)
-        cache = cache.gsub(/\.haml/, '')
-        File.join(File.dirname(cache), '.cache', File.basename(cache))
+        return (File.exists?(template) ? [template] : []).concat((!self.exclude_parent_template?(format) && self.superclass.respond_to?(:get_templates) ) ? self.superclass.get_templates(format) : [])
       end
 
     end

@@ -25,7 +25,7 @@ module RubyApp
       end
 
       def localize(*parameters)
-        RubyApp::Language.l(*parameters)
+        return RubyApp::Language.l(*parameters)
       end
 
     end

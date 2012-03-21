@@ -54,8 +54,8 @@
             } )
             .error( function(request, message, exception) {
               RubyApp.log('RubyApp.queueEvent ERROR event.class=' + event._class + ' wait=' + wait);
-              if ($.parseJSON(RubyApp.getData('event_error', 'true')) == true)
-                RubyApp.confirmRefresh(RubyApp.getData('event_error_message', null));
+              if ($.parseJSON(RubyApp.getData('_event_error', 'true')) == true)
+                RubyApp.confirmRefresh(RubyApp.getData('_event_error_message', null));
             } )
             .complete( function() {
               RubyApp.log('RubyApp.queueEvent COMPLETE event.class=' + event._class + ' wait=' + wait);

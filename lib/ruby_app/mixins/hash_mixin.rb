@@ -9,7 +9,7 @@ module RubyApp
           capture = $~.captures[0]
           self[capture.to_sym] = arguments[0]
         else
-          self[name.to_sym]
+          return self[name.to_sym]
         end
       end
 

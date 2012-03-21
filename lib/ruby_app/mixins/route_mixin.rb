@@ -25,11 +25,7 @@ module RubyApp
       end
 
       def routes
-        @_routes ||= []
-      end
-
-      def clear_routes
-        self.routes.clear
+        return @_routes ||= []
       end
 
     end

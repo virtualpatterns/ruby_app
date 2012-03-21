@@ -5,7 +5,7 @@ module RubyApp
     module DelegateMixin
 
       def method_missing(name, *arguments, &block)
-        self.get.send(name, *arguments, &block)
+        return self.get.send(name, *arguments, &block)
       end
 
     end
