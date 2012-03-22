@@ -9,6 +9,8 @@ module RubyApp
   class Request < ::Rack::Request
     extend RubyApp::Mixins::DelegateMixin
 
+    attr_reader :environment
+
     def language
       self.fullpath =~ /^\/([^\/\?]+)/
       return $1
@@ -57,6 +59,7 @@ module RubyApp
 
       def initialize(environment)
         super(environment)
+        @environment = environment
       end
 
   end

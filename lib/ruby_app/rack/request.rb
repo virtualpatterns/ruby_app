@@ -12,6 +12,9 @@ module RubyApp
       def call(environment)
         RubyApp::Request.create!(environment)
         begin
+          #environment.each do |name, value|
+          #  RubyApp::Log.debug("#{RubyApp::Log.prefix(self, __method__)} environment[#{name.inspect}]=#{value.inspect}")
+          #end
           #RubyApp::Log.debug("#{RubyApp::Log.prefix(self, __method__)} RubyApp::Request.request_method=#{RubyApp::Request.request_method.inspect}")
           #RubyApp::Log.debug("#{RubyApp::Log.prefix(self, __method__)} RubyApp::Request.path=#{RubyApp::Request.path.inspect}")
           return @application.call(environment)
