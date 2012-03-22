@@ -4,6 +4,7 @@ require 'bundler/setup'
 require 'facets/string/interpolate'
 require 'fileutils'
 require 'logger'
+require 'socket'
 
 module RubyApp
   require 'ruby_app'
@@ -16,7 +17,7 @@ module RubyApp
     class Formatter < ::Logger::Formatter
 
       def call(severity, time, application, message)
-        return "#{severity} | #{time.strftime('%Y-%m-%d %H:%M:%S %Z')} | #{RubyApp::Request.exists? ? RubyApp::Request.environment['REMOTE_ADDR'] : '-'} | #{RubyApp::Request.exists? ? RubyApp::Request.environment['SERVER_NAME'] : '-'} | #{RubyApp::Request.exists? ? RubyApp::Request.environment['SERVER_PORT'] : '-'} | #{RubyApp::Session.exists? ? RubyApp::Session.session_id : '-'} | #{RubyApp::Session.exists? && RubyApp::Session.identity ? RubyApp::Session.identity.url : '-'} | #{message}\n"
+        return "#{severity} | #{time.strftime('%Y-%m-%d %H:%M:%S %Z')} | #{Socket.gethostname} | #{RubyApp::Session.exists? ? RubyApp::Session.session_id : '-'} | #{RubyApp::Session.exists? && RubyApp::Session.identity ? RubyApp::Session.identity.url : '-'} | #{message}\n"
       end
 
     end
