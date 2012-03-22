@@ -6,11 +6,20 @@ require 'fileutils'
 require 'logger'
 
 module RubyApp
+  require 'ruby_app'
   require 'ruby_app/mixins'
 
   class Log < ::Logger
     extend RubyApp::Mixins::ConfigurationMixin
     extend RubyApp::Mixins::DelegateMixin
+
+    class Formatter < ::Logger::Formatter
+
+      def call(severity, time, application, message)
+        return "#{severity} | #{time.strftime('%Y-%m-%d %H:%M:%S %Z')} | #{RubyApp::Session.exists? ? RubyApp::Session.session_id : '-'} | #{RubyApp::Session.exists? && RubyApp::Session.identity ? RubyApp::Session.identity.url : '-'} | #{message}\n"
+      end
+
+    end
 
     def duration(message)
       start = Time.now
@@ -69,6 +78,7 @@ module RubyApp
 
       def initialize(path)
         super(path)
+        self.formatter = RubyApp::Log::Formatter.new
       end
 
   end

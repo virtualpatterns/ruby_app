@@ -18,7 +18,7 @@ module RubyApp
       end
 
       route(RubyApp::Mixins::RouteMixin::GET, /\/quit/) do |method, path|
-        RubyApp::Log.debug("#{RubyApp::Session.session_id} GET  /quit")
+        RubyApp::Log.debug("GET  /quit")
         RubyApp::Session.quit!
         RubyApp::Response['Content-Type'] = 'text/html'
         RubyApp::Response.write(RubyApp::Elements::Pages::QuitPage.new.render(:html))
@@ -28,7 +28,7 @@ module RubyApp
         RubyApp::Response['Content-Type'] = RubyApp::Element.get_content_type(format)
         begin
           element = RubyApp::Element.get_element(element_id)
-          RubyApp::Log.duration("#{RubyApp::Session.session_id} GET  #{element.class} #{format}") do
+          RubyApp::Log.duration("GET  #{element.class} #{format}") do
             RubyApp::Response.write(element.render(format.to_sym))
           end
         rescue Exception => exception
@@ -39,7 +39,7 @@ module RubyApp
       route(RubyApp::Mixins::RouteMixin::GET, /\.([^\.\?]+)/) do |method, path, format|
         RubyApp::Response['Content-Type'] = RubyApp::Element.get_content_type(format)
         page = RubyApp::Session.pages.last
-        RubyApp::Log.duration("#{RubyApp::Session.session_id} GET  #{page.class} #{format}") do
+        RubyApp::Log.duration("GET  #{page.class} #{format}") do
           RubyApp::Response.write(page.render(format.to_sym))
         end
       end
@@ -52,7 +52,7 @@ module RubyApp
         RubyApp::Response['Content-Type'] = 'application/json'
         begin
           event = RubyApp::Element::Event.from_hash(RubyApp::Request.POST)
-          RubyApp::Log.duration("#{RubyApp::Session.session_id} POST #{event.class}") do
+          RubyApp::Log.duration("POST #{event.class}") do
             event.process!
             RubyApp::Response.write(Yajl::Encoder.new.encode(event.to_hash))
           end
