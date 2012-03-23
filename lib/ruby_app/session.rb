@@ -30,8 +30,11 @@ module RubyApp
       @data = {}
       @identity = nil
 
-      require 'ruby_app/elements/pages/default_page'
-      @pages.push(page || RubyApp::Elements::Pages::DefaultPage.new)
+      #require 'ruby_app/elements/pages/default_page'
+      #@pages.push(page || RubyApp::Elements::Pages::DefaultPage.new)
+
+      require 'ruby_app/elements/mobile/page'
+      @pages.push(page || RubyApp::Elements::Mobile::Page.new)
 
     end
 
