@@ -10,12 +10,12 @@ namespace :ruby_app do
 
   desc 'Create console'
   task :console do |task|
-    system("cd ./lib/ruby_app && clear && bundle exec ../../bin/ruby_app console")
+    system('cd ./lib/ruby_app && clear && bundle exec ../../bin/ruby_app console')
   end
 
   desc 'Run'
-  task :run do |task|
-    system("cd ./lib/ruby_app && clear && bundle exec ../../bin/ruby_app run")
+  task :run => ['ruby_app:cache:destroy'] do |task|
+    system('cd ./lib/ruby_app && clear && bundle exec ../../bin/ruby_app run')
   end
 
   desc 'Get version'
@@ -25,18 +25,19 @@ namespace :ruby_app do
 
   desc 'Push to master, release, and increment version'
   task :release do |task|
-      system "git push origin master && rake release"
+      system('git push origin master && rake release')
       version_file = File.join(RubyApp::ROOT, %w[version.rb])
       RubyApp::VERSION =~ /(\d+)\.(\d+)\.(\d+)/
-      system "sed 's|[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*|#{$1}.#{$2}.#{$3.to_i + 1}|g' < '#{version_file}' > '#{version_file}.out'; rm '#{version_file}'; mv '#{version_file}.out' '#{version_file}'"
-      system "git commit --all --message='Incrementing version'"
+      system("sed 's|[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*|#{$1}.#{$2}.#{$3.to_i + 1}|g' < '#{version_file}' > '#{version_file}.out'; rm '#{version_file}'; mv '#{version_file}.out' '#{version_file}'")
+      system('git commit --all --message=\'Incrementing version\'')
   end
 
   namespace :test do
 
     desc 'Run all tests'
-    task :all => ['test:specs',
-                  'test:features']
+    task :all => ['ruby_app:cache:destroy',
+                  'ruby_app:test:specs',
+                  'ruby_app:test:features']
 
     desc 'Run RSpec tests'
     task :specs, :file, :line do |task, arguments|
@@ -47,17 +48,32 @@ namespace :ruby_app do
           system("bundle exec rspec #{arguments.file} --format=documentation --colour")
         end
       else
-        system("bundle exec rspec spec/ --format=documentation --colour")
+        system('bundle exec rspec spec/ --format=documentation --colour')
       end
     end
 
     desc 'Run feature tests for all features or the given feature file'
     task :features, :file do |task, arguments|
       unless arguments.file
-        system("bundle exec cucumber --format pretty --tags ~@broken --require features")
+        system('bundle exec cucumber --format pretty --tags ~@broken --require features')
       else
         system("bundle exec cucumber --format pretty --tags ~@broken --require features '#{arguments.file}'")
       end
+    end
+
+  end
+
+  namespace :cache do
+
+    desc 'List all cached files'
+    task :list do
+      system('find . | grep \'\\.cache\'')
+    end
+
+    desc 'Remove all cached files'
+    task :destroy do
+      puts 'Removing cached files ...'
+      system('find . -name \'.cache\' | xargs rm -rv')
     end
 
   end

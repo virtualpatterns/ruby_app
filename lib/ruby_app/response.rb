@@ -9,6 +9,7 @@ module RubyApp
 
   class Response < ::Rack::Response
     extend RubyApp::Mixins::DelegateMixin
+    extend RubyApp::Mixins::ConfigurationMixin
 
     def rendered?(template)
       return @rendered.key?(template)
@@ -30,6 +31,29 @@ module RubyApp
 
     def clear_content(element)
       @content[element] = {}
+    end
+
+    def write_from_cache(element, format)
+      if RubyApp::Response.configuration.cache.formats.include?(format)
+        cache = element.cache(format)
+        if RubyApp::Response.configuration.cache.read? && File.exists?(cache)
+          RubyApp::Log.debug("#{RubyApp::Log.prefix(self, __method__)} READ  #{cache.inspect}")
+          self.write(File.read(cache))
+        else
+          content = element.render(format)
+          if RubyApp::Response.configuration.cache.write? && !File.exists?(cache)
+            FileUtils.mkdir_p(File.dirname(cache))
+            RubyApp::Log.debug("#{RubyApp::Log.prefix(self, __method__)} WRITE #{cache.inspect}")
+            File.open(cache, 'w') do |file|
+              file.write(content)
+              file.flush
+            end
+          end
+          self.write(content)
+        end
+      else
+        self.write(element.render(format))
+      end
     end
 
     def self.get

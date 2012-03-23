@@ -33,6 +33,11 @@ module RubyApp
         return (File.exists?(template) ? [template] : []).concat((!self.exclude_parent_template?(format) && self.superclass.respond_to?(:get_templates) ) ? self.superclass.get_templates(format) : [])
       end
 
+      def get_cache(format)
+        template = self.get_template(format)
+        return File.join(File.dirname(template), '.cache', File.basename(template)).gsub(/\.haml/, '')
+      end
+
     end
 
   end

@@ -10,6 +10,10 @@ module RubyApp
     module RenderMixin
       require 'ruby_app'
 
+      def cache(format)
+        return self.is_a?(Class) ? self.get_cache(format) : self.class.get_cache(format)
+      end
+
       def templates(format)
         return self.is_a?(Class) ? self.get_templates(format) : self.class.get_templates(format)
       end

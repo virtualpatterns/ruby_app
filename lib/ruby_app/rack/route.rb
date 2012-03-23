@@ -40,7 +40,8 @@ module RubyApp
         RubyApp::Response['Content-Type'] = RubyApp::Element.get_content_type(format)
         page = RubyApp::Session.pages.last
         RubyApp::Log.duration("GET  #{page.class} #{format}") do
-          RubyApp::Response.write(page.render(format.to_sym))
+          RubyApp::Response.write_from_cache(page, format.to_sym)
+          #RubyApp::Response.write(page.render(format.to_sym))
         end
       end
 

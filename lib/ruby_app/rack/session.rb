@@ -1,9 +1,9 @@
 module RubyApp
 
   module Rack
+    require 'ruby_app'
 
     class Session
-      require 'ruby_app'
 
       def initialize(application)
         @application = application
