@@ -15,20 +15,21 @@ namespace :_APPLICATION_DOWNCODE_ do
   end
 
   desc 'Run'
-  task :run do |task|
+  task :run => ['_APPLICATION_DOWNCODE_:cache:destroy'] do |task|
     system("clear; bundle exec ruby_app run")
   end
 
   namespace :cache do
 
-    desc 'Create element cache'
-    task :create do |task|
-      _APPLICATION_UPCODE_::Application.create_cache(File.join(File.dirname(__FILE__), %w[lib _APPLICATION_DOWNCODE_ elements pages]), File.join(File.dirname(__FILE__), %w[lib]))
+    desc 'List all cached files'
+    task :list do
+      system('find . | grep \'\\.cache\'')
     end
 
-    desc 'Delete element cache'
-    task :destroy do |task|
-      _APPLICATION_UPCODE_::Application.destroy_cache(File.join(File.dirname(__FILE__), %w[lib _APPLICATION_DOWNCODE_ elements]))
+    desc 'Remove all cached files'
+    task :destroy do
+      puts 'Removing cached files ...'
+      system('find . -name \'.cache\' | xargs rm -rv')
     end
 
   end
