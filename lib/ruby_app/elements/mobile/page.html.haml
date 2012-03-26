@@ -3,50 +3,13 @@
   #{__FILE__}
 %html{attributes}
   %head
-    %meta{:name => :viewport, :content => 'width=device-width, initial-scale=1'}
+    %meta{:name => :viewport,
+          :content => 'width=device-width, initial-scale=1'}
     %link{:rel => 'stylesheet',
           :href => 'http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.css'}
-    %link{:rel => 'stylesheet',
-          :href => "/#{RubyApp::Language.locale.code}/application.css"}
     %script{:src => 'http://code.jquery.com/jquery-1.7.1.min.js'}
     %script{:src => 'http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.js'}
-    %script{:src => "/#{RubyApp::Language.locale.code}/application.js"}
-    %title
-      = yield(:title) || self.translate.title
-    /
-      RubyApp::Session.data
-    %meta{:name => :session_id, :content => RubyApp::Session.session_id}
-    - RubyApp::Session.data.each do |name, value|
-      %meta{:name => name, :content => value}
-    /
-      RubyApp::Request.query
-    - RubyApp::Request.query.each do |name, value|
-      %meta{:name => name, :content => value}
-    /
-      RubyApp::Language
-    %meta{:name => :locale, :content => RubyApp::Language.locale.code}
 
   %body
     %div{'data-role' => 'page'}
-      %div{'data-role' => 'header'}
-        %h1
-          My Title
-      %div{'data-role' => 'content'}
-        %ul{'data-role' => 'listview',
-            'data-inset' => 'true',
-            'data-filter' => 'true'}
-          %li
-            %a{:href => '#'}
-              Acura
-          %li
-            %a{:href => '#'}
-              Audi
-          %li
-            %a{:href => '#'}
-              BMW
-          %li
-            %a{:href => '#'}
-              Cadillac
-          %li
-            %a{:href => '#'}
-              Ferrari
+      = yield :page
