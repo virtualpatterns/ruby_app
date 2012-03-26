@@ -37,31 +37,25 @@ module RubyApp
 
           self.init_haml_helpers unless @haml_buffer
 
-          begin
+          yield(self) if block_given?
 
-            yield(self) if block_given?
-
-            templates.each_with_index do |template, index|
-              content = Haml::Engine.new(File.read(template), :filename => template).render(self) do |*arguments|
-                if arguments.empty?
-                  index == 0 ? nil : RubyApp::Response.get_content(self, templates[index - 1])
+          templates.each_with_index do |template, index|
+            content = Haml::Engine.new(File.read(template), :filename => template).render(self) do |*arguments|
+              if arguments.empty?
+                index == 0 ? nil : RubyApp::Response.get_content(self, format, templates[index - 1])
+              else
+                _content = RubyApp::Response.get_content(self, format, arguments[0])
+                if self.block_is_haml?(_content)
+                  self.capture_haml(arguments, &_content)
                 else
-                  _content = RubyApp::Response.get_content(self, arguments[0])
-                  if self.block_is_haml?(_content)
-                    self.capture_haml(arguments, &_content)
-                  else
-                    _content
-                  end
+                  _content
                 end
               end
-              RubyApp::Response.content_for(self, template, content)
             end
-
-            return RubyApp::Response.get_content(self, templates.last)
-
-          ensure
-            RubyApp::Response.clear_content(self)
+            RubyApp::Response.content_for(self, format, template, content)
           end
+
+          return RubyApp::Response.get_content(self, format, templates.last)
 
         end
       end

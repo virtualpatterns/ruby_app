@@ -19,18 +19,14 @@ module RubyApp
       @rendered[template] = true
     end
 
-    def content_for(element, name, value = nil, &block)
+    def content_for(element, format, name, value = nil, &block)
       @content[element] ||= {}
       @content[element][name] = block_given? ? block : String.interpolate { value }
     end
 
-    def get_content(element, name)
+    def get_content(element, format, name)
       @content[element] ||= {}
       return @content[element][name]
-    end
-
-    def clear_content(element)
-      @content[element] = {}
     end
 
     def write_from_cache(element, format)

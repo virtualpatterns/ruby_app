@@ -1,6 +1,6 @@
-- self.content_for(:footer) do
+- self.content_for(:html, :footer) do
   /
     #{__FILE__}
   = @close.render(:html) do |element|
-    - element.content_for(:body, RubyApp::Elements::Dialogs::Base::BaseCloseDialog.translate.close.body)
+    - element.content_for(:html, :body, RubyApp::Elements::Dialogs::Base::BaseCloseDialog.translate.close.body)
 = yield

@@ -142,10 +142,6 @@ module RubyApp
       "id_#{object_id}"
     end
 
-    def self.get_content_type(format)
-      ( mime_type = MIME::Types.type_for(format)[0] ) ? mime_type.content_type : 'text/plain'
-    end
-
     def self.get_element(element_id)
       element_id =~ /(-?\d+)/
       ObjectSpace._id2ref($1.to_i)
