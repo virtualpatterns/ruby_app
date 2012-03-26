@@ -1,4 +1,4 @@
-/* /Users/fficnar/Dropbox/Projects/gems/ruby_app/lib/ruby_app/elements/base/base_page.css.haml */
+/* /Users/frank.ficnar/Dropbox/Projects/gems/ruby_app/lib/ruby_app/elements/base/base_page.css.haml */
 body > div.overlay {
   display: none;
   height: 100%;
@@ -24,7 +24,7 @@ body > div.wait {
     width: 48px; }
 body > ul.log {
   display: none; }
-/* /Users/fficnar/Dropbox/Projects/gems/ruby_app/lib/ruby_app/elements/pages/base/base_blank_page.css.haml */
+/* /Users/frank.ficnar/Dropbox/Projects/gems/ruby_app/lib/ruby_app/elements/pages/base/base_blank_page.css.haml */
 body > div.body > div.header {
   display: table;
   width: 100%; }

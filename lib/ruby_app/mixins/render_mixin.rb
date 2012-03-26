@@ -25,8 +25,8 @@ module RubyApp
         end
       end
 
-      def content_for(name, value = nil, &block)
-        return RubyApp::Response.content_for(self, name, value, &block)
+      def content_for(format, name, value = nil, &block)
+        return RubyApp::Response.content_for(self, format, name, value, &block)
       end
 
       def render(format)

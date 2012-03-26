@@ -1,4 +1,4 @@
-/* /Users/fficnar/Dropbox/Projects/gems/ruby_app/lib/ruby_app/elements/base/base_page.css.haml */
+/* /Users/frank.ficnar/Dropbox/Projects/gems/ruby_app/lib/ruby_app/elements/base/base_page.css.haml */
 body > div.overlay {
   display: none;
   height: 100%;
@@ -24,7 +24,7 @@ body > div.wait {
     width: 48px; }
 body > ul.log {
   display: none; }
-/* /Users/fficnar/Dropbox/Projects/gems/ruby_app/lib/ruby_app/elements/pages/base/base_blank_page.css.haml */
+/* /Users/frank.ficnar/Dropbox/Projects/gems/ruby_app/lib/ruby_app/elements/pages/base/base_blank_page.css.haml */
 body > div.body > div.header {
   display: table;
   width: 100%; }
@@ -37,11 +37,11 @@ body > div.body > div.header {
     width: 25%; }
 
 
-/* /Users/fficnar/Dropbox/Projects/gems/ruby_app/lib/ruby_app/elements/base/base_dialog.css.haml */
+/* /Users/frank.ficnar/Dropbox/Projects/gems/ruby_app/lib/ruby_app/elements/base/base_dialog.css.haml */
 body > div.overlay > div.dialog {
   position: absolute;
   width: 40%; }
-/* /Users/fficnar/Dropbox/Projects/gems/ruby_app/lib/ruby_app/elements/dialogs/base/base_close_dialog.css.haml */
+/* /Users/frank.ficnar/Dropbox/Projects/gems/ruby_app/lib/ruby_app/elements/dialogs/base/base_close_dialog.css.haml */
 body > div.overlay > div.dialog > div.footer {
   text-align: right;
   width: 100%; }

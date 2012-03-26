@@ -147,6 +147,10 @@ module RubyApp
       ObjectSpace._id2ref($1.to_i)
     end
 
+    def self.get_content_type(format)
+      ( mime_type = MIME::Types.type_for(format)[0] ) ? mime_type.content_type : 'text/plain'
+    end
+
     protected
 
       def on_event(event)
