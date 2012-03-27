@@ -33,8 +33,8 @@ module RubyApp
       #require 'ruby_app/elements/pages/default_page'
       #@pages.push(page || RubyApp::Elements::Pages::DefaultPage.new)
 
-      require 'ruby_app/elements/mobile/page'
-      @pages.push(page || RubyApp::Elements::Mobile::Page.new)
+      require 'ruby_app/elements/mobile/samples/document1'
+      @pages.push(page || RubyApp::Elements::Mobile::Samples::Document1.new)
 
     end
 
