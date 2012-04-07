@@ -1,0 +1,50 @@
+PATH
+  remote: .
+  specs:
+    RubyApp (0.2.8)
+      BlueCloth
+      chronic
+      chronic_duration
+      facets
+      fileutils
+      haml
+      json
+      mime-types
+      r18n-core
+      rack
+      ruby-event
+      ruby-openid
+      sass
+      term-ansicolor
+      yajl-ruby
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    BlueCloth (1.0.1)
+    chronic (0.6.7)
+    chronic_duration (0.9.6)
+      numerizer (~> 0.1.1)
+    facets (2.9.3)
+    fileutils (0.7)
+      rmagick (>= 2.13.1)
+    haml (3.1.4)
+    json (1.6.6)
+    mime-types (1.18)
+    numerizer (0.1.1)
+    r18n-core (0.4.14)
+    rack (1.4.1)
+    rake (0.9.2.2)
+    rmagick (2.13.1)
+    ruby-event (1.0.0)
+    ruby-openid (2.1.8)
+    sass (3.1.15)
+    term-ansicolor (1.0.7)
+    yajl-ruby (1.1.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  RubyApp!
+  rake
