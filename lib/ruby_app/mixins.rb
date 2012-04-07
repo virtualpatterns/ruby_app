@@ -1,3 +1,7 @@
+require 'ruby_app/mixins/array_extension'
+require 'ruby_app/mixins/class_extension'
+require 'ruby_app/mixins/string_extension'
+
 require 'ruby_app/mixins/configuration_mixin'
 require 'ruby_app/mixins/delegate_mixin'
 require 'ruby_app/mixins/hash_mixin'

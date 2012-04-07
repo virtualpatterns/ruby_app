@@ -1,0 +1,48 @@
+- require 'chronic'
+- self.content_for(:html, :page) do
+  /
+    #{__FILE__}
+  %div{'data-role' => 'header'}
+    = @back_button.render(:html)
+    %h1
+      Information
+  %div{'data-role' => 'content'}
+    %ul{'data-role' => 'listview'}
+      %li
+        %span
+          Version
+        %span.ui-li-aside
+          %code
+            = RubyApp::VERSION
+      %li
+        %span
+          Memory Usage
+        %span.ui-li-aside
+          %code
+            - memory = `ps -o rss= -p #{$$}`.to_i
+            = "#{memory} bytes"
+      %li
+        %span
+          Server Time
+        %span.ui-li-aside
+          %code
+            = RubyApp::Language.locale.strftime(Time.now, RubyApp::Application.configuration.format.date.long)
+      %li
+        %span
+          Client Time
+        %span.ui-li-aside
+          %code
+            = RubyApp::Language.locale.strftime(@now, RubyApp::Application.configuration.format.date.long)
+      %li
+        %span
+          Configuration
+        %span.ui-li-aside
+          %code
+            = ENV['RUBY_APP_CONFIGURATION'] || 'default'
+      %li
+        = @sessions_link.render(:html) do |element|
+          - element.content_for(:html, :link) do
+            %span
+              Sessions
+            %span.ui-li-count
+              = RubyApp::Session.sessions.length

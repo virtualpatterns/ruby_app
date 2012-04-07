@@ -28,5 +28,6 @@ map '/' do
   use RubyApp::Rack::Response
   use RubyApp::Rack::Language
   use RubyApp::Rack::Session
+  use RubyApp::Rack::Test
   run RubyApp::Rack::Route.new
 end

@@ -1,9 +1,0 @@
-/ 
-  #{__FILE__}
-%span.link{attributes}
-  - if self.current_page?
-    %span.current{:href => '', :page => self.page}
-      = yield(self.page) || self.page.translate.title
-  - else
-    %a.page{:href => '', :page => self.page}
-      = yield(self.page) || self.page.translate.title

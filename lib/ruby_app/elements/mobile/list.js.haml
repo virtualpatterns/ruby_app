@@ -1,0 +1,9 @@
+:plain
+  // #{__FILE__}
+  $(document).ready( function() {
+    $(document).on('tap', 'ul.list > li.item a.item', function(event) {
+      event.preventDefault();
+      RubyApp.queueEvent({_class:'RubyApp::Elements::Mobile::List::ClickedEvent', source:$(this).parents('ul.list').attr('id'), index:$(this).attr('index')});
+    });
+  });
+= yield

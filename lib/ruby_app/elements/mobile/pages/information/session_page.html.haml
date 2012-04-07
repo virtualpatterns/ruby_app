@@ -1,0 +1,35 @@
+- require 'chronic'
+- self.content_for(:html, :page) do
+  /
+    #{__FILE__}
+  %div{'data-role' => 'header'}
+    = @back_button.render(:html)
+    %h1
+      Session
+  %div{'data-role' => 'content'}
+    %ul{'data-role' => 'listview'}
+      %li
+        %span
+          ID
+        %span.ui-li-aside
+          %code
+            = @session.session_id
+      %li
+        %span
+          Class
+        %span.ui-li-aside
+          %code
+            = @session.class.short_name
+      %li
+        %span
+          Expires
+        %span.ui-li-aside
+          %code
+            = RubyApp::Language.locale.strftime(@session.expires, RubyApp::Application.configuration.format.date.long)
+      %li
+        = @documents_link.render(:html) do |element|
+          - element.content_for(:html, :link) do
+            %span
+              Documents
+            %span.ui-li-count
+              = @session.documents.length

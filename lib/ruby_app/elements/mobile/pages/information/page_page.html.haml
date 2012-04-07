@@ -1,0 +1,22 @@
+- require 'chronic'
+- self.content_for(:html, :page) do
+  /
+    #{__FILE__}
+  %div{'data-role' => 'header'}
+    = @back_button.render(:html)
+    %h1
+      Page
+  %div{'data-role' => 'content'}
+    %ul{'data-role' => 'listview'}
+      %li
+        %span
+          ID
+        %span.ui-li-aside
+          %code
+            = @page.element_id
+      %li
+        %span
+          Class
+        %span.ui-li-aside
+          %code
+            = @page.class.short_name

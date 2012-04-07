@@ -1,0 +1,9 @@
+:plain
+  // #{__FILE__}
+  $(document).ready( function() {
+    $(document).on('change', 'select[data-role="slider"]', function(event) {
+      event.preventDefault();
+      RubyApp.queueEvent({_class:'RubyApp::Elements::Mobile::Inputs::ToggleInput::ChangedEvent', source:$(this).attr('id'), value:$(this).val()});
+    });
+  });
+= yield

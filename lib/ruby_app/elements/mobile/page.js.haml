@@ -1,0 +1,14 @@
+:plain
+  // #{__FILE__}
+  $(document).ready( function() {
+    $(document).on('pageshow', 'div[data-role="page"]', function(event) {
+      RubyApp.queueEvent({_class:'RubyApp::Elements::Mobile::Page::ShownEvent', source:$(this).attr('id')});
+    });
+    $(document).on('pagebeforehide', 'div[data-role="page"]', function(event) {
+      RubyApp.queueEvent({_class:'RubyApp::Elements::Mobile::Page::BeforeHiddenEvent', source:$(this).attr('id')});
+    });
+    $(document).on('pagehide', 'div[data-role="page"]', function(event) {
+      RubyApp.queueEvent({_class:'RubyApp::Elements::Mobile::Page::HiddenEvent', source:$(this).attr('id')});
+    });
+  });
+= yield

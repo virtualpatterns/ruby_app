@@ -1,15 +1,12 @@
 module RubyApp
 
   module Exceptions
-    require 'ruby_app/exceptions/base/base_exception'
+    require 'ruby_app/exception'
 
-    class SessionInvalidException < RubyApp::Exceptions::Base::BaseException
-
-      attr_reader :session_id
+    class SessionInvalidException < RubyApp::Exception
 
       def initialize(session_id)
         super(RubyApp::Exceptions::SessionInvalidException.translate.message)
-        @session_id = session_id
       end
 
     end

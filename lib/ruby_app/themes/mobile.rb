@@ -21,7 +21,7 @@ RubyApp::Elements::Mail.template_path(:css, File.join(File.dirname(__FILE__), %w
 RubyApp::Elements::Markdown.template_path(:css, File.join(File.dirname(__FILE__), %w[mobile]))
 RubyApp::Elements::Navigation::Base::BaseBreadcrumbs.template_path(:html, File.join(File.dirname(__FILE__), %w[mobile navigation base]))
 RubyApp::Elements::Page.template_path(:css, File.join(File.dirname(__FILE__), %w[mobile]))
-RubyApp::Elements::Pages::Authentication::OpenId::AuthenticationPage.template_path(:css, File.join(File.dirname(__FILE__), %w[mobile pages authentication open_id]))
+RubyApp::Elements::Mobile::Documents::Authentication::OpenId::AuthenticationDocument.template_path(:css, File.join(File.dirname(__FILE__), %w[mobile pages authentications open_id]))
 RubyApp::Elements::Pages::Base::BaseBlankPage.template_path(:html, File.join(File.dirname(__FILE__), %w[mobile pages base]))
 RubyApp::Elements::Pages::Base::BaseBlankPage.template_path(:css, File.join(File.dirname(__FILE__), %w[mobile pages base]))
 RubyApp::Elements::Pages::BlankPage.template_path(:css, File.join(File.dirname(__FILE__), %w[mobile pages]))

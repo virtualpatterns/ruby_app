@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Frank G. Ficnar"]
   s.email       = ["frank.ficnar@gmail.com"]
   s.homepage    = ""
-  s.summary     = %q{A web application framework in Ruby}
-  s.description = %q{A web application framework in Ruby}
+  s.summary     = %q{A mobile web application framework in Ruby}
+  s.description = %q{A mobile web application framework in Ruby}
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
@@ -32,11 +32,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'term-ansicolor'
   s.add_dependency 'yajl-ruby'
 
-  s.add_development_dependency 'capybara'
-  s.add_development_dependency 'cucumber'
-  s.add_development_dependency 'launchy'
   s.add_development_dependency 'rake'
-  s.add_development_dependency 'rspec'
-  s.add_development_dependency 'rspec-mocks'
-  #s.add_development_dependency 'ya2yaml'
 end

@@ -2,6 +2,7 @@ require 'rubygems'
 require 'bundler/setup'
 
 require 'facets/string/interpolate'
+require 'mime/types'
 require 'rack'
 
 module RubyApp
@@ -11,12 +12,12 @@ module RubyApp
     extend RubyApp::Mixins::DelegateMixin
     extend RubyApp::Mixins::ConfigurationMixin
 
-    def rendered?(template)
-      return @rendered.key?(template)
+    def rendered?(element, template)
+      return element.is_a?(Class) && @templates.include?(template)
     end
 
-    def rendered(template)
-      @rendered[template] = true
+    def rendered(element, template)
+      @templates.push(template) if element.is_a?(Class) unless @templates.include?(template)
     end
 
     def content_for(element, format, name, value = nil, &block)
@@ -31,7 +32,7 @@ module RubyApp
 
     def write_from_cache(element, format)
       if RubyApp::Response.configuration.cache.formats.include?(format)
-        cache = element.cache(format)
+        cache = element.get_cache(format)
         if RubyApp::Response.configuration.cache.read? && File.exists?(cache)
           #RubyApp::Log.debug("#{RubyApp::Log.prefix(self, __method__)} READ  #{cache.inspect}")
           self.write(File.read(cache))
@@ -64,12 +65,16 @@ module RubyApp
       Thread.current[:_response] = nil
     end
 
+    def self.get_content_type(format)
+      return ( mime_type = MIME::Types.type_for(format)[0] ) ? mime_type.content_type : 'text/plain'
+    end
+
     private
 
       def initialize
         super
         self['Cache-Control'] = 'no-cache'
-        @rendered = {}
+        @templates = []
         @content = {}
       end
 

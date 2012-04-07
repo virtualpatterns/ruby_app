@@ -4,8 +4,8 @@ ruby_app:
     exception_event:
       message: "%1.  The page will refresh so you can try again."
   elements:
-    base:
-      base_page:
+    mobile:
+      document:
         _event_error_message: "An error occurred sending the event.  The page will refresh so you can try again."
     dialogs:
       base:
@@ -36,182 +36,18 @@ ruby_app:
       authentication:
         open_id:
           base:
-            base_authentication_page:
+            base_authentication_document:
               message: "Authenticating ..."
-          google_authentication_page:
+          google_authentication_document:
             title: "Google Authentication"
-          my_open_id_authentication_page:
+          my_open_id_authentication_document:
             title: "myOpenId Authentication"
-          yahoo_authentication_page:
+          yahoo_authentication_document:
             title: "Yahoo! Authentication"
-      base:
-        base_blank_page:
-          settings:
-            body: "Settings"
-      default_page:
-        content:
-          body: "Click [here](go_test) to go to the test pages.\n"
-        loaded: "Loaded at %1"
-        title: "Home"
-      quit_page:
-        title: "Quit"
-      settings_page:
-        content:
-          body: |
-              You are currently logged in as #{(RubyApp::Session.identity ? RubyApp::Session.identity.url : '(not logged in)')}
-
-              Load or reload the [Mobile](do_load_theme_mobile) theme.
-
-              [Refresh](do_reload_translations) the translation file(s).
-
-              [Quit](do_quit) the session.
-        title: Settings
-      test_pages:
-        button_test_page:
-          button:
-            body: "Click"
-          content:
-            body: "Click the button below to go to another page.\n"
-          title: "Button Test Page"
-        default_test_page:
-          content:
-            body: |
-                [`ButtonTestPage`](RubyApp::Elements::Pages::TestPages::ButtonTestPage) ... A page with a single, clickable button
-
-                [`DialogTestPage`](RubyApp::Elements::Pages::TestPages::DialogTestPage) ... A page with links to show a variety of dialogs (e.g. exception dialog, message dialog, month dialog, etc.)
-
-                [`InputTestPage`](RubyApp::Elements::Pages::TestPages::InputTestPage) ... A page with a variety of input controls (e.g. simple input, duration input, etc.)
-
-                [`LinkTestPage`](RubyApp::Elements::Pages::TestPages::LinkTestPage) ... A page with a single, clickable link
-
-                [`ListTestPage`](RubyApp::Elements::Pages::TestPages::ListTestPage) ... A page with a variety of lists (e.g. simple list, select list, etc.)
-
-                [`MarkdownTestPage`](RubyApp::Elements::Pages::TestPages::MarkdownTestPage) ... A page with markdown containing a single, clickable link
-
-                [`_TestPage`](RubyApp::Elements::Pages::TestPages::TestPage) ... A test page showing load, release, and trigger events.
-
-                ---
-
-                [`GoogleAuthenticationPage`](RubyApp::Elements::Pages::Authentication::OpenId::GoogleAuthenticationPage) ... re/authenticate using Google
-
-                [`MyOpenIdAuthenticationPage`](RubyApp::Elements::Pages::Authentication::OpenId::MyOpenIdAuthenticationPage) ... re/authenticate using myOpenId
-
-                [`YahooAuthenticationPage`](RubyApp::Elements::Pages::Authentication::OpenId::YahooAuthenticationPage) ... re/authenticate using Yahoo!
-          title: "Test Pages"
-        dialog_test_page:
-          acknowledgement_dialog:
-            message: "This will happen."
-            message_dialog:
-              message: "%1"
-              title: "You clicked ..."
-            title: "Acknowledgement Dialog"
-          confirmation_dialog:
-            message: "Are you sure?"
-            message_dialog:
-              message: "%1"
-              title: "You clicked ..."
-            title: "Confirmation Dialog"
-          content:
-            body: |
-                [`ConfirmationDialog`](do_confirmation_dialog) ... Ask for confirmation.
-
-                [`ExceptionDialog`](do_exception_dialog) ... Raise an exception and show the `class` and `message` properties.
-
-                [`_Exception`](do_unhandled_exception_dialog) ... Raise an unhandled exception.
-
-                [`MessageDialog`](do_message_dialog) ... Show a sample message dialog.
-
-                [`MonthDialog`](do_month_dialog) ... Show a calendar month dialog, hide it when a date is clicked, and then show the clicked date (the last date clicked was <span id='last_value'>(nothing)</span>).
-
-                [`AcknowledgementDialog`](do_acknowledgement_dialog) ... Expect acknowledgementment.
-
-                ---
-
-                [`ConfirmationDialog`](do_confirmation_dialog) ... Ask for confirmation.
-
-                [`ExceptionDialog`](do_exception_dialog) ... Raise an exception and show the `class` and `message` properties.
-
-                [`_Exception`](do_unhandled_exception_dialog) ... Raise an unhandled exception.
-
-                [`MessageDialog`](do_message_dialog) ... Show a sample message dialog.
-
-                [`MonthDialog`](do_month_dialog) ... Show a calendar month dialog, hide it when a date is clicked, and then show the clicked date (the last date clicked was <span id='last_value'>(nothing)</span>).
-
-                [`AcknowledgementDialog`](do_acknowledgement_dialog) ... Expect acknowledgementment.
-          exception: "Exception dialog"
-          message_dialog:
-            message:
-              message: "This is a Message Dialog"
-              title: "Message Dialog"
-          month_dialog:
-            message_dialog:
-              message: "%1"
-              title: "You clicked ..."
-            title: "Month Dialog"
-          title: "Dialog Test Page"
-        exception_test_page:
-          content:
-            body: "Rendering this page raises an exception.\n"
-          exception: "Exception page"
-          title: "Exception Test Page"
-        input_test_page:
-          content:
-            body: "Enter a value in the input fields below.  When changed a dialog will show the entered value.\n"
-          label:
-            duration_input: "DurationInput"
-            email_input: "EmailInput"
-            input: "Input"
-            multiline_input: "MultilineInput"
-            toggle_input: "ToggleInput"
-          message_dialog:
-            message:
-              message: "You input '%1' of type %2."
-              title: "Input Test"
-          title: "Input Test Page"
-        link_test_page:
-          content:
-            body: "Click the link below to go to another page.\n"
-          link:
-            body: Click
-          title: "Link Test Page"
-        linked_test_page:
-          content:
-            body: "This is the other page.\n"
-          title: "Linked Test Page"
-        list_test_page:
-          content:
-            body: "Click an item below.\n"
-          message_dialog:
-            message:
-              message: "You clicked '%1'."
-              title: "List Test"
-          title: "List Test Page"
-        markdown_test_page:
-          content:
-            body: "Click [here](go) to go to another page.\n"
-          link:
-            body: "Click"
-          title: "Markdown Test Page"
-        test_page:
-          content:
-            body: |
-                The list below will populate as the page is rendered (immediate), loaded (once fully loaded in the browser), triggered (once 2 seconds have elapsed), and unloaded (once another page is loaded).
-
-                The cookie value is '%1'.
-          label:
-            input: "Enter a new cookie value"
-          loaded: "Loaded at %1"
-          message_dialog:
-            message:
-              message: "The cookie value is '%1'."
-              title: "Cookie Test"
-          not_loaded: "(not loaded)"
-          not_triggered: "(not triggered)"
-          not_unloaded: "(not unloaded)"
-          rendered: "Rendered"
-          title: "Test Page"
-          triggered: "Triggered at %1"
-          unloaded: "Unloaded at %1"
   exceptions:
+    assert_failed_exception:
+      message: "The assertion %1 failed."
+    element_invalid_exception:
+      message: "The element is invalid or has been recycled"
     session_invalid_exception:
       message: "The session is invalid or has expired"

@@ -1,7 +1,0 @@
-- self.content_for(:html, :content) do
-  /
-    #{__FILE__}
-  = @markdown.render(:html) do |element|
-    - element.content_for(:html, :body, self.translate.content.body)
-  = @list.render(:html)
-  = @select.render(:html)

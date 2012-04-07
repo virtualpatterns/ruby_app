@@ -2,6 +2,10 @@ default:
   ruby_app:
     application:
       _class: "RubyApp::Application"
+      format:
+        date:
+          long: %b %d %H:%M %Z
+          short: %a %b %-d
     language:
       default: "en"
       paths:
@@ -13,23 +17,28 @@ default:
         formats:
           - :css
           - :js
-        read?: true
-        write?: true
+        read?: false
+        write?: false
     session:
       _class: "RubyApp::Session"
-      expires: 60
+      expires: 1200
       interval: 15
+      length: 4
+      test:
+        enabled: true
+        path: "#{RubyApp::ROOT}/tests"
     elements:
-      pages:
-        authentication:
-          open_id:
-            google_authentication_page:
-              attributes:
-                email: "http://schema.openid.net/contact/email"
-              identifier: "https://www.google.com/accounts/o8/id"
-            my_open_id_authentication_page:
-              identifier: "http://myopenid.com"
-            yahoo_authentication_page:
-              attributes:
-                email: "http://axschema.org/contact/email"
-              identifier: "https://www.yahoo.com"
+      mobile:
+        documents:
+          authentication:
+            open_id:
+              google_authentication_document:
+                attributes:
+                  email: "http://schema.openid.net/contact/email"
+                identifier: "https://www.google.com/accounts/o8/id"
+              my_open_id_authentication_document:
+                identifier: "http://myopenid.com"
+              yahoo_authentication_document:
+                attributes:
+                  email: "http://axschema.org/contact/email"
+                identifier: "https://www.yahoo.com"

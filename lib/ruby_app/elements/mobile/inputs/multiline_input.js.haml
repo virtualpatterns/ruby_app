@@ -1,0 +1,9 @@
+:plain
+  // #{__FILE__}
+  $(document).ready( function() {
+    $(document).on('change', 'textarea', function(event) {
+      event.preventDefault();
+      RubyApp.queueEvent({_class:'RubyApp::Elements::Mobile::Inputs::MultilineInput::ChangedEvent', source:$(this).attr('id'), value:$(this).val()});
+    });
+  });
+= yield

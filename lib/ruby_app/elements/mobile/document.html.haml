@@ -7,8 +7,16 @@
           :content => 'width=device-width, initial-scale=1'}
     %link{:rel => 'stylesheet',
           :href => 'http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.css'}
-    %script{:src => 'http://code.jquery.com/jquery-1.7.1.min.js'}
-    %script{:src => 'http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.js'}
-
+    %link{:rel => 'stylesheet',
+          :href => "/#{RubyApp::Language.locale.code}/document.css"}
+    %script{:src => 'http://code.jquery.com/jquery-1.7.1.js'}
+    %script{:src => 'http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.js'}
+    %script{:src => "/#{RubyApp::Language.locale.code}/document.js"}
+    %meta{:name => :session, :content => RubyApp::Session.session_id}
+    - RubyApp::Request.query.each do |name, value|
+      %meta{:name => name, :content => value}
+    %meta{:name => :locale, :content => RubyApp::Language.locale.code}
+    %meta{:name => :_event_error_message, :content => RubyApp::Elements::Mobile::Document.translate._event_error_message}
   %body
-    = yield :document
+    - self.pages.reverse.each do |page|
+      = page.render(:html)

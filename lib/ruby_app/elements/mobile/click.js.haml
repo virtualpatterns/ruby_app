@@ -1,0 +1,9 @@
+:plain
+  // #{__FILE__}
+  $(document).ready( function() {
+    $(document).on('tap', '.click', function(event) {
+      event.preventDefault();
+      RubyApp.queueEvent({_class:'RubyApp::Elements::Mobile::Click::ClickedEvent', source:$(this).attr('id')});
+    });
+  });
+= yield

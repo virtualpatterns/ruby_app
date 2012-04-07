@@ -1,0 +1,29 @@
+- require 'chronic'
+- self.content_for(:html, :page) do
+  /
+    #{__FILE__}
+  %div{'data-role' => 'header'}
+    = @back_button.render(:html)
+    %h1
+      Document
+  %div{'data-role' => 'content'}
+    %ul{'data-role' => 'listview'}
+      %li
+        %span
+          ID
+        %span.ui-li-aside
+          %code
+            = @document.element_id
+      %li
+        %span
+          Class
+        %span.ui-li-aside
+          %code
+            = @document.class.short_name
+      %li
+        = @pages_link.render(:html) do |element|
+          - element.content_for(:html, :link) do
+            %span
+              Pages
+            %span.ui-li-count
+              = @document.pages.length

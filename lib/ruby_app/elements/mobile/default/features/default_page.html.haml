@@ -1,0 +1,21 @@
+- self.content_for(:html, :page) do
+  /
+    #{__FILE__}
+  %div{'data-role' => 'header'}
+    = @back_button.render(:html)
+    %h1
+      Features
+  %div{'data-role' => 'content'}
+    %div{'data-role' => 'controlgroup'}
+      = @authentications_link.render(:html) do |element|
+        - element.content_for(:html, :link, 'Authentications')
+      = @buttons_link.render(:html) do |element|
+        - element.content_for(:html, :link, 'Buttons')
+      = @dialogs_link.render(:html) do |element|
+        - element.content_for(:html, :link, 'Dialogs')
+      = @inputs_link.render(:html) do |element|
+        - element.content_for(:html, :link, 'Inputs')
+      = @lists_link.render(:html) do |element|
+        - element.content_for(:html, :link, 'Lists')
+      = @trigger_link.render(:html) do |element|
+        - element.content_for(:html, :link, 'Trigger')

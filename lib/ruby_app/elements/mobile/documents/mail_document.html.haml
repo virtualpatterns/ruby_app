@@ -1,0 +1,9 @@
+!!! 5
+/
+  #{__FILE__}
+%html{attributes}
+  %head
+    %style{:type => 'text/css'}
+      = self.render(:css)
+  %body
+    = yield :document

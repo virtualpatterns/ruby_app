@@ -1,0 +1,14 @@
+- self.content_for(:html, :dialog) do
+  /
+    #{__FILE__}
+  %div{'data-role' => 'header'}
+    %h1
+      = @title
+  %div{'data-role' => 'content'}
+    %div.message
+      = @message
+    %div.buttons
+      = @yes_link.render(:html) do |element|
+        - element.content_for(:html, :link, 'Yes')
+      = @no_link.render(:html) do |element|
+        - element.content_for(:html, :link, 'No')

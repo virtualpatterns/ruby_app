@@ -28,6 +28,10 @@ module RubyApp
         return (@_template_path[format] || @_template_path[:all]).gsub(/\*/,format.to_s)
       end
 
+      def get_default_template
+        return File.join(File.dirname(__FILE__), %w[template_mixin.haml])
+      end
+
       def get_templates(format)
         template = self.get_template(format)
         return (File.exists?(template) ? [template] : []).concat((!self.exclude_parent_template?(format) && self.superclass.respond_to?(:get_templates) ) ? self.superclass.get_templates(format) : [])

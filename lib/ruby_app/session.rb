@@ -1,3 +1,7 @@
+require 'rubygems'
+require 'bundler/setup'
+
+require 'facets/string/interpolate'
 require 'securerandom'
 require 'thread'
 
@@ -19,44 +23,93 @@ module RubyApp
 
     end
 
-    attr_reader :session_id, :expires, :pages, :data
-    attr_accessor :identity
+    class Test
+      extend RubyApp::Mixins::ConfigurationMixin
 
-    def initialize(page = nil)
-      @session_id = RubyApp::Session.generate_session_id(self)
-      @expires = Time.now + RubyApp::Session.configuration.expires
-      @pages = []
-      @dialogs = []
-      @data = {}
-      @identity = nil
+      def initialize
+        @steps = []
+        @index = 0
+      end
 
-      #require 'ruby_app/elements/pages/default_page'
-      #@pages.push(page || RubyApp::Elements::Pages::DefaultPage.new)
+      def empty?
+        return @steps.empty?
+      end
 
-      require 'ruby_app/elements/mobile/samples/document1'
-      @pages.push(page || RubyApp::Elements::Mobile::Samples::Document1.new)
+      def load!(path)
+        path = File.join(String.interpolate { RubyApp::Session::Test.configuration.path }, "#{path}.rb")
+        Kernel.eval(File.read(path), self.send(:binding), path)
+      end
+
+      def step!(_class, name = "Step ##{@steps.length}", &block)
+        @steps.push({:_class => _class,
+                     :name  => name,
+                     :block => block})
+      end
+
+      def process?(event)
+        return RubyApp::Session::Test.configuration.enabled && @index < @steps.length && event.is_a?(@steps[@index]._class)
+      end
+
+      def process!(event)
+        begin
+          event.process!
+          unless self.empty?
+            if self.process?(event)
+              step = @steps[@index]
+              step.block.call(event) if step.block
+              @index += 1
+              if @index == @steps.length
+                RubyApp::Log.error('=' * 80)
+                RubyApp::Log.error("PASS")
+                RubyApp::Log.error('=' * 80)
+              end
+            end
+          end
+        rescue Exception => exception
+          unless self.empty?
+            RubyApp::Log.error('=' * 80)
+            RubyApp::Log.error("FAIL")
+            RubyApp::Log.error('=' * 80)
+            @index = @steps.length
+          end
+          raise
+        end
+      end
+
+      def reset!
+        @index = 0
+      end
 
     end
 
-    def show_dialog(event, dialog, &block)
+    attr_reader :session_id
+    attr_reader :expires
 
-      @dialogs.push(dialog)
+    attr_reader :documents
+    attr_reader :data
 
-      if block_given? and block.arity == 1
-        dialog.shown do |element, _event|
-          yield _event
-          _event.hide_dialog(element)
-        end
-      end
-      dialog.hidden do |element, _event|
-        if block_given? and block.arity == 2
-          yield _event, dialog.response
-        end
-        @dialogs.delete(dialog)
-      end
+    attr_reader :test
 
-      event.show_dialog(dialog)
+    attr_accessor :identity
 
+    def initialize(document = nil)
+      @session_id = RubyApp::Session.generate_session_id(self)
+      @expires = Time.now + RubyApp::Session.configuration.expires
+
+      @documents = []
+      @data = {}
+
+      @test = RubyApp::Session::Test.new
+
+      @identity = nil
+
+      require 'ruby_app/elements/mobile/default/default_document'
+      @documents.push(document || RubyApp::Elements::Mobile::Default::DefaultDocument.new)
+
+    end
+
+    def document
+      return @documents.last
     end
 
     def reset!
@@ -65,6 +118,10 @@ module RubyApp
 
     def expired?
       return @expires <= Time.now
+    end
+
+    def process!(event)
+      @test.process!(event)
     end
 
     def quit!
@@ -99,10 +156,10 @@ module RubyApp
     end
 
     def self.generate_session_id(session)
-      session_id = SecureRandom.hex
+      session_id = "id_#{SecureRandom.hex(RubyApp::Session.configuration.length)}"
       RubyApp::Session.lock_sessions do
         while RubyApp::Session.get_session(session_id)
-          session_id = SecureRandom.hex
+          session_id = "id_#{SecureRandom.hex(RubyApp::Session.configuration.length)}"
         end
         RubyApp::Session.sessions.store(session_id, session)
         return session_id
@@ -126,16 +183,12 @@ module RubyApp
         @@_thread = Thread.new do
           begin
             while true
-              #RubyApp::Log.duration(RubyApp::Log.prefix(self, __method__)) do
-                RubyApp::Session.sessions.values.each do |session|
-                  if session.expired?
-                    #RubyApp::Log.memory(RubyApp::Log.prefix(self, __method__)) do
-                      RubyApp::Log.debug("#{RubyApp::Log.prefix(self, __method__)} session.quit! #{session.session_id.inspect}")
-                      session.quit!
-                    #end
-                  end
+              RubyApp::Session.sessions.values.each do |session|
+                if session.expired?
+                  RubyApp::Log.debug("QUIT  #{session.session_id.inspect}")
+                  session.quit!
                 end
-              #end
+              end
               sleep(RubyApp::Session.configuration.interval)
             end
           rescue Exception => exception

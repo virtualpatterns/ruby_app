@@ -1,0 +1,9 @@
+:plain
+  // #{__FILE__}
+  $(document).ready( function() {
+    $(document).on('change', 'input', function(event) {
+      event.preventDefault();
+      RubyApp.queueEvent({_class:'RubyApp::Elements::Mobile::Input::ChangedEvent', source:$(this).attr('id'), value:$(this).val()});
+    });
+  });
+= yield

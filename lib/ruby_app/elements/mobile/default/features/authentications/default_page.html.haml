@@ -1,0 +1,17 @@
+- self.content_for(:html, :page) do
+  /
+    #{__FILE__}
+  %div{'data-role' => 'header'}
+    = @back_button.render(:html)
+    %h1
+      Authentications
+  %div{'data-role' => 'content'}
+    %div{:style => 'margin: 0px auto 15px auto; text-align: center; width: 50%;'}
+      You are currently logged in as #{RubyApp::Session.identity ? RubyApp::Session.identity.url : '(nil)'}
+    %div{'data-role' => 'controlgroup'}
+      = @google_authentication_link.render(:html) do |element|
+        - element.content_for(:html, :link, 'Google')
+      = @my_open_id_authentication_link.render(:html) do |element|
+        - element.content_for(:html, :link, 'My OpenID')
+      = @yahoo_authentication_link.render(:html) do |element|
+        - element.content_for(:html, :link, 'Yahoo!')
