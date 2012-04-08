@@ -24,10 +24,6 @@ module RubyApp
       self.params
     end
 
-    def quit?
-      self.path =~ /\/quit/
-    end
-
     def self.get
       Thread.current[:_request]
     end

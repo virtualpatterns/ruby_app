@@ -41,8 +41,11 @@ module RubyApp
       end
 
       def step!(_class, name = "Step ##{@steps.length}", &block)
+        caller = Kernel.caller.first.split(':')
         @steps.push({:_class => _class,
                      :name  => name,
+                     :file => caller[0],
+                     :line => caller[1].to_i,
                      :block => block})
       end
 
@@ -56,20 +59,19 @@ module RubyApp
           unless self.empty?
             if self.process?(event)
               step = @steps[@index]
-              step.block.call(event) if step.block
+              RubyApp::Log.duration("STEP   #{step.name} #{step.file}:#{step.line}") do
+                step.block.call(event) if step.block
+              end
               @index += 1
               if @index == @steps.length
-                RubyApp::Log.error('=' * 80)
-                RubyApp::Log.error("PASS")
-                RubyApp::Log.error('=' * 80)
+                RubyApp::Log.debug("STEP   Completed #{@steps.length} steps")
               end
             end
           end
         rescue Exception => exception
           unless self.empty?
-            RubyApp::Log.error('=' * 80)
-            RubyApp::Log.error("FAIL")
-            RubyApp::Log.error('=' * 80)
+            step = @steps[@index]
+            RubyApp::Log.error("STEP   Exception occurred at or before #{step.name} #{step.file}:#{step.line}")
             @index = @steps.length
           end
           raise

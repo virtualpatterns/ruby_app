@@ -39,6 +39,13 @@
         %span.ui-li-aside
           %code
             = ENV['RUBY_APP_CONFIGURATION'] || 'default'
+      -#%li
+      -#  = @tests_link.render(:html) do |element|
+      -#    - element.content_for(:html, :link) do
+      -#      %span
+      -#        Tests
+      -#      %span.ui-li-count
+      -#        = RubyApp::Application.tests.length
       %li
         = @sessions_link.render(:html) do |element|
           - element.content_for(:html, :link) do

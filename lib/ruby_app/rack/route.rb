@@ -19,7 +19,7 @@ module RubyApp
 
       route(RubyApp::Mixins::RouteMixin::GET, /\/quit/) do |method, path|
         begin
-          RubyApp::Log.duration("GET   /quit") do
+          RubyApp::Log.duration("GET    /quit") do
             RubyApp::Session.quit!
             unless RubyApp::Request.query['go']
               RubyApp::Response['Content-Type'] = 'text/html'
@@ -37,7 +37,7 @@ module RubyApp
       route(RubyApp::Mixins::RouteMixin::GET, /\/elements\/([^\.]+)\.([^\.\?]+)/) do |method, path, element_id, format|
         begin
           element = RubyApp::Element.get_element(element_id)
-          RubyApp::Log.duration("GET   #{element.class} #{format}") do
+          RubyApp::Log.duration("GET    #{element.class} #{format}") do
             RubyApp::Response['Content-Type'] = RubyApp::Response.get_content_type(format)
             RubyApp::Response.write_from_cache(element, format.to_sym)
             #RubyApp::Response.write(element.render(format.to_sym))
@@ -51,7 +51,7 @@ module RubyApp
       route(RubyApp::Mixins::RouteMixin::GET, /\.([^\.\?]+)/) do |method, path, format|
         begin
           document = RubyApp::Session.document
-          RubyApp::Log.duration("GET   #{document.class} #{format}") do
+          RubyApp::Log.duration("GET    #{document.class} #{format}") do
             RubyApp::Response['Content-Type'] = RubyApp::Response.get_content_type(format)
             RubyApp::Response.write_from_cache(document, format.to_sym)
             #RubyApp::Response.write(document.render(format.to_sym))
@@ -74,7 +74,7 @@ module RubyApp
           #  end
           #end
           event = RubyApp::Element::Event.from_hash(RubyApp::Request.POST)
-          RubyApp::Log.duration("POST  #{event.class}") do
+          RubyApp::Log.duration("POST   #{event.class}") do
             RubyApp::Session.process!(event)
             RubyApp::Response['Content-Type'] = 'application/json'
             RubyApp::Response.write(Yajl::Encoder.new.encode(event.to_hash))

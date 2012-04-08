@@ -27,6 +27,15 @@
           %code
             = RubyApp::Language.locale.strftime(@session.expires, RubyApp::Application.configuration.format.date.long)
       %li
+        %span
+          Identity URL
+        %span.ui-li-aside
+          %code
+            - if @session.identity
+              = @session.identity.url
+            - else
+              (nil)
+      %li
         = @documents_link.render(:html) do |element|
           - element.content_for(:html, :link) do
             %span

@@ -12,11 +12,14 @@ module RubyApp
       def call(environment)
         RubyApp::Request.create!(environment)
         begin
-          #environment.each do |name, value|
+          #RubyApp::Request.environment.each do |name, value|
           #  RubyApp::Log.debug("#{RubyApp::Log.prefix(self, __method__)} environment[#{name.inspect}]=#{value.inspect}")
           #end
           #RubyApp::Log.debug("#{RubyApp::Log.prefix(self, __method__)} RubyApp::Request.request_method=#{RubyApp::Request.request_method.inspect}")
           #RubyApp::Log.debug("#{RubyApp::Log.prefix(self, __method__)} RubyApp::Request.path=#{RubyApp::Request.path.inspect}")
+          #RubyApp::Request.query.each do |name, value|
+          #  RubyApp::Log.debug("#{RubyApp::Log.prefix(self, __method__)} RubyApp::Request.query[#{name.inspect}]=#{value.inspect}")
+          #end
           return @application.call(environment)
         ensure
           RubyApp::Request.destroy!

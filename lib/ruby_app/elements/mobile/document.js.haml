@@ -6,7 +6,7 @@
       event.session = RubyApp.getData('session', null);
       $(window).queue( function() {
         RubyApp.log('RubyApp.queueEvent(...) DEQUEUE event.class=' + event._class);
-        request = $.ajax({type:'POST', url:'/' + RubyApp.getData('locale', 'en') + '/', data:event});
+        request = $.ajax({type:'POST', url:location.href, data:event});
         request
           .success( function(event) {
             $.each(event.statements, function(index, statement) {

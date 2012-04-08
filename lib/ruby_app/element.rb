@@ -250,12 +250,7 @@ module RubyApp
       end
 
       def on_asserted(event)
-        if event.value
-          RubyApp::Log.debug("TRUE  #{event.name}")
-        else
-          RubyApp::Log.debug("FALSE #{event.name}")
-          raise RubyApp::Exceptions::AssertFailedException.new(event.name)
-        end
+        raise RubyApp::Exceptions::AssertFailedException.new(event.name) unless event.value
         asserted(event)
       end
 
