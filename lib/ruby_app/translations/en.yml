@@ -48,6 +48,6 @@ ruby_app:
     assert_failed_exception:
       message: "The assertion %1 failed."
     element_invalid_exception:
-      message: "The element is invalid or has been recycled"
+      message: "The element id %1 is invalid or has been recycled"
     session_invalid_exception:
-      message: "The session is invalid or has expired"
+      message: "The session id %1 is invalid or has expired"

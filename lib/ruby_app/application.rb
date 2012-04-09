@@ -4,7 +4,10 @@ require 'bundler/setup'
 require 'fileutils'
 
 module RubyApp
+  require 'ruby_app/configuration'
+  require 'ruby_app/log'
   require 'ruby_app/mixins'
+  require 'ruby_app/version'
 
   class Application
     extend RubyApp::Mixins::ConfigurationMixin

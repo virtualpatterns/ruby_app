@@ -34,12 +34,12 @@ namespace :ruby_app do
 
   namespace :test do
 
-    desc 'Run all tests'
+    desc 'Run all steps'
     task :all => ['ruby_app:cache:destroy',
                   'ruby_app:test:specs',
                   'ruby_app:test:features']
 
-    desc 'Run RSpec tests'
+    desc 'Run RSpec steps'
     task :specs, :file, :line do |task, arguments|
       if arguments.file
         if arguments.line
@@ -52,7 +52,7 @@ namespace :ruby_app do
       end
     end
 
-    desc 'Run feature tests for all features or the given feature file'
+    desc 'Run feature steps for all features or the given feature file'
     task :features, :file do |task, arguments|
       unless arguments.file
         system('bundle exec cucumber --format pretty --tags ~@broken --require features')

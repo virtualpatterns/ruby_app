@@ -29,13 +29,13 @@ module RubyApp
                 @google_authentication_link = RubyApp::Elements::Mobile::Button.new
                 @google_authentication_link.clicked do |element, event|
                   RubyApp::Session.documents.push(RubyApp::Elements::Mobile::Documents::Authentication::OpenId::GoogleAuthenticationDocument.new)
-                  event.refresh
+                  event.refresh_browser
                 end
 
                 @yahoo_authentication_link = RubyApp::Elements::Mobile::Button.new
                 @yahoo_authentication_link.clicked do |element, event|
                   RubyApp::Session.documents.push(RubyApp::Elements::Mobile::Documents::Authentication::OpenId::YahooAuthenticationDocument.new)
-                  event.refresh
+                  event.refresh_browser
                 end
 
               end

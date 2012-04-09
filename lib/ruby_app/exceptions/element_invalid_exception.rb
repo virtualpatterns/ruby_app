@@ -6,7 +6,7 @@ module RubyApp
     class ElementInvalidException < RubyApp::Exception
 
       def initialize(element_id)
-        super(RubyApp::Exceptions::ElementInvalidException.translate.message)
+        super(RubyApp::Exceptions::ElementInvalidException.translate.message(element_id))
       end
 
     end

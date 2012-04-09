@@ -4,7 +4,7 @@ module RubyApp
 
     module TemplateMixin
 
-      def template_name
+      def get_template_name
         name = self.to_s.split('::').last
         name.gsub!(/([A-Z]+)([A-Z][a-z])/,'\1_\2')
         name.gsub!(/([a-z\d])([A-Z])/,'\1_\2')
@@ -13,7 +13,7 @@ module RubyApp
       end
 
       def template_path(format, path)
-        (@_template_path ||= {})[format] = File.directory?(path) ? "#{File.join(path, self.template_name)}.*.haml" : path
+        (@_template_path ||= {})[format] = File.directory?(path) ? "#{File.join(path, self.get_template_name)}.*.haml" : path
       end
 
       def exclude_parent_template?(format)

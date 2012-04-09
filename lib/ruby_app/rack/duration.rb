@@ -10,7 +10,7 @@ module RubyApp
       end
 
       def call(environment)
-        RubyApp::Log.duration(RubyApp::Log.prefix(self, __method__)) do
+        RubyApp::Log.duration(RubyApp::Log::DEBUG, RubyApp::Log.prefix(self, __method__)) do
           return @application.call(environment)
         end
       end

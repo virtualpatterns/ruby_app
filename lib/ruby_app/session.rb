@@ -6,6 +6,7 @@ require 'securerandom'
 require 'thread'
 
 module RubyApp
+  require 'ruby_app/log'
   require 'ruby_app/mixins'
 
   class Session
@@ -23,74 +24,11 @@ module RubyApp
 
     end
 
-    class Test
-      extend RubyApp::Mixins::ConfigurationMixin
-
-      def initialize
-        @steps = []
-        @index = 0
-      end
-
-      def empty?
-        return @steps.empty?
-      end
-
-      def load!(path)
-        path = File.join(String.interpolate { RubyApp::Session::Test.configuration.path }, "#{path}.rb")
-        Kernel.eval(File.read(path), self.send(:binding), path)
-      end
-
-      def step!(_class, name = "Step ##{@steps.length}", &block)
-        caller = Kernel.caller.first.split(':')
-        @steps.push({:_class => _class,
-                     :name  => name,
-                     :file => caller[0],
-                     :line => caller[1].to_i,
-                     :block => block})
-      end
-
-      def process?(event)
-        return RubyApp::Session::Test.configuration.enabled && @index < @steps.length && event.is_a?(@steps[@index]._class)
-      end
-
-      def process!(event)
-        begin
-          event.process!
-          unless self.empty?
-            if self.process?(event)
-              step = @steps[@index]
-              RubyApp::Log.duration("STEP   #{step.name} #{step.file}:#{step.line}") do
-                step.block.call(event) if step.block
-              end
-              @index += 1
-              if @index == @steps.length
-                RubyApp::Log.debug("STEP   Completed #{@steps.length} steps")
-              end
-            end
-          end
-        rescue Exception => exception
-          unless self.empty?
-            step = @steps[@index]
-            RubyApp::Log.error("STEP   Exception occurred at or before #{step.name} #{step.file}:#{step.line}")
-            @index = @steps.length
-          end
-          raise
-        end
-      end
-
-      def reset!
-        @index = 0
-      end
-
-    end
-
     attr_reader :session_id
     attr_reader :expires
 
     attr_reader :documents
     attr_reader :data
-
-    attr_reader :test
 
     attr_accessor :identity
 
@@ -101,9 +39,10 @@ module RubyApp
       @documents = []
       @data = {}
 
-      @test = RubyApp::Session::Test.new
-
       @identity = nil
+
+      @steps = []
+      @steps_index = 0
 
       require 'ruby_app/elements/mobile/default/default_document'
       @documents.push(document || RubyApp::Elements::Mobile::Default::DefaultDocument.new)
@@ -114,7 +53,7 @@ module RubyApp
       return @documents.last
     end
 
-    def reset!
+    def reset_expiry!
       @expires = Time.now + RubyApp::Session.configuration.expires
     end
 
@@ -122,14 +61,55 @@ module RubyApp
       return @expires <= Time.now
     end
 
-    def process!(event)
-      @test.process!(event)
-    end
-
     def quit!
       RubyApp::Session.lock_sessions do
         RubyApp::Session.sessions.delete(self.session_id)
       end
+    end
+
+    def load_steps!(path)
+      path = File.join(String.interpolate { RubyApp::Session::configuration.steps.path }, "#{path}.rb")
+      #RubyApp::Log.duration(RubyApp::Log::DEBUG, "#{RubyApp::Log.prefix(self, __method__)} path=#{path.inspect}") do
+        Kernel.eval(File.read(path), self.send(:binding), path)
+      #end
+    end
+
+    def add_step!(_class, name = "Step ##{@steps.length}", &block)
+      caller = Kernel.caller.first.split(':')
+      @steps.push({:_class => _class,
+                   :name  => name,
+                   :file => caller[0],
+                   :line => caller[1].to_i,
+                   :block => block})
+    end
+
+    def process_event!(event)
+
+      event.process!
+
+      if RubyApp::Session.configuration.steps.enabled
+        step = @steps[@steps_index]
+        if step && event.is_a?(step._class)
+          begin
+            RubyApp::Log.duration(RubyApp::Log::INFO, "STEP   #{step.name} #{step.file}:#{step.line}") do
+              step.block.call(event)
+            end
+            @steps_index += 1
+            if @steps_index == @steps.length
+              RubyApp::Log.info("STEP   Completed #{@steps.length} steps")
+            end
+          rescue Exception => exception
+            RubyApp::Log.info("STEP   Exception occurred at #{step.name} #{step.file}:#{step.line}")
+            @steps_index = @steps.length
+            raise
+          end
+        end
+      end
+
+    end
+
+    def reset_steps!
+      @steps_index = 0
     end
 
     def self.sessions
@@ -146,7 +126,7 @@ module RubyApp
       session = RubyApp::Session.sessions[session_id]
       if session
         unless session.expired?
-          session.reset!
+          session.reset_expiry!
           return session
         else
           session.quit!
@@ -172,8 +152,13 @@ module RubyApp
       Thread.current[:_session]
     end
 
-    def self.load!(session_id = nil)
-      Thread.current[:_session] = RubyApp::Session.get_session(session_id) || Kernel.eval(RubyApp::Session.configuration._class).new
+    def self.load!(session_id = nil, steps_path = nil)
+      session = RubyApp::Session.get_session(session_id)
+      unless session
+        session = Kernel.eval(RubyApp::Session.configuration._class).new
+        session.load_steps!(steps_path) if steps_path
+      end
+      Thread.current[:_session] = session
     end
 
     def self.unload!
@@ -194,7 +179,7 @@ module RubyApp
               sleep(RubyApp::Session.configuration.interval)
             end
           rescue Exception => exception
-            RubyApp::Log.exception(exception)
+            RubyApp::Log.exception(RubyApp::Log::ERROR, exception)
           end
         end
 
@@ -202,7 +187,7 @@ module RubyApp
           begin
             RubyApp::Session.stop_thread!
           rescue Exception => exception
-            RubyApp::Log.exception(exception)
+            RubyApp::Log.exception(RubyApp::Log::ERROR, exception)
           end
         end
 

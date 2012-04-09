@@ -27,7 +27,7 @@ module RubyApp
             begin
               yield
             rescue Exception => exception
-              RubyApp::Log.exception(exception)
+              RubyApp::Log.exception(RubyApp::Log::ERROR, exception)
               self.show(event, RubyApp::Elements::Mobile::Dialogs::ExceptionDialog.new(exception), options)
             end
           end

@@ -53,12 +53,12 @@ module RubyApp
         self.source.send(:on_event, self)
       end
 
-      def refresh
-        self.execute("RubyApp.refresh();")
+      def refresh_browser
+        self.execute("RubyApp.refreshBrowser();")
       end
 
-      def confirm_refresh(message)
-        self.execute("RubyApp.confirmRefresh(#{message.to_json});")
+      def confirm_refresh_browser(message)
+        self.execute("RubyApp.confirmRefreshBrowser(#{message.to_json});")
       end
 
       def show_page(page, options = {})
@@ -186,15 +186,7 @@ module RubyApp
 
     end
 
-    class TestedEvent < RubyApp::Element::Event
-
-      def initialize(data)
-        super(data)
-      end
-
-    end
-
-    class AssertedEvent < RubyApp::Element::TestedEvent
+    class AssertedEvent < RubyApp::Element::Event
 
       attr_reader :name
       attr_reader :value
@@ -211,7 +203,7 @@ module RubyApp
 
       def initialize(exception)
         super()
-        self.confirm_refresh(RubyApp::Element::ExceptionEvent.translate.message(exception.message))
+        self.confirm_refresh_browser(RubyApp::Element::ExceptionEvent.translate.message(exception.message))
       end
 
     end

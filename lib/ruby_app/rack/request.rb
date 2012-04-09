@@ -13,7 +13,7 @@ module RubyApp
         RubyApp::Request.create!(environment)
         begin
           #RubyApp::Request.environment.each do |name, value|
-          #  RubyApp::Log.debug("#{RubyApp::Log.prefix(self, __method__)} environment[#{name.inspect}]=#{value.inspect}")
+          #  RubyApp::Log.debug("#{RubyApp::Log.prefix(self, __method__)} RubyApp::Request.environment[#{name.inspect}]=#{value.inspect}")
           #end
           #RubyApp::Log.debug("#{RubyApp::Log.prefix(self, __method__)} RubyApp::Request.request_method=#{RubyApp::Request.request_method.inspect}")
           #RubyApp::Log.debug("#{RubyApp::Log.prefix(self, __method__)} RubyApp::Request.path=#{RubyApp::Request.path.inspect}")

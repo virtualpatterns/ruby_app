@@ -22,34 +22,34 @@ module RubyApp
 
     end
 
-    def duration(message)
+    def duration(severity, message)
       start = Time.now
       begin
-        return yield if block_given?
+        return yield
       ensure
-        self.debug("#{message} #{Time.now - start}s")
+        self.log(severity, "#{message} #{Time.now - start}s")
       end
     end
 
-    def memory(message)
+    def memory(severity, message)
       begin
-        return yield if block_given?
+        return yield
       ensure
         GC.start
         count = ObjectSpace.each_object { |item| }
-        self.debug("#{message}  count=#{count}")
-        self.debug("#{message} memory=#{`ps -o rss= -p #{$$}`.to_i}")
+        self.log(severity, "#{message}  count=#{count}")
+        self.log(severity, "#{message} memory=#{`ps -o rss= -p #{$$}`.to_i}")
       end
     end
 
-    def exception(exception)
-      self.error('-' * 80)
-      self.error("exception=#{exception.class.inspect} #{exception.message}")
-      self.error('-' * 80)
+    def exception(severity, exception)
+      self.log(severity, '-' * 80)
+      self.log(severity, "exception=#{exception.class.inspect} #{exception.message}")
+      self.log(severity, '-' * 80)
       exception.backtrace.each do |line|
-        self.error(line)
+        self.log(severity, line)
       end
-      self.error('-' * 80)
+      self.log(severity, '-' * 80)
     end
 
     def self.prefix(object, method)
