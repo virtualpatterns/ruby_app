@@ -32,6 +32,12 @@ module RubyApp
                   event.refresh_browser
                 end
 
+                @my_open_id_authentication_link = RubyApp::Elements::Mobile::Button.new
+                @my_open_id_authentication_link.clicked do |element, event|
+                  RubyApp::Session.documents.push(RubyApp::Elements::Mobile::Documents::Authentication::OpenId::MyOpenIdAuthenticationDocument.new)
+                  event.refresh_browser
+                end
+
                 @yahoo_authentication_link = RubyApp::Elements::Mobile::Button.new
                 @yahoo_authentication_link.clicked do |element, event|
                   RubyApp::Session.documents.push(RubyApp::Elements::Mobile::Documents::Authentication::OpenId::YahooAuthenticationDocument.new)

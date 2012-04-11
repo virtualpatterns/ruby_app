@@ -8,8 +8,8 @@ module _APPLICATION_UPCODE_
   class Session < RubyApp::Session
 
     def initialize
-      require '_APPLICATION_DOWNCODE_/elements/pages/default_page'
-      super(_APPLICATION_UPCODE_::Elements::Pages::DefaultPage.new)
+      require '_APPLICATION_DOWNCODE_/elements/documents/default_document'
+      super(_APPLICATION_UPCODE_::Elements::Documents::DefaultDocument.new)
     end
 
   end

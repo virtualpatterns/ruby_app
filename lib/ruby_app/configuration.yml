@@ -4,8 +4,8 @@ default:
       _class: "RubyApp::Application"
       format:
         date:
-          long: %b %d %H:%M %Z
-          short: %a %b %-d
+          long: "%b %d %H:%M %Z"
+          short: "%a %b %-d"
     language:
       default: "en"
       paths:
@@ -17,16 +17,16 @@ default:
         formats:
           - :css
           - :js
-        read?: false
-        write?: false
+        read?: true
+        write?: true
     session:
       _class: "RubyApp::Session"
       expires: 1200
       interval: 15
       length: 4
-      steps:
+      scripts:
         enabled: true
-        path: "#{RubyApp::ROOT}/steps"
+        path: "#{RubyApp::ROOT}/scripts"
     elements:
       mobile:
         documents:

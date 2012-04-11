@@ -1,4 +1,4 @@
-load_steps! 'common/features'
+load_script! 'common/features'
 
 add_step! (RubyApp::Elements::Mobile::Page::ShownEvent) { |event| event.assert_exists_link('Buttons') }
 add_step! (RubyApp::Element::AssertedEvent)             { |event| event.tap_link('Buttons') }

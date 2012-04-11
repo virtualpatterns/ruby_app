@@ -1,0 +1,10 @@
+- require 'chronic'
+- self.content_for(:html, :page) do
+  /
+    #{__FILE__}
+  %div{'data-role' => 'header'}
+    = @back_button.render(:html)
+    %h1
+      Scripts
+  %div{'data-role' => 'content'}
+    = @scripts_list.render(:html)

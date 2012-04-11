@@ -1,9 +1,3 @@
-- self.rendered?(__FILE__) do
-  :sass
-    div.welcome
-      border: 6px solid #ffffff
-      margin: 10px auto
-      padding-left: 15px
-      padding-right: 15px
-      width: 50%
+= RubyApp::Elements::Mobile::Navigation::NavigationLink.render(:css)
+= RubyApp::Elements::Mobile::Pages::InformationPage.render(:css)
 = yield

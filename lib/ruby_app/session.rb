@@ -67,18 +67,15 @@ module RubyApp
       end
     end
 
-    def load_steps!(path)
-      path = File.join(String.interpolate { RubyApp::Session::configuration.steps.path }, "#{path}.rb")
-      #RubyApp::Log.duration(RubyApp::Log::DEBUG, "#{RubyApp::Log.prefix(self, __method__)} path=#{path.inspect}") do
-        Kernel.eval(File.read(path), self.send(:binding), path)
-      #end
+    def load_script!(path)
+      _path = File.join(String.interpolate { RubyApp::Session.configuration.scripts.path }, "#{path}.rb")
+      Kernel.eval(File.read(_path), self.send(:binding), _path)
     end
 
-    def add_step!(_class, name = "Step ##{@steps.length}", &block)
+    def add_step!(_class, &block)
       caller = Kernel.caller.first.split(':')
       @steps.push({:_class => _class,
-                   :name  => name,
-                   :file => caller[0],
+                   :file => caller[0].gsub(String.interpolate { RubyApp::Session.configuration.scripts.path }, '').gsub(/^\//, ''),
                    :line => caller[1].to_i,
                    :block => block})
     end
@@ -87,19 +84,21 @@ module RubyApp
 
       event.process!
 
-      if RubyApp::Session.configuration.steps.enabled
+      if RubyApp::Session.configuration.scripts.enabled
         step = @steps[@steps_index]
-        if step && event.is_a?(step._class)
+        if step
           begin
-            RubyApp::Log.duration(RubyApp::Log::INFO, "STEP   #{step.name} #{step.file}:#{step.line}") do
-              step.block.call(event)
-            end
-            @steps_index += 1
-            if @steps_index == @steps.length
-              RubyApp::Log.info("STEP   Completed #{@steps.length} steps")
+            if event.is_a?(step._class)
+              @steps_index += 1
+              RubyApp::Log.duration(RubyApp::Log::INFO, "STEP   #{step.file}:#{step.line}") do
+                step.block.call(event)
+              end
+              if @steps_index == @steps.length
+                RubyApp::Log.info("STEP   Completed #{@steps.length} steps")
+              end
             end
           rescue Exception => exception
-            RubyApp::Log.info("STEP   Exception occurred at #{step.name} #{step.file}:#{step.line}")
+            RubyApp::Log.info("STEP   Exception occurred at #{step.file}:#{step.line}")
             @steps_index = @steps.length
             raise
           end
@@ -108,7 +107,7 @@ module RubyApp
 
     end
 
-    def reset_steps!
+    def reset_script!
       @steps_index = 0
     end
 
@@ -152,11 +151,11 @@ module RubyApp
       Thread.current[:_session]
     end
 
-    def self.load!(session_id = nil, steps_path = nil)
+    def self.load!(session_id = nil, script_path = nil)
       session = RubyApp::Session.get_session(session_id)
       unless session
         session = Kernel.eval(RubyApp::Session.configuration._class).new
-        session.load_steps!(steps_path) if steps_path
+        session.load_script!(script_path) if script_path
       end
       Thread.current[:_session] = session
     end
@@ -202,6 +201,23 @@ module RubyApp
         @@_thread.exit
         @@_thread = nil
       end
+    end
+
+    def self.get_scripts(path = String.interpolate { RubyApp::Session.configuration.scripts.path })
+      scripts = []
+      Dir.new(path).each do |item|
+        unless item.start_with?('.')
+          _path = File.join(path, item)
+          if File.directory?(_path)
+            scripts += self.get_scripts(_path)
+          elsif _path =~ /\.rb/
+            name = _path.gsub(String.interpolate { RubyApp::Session.configuration.scripts.path }, '').gsub(/^\//, '').gsub(/\.rb/, '')
+            scripts.push({:name => name,
+                        :url  => "/quit?go=#{CGI.escape("/?script=#{name}")}"})
+          end
+        end
+      end
+      return scripts.sort { |a, b| a.name <=> b.name }
     end
 
   end

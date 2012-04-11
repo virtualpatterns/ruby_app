@@ -37,8 +37,7 @@ module RubyApp
       ensure
         GC.start
         count = ObjectSpace.each_object { |item| }
-        self.log(severity, "#{message}  count=#{count}")
-        self.log(severity, "#{message} memory=#{`ps -o rss= -p #{$$}`.to_i}")
+        self.log(severity, "#{message} count=#{count}")
       end
     end
 

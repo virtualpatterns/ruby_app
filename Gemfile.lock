@@ -16,6 +16,7 @@ PATH
       ruby-openid
       sass
       term-ansicolor
+      terminal-table
       yajl-ruby
 
 GEM
@@ -40,6 +41,7 @@ GEM
     ruby-openid (2.1.8)
     sass (3.1.15)
     term-ansicolor (1.0.7)
+    terminal-table (1.4.5)
     yajl-ruby (1.1.0)
 
 PLATFORMS

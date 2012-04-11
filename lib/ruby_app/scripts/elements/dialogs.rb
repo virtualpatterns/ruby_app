@@ -1,4 +1,4 @@
-load_steps! 'common/features'
+load_script! 'common/features'
 
 add_step! RubyApp::Elements::Mobile::Page::ShownEvent do |event|
   event.assert_exists_link('Dialogs')
@@ -58,7 +58,7 @@ add_step! RubyApp::Elements::Mobile::Page::ShownEvent do |event|
 end
 
 add_step! RubyApp::Elements::Mobile::Page::ShownEvent do |event|
-  event.assert_exists_text('The assertion false failed.')
+  event.assert_exists_text('The assertion false failed')
   event.assert_exists_link('Close')
   event.tap_link('Close')
 end

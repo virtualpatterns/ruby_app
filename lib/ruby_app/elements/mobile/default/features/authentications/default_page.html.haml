@@ -14,5 +14,7 @@
     %div{'data-role' => 'controlgroup'}
       = @google_authentication_link.render(:html) do |element|
         - element.content_for(:html, :link, 'Google')
+      = @my_open_id_authentication_link.render(:html) do |element|
+        - element.content_for(:html, :link, 'myOpenID')
       = @yahoo_authentication_link.render(:html) do |element|
         - element.content_for(:html, :link, 'Yahoo!')

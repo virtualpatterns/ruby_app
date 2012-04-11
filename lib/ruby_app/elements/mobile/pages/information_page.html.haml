@@ -13,7 +13,7 @@
           Version
         %span.ui-li-aside
           %code
-            = RubyApp::VERSION
+            = "RubyApp #{RubyApp::VERSION}"
       %li
         %span
           Memory Usage
@@ -39,13 +39,13 @@
         %span.ui-li-aside
           %code
             = ENV['RUBY_APP_CONFIGURATION'] || 'default'
-      -#%li
-      -#  = @tests_link.render(:html) do |element|
-      -#    - element.content_for(:html, :link) do
-      -#      %span
-      -#        Tests
-      -#      %span.ui-li-count
-      -#        = RubyApp::Application.steps.length
+      %li
+        = @scripts_link.render(:html) do |element|
+          - element.content_for(:html, :link) do
+            %span
+              Scripts
+            %span.ui-li-count
+              = RubyApp::Session.get_scripts.length
       %li
         = @sessions_link.render(:html) do |element|
           - element.content_for(:html, :link) do

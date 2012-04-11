@@ -16,8 +16,7 @@
           } )
           .error( function(request, message, exception) {
             RubyApp.log('RubyApp.queueEvent(...) ERROR   event.class=' + event._class +' message=' + message);
-            if ($.parseJSON(RubyApp.getData('_event_error', 'true')) == true)
-              RubyApp.confirmRefreshBrowser(RubyApp.getData('_event_error_message', null));
+            RubyApp.confirmRefreshBrowser(RubyApp.getData('event_error_message', null));
           } )
           .complete( function() {
             $(window).dequeue();

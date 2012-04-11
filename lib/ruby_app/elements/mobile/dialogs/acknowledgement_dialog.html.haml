@@ -9,4 +9,4 @@
       = @message
     %div.buttons
       = @ok_link.render(:html) do |element|
-        - element.content_for(:html, :link, 'OK')
+        - element.content_for(:html, :link, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.translate.ok)

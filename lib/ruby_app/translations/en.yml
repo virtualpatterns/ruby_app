@@ -5,48 +5,26 @@ ruby_app:
       message: "%1.  The page will refresh so you can try again."
   elements:
     mobile:
+      dialogs:
+        acknowledgement_dialog:
+          ok: "OK"
+        confirmation_dialog:
+          _yes: "Yes"
+          _no: "No"
+        exception_dialog:
+          close: "Close"
       document:
-        _event_error_message: "An error occurred sending the event.  The page will refresh so you can try again."
-    dialogs:
-      base:
-        base_close_dialog:
-          close:
-            body: "Close"
-        base_ok_dialog:
-          ok:
-            body: "OK"
-        base_yes_no_dialog:
-          _no:
-            body: "No"
-          _yes:
-            body: "Yes"
-      calendars:
-        month_dialog:
-          cancel:
-            body: "Cancel"
-          today:
-            body: "Today"
-    navigation:
-      back_button:
-        body: "Back"
-      base:
-        base_breadcrumbs:
+        event_error_message: "An error occurred sending the event.  The page will refresh so you can try again."
+      inputs:
+        toggle_input:
+          _on: "ON"
+          _off: "OFF"
+      navigation:
+        back_button:
           back: "Back"
-    pages:
-      authentication:
-        open_id:
-          base:
-            base_authentication_document:
-              message: "Authenticating ..."
-          google_authentication_document:
-            title: "Google Authentication"
-          my_open_id_authentication_document:
-            title: "myOpenId Authentication"
-          yahoo_authentication_document:
-            title: "Yahoo! Authentication"
   exceptions:
     assert_failed_exception:
-      message: "The assertion %1 failed."
+      message: "The assertion %1 failed"
     element_invalid_exception:
       message: "The element id %1 is invalid or has been recycled"
     session_invalid_exception:

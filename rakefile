@@ -3,6 +3,7 @@ require "bundler/gem_tasks"
 require 'bundler/setup'
 
 require 'rake'
+require 'terminal-table'
 
 require 'ruby_app'
 
@@ -32,35 +33,19 @@ namespace :ruby_app do
       system('git commit --all --message=\'Incrementing version\'')
   end
 
-  namespace :test do
-
-    desc 'Run all steps'
-    task :all => ['ruby_app:cache:destroy',
-                  'ruby_app:test:specs',
-                  'ruby_app:test:features']
-
-    desc 'Run RSpec steps'
-    task :specs, :file, :line do |task, arguments|
-      if arguments.file
-        if arguments.line
-          system("bundle exec rspec #{arguments.file} --line_number=#{arguments.line} --format=documentation --colour")
-        else
-          system("bundle exec rspec #{arguments.file} --format=documentation --colour")
+  desc 'List all scripts and their url\'s'
+  task :scripts do |task|
+    RubyApp::Application.create_context! do
+      table = Terminal::Table.new(:title => 'Steps',
+                                  :headings => ['Script',
+                                                'Url']) do |table|
+        RubyApp::Session.get_scripts.each do |script|
+          table.add_row([script.name,
+                         script.url])
         end
-      else
-        system('bundle exec rspec spec/ --format=documentation --colour')
+        puts table
       end
     end
-
-    desc 'Run feature steps for all features or the given feature file'
-    task :features, :file do |task, arguments|
-      unless arguments.file
-        system('bundle exec cucumber --format pretty --tags ~@broken --require features')
-      else
-        system("bundle exec cucumber --format pretty --tags ~@broken --require features '#{arguments.file}'")
-      end
-    end
-
   end
 
   namespace :cache do

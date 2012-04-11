@@ -9,7 +9,7 @@ module RubyApp
         require 'ruby_app/elements/mobile/navigation/navigation_link'
         require 'ruby_app/elements/mobile/page'
         require 'ruby_app/elements/mobile/pages/information/sessions_page'
-        #require 'ruby_app/elements/mobile/pages/information/tests_page'
+        require 'ruby_app/elements/mobile/pages/information/scripts_page'
 
         class InformationPage < RubyApp::Elements::Mobile::Page
 
@@ -22,10 +22,10 @@ module RubyApp
 
             @back_button = RubyApp::Elements::Mobile::Navigation::BackButton.new
 
-            #@tests_link = RubyApp::Elements::Mobile::Navigation::NavigationLink.new
-            #@tests_link.clicked do |element, event|
-            #  RubyApp::Elements::Mobile::Pages::Information::TestsPage.new.show(event, element.options)
-            #end
+            @scripts_link = RubyApp::Elements::Mobile::Navigation::NavigationLink.new
+            @scripts_link.clicked do |element, event|
+              RubyApp::Elements::Mobile::Pages::Information::ScriptsPage.new.show(event, element.options)
+            end
 
             @sessions_link = RubyApp::Elements::Mobile::Navigation::NavigationLink.new
             @sessions_link.clicked do |element, event|

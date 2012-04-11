@@ -10,7 +10,7 @@ module RubyApp
       end
 
       def call(environment)
-        RubyApp::Session.load!(RubyApp::Request.cookies['_session'], RubyApp::Request.query['steps'])
+        RubyApp::Session.load!(RubyApp::Request.cookies['_session'], RubyApp::Request.query['script'])
         begin
           #RubyApp::Log.debug("#{RubyApp::Log.prefix(self, __method__)} RubyApp::Session.session_id=#{RubyApp::Session.session_id.inspect}")
           #RubyApp::Log.debug("#{RubyApp::Log.prefix(self, __method__)} RubyApp::Session.expires=#{RubyApp::Session.expires.inspect}")

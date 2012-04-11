@@ -1,6 +1,0 @@
-load_steps! 'default'
-load_steps! 'elements/buttons'
-load_steps! 'elements/dialogs'
-load_steps! 'elements/inputs'
-load_steps! 'elements/lists'
-load_steps! 'elements/trigger'

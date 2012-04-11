@@ -30,6 +30,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'ruby-openid'
   s.add_dependency 'sass'
   s.add_dependency 'term-ansicolor'
+  s.add_dependency 'terminal-table'
   s.add_dependency 'yajl-ruby'
 
   s.add_development_dependency 'rake'

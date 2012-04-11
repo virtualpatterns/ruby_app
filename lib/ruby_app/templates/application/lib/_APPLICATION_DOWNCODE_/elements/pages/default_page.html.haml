@@ -1,7 +1,12 @@
-- self.content_for(:html, :body) do
+- self.content_for(:html, :page) do
   /
     #{__FILE__}
-  %div.welcome
+  %div{'data-role' => 'header'}
+    %h1
+      = _APPLICATION_UPCODE_::Elements::Pages::DefaultPage.translate.title
+    = @information_link.render(:html) do |element|
+      - element.content_for(:html, :link, 'Information')
+  %div{'data-role' => 'content'}
     :markdown
       ## Welcome!
       This is the default page for your application.  This content can be found in the file `lib/_APPLICATION_DOWNCODE_/elements/pages/default_page.html.haml`.
