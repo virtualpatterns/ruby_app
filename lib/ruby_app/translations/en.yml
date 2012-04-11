@@ -14,7 +14,7 @@ ruby_app:
         exception_dialog:
           close: "Close"
       document:
-        event_error_message: "An error occurred sending the event.  The page will refresh so you can try again."
+        error_message: "An error occurred exchanging data with the server.  The page will refresh so you can try again."
       inputs:
         toggle_input:
           _on: "ON"

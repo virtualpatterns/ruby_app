@@ -16,7 +16,7 @@
     - RubyApp::Request.query.each do |name, value|
       %meta{:name => name, :content => value}
     %meta{:name => :locale, :content => RubyApp::Language.locale.code}
-    %meta{:name => :event_error_message, :content => RubyApp::Elements::Mobile::Document.translate.event_error_message}
+    %meta{:name => :error_message, :content => RubyApp::Elements::Mobile::Document.translate.error_message}
   %body
     - self.pages.reverse.each do |page|
       = page.render(:html)

@@ -17,8 +17,8 @@ default:
         formats:
           - :css
           - :js
-        read?: true
-        write?: true
+        read?: false
+        write?: false
     session:
       _class: "RubyApp::Session"
       expires: 1200
