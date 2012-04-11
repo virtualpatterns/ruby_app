@@ -7,6 +7,7 @@ module RubyApp
       module Pages
 
         module Information
+          require 'ruby_app/elements/mobile/dialogs/acknowledgement_dialog'
           require 'ruby_app/elements/mobile/navigation/back_button'
           require 'ruby_app/elements/mobile/pages/information/scripts_list'
           require 'ruby_app/elements/mobile/page'
@@ -22,7 +23,11 @@ module RubyApp
 
               @scripts_list = RubyApp::Elements::Mobile::Pages::Information::ScriptsList.new
               @scripts_list.clicked do |element, event|
-                event.go(event.item.url)
+                if RubyApp::Session.configuration.scripts.enabled
+                  event.go(event.item.url)
+                else
+                  RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('Scripts', 'Scripts are currently disabled.'), :transition => 'pop')
+                end
               end
 
             end

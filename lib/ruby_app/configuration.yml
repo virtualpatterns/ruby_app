@@ -1,17 +1,17 @@
 default:
   ruby_app:
     application:
-      _class: "RubyApp::Application"
+      _class: 'RubyApp::Application'
       format:
         date:
-          long: "%b %d %H:%M %Z"
-          short: "%a %b %-d"
+          long: '%b %d %H:%M %Z'
+          short: '%a %b %-d'
     language:
-      default: "en"
+      default: 'en'
       paths:
-        - "#{RubyApp::ROOT}/translations"
+        - '#{RubyApp::ROOT}/translations'
     log:
-      path: "#{RubyApp::ROOT}/process/log/application.log"
+      path: '#{RubyApp::ROOT}/process/log/application.log'
     response:
       cache:
         formats:
@@ -20,13 +20,13 @@ default:
         read?: false
         write?: false
     session:
-      _class: "RubyApp::Session"
+      _class: 'RubyApp::Session'
       expires: 1200
       interval: 15
       length: 4
       scripts:
-        enabled: true
-        path: "#{RubyApp::ROOT}/scripts"
+        enabled: false
+        path: '#{RubyApp::ROOT}/scripts'
     elements:
       mobile:
         documents:
@@ -34,11 +34,11 @@ default:
             open_id:
               google_authentication_document:
                 attributes:
-                  email: "http://schema.openid.net/contact/email"
-                identifier: "https://www.google.com/accounts/o8/id"
+                  email: 'http://schema.openid.net/contact/email'
+                identifier: 'https://www.google.com/accounts/o8/id'
               my_open_id_authentication_document:
-                identifier: "http://myopenid.com"
+                identifier: 'http://myopenid.com'
               yahoo_authentication_document:
                 attributes:
-                  email: "http://axschema.org/contact/email"
-                identifier: "https://www.yahoo.com"
+                  email: 'http://axschema.org/contact/email'
+                identifier: 'https://www.yahoo.com'
