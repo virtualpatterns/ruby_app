@@ -22,13 +22,34 @@ module RubyApp
 
         template_path(:all, File.dirname(__FILE__))
 
+        attr_reader :metadata
+        attr_reader :links
+        attr_reader :stylesheets
+        attr_reader :scripts
+
         attr_reader :pages
 
         event :loaded
 
         def initialize
           super
+
+          @metadata = {}
+          @links = {}
+          @stylesheets = []
+          @scripts = []
+
           @pages = []
+
+          @metadata.merge!('viewport' => 'width=device-width, initial-scale=1')
+
+          @stylesheets.push('http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.css')
+          @stylesheets.push("/#{RubyApp::Language.locale.code}/document.css")
+
+          @scripts.push('http://code.jquery.com/jquery-1.7.1.js')
+          @scripts.push('http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.js')
+          @scripts.push("/#{RubyApp::Language.locale.code}/document.js")
+
         end
 
         def page

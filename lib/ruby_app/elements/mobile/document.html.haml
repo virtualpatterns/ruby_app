@@ -3,20 +3,22 @@
   #{__FILE__}
 %html{attributes}
   %head
-    %meta{:name => :viewport,
-          :content => 'width=device-width, initial-scale=1'}
-    %link{:rel => 'stylesheet',
-          :href => 'http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.css'}
-    %link{:rel => 'stylesheet',
-          :href => "/#{RubyApp::Language.locale.code}/document.css"}
-    %script{:src => 'http://code.jquery.com/jquery-1.7.1.js'}
-    %script{:src => 'http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.js'}
-    %script{:src => "/#{RubyApp::Language.locale.code}/document.js"}
+    - self.metadata.each do |name, value|
+      %meta{:name => name,
+            :content => value}
+    - self.links.each do |name, value|
+      %link{:rel => name,
+            :href => value}
+    - self.stylesheets.each do |stylesheet|
+      %link{:rel => 'stylesheet',
+            :href => stylesheet}
+    - self.scripts.each do |script|
+      %script{:src => script}
+
     %meta{:name => :session, :content => RubyApp::Session.session_id}
-    - RubyApp::Request.query.each do |name, value|
-      %meta{:name => name, :content => value}
     %meta{:name => :locale, :content => RubyApp::Language.locale.code}
     %meta{:name => :error_message, :content => RubyApp::Elements::Mobile::Document.translate.error_message}
+
   %body
     - self.pages.reverse.each do |page|
       = page.render(:html)
