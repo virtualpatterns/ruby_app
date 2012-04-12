@@ -15,7 +15,7 @@ module RubyApp
 
               template_path(:all, File.dirname(__FILE__))
 
-              def initialize(identifier = self.configuration.identifier)
+              def initialize(identifier = RubyApp::Elements::Mobile::Documents::Authentication::OpenId::GoogleAuthenticationDocument.configuration.identifier)
                 super(identifier)
               end
 

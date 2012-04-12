@@ -25,16 +25,17 @@ default:
       interval: 15
       length: 4
       scripts:
-        enabled: false
+        enabled: true
         path: '#{RubyApp::ROOT}/scripts'
     elements:
       mobile:
         documents:
           authentication:
             open_id:
-              google_authentication_document:
+              ax_authentication_document:
                 attributes:
                   email: 'http://schema.openid.net/contact/email'
+              google_authentication_document:
                 identifier: 'https://www.google.com/accounts/o8/id'
               my_open_id_authentication_document:
                 identifier: 'http://myopenid.com'
