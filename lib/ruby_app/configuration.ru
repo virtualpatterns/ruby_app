@@ -1,4 +1,4 @@
-#\ --warn --port 8008 --pid ./rack.pid --debug true
+#\ --port 8008 --pid ./rack.pid
 require 'rubygems'
 require 'bundler/setup'
 

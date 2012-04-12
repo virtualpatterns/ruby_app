@@ -97,7 +97,7 @@ module RubyApp
                 RubyApp::Log.info("STEP   Completed #{@steps.length} steps")
               end
             end
-          rescue Exception => exception
+          rescue => exception
             RubyApp::Log.info("STEP   Exception occurred at #{step.file}:#{step.line}")
             @steps_index = @steps.length
             raise
@@ -177,7 +177,7 @@ module RubyApp
               end
               sleep(RubyApp::Session.configuration.interval)
             end
-          rescue Exception => exception
+          rescue => exception
             RubyApp::Log.exception(RubyApp::Log::ERROR, exception)
           end
         end
@@ -185,7 +185,7 @@ module RubyApp
         at_exit do
           begin
             RubyApp::Session.stop_thread!
-          rescue Exception => exception
+          rescue => exception
             RubyApp::Log.exception(RubyApp::Log::ERROR, exception)
           end
         end

@@ -40,7 +40,7 @@ module RubyApp
               @exception_link = RubyApp::Elements::Mobile::Button.new
               @exception_link.clicked do |element, event|
                 RubyApp::Elements::Mobile::Dialogs::ExceptionDialog.show_on_exception(event, :transition => 'pop') do
-                  raise RubyApp::Exceptions::AssertFailedException.new('false')
+                  raise 'This is an exception.'
                 end
               end
 

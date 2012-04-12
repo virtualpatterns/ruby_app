@@ -16,7 +16,7 @@ module RubyApp
       def call(environment)
         begin
           return @application.call(environment)
-        rescue Exception => exception
+        rescue => exception
           RubyApp::Log.exception(RubyApp::Log::ERROR, exception)
           raise exception
         end

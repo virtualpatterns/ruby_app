@@ -28,7 +28,7 @@ module RubyApp
               RubyApp::Response.redirect(RubyApp::Request.query['go'])
             end
           end
-        rescue Exception => exception
+        rescue => exception
           RubyApp::Log.exception(RubyApp::Log::ERROR, exception)
           raise
         end
@@ -42,7 +42,7 @@ module RubyApp
             RubyApp::Response.write_from_cache(element, format.to_sym)
             #RubyApp::Response.write(element.render(format.to_sym))
           end
-        rescue Exception => exception
+        rescue => exception
           RubyApp::Log.exception(RubyApp::Log::ERROR, exception)
           raise
         end
@@ -56,7 +56,7 @@ module RubyApp
             RubyApp::Response.write_from_cache(document, format.to_sym)
             #RubyApp::Response.write(document.render(format.to_sym))
           end
-        rescue Exception => exception
+        rescue => exception
           RubyApp::Log.exception(RubyApp::Log::ERROR, exception)
           raise
         end
@@ -79,7 +79,7 @@ module RubyApp
             RubyApp::Response['Content-Type'] = 'application/json'
             RubyApp::Response.write(Yajl::Encoder.new.encode(event.to_hash))
           end
-        rescue Exception => exception
+        rescue => exception
           RubyApp::Log.exception(RubyApp::Log::ERROR, exception)
           RubyApp::Response['Content-Type'] = 'application/json'
           RubyApp::Response.write(Yajl::Encoder.new.encode(RubyApp::Element::ExceptionEvent.new(exception).to_hash))

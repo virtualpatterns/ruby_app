@@ -1,4 +1,4 @@
-#\ --warn --port 8008 --pid ./rack.pid
+#\ --port 8008 --pid ./rack.pid
 $LOAD_PATH.unshift File.expand_path(File.join(File.dirname(__FILE__), %w[lib]))
 
 require 'rubygems'
