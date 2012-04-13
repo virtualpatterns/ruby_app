@@ -12,6 +12,14 @@ module RubyApp
 
       class Page < RubyApp::Element
 
+        class LoadedEvent < RubyApp::Element::Event
+
+          def initialize(data)
+            super(data)
+          end
+
+        end
+
         class ShownEvent < RubyApp::Element::Event
 
           def initialize(data)
@@ -38,6 +46,7 @@ module RubyApp
 
         template_path(:all, File.dirname(__FILE__))
 
+        event :loaded
         event :shown
         event :before_hidden
         event :hidden
@@ -60,10 +69,15 @@ module RubyApp
         protected
 
           def on_event(event)
+            on_loaded(event) if event.is_a?(RubyApp::Elements::Mobile::Page::LoadedEvent)
             on_shown(event) if event.is_a?(RubyApp::Elements::Mobile::Page::ShownEvent)
             on_before_hidden(event) if event.is_a?(RubyApp::Elements::Mobile::Page::BeforeHiddenEvent)
             on_hidden(event) if event.is_a?(RubyApp::Elements::Mobile::Page::HiddenEvent)
             super(event)
+          end
+
+          def on_loaded(event)
+            loaded(event)
           end
 
           def on_shown(event)
