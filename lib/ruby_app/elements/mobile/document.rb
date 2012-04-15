@@ -12,6 +12,14 @@ module RubyApp
 
       class Document < RubyApp::Element
 
+        class LoadedEvent < RubyApp::Element::Event
+
+          def initialize(data)
+            super(data)
+          end
+
+        end
+
         template_path(:all, File.dirname(__FILE__))
 
         attr_reader :metadata
@@ -20,6 +28,8 @@ module RubyApp
         attr_reader :scripts
 
         attr_reader :pages
+
+        event :loaded
 
         def initialize
           super
@@ -47,6 +57,15 @@ module RubyApp
         end
 
         protected
+
+          def on_event(event)
+            on_loaded(event) if event.is_a?(RubyApp::Elements::Mobile::Document::LoadedEvent)
+            super(event)
+          end
+
+          def on_loaded(event)
+            loaded(event)
+          end
 
       end
 
