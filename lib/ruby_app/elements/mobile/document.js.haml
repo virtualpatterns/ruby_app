@@ -90,6 +90,7 @@
         RubyApp.refreshBrowser();
     },
     this.go = function(url) {
+      $(window).clearQueue();
       location.assign(url);
     },
     this.addClass = function(selector, _class) {
@@ -144,7 +145,8 @@
 
   $(window).load(function() {
     RubyApp.queueEvent({_class:'RubyApp::Elements::Mobile::Document::LoadedEvent', source:$('html').attr('id')});
-    RubyApp.queueEvent({_class:'RubyApp::Elements::Mobile::Page::LoadedEvent', source:$('div[data-role="page"]').filter(':first').attr('id')});
+    if ($('div[data-role="page"]').length)
+      RubyApp.queueEvent({_class:'RubyApp::Elements::Mobile::Page::LoadedEvent', source:$('div[data-role="page"]').filter(':first').attr('id')});
   });
 
 = yield
