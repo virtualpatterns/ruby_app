@@ -22,7 +22,7 @@ module RubyApp
               @back_button = RubyApp::Elements::Mobile::Navigation::BackButton.new
 
               @scripts_list = RubyApp::Elements::Mobile::Pages::Information::ScriptsList.new
-              @scripts_list.clicked do |element, event|
+              @scripts_list.item_clicked do |element, event|
                 if RubyApp::Session.configuration.scripts.enabled
                   event.go(event.item.url)
                 else

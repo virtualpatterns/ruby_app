@@ -24,7 +24,7 @@ module RubyApp
               @back_button = RubyApp::Elements::Mobile::Navigation::BackButton.new
 
               @pages_list = RubyApp::Elements::Mobile::Pages::Information::PagesList.new(@document)
-              @pages_list.clicked do |element, event|
+              @pages_list.item_clicked do |element, event|
                 RubyApp::Elements::Mobile::Pages::Information::PagePage.new(event.item).show(event, element.options)
               end
 

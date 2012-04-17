@@ -3,5 +3,8 @@
 %ul.list{attributes}
   - self.items.each_with_index do |item, index|
     %li.item{'data-icon' => 'false'}
-      %a.item{:href => '#', :index => index}
+      %a.item{:href => '#', 'data-index' => index}
         = yield(:item, item, index) || item
+      - if self.split?
+        %a.link{:href => '#', 'data-index' => index}
+          = yield(:link, item, index) || item

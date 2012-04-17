@@ -122,6 +122,14 @@ module RubyApp
         self.tap_selector("a:contains('#{text}')")
       end
 
+      def tap_list_item(text)
+        self.tap_selector("a.item:contains('#{text}')")
+      end
+
+      def tap_list_link(text)
+        self.tap_selector("a.link[title*='#{text}']")
+      end
+
       def tap_selector(selector)
         _selector = ".ui-page-active #{selector}"
         self.execute("RubyApp.tap(#{_selector.to_json});")

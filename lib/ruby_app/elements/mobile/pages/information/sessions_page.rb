@@ -22,7 +22,7 @@ module RubyApp
               @back_button = RubyApp::Elements::Mobile::Navigation::BackButton.new
 
               @sessions_list = RubyApp::Elements::Mobile::Pages::Information::SessionsList.new
-              @sessions_list.clicked do |element, event|
+              @sessions_list.item_clicked do |element, event|
                 RubyApp::Elements::Mobile::Pages::Information::SessionPage.new(event.item).show(event, element.options)
               end
 

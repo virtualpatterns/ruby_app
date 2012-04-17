@@ -26,7 +26,7 @@ module RubyApp
 
           protected
 
-            def on_clicked(event)
+            def on_item_clicked(event)
               @selected_item = event.item
               event.update_element(self)
               super(event)
