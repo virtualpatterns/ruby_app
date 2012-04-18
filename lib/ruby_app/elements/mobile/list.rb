@@ -36,7 +36,7 @@ module RubyApp
 
           def initialize(item)
             super(item)
-            self.attributes.merge!('role' => 'list-divider')
+            self.attributes.merge!('data-role' => 'list-divider')
           end
 
         end
