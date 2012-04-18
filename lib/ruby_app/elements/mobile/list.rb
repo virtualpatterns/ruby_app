@@ -12,18 +12,62 @@ module RubyApp
 
       class List < RubyApp::Element
 
+        class ListItem < RubyApp::Element
+
+          template_path(:all, File.dirname(__FILE__))
+
+          attr_accessor :item
+
+          def initialize(item)
+            super()
+            self.attributes.merge!('data-icon' => 'false')
+
+            @item = item
+
+          end
+
+        end
+
+        class ListDivider < RubyApp::Elements::Mobile::List::ListItem
+
+          template_path(:all, File.dirname(__FILE__))
+
+          exclude_parent_template(:html)
+
+          def initialize(item)
+            super(item)
+            self.attributes.merge!('role' => 'list-divider')
+          end
+
+        end
+
+        class ListSplitItem < RubyApp::Elements::Mobile::List::ListItem
+
+          template_path(:all, File.dirname(__FILE__))
+
+          exclude_parent_template(:html)
+
+          def initialize(item)
+            super(item)
+          end
+
+        end
+
         class ClickedEvent < RubyApp::Element::Event
 
-          attr_reader :index, :item
+          attr_reader :item
 
           def initialize(data)
             super(data)
-            @index = data['index'].to_i
-            @item = self.source.items[@index]
+
+            item = RubyApp::Element.get_element(data['item'])
+            raise RubyApp::Exceptions::ElementInvalidException.new(data['item']) unless item
+            @item = item
+
           end
 
           def to_hash
-            super.merge('index' => @index)
+            super.merge('item' => @item.element_id)
           end
 
         end
@@ -47,7 +91,6 @@ module RubyApp
         template_path(:all, File.dirname(__FILE__))
 
         attr_accessor :items
-        attr_accessor :is_split
 
         event :item_clicked
         event :link_clicked
@@ -57,12 +100,7 @@ module RubyApp
           self.attributes.merge!('data-role' => 'listview')
 
           @items = []
-          @is_split = false
 
-        end
-
-        def split?
-          return self.is_split
         end
 
         protected

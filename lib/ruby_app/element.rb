@@ -175,7 +175,7 @@ module RubyApp
         {
           '_class' => self.class.to_s,
           'now' => @now,
-          'source_id' => @source ? @source.element_id : nil,
+          'source' => @source ? @source.element_id : nil,
           'statements' => @statements
         }
       end

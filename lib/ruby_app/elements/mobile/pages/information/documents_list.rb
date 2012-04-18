@@ -11,11 +11,23 @@ module RubyApp
 
           class DocumentsList < RubyApp::Elements::Mobile::Pages::Information::InformationList
 
+            class DocumentsListItem < RubyApp::Elements::Mobile::List::ListItem
+
+              template_path(:all, File.dirname(__FILE__))
+
+              alias :document :item
+
+              def initialize(document)
+                super(document)
+              end
+
+            end
+
             template_path(:all, File.dirname(__FILE__))
 
             def initialize(session)
               super()
-              self.items = session.documents
+              self.items = session.documents.collect { |document| RubyApp::Elements::Mobile::Pages::Information::DocumentsList::DocumentsListItem.new(document) }
             end
 
           end

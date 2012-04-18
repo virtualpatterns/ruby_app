@@ -1,0 +1,7 @@
+/
+  #{__FILE__}
+%li.item{attributes}
+  %a.item{:href => '#'}
+    = yield(:item) || self.item
+  %a.link{:href => '#'}
+    = yield(:link) || self.item

@@ -23,7 +23,7 @@ module RubyApp
 
               @sessions_list = RubyApp::Elements::Mobile::Pages::Information::SessionsList.new
               @sessions_list.item_clicked do |element, event|
-                RubyApp::Elements::Mobile::Pages::Information::SessionPage.new(event.item).show(event, element.options)
+                RubyApp::Elements::Mobile::Pages::Information::SessionPage.new(event.item.session).show(event, element.options)
               end
 
             end

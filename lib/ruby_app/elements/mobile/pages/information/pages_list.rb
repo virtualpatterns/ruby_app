@@ -13,9 +13,21 @@ module RubyApp
 
             template_path(:all, File.dirname(__FILE__))
 
+            class PagesListItem < RubyApp::Elements::Mobile::List::ListItem
+
+              template_path(:all, File.dirname(__FILE__))
+
+              alias :page :item
+
+              def initialize(page)
+                super(page)
+              end
+
+            end
+
             def initialize(document)
               super()
-              self.items = document.pages
+              self.items = document.pages.collect { |page| RubyApp::Elements::Mobile::Pages::Information::PagesList::PagesListItem.new(page) }
             end
 
           end

@@ -25,7 +25,7 @@ module RubyApp
 
               @documents_list = RubyApp::Elements::Mobile::Pages::Information::DocumentsList.new(@session)
               @documents_list.item_clicked do |element, event|
-                RubyApp::Elements::Mobile::Pages::Information::DocumentPage.new(event.item).show(event, element.options)
+                RubyApp::Elements::Mobile::Pages::Information::DocumentPage.new(event.item.document).show(event, element.options)
               end
 
             end

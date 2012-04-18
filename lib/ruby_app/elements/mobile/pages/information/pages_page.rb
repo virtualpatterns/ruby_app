@@ -25,7 +25,7 @@ module RubyApp
 
               @pages_list = RubyApp::Elements::Mobile::Pages::Information::PagesList.new(@document)
               @pages_list.item_clicked do |element, event|
-                RubyApp::Elements::Mobile::Pages::Information::PagePage.new(event.item).show(event, element.options)
+                RubyApp::Elements::Mobile::Pages::Information::PagePage.new(event.item.page).show(event, element.options)
               end
 
             end

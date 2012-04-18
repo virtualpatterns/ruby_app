@@ -11,8 +11,6 @@ module RubyApp
 
           template_path(:all, File.dirname(__FILE__))
 
-          exclude_parent_template(:html)
-
           attr_accessor :selected_item
 
           def initialize
@@ -27,7 +25,9 @@ module RubyApp
           protected
 
             def on_item_clicked(event)
+              @selected_item.attributes.merge!('data-theme' => nil) if @selected_item
               @selected_item = event.item
+              @selected_item.attributes.merge!('data-theme' => self.attributes['data-selected-theme'])
               event.update_element(self)
               super(event)
             end

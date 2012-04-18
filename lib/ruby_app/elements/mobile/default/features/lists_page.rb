@@ -24,32 +24,34 @@ module RubyApp
 
               @list = RubyApp::Elements::Mobile::List.new
               @list.attributes.merge!('data-inset' => true)
-              @list.is_split = true
+              @list.items += [  RubyApp::Elements::Mobile::List::ListDivider.new('List') ]
               @list.items += [  'Item 01',
                                 'Item 02',
                                 'Item 03',
                                 'Item 04',
-                                'Item 05' ]
+                                'Item 05' ].collect { |item| RubyApp::Elements::Mobile::List::ListSplitItem.new(item) }
+
               @list.item_clicked do |element, event|
-                RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('List', "You clicked the item #{event.item}."), :transition => 'pop')
+                RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('List', "You clicked the item #{event.item.item}."), :transition => 'pop')
               end
               @list.link_clicked do |element, event|
-                RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('List', "You clicked the link #{event.item}."), :transition => 'pop')
+                RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('List', "You clicked the link #{event.item.item}."), :transition => 'pop')
               end
 
               @select = RubyApp::Elements::Mobile::Lists::Select.new
               @select.attributes.merge!('data-inset' => true)
-              @select.is_split = true
+              @select.items += [  RubyApp::Elements::Mobile::List::ListDivider.new('Select') ]
               @select.items += [  'Item 11',
                                   'Item 12',
                                   'Item 13',
                                   'Item 14',
-                                  'Item 15' ]
+                                  'Item 15' ].collect { |item| RubyApp::Elements::Mobile::List::ListSplitItem.new(item) }
+
               @select.item_clicked do |element, event|
-                RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('List', "You clicked the item #{event.item}."), :transition => 'pop')
+                RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('List', "You clicked the item #{event.item.item}."), :transition => 'pop')
               end
               @select.link_clicked do |element, event|
-                RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('List', "You clicked the link #{event.item}."), :transition => 'pop')
+                RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('List', "You clicked the link #{event.item.item}."), :transition => 'pop')
               end
 
             end

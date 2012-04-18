@@ -24,7 +24,7 @@ module RubyApp
               @scripts_list = RubyApp::Elements::Mobile::Pages::Information::ScriptsList.new
               @scripts_list.item_clicked do |element, event|
                 if RubyApp::Session.configuration.scripts.enabled
-                  event.go(event.item.url)
+                  event.go(event.item.script.url)
                 else
                   RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('Scripts', 'Scripts are currently disabled.'), :transition => 'pop')
                 end

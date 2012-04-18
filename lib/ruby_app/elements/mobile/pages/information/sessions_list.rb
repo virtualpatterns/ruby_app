@@ -11,11 +11,23 @@ module RubyApp
 
           class SessionsList < RubyApp::Elements::Mobile::Pages::Information::InformationList
 
+            class SessionsListItem < RubyApp::Elements::Mobile::List::ListItem
+
+              template_path(:all, File.dirname(__FILE__))
+
+              alias :session :item
+
+              def initialize(session)
+                super(session)
+              end
+
+            end
+
             template_path(:all, File.dirname(__FILE__))
 
             def initialize
               super
-              self.items = RubyApp::Session.sessions.values
+              self.items = RubyApp::Session.sessions.values.collect { |session| RubyApp::Elements::Mobile::Pages::Information::SessionsList::SessionsListItem.new(session) }
             end
 
           end
