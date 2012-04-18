@@ -11,7 +11,7 @@ module RubyApp
 
           class DocumentsList < RubyApp::Elements::Mobile::Pages::Information::InformationList
 
-            class DocumentsListItem < RubyApp::Elements::Mobile::List::ListItem
+            class DocumentsListItem < RubyApp::Elements::Mobile::Pages::Information::InformationList::InformationListItem
 
               template_path(:all, File.dirname(__FILE__))
 

@@ -11,6 +11,16 @@ module RubyApp
 
           class InformationList < RubyApp::Elements::Mobile::Navigation::NavigationList
 
+            class InformationListItem < RubyApp::Elements::Mobile::Navigation::NavigationList::NavigationListItem
+
+              template_path(:all, File.dirname(__FILE__))
+
+              def initialize(script)
+                super(script)
+              end
+
+            end
+
             template_path(:all, File.dirname(__FILE__))
 
             def initialize

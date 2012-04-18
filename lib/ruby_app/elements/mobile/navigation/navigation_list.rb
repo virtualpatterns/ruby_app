@@ -10,6 +10,17 @@ module RubyApp
 
         class NavigationList < RubyApp::Elements::Mobile::List
 
+          class NavigationListItem < RubyApp::Elements::Mobile::List::ListItem
+
+            template_path(:all, File.dirname(__FILE__))
+
+            def initialize(script)
+              super(script)
+              self.attributes.merge!('data-icon' => 'arrow-r')
+            end
+
+          end
+
           template_path(:all, File.dirname(__FILE__))
 
           attr_accessor :options

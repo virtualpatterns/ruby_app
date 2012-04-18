@@ -11,9 +11,7 @@ module RubyApp
 
           class PagesList < RubyApp::Elements::Mobile::Pages::Information::InformationList
 
-            template_path(:all, File.dirname(__FILE__))
-
-            class PagesListItem < RubyApp::Elements::Mobile::List::ListItem
+            class PagesListItem < RubyApp::Elements::Mobile::Pages::Information::InformationList::InformationListItem
 
               template_path(:all, File.dirname(__FILE__))
 
@@ -24,6 +22,8 @@ module RubyApp
               end
 
             end
+
+            template_path(:all, File.dirname(__FILE__))
 
             def initialize(document)
               super()

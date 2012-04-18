@@ -11,7 +11,7 @@ module RubyApp
 
           class ScriptsList < RubyApp::Elements::Mobile::Pages::Information::InformationList
 
-            class ScriptsListItem < RubyApp::Elements::Mobile::List::ListItem
+            class ScriptsListItem < RubyApp::Elements::Mobile::Pages::Information::InformationList::InformationListItem
 
               template_path(:all, File.dirname(__FILE__))
 
