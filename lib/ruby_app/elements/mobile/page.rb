@@ -58,12 +58,28 @@ module RubyApp
             super(data)
           end
 
+          def left?
+            return true
+          end
+
+          def right?
+            return false
+          end
+
         end
 
         class SwipedRightEvent < RubyApp::Elements::Mobile::Page::SwipedEvent
 
           def initialize(data)
             super(data)
+          end
+
+          def left?
+            return false
+          end
+
+          def right?
+            return true
           end
 
         end
