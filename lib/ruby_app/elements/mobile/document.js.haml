@@ -116,6 +116,12 @@
     this.tap = function(selector) {
       $(selector).tap();
     },
+    this.swipeLeft = function() {
+      $('.ui-page-active').swipeleft();
+    },
+    this.swipeRight = function() {
+      $('.ui-page-active').swiperight();
+    },
     this.change = function(selector) {
       $(selector).change();
     },

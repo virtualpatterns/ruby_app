@@ -12,6 +12,7 @@ require 'ruby_app/elements/mobile/documents/authentication/open_id/google_authen
 require 'ruby_app/elements/mobile/documents/authentication/open_id/my_open_id_authentication_document'
 require 'ruby_app/elements/mobile/documents/authentication/open_id/yahoo_authentication_document'
 require 'ruby_app/elements/mobile/input'
+require 'ruby_app/elements/mobile/inputs/date_input'
 require 'ruby_app/elements/mobile/inputs/duration_input'
 require 'ruby_app/elements/mobile/inputs/email_input'
 require 'ruby_app/elements/mobile/inputs/multiline_input'

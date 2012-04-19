@@ -44,12 +44,37 @@ module RubyApp
 
         end
 
+        class SwipedEvent < RubyApp::Element::Event
+
+          def initialize(data)
+            super(data)
+          end
+
+        end
+
+        class SwipedLeftEvent < RubyApp::Elements::Mobile::Page::SwipedEvent
+
+          def initialize(data)
+            super(data)
+          end
+
+        end
+
+        class SwipedRightEvent < RubyApp::Elements::Mobile::Page::SwipedEvent
+
+          def initialize(data)
+            super(data)
+          end
+
+        end
+
         template_path(:all, File.dirname(__FILE__))
 
         event :loaded
         event :shown
         event :before_hidden
         event :hidden
+        event :swiped
 
         def initialize
           super
@@ -73,6 +98,7 @@ module RubyApp
             on_shown(event) if event.is_a?(RubyApp::Elements::Mobile::Page::ShownEvent)
             on_before_hidden(event) if event.is_a?(RubyApp::Elements::Mobile::Page::BeforeHiddenEvent)
             on_hidden(event) if event.is_a?(RubyApp::Elements::Mobile::Page::HiddenEvent)
+            on_swiped(event) if event.is_a?(RubyApp::Elements::Mobile::Page::SwipedEvent)
             super(event)
           end
 
@@ -91,6 +117,10 @@ module RubyApp
           def on_hidden(event)
             RubyApp::Session.document.pages.pop if RubyApp::Session.document.pages.last == self
             hidden(event)
+          end
+
+          def on_swiped(event)
+            swiped(event)
           end
 
       end

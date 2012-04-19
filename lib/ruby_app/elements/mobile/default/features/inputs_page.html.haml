@@ -6,9 +6,9 @@
     %h1
       Inputs
   %div{'data-role' => 'content'}
-    %label{:for => @simple_input.element_id}
-      Simple Input
-    = @simple_input.render(:html)
+    %label{:for => @date_input.element_id}
+      Date Input
+    = @date_input.render(:html)
     %label{:for => @duration_input.element_id}
       Duration Input
     = @duration_input.render(:html)
@@ -18,6 +18,9 @@
     %label{:for => @multiline_input.element_id}
       Multiline Input
     = @multiline_input.render(:html)
+    %label{:for => @simple_input.element_id}
+      Simple Input
+    = @simple_input.render(:html)
     %label{:for => @toggle_input.element_id}
       Toggle Input
     = @toggle_input.render(:html)

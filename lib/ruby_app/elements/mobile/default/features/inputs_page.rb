@@ -30,6 +30,11 @@ module RubyApp
                 RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('Simple Input', "You input #{@simple_input.value}."), :transition => 'pop')
               end
 
+              @date_input = RubyApp::Elements::Mobile::Inputs::DateInput.new
+              @date_input.changed do |element, event|
+                RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('Date Input', "You input #{@date_input.value}."), :transition => 'pop')
+              end
+
               @duration_input = RubyApp::Elements::Mobile::Inputs::DurationInput.new
               @duration_input.changed do |element, event|
                 RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('Duration Input', "You input #{@duration_input.duration}."), :transition => 'pop')

@@ -12,7 +12,7 @@ module RubyApp
           require 'ruby_app/elements/mobile/navigation/back_button'
           require 'ruby_app/elements/mobile/page'
 
-          class ButtonsPage < RubyApp::Elements::Mobile::Page
+          class SwipePage < RubyApp::Elements::Mobile::Page
 
             template_path(:all, File.dirname(__FILE__))
 
@@ -21,9 +21,8 @@ module RubyApp
 
               @back_button = RubyApp::Elements::Mobile::Navigation::BackButton.new
 
-              @button_link = RubyApp::Elements::Mobile::Button.new
-              @button_link.clicked do |element, event|
-                RubyApp::Elements::Mobile::Default::Features::NavigatedPage.new.show(event, :transition => 'slide')
+              self.swiped do |element, event|
+                RubyApp::Elements::Mobile::Default::Features::NavigatedPage.new.show(event, :transition => 'slide', :reverse => event.is_a?(RubyApp::Elements::Mobile::Page::SwipedRightEvent) ? true : false)
               end
 
             end

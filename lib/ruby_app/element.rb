@@ -135,6 +135,10 @@ module RubyApp
         self.execute("RubyApp.tap(#{_selector.to_json});")
       end
 
+      def swipe(direction)
+        self.execute("RubyApp.swipe#{direction == :left ? 'Left' : 'Right'}();")
+      end
+
       def assert_exists_text(text)
         self.assert_exists_selector("*:contains('#{text}')")
       end

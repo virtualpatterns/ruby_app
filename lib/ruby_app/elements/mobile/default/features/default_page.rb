@@ -11,6 +11,7 @@ module RubyApp
           require 'ruby_app/elements/mobile/default/features/buttons_page'
           require 'ruby_app/elements/mobile/default/features/dialogs_page'
           require 'ruby_app/elements/mobile/default/features/inputs_page'
+          require 'ruby_app/elements/mobile/default/features/swipe_page'
           require 'ruby_app/elements/mobile/default/features/trigger_page'
           require 'ruby_app/elements/mobile/default/features/lists_page'
           require 'ruby_app/elements/mobile/navigation/back_button'
@@ -40,6 +41,9 @@ module RubyApp
 
               @lists_link = RubyApp::Elements::Mobile::Navigation::PageButton.new
               @lists_link.page = RubyApp::Elements::Mobile::Default::Features::ListsPage
+
+              @swipe_link = RubyApp::Elements::Mobile::Navigation::PageButton.new
+              @swipe_link.page = RubyApp::Elements::Mobile::Default::Features::SwipePage
 
               @trigger_link = RubyApp::Elements::Mobile::Navigation::PageButton.new
               @trigger_link.page = RubyApp::Elements::Mobile::Default::Features::TriggerPage
