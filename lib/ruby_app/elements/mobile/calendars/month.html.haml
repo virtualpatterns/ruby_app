@@ -1,0 +1,34 @@
+/
+  #{__FILE__}
+%div.month{self.attributes}
+  %table{:cellpadding => 0,
+         :cellspacing => 0}
+    %thead
+      - sunday = self.first_date
+      %tr
+        - (0..6).each do |weekday|
+          - day = sunday + weekday
+          %td
+            = RubyApp::Language.locale.strftime(day, '%a')
+    %tbody
+      - first_date = self.first_date
+      - last_date = self.last_date
+      - date = first_date
+      - (0..6).each do |week|
+        - if date <= last_date
+          %tr
+            - (0..6).each do |weekday|
+              %td
+                - if date.month == @display.month
+                  - unless date == @value
+                    %a.date.ui-btn.ui-shadow.ui-btn-corner-all{:class => "ui-btn-#{date == @today ? 'down' : 'up'}-#{self.attributes['data-date-theme'] || 'c'}",
+                                                               'href' => '#',
+                                                               'data-value' => date}
+                      = date.day
+                  - else
+                    %span.value.ui-btn.ui-shadow.ui-btn-corner-all.ui-btn-active
+                      = date.day
+                - else
+                  %span.date.ui-btn.ui-shadow.ui-btn-corner-all.ui-disabled{:class => "ui-btn-down-#{self.attributes['data-date-theme'] || 'c'}"}
+                    = date.day
+                - date += 1

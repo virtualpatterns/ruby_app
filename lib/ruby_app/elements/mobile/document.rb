@@ -43,7 +43,7 @@ module RubyApp
 
           @metadata.merge!('viewport' => 'width=device-width, initial-scale=1')
 
-          @stylesheets.push('http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.css')
+          @stylesheets.push('http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.css')
           @stylesheets.push("/#{RubyApp::Language.locale.code}/document.css")
 
           @scripts.push('http://code.jquery.com/jquery-1.7.1.js')

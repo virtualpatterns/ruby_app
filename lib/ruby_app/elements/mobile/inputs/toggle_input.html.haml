@@ -1,6 +1,6 @@
 /
   #{__FILE__}
-%select{attributes}
+%select{self.attributes}
   %option{:value => 'false', :selected => self.value == false}
     = RubyApp::Elements::Mobile::Inputs::ToggleInput.translate._off
   %option{:value => 'true', :selected => self.value == true}

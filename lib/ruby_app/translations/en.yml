@@ -6,6 +6,10 @@ ruby_app:
   elements:
     mobile:
       dialogs:
+        calendars:
+          month_dialog:
+            today: "Today"
+            close: "Close"
         acknowledgement_dialog:
           ok: "OK"
         confirmation_dialog:

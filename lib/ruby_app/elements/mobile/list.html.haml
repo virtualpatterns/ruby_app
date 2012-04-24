@@ -1,5 +1,5 @@
 /
   #{__FILE__}
-%ul.list{attributes}
+%ul.list{self.attributes}
   - self.items.each do |item|
     = item.render(:html)

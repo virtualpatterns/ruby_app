@@ -1,5 +1,6 @@
 load_script! 'default'
 load_script! 'elements/buttons'
+load_script! 'elements/calendars/month'
 load_script! 'elements/dialogs'
 load_script! 'elements/inputs'
 load_script! 'elements/lists'

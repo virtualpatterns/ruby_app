@@ -91,19 +91,23 @@ module RubyApp
       end
 
       def add_class(selector, _class)
-        self.execute("RubyApp.addClass(#{selector.to_json}, #{_class.to_json});")
+        _selector = ".ui-page-active #{selector}"
+        self.execute("RubyApp.addClass(#{_selector.to_json}, #{_class.to_json});")
       end
 
       def remove_class(selector, _class)
-        self.execute("RubyApp.removeClass(#{selector.to_json}, #{_class.to_json});")
+        _selector = ".ui-page-active #{selector}"
+        self.execute("RubyApp.removeClass(#{_selector.to_json}, #{_class.to_json});")
       end
 
       def update_text(selector, value)
-        self.execute("RubyApp.updateText(#{selector.to_json}, #{value.to_json});")
+        _selector = ".ui-page-active #{selector}"
+        self.execute("RubyApp.updateText(#{_selector.to_json}, #{value.to_json});")
       end
 
       def update_value(selector, value)
-        self.execute("RubyApp.updateValue(#{selector.to_json}, #{value.to_json});")
+        _selector = ".ui-page-active #{selector}"
+        self.execute("RubyApp.updateValue(#{_selector.to_json}, #{value.to_json});")
       end
 
       def update_input(text, value)
@@ -111,7 +115,8 @@ module RubyApp
       end
 
       def update_value_for(selector, value)
-        self.execute("RubyApp.updateValueFor(#{selector.to_json}, #{value.to_json});")
+        _selector = ".ui-page-active #{selector}"
+        self.execute("RubyApp.updateValueFor(#{_selector.to_json}, #{value.to_json});")
       end
 
       def set_cookie(name, value, expires = Time.now + 365*24*60*60)

@@ -1,0 +1,18 @@
+- self.content_for(:html, :dialog) do
+  /
+    #{__FILE__}
+  %div{'data-role' => 'header'}
+    %h1
+      = RubyApp::Language.locale.strftime(@month.display, '%b %Y')
+  %div{'data-role' => 'content'}
+    = @month.render(:html)
+    %div.buttons.ui-grid-b
+      %div.ui-block-a
+        = @previous_link.render(:html) do |element|
+          - element.content_for(:html, :link, RubyApp::Language.locale.strftime(@month.display << 1, '%b'))
+      %div.ui-block-b
+        = @today_link.render(:html) do |element|
+          - element.content_for(:html, :link, RubyApp::Elements::Mobile::Dialogs::Calendars::MonthDialog.translate.today)
+      %div.ui-block-c
+        = @next_link.render(:html) do |element|
+          - element.content_for(:html, :link, RubyApp::Language.locale.strftime(@month.display >> 1, '%b'))

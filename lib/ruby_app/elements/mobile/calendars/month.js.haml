@@ -1,0 +1,9 @@
+:plain
+  // #{__FILE__}
+  $(document).ready( function() {
+    $(document).on('tap', 'div.month a.date', function(event) {
+      event.preventDefault();
+      RubyApp.queueEvent({_class:'RubyApp::Elements::Mobile::Calendars::Month::ChangedEvent', source:$(this).parents('div.month').attr('id'), value:$(this).attr('data-value')});
+    });
+  });
+= yield

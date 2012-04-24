@@ -1,7 +1,7 @@
 !!! 5
 /
   #{__FILE__}
-%html{attributes}
+%html{self.attributes}
   %head
     - self.metadata.each do |name, value|
       %meta{:name => name,
