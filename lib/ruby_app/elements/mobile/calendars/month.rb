@@ -14,46 +14,6 @@ module RubyApp
 
         class Month < RubyApp::Element
 
-          class MovedEvent < RubyApp::Element::Event
-
-            def initialize(data)
-              super(data)
-            end
-
-          end
-
-          class MovedPreviousEvent < RubyApp::Elements::Mobile::Calendars::Month::MovedEvent
-
-            def initialize(data)
-              super(data)
-            end
-
-            def previous?
-              return true
-            end
-
-            def next?
-              return false
-            end
-
-          end
-
-          class MovedNextEvent < RubyApp::Elements::Mobile::Calendars::Month::MovedEvent
-
-            def initialize(data)
-              super(data)
-            end
-
-            def previous?
-              return false
-            end
-
-            def next?
-              return true
-            end
-
-          end
-
           class ChangedEvent < RubyApp::Element::Event
 
             attr_reader :value
@@ -73,6 +33,7 @@ module RubyApp
           template_path(:all, File.dirname(__FILE__))
 
           attr_accessor :value
+          attr_accessor :display
 
           event :changed
 
