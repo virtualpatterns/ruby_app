@@ -37,10 +37,10 @@ module RubyApp
 
           event :changed
 
-          def initialize(today = Date.today)
+          def initialize(today = Date.today, value = Date.today)
             super()
             @today = today
-            @value = @today
+            @value = value
             @display = @value
           end
 

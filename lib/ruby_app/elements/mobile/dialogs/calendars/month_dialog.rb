@@ -17,10 +17,10 @@ module RubyApp
 
             attr_accessor :value
 
-            def initialize(today = Date.today)
+            def initialize(today = Date.today, value = Date.today)
               super()
 
-              @month = RubyApp::Elements::Mobile::Calendars::Month.new(today)
+              @month = RubyApp::Elements::Mobile::Calendars::Month.new(today, value)
               @month.changed do |element, event|
                 @response = @month.value
                 self.hide(event, @today_link.options)

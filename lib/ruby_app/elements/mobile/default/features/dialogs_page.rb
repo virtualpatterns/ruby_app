@@ -47,7 +47,7 @@ module RubyApp
 
               @month_link = RubyApp::Elements::Mobile::Button.new
               @month_link.clicked do |element, event|
-                RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::Calendars::MonthDialog.new(event.today), :transition => 'pop') do |_event, response|
+                RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::Calendars::MonthDialog.new(event.today, event.today << 1), :transition => 'pop') do |_event, response|
                   RubyApp::Elements::Mobile::Dialog.show(_event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('Acknowledgement', "You responded day #{response.day}."), :transition => 'pop')
                 end
               end
