@@ -22,6 +22,10 @@ end
 class Hash
   include RubyApp::Mixins::HashMixin
 
+  def prepend!(key, value)
+    self[key] = "#{value} #{self[key]}"
+  end
+
   def symbolize!
     copy=self.dup
     self.clear

@@ -90,6 +90,11 @@ module RubyApp
         self.execute("RubyApp.go(#{url.to_json});")
       end
 
+      def update_style(selector, property, value)
+        _selector = ".ui-page-active #{selector}"
+        self.execute("RubyApp.updateStyle(#{_selector.to_json}, #{property.to_json}, #{value.to_json});")
+      end
+
       def add_class(selector, _class)
         _selector = ".ui-page-active #{selector}"
         self.execute("RubyApp.addClass(#{_selector.to_json}, #{_class.to_json});")
@@ -234,7 +239,7 @@ module RubyApp
     event :asserted
 
     def initialize
-      @attributes = {:id => self.element_id}
+      @attributes = {'id' => self.element_id}
     end
 
     def element_id

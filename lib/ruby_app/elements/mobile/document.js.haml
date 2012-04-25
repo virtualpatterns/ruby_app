@@ -93,6 +93,9 @@
       $(window).clearQueue();
       location.assign(url);
     },
+    this.updateStyle = function(selector, property, value) {
+      $(selector).css(property, value);
+    },
     this.addClass = function(selector, _class) {
       $(selector).addClass(_class);
     },
