@@ -14,9 +14,28 @@ module RubyApp
 
             template_path(:all, File.dirname(__FILE__))
 
-            def initialize(script)
-              super(script)
+            def initialize(item)
+              super(item)
               self.attributes.merge!('data-icon' => 'arrow-r')
+            end
+
+            def go(event, options)
+            end
+
+          end
+
+          class NavigationListPageItem < RubyApp::Elements::Mobile::Navigation::NavigationList::NavigationListItem
+
+            template_path(:all, File.dirname(__FILE__))
+
+            alias :page :item
+
+            def initialize(page)
+              super(page)
+            end
+
+            def go(event, options)
+              self.page.new.show(event, options)
             end
 
           end
@@ -27,7 +46,13 @@ module RubyApp
 
           def initialize
             super
+
             @options = RubyApp::Elements::Mobile::Navigation::NavigationLink.default_options
+
+            self.item_clicked do |element, event|
+              event.item.go(event, @options)
+            end
+
           end
 
         end

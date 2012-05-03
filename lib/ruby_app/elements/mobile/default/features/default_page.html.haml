@@ -19,6 +19,8 @@
         - element.content_for(:html, :link, 'Inputs')
       = @lists_link.render(:html) do |element|
         - element.content_for(:html, :link, 'Lists')
+      = @navigation_link.render(:html) do |element|
+        - element.content_for(:html, :link, 'Navigation')
       = @swipe_link.render(:html) do |element|
         - element.content_for(:html, :link, 'Swipe')
       = @trigger_link.render(:html) do |element|

@@ -13,10 +13,10 @@ module RubyApp
 
           attr_accessor :page
 
-          def initialize
-            super
+          def initialize(page = nil)
+            super()
 
-            @page = nil
+            @page = page
 
             self.clicked do |element, event|
               page = @page.new

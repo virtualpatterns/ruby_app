@@ -15,8 +15,8 @@ module RubyApp
 
               template_path(:all, File.dirname(__FILE__))
 
-              def initialize(script)
-                super(script)
+              def initialize(item)
+                super(item)
               end
 
             end
