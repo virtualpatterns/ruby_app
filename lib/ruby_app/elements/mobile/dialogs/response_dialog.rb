@@ -16,7 +16,7 @@ module RubyApp
 
             def initialize
               super
-              self.attributes.merge!('data-inline' => true)
+              self.attributes.merge!('data-inline' => 'true')
               self.options.merge!(:transition => 'pop')
             end
 

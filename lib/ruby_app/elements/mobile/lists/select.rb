@@ -15,11 +15,14 @@ module RubyApp
 
           def initialize
             super
-            self.attributes.merge!('data-selected-theme' => 'a')
+            self.attributes.merge!('data-selected-theme' => 'b')
           end
 
           def selected_item=(item)
-            @selected_item = item
+            @selected_item.attributes.merge!('data-theme' => nil) if @selected_item
+            selected_items = self.items.select { |_item| _item.item == item }
+            @selected_item = selected_items.first
+            @selected_item.attributes.merge!('data-theme' => self.attributes['data-selected-theme']) if @selected_item
           end
 
           protected

@@ -90,6 +90,7 @@ module RubyApp
         event :shown
         event :before_hidden
         event :hidden
+        event :unloaded
         event :swiped
 
         def initialize
@@ -131,7 +132,10 @@ module RubyApp
           end
 
           def on_hidden(event)
-            RubyApp::Session.document.pages.pop if RubyApp::Session.document.pages.last == self
+            if RubyApp::Session.document.pages.last == self
+              RubyApp::Session.document.pages.pop
+              unloaded(event)
+            end
             hidden(event)
           end
 

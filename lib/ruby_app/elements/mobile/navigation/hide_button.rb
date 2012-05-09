@@ -14,7 +14,7 @@ module RubyApp
           def initialize
             super
 
-            self.options.merge!(:reverse => true)
+            self.options.merge!(:reverse => 'true')
 
             self.clicked do |element, event|
               RubyApp::Session.document.pages.last.hide(event, self.options)

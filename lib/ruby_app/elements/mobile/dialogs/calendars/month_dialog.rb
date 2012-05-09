@@ -29,7 +29,7 @@ module RubyApp
               @previous_link = RubyApp::Elements::Mobile::Button.new
               @previous_link.attributes.merge!('data-icon'    => 'arrow-l',
                                                'data-iconpos' => 'left',
-                                               'data-inline'  => true)
+                                               'data-inline'  => 'true')
               @previous_link.clicked do |element, event|
                 @month.move_previous(event)
                 event.update_text('div[data-role="header"] h1', RubyApp::Language.locale.strftime(@month.display, '%b %Y'))
@@ -46,7 +46,7 @@ module RubyApp
               @next_link = RubyApp::Elements::Mobile::Button.new
               @next_link.attributes.merge!('data-icon'    => 'arrow-r',
                                            'data-iconpos' => 'right',
-                                           'data-inline'  => true)
+                                           'data-inline'  => 'true')
               @next_link.clicked do |element, event|
                 @month.move_next(event)
                 event.update_text('div[data-role="header"] h1', RubyApp::Language.locale.strftime(@month.display, '%b %Y'))

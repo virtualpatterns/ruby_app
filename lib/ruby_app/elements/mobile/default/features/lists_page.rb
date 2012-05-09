@@ -23,7 +23,7 @@ module RubyApp
               @back_button = RubyApp::Elements::Mobile::Navigation::BackButton.new
 
               @list = RubyApp::Elements::Mobile::List.new
-              @list.attributes.merge!('data-inset' => true)
+              @list.attributes.merge!('data-inset' => 'true')
               @list.items += [  RubyApp::Elements::Mobile::List::ListDivider.new('List') ]
               @list.items += [  'Item 01',
                                 'Item 02',
@@ -39,13 +39,14 @@ module RubyApp
               end
 
               @select = RubyApp::Elements::Mobile::Lists::Select.new
-              @select.attributes.merge!('data-inset' => true)
+              @select.attributes.merge!('data-inset' => 'true')
               @select.items += [  RubyApp::Elements::Mobile::List::ListDivider.new('Select') ]
               @select.items += [  'Item 11',
                                   'Item 12',
                                   'Item 13',
                                   'Item 14',
                                   'Item 15' ].collect { |item| RubyApp::Elements::Mobile::List::ListSplitItem.new(item) }
+              @select.selected_item = 'Item 11'
 
               @select.item_clicked do |element, event|
                 RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('List', "You clicked the item #{event.item.item}."), :transition => 'pop')
