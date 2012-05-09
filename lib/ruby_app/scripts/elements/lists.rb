@@ -28,29 +28,7 @@ add_step! RubyApp::Elements::Mobile::Page::ShownEvent do |event|
 end
 
 add_step! RubyApp::Elements::Mobile::Page::ShownEvent do |event|
-  event.assert_exists_link('Item 11')
-  event.tap_list_item('Item 11')
-end
-
-add_step! RubyApp::Elements::Mobile::Page::ShownEvent do |event|
-  event.assert_exists_text('You clicked the item Item 11.')
-  event.assert_exists_link('OK')
-  event.tap_link('OK')
-end
-
-add_step! RubyApp::Elements::Mobile::Page::ShownEvent do |event|
-  event.assert_exists_link('Item 11')
-  event.tap_list_link('Item 11')
-end
-
-add_step! RubyApp::Elements::Mobile::Page::ShownEvent do |event|
-  event.assert_exists_text('You clicked the link Item 11.')
-  event.assert_exists_link('OK')
-  event.tap_link('OK')
-end
-
-add_step! RubyApp::Elements::Mobile::Page::ShownEvent do |event|
-  event.assert_exists_link('Item 11')
+  event.assert_exists_link('Item 01')
   event.tap_link('Back')
 end
 

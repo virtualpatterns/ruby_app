@@ -9,7 +9,6 @@ module RubyApp
         module Features
           require 'ruby_app/elements/mobile/dialogs/acknowledgement_dialog'
           require 'ruby_app/elements/mobile/list'
-          require 'ruby_app/elements/mobile/lists/select'
           require 'ruby_app/elements/mobile/navigation/back_button'
           require 'ruby_app/elements/mobile/page'
 
@@ -35,23 +34,6 @@ module RubyApp
                 RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('List', "You clicked the item #{event.item.item}."), :transition => 'pop')
               end
               @list.link_clicked do |element, event|
-                RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('List', "You clicked the link #{event.item.item}."), :transition => 'pop')
-              end
-
-              @select = RubyApp::Elements::Mobile::Lists::Select.new
-              @select.attributes.merge!('data-inset' => 'true')
-              @select.items += [  RubyApp::Elements::Mobile::List::ListDivider.new('Select') ]
-              @select.items += [  'Item 11',
-                                  'Item 12',
-                                  'Item 13',
-                                  'Item 14',
-                                  'Item 15' ].collect { |item| RubyApp::Elements::Mobile::List::ListSplitItem.new(item) }
-              @select.selected_item = 'Item 11'
-
-              @select.item_clicked do |element, event|
-                RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('List', "You clicked the item #{event.item.item}."), :transition => 'pop')
-              end
-              @select.link_clicked do |element, event|
                 RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('List', "You clicked the link #{event.item.item}."), :transition => 'pop')
               end
 
