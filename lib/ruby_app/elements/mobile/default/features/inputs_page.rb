@@ -27,32 +27,32 @@ module RubyApp
 
               @simple_input = RubyApp::Elements::Mobile::Input.new
               @simple_input.changed do |element, event|
-                RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('Simple Input', "You input #{@simple_input.value}."), :transition => 'pop')
+                RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('Simple Input', "You input #{@simple_input.value}."))
               end
 
               @date_input = RubyApp::Elements::Mobile::Inputs::DateInput.new
               @date_input.changed do |element, event|
-                RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('Date Input', "You input #{@date_input.value}."), :transition => 'pop')
+                RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('Date Input', "You input #{@date_input.value}."))
               end
 
               @duration_input = RubyApp::Elements::Mobile::Inputs::DurationInput.new
               @duration_input.changed do |element, event|
-                RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('Duration Input', "You input #{@duration_input.duration}."), :transition => 'pop')
+                RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('Duration Input', "You input #{@duration_input.duration}."))
               end
 
               @email_input = RubyApp::Elements::Mobile::Inputs::EmailInput.new
               @email_input.changed do |element, event|
-                RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('Email Input', "You input #{@email_input.value}."), :transition => 'pop')
+                RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('Email Input', "You input #{@email_input.value}."))
               end
 
               @multiline_input = RubyApp::Elements::Mobile::Inputs::MultilineInput.new
               @multiline_input.changed do |element, event|
-                RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('Multiline Input', "You input #{@multiline_input.value}."), :transition => 'pop')
+                RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('Multiline Input', "You input #{@multiline_input.value}."))
               end
 
               @toggle_input = RubyApp::Elements::Mobile::Inputs::ToggleInput.new
               @toggle_input.changed do |element, event|
-                RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('Toggle Input', "You input #{@toggle_input.value}."), :transition => 'pop')
+                RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('Toggle Input', "You input #{@toggle_input.value}."))
               end
 
             end

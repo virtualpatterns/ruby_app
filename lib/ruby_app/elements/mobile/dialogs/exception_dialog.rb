@@ -17,9 +17,6 @@ module RubyApp
             @exception = exception
 
             @close_link = RubyApp::Elements::Mobile::Dialogs::ResponseDialog::CloseLink.new
-            @close_link.clicked do |element, event|
-              self.hide(event, element.options)
-            end
 
           end
 

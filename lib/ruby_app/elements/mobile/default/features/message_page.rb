@@ -7,12 +7,10 @@ module RubyApp
       module Default
 
         module Features
-          require 'ruby_app/elements/mobile/button'
-          require 'ruby_app/elements/mobile/default/features/navigated_page'
           require 'ruby_app/elements/mobile/navigation/back_button'
           require 'ruby_app/elements/mobile/page'
 
-          class SwipePage < RubyApp::Elements::Mobile::Page
+          class MessagePage < RubyApp::Elements::Mobile::Page
 
             template_path(:all, File.dirname(__FILE__))
 
@@ -21,8 +19,12 @@ module RubyApp
 
               @back_button = RubyApp::Elements::Mobile::Navigation::BackButton.new
 
-              self.swiped do |element, event|
-                RubyApp::Elements::Mobile::Default::Features::NavigatedPage.new.show(event, :reverse => event.is_a?(RubyApp::Elements::Mobile::Page::SwipedRightEvent) ? true : false)
+              self.shown do |element, event|
+                event.send_message(self, "Message")
+              end
+
+              self.messaged do |element, event|
+                event.update_text('div.message', "Messaged at #{RubyApp::Language.locale.strftime(Time.now, RubyApp::Application.configuration.format.date.long)} with message #{event.message ? event.message.inspect : '(none)'}")
               end
 
             end

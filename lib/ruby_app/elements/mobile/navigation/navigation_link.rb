@@ -19,7 +19,7 @@ module RubyApp
           end
 
           def self.default_options
-            return {:transition => 'slide'}
+            return {:transition => 'none'}
           end
 
         end

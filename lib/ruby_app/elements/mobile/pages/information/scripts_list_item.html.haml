@@ -1,5 +1,9 @@
 - self.content_for(:html, :item) do
   /
     #{__FILE__}
-  %code
-    = self.script.name
+  %div.script
+    %div.name
+      %code
+        = self.script.name
+        /
+          #{self.script.url}

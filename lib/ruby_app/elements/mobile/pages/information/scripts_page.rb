@@ -26,7 +26,7 @@ module RubyApp
                 if RubyApp::Session.configuration.scripts.enabled
                   event.go(event.item.script.url)
                 else
-                  RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('Scripts', 'Scripts are currently disabled.'), :transition => 'pop')
+                  RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('Scripts', 'Scripts are currently disabled.'))
                 end
               end
 

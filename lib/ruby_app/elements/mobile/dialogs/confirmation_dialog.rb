@@ -20,13 +20,11 @@ module RubyApp
             @yes_link = RubyApp::Elements::Mobile::Dialogs::ResponseDialog::CloseLink.new
             @yes_link.clicked do |element, event|
               @response = true
-              self.hide(event, element.options)
             end
 
             @no_link = RubyApp::Elements::Mobile::Dialogs::ResponseDialog::CloseLink.new
             @no_link.clicked do |element, event|
               @response = false
-              self.hide(event, element.options)
             end
 
           end

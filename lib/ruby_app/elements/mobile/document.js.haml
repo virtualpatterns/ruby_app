@@ -1,21 +1,23 @@
 :plain
   // #{__FILE__}
   var RubyApp = new function() {
-    this.queueEvent = function(event) {
+    this.sendEvent = function(event) {
+      // RubyApp.log('ENQUEUE event.class=' + event._class);
       event.now = new Date().toString();
       event.session = RubyApp.getData('session', null);
       $(window).queue( function() {
-        RubyApp.log('RubyApp.queueEvent(...)    DEQUEUE event.class=' + event._class);
+        // RubyApp.log('DEQUEUE event.class=' + event._class);
         request = $.ajax({type:'POST', url:location.href, data:event});
         request
           .success( function(event) {
             $.each(event.statements, function(index, statement) {
-              RubyApp.log('RubyApp.queueEvent(...)    EVAL    statement="' + statement + '"')
+              RubyApp.log('EVAL    ' + statement)
               eval(statement);
             } );
+            RubyApp.log('SUCCESS event.class=' + event._class);
           } )
           .error( function(request, message, exception) {
-            RubyApp.log('RubyApp.queueEvent(...)    ERROR   event.class=' + event._class +' message=' + message);
+            RubyApp.log('ERROR   event.class=' + event._class + ' message=' + message);
             RubyApp.confirmRefreshBrowser(RubyApp.getData('error_message', null));
           } )
           .complete( function() {
@@ -24,61 +26,69 @@
       } );
     },
     this.showPage = function(id, options) {
-      $(window).clearQueue();
       if ($('#' + id).length)
         $.mobile.changePage($('#' + id), options);
       else
       {
-        RubyApp.log('RubyApp.showPage(...)      REQUEST id=' + id);
+        // RubyApp.log('ENQUEUE RubyApp.showPage("' + id + '", ...)');
+        $(window).queue( function() {
+          // RubyApp.log('DEQUEUE RubyApp.showPage("' + id + '", ...)');
+          $.mobile.showPageLoadingMsg();
+          request = $.ajax({type:'GET', url:'/' + RubyApp.getData('locale', 'en') + '/elements/' + id + '.html'});
+          request
+            .success( function(content) {
+              $('body').prepend(content);
+              $.mobile.changePage($('#' + id), options);
+              RubyApp.log('SUCCESS RubyApp.showPage("' + id + '", ...)');
+            } )
+            .error( function(request, message, exception) {
+              RubyApp.log('ERROR   RubyApp.showPage("' + id + '", ...) message=' + message);
+              RubyApp.confirmRefreshBrowser(RubyApp.getData('error_message', null));
+            } )
+            .complete( function() {
+              $.mobile.hidePageLoadingMsg();
+              $(window).dequeue();
+            } );
+        } );
+      }
+    },
+    this.removePage = function(id) {
+      $('#' + id).remove();
+    },
+    this.updateElement = function(id) {
+      // RubyApp.log('ENQUEUE RubyApp.updateElement("' + id + '")');
+      $(window).queue( function() {
+        // RubyApp.log('DEQUEUE RubyApp.updateElement("' + id + '")');
         $.mobile.showPageLoadingMsg();
         request = $.ajax({type:'GET', url:'/' + RubyApp.getData('locale', 'en') + '/elements/' + id + '.html'});
         request
           .success( function(content) {
-            $('body').prepend(content);
-            $.mobile.changePage($('#' + id), options);
+            $('#' + id).replaceWith(content);
+            $('#' + id).parent().trigger('create');
+            RubyApp.log('SUCCESS RubyApp.updateElement("' + id + '")');
           } )
           .error( function(request, message, exception) {
-            RubyApp.log('RubyApp.showPage(...)      ERROR  id=' + id +' message=' + message);
+            RubyApp.log('ERROR   RubyApp.updateElement("' + id + '") message=' + message);
             RubyApp.confirmRefreshBrowser(RubyApp.getData('error_message', null));
           } )
           .complete( function() {
             $.mobile.hidePageLoadingMsg();
+            $(window).dequeue();
           } );
-      }
-    },
-    this.removePage = function(id) {
-      $(document).on('pagehide.removePage', '#' + id, function(event) {
-        $(document).off('pagehide.removePage', '#' + id);
-        $(this).remove();
-      });
-    },
-    this.updateElement = function(id) {
-      RubyApp.log('RubyApp.updateElement(...) REQUEST id=' + id);
-      $.mobile.showPageLoadingMsg();
-      request = $.ajax({type:'GET', url:'/' + RubyApp.getData('locale', 'en') + '/elements/' + id + '.html'});
-      request
-        .success( function(content) {
-          $('#' + id).replaceWith(content);
-          $('#' + id).parent().trigger('create');
-        } )
-        .error( function(request, message, exception) {
-          RubyApp.log('RubyApp.showPage(...) ERROR  id=' + id +' message=' + message);
-          RubyApp.confirmRefreshBrowser(RubyApp.getData('error_message', null));
-        } )
-        .complete( function() {
-          $.mobile.hidePageLoadingMsg();
-        } );
+      } );
+      RubyApp.sendEvent({_class:'RubyApp::Element::UpdatedEvent', source:id});
     },
     this.createTrigger = function(id, interval) {
       RubyApp.destroyTrigger(id);
       $('#' + id)[0]._trigger = window.setInterval( function() {
-        RubyApp.queueEvent({_class:'RubyApp::Element::TriggeredEvent', source:id});
+        RubyApp.sendEvent({_class:'RubyApp::Element::TriggeredEvent', source:id});
       }, interval );
     },
     this.destroyTrigger = function(id) {
-      if ($('#' + id)[0]._trigger != undefined) {
+      if ($('#' + id)[0]._trigger) {
         window.clearInterval($('#' + id)[0]._trigger);
         $('#' + id)[0]._trigger = undefined;
+        RubyApp.log('SUCCESS RubyApp.destroyTrigger("' + id + '")');
       }
     },
     this.refreshBrowser = function() {
@@ -131,6 +141,9 @@
     this.assertExists = function(selector) {
       RubyApp.assert('selector=' + selector, $(selector).length > 0);
     },
+    this.assertNotExists = function(selector) {
+      RubyApp.assert('selector=' + selector, $(selector).length <= 0);
+    },
     this.assertExistsFor = function(selector) {
       var _for = $(selector).attr('for');
       RubyApp.assert('selector=' + selector + ', for=' + _for, $('#' + _for).length > 0);
@@ -141,7 +154,7 @@
       RubyApp.assert('selector=' + selector + ', for=' + _for + ', value=' + value, _value == value);
     },
     this.assert = function(name, value) {
-      RubyApp.queueEvent({_class:'RubyApp::Element::AssertedEvent', source:$('html').attr('id'), name:name, value:value});
+      RubyApp.sendEvent({_class:'RubyApp::Element::AssertedEvent', source:$('html').attr('id'), name:name, value:eval(value)});
     },
     this.getData = function(name, _default) {
       var value = $('meta[name="' + name + '"]').attr('content');
@@ -153,9 +166,9 @@
   };
 
   $(window).load(function() {
-    RubyApp.queueEvent({_class:'RubyApp::Elements::Mobile::Document::LoadedEvent', source:$('html').attr('id')});
+    RubyApp.sendEvent({_class:'RubyApp::Elements::Mobile::Document::LoadedEvent', source:$('html').attr('id')});
     if ($('div[data-role="page"]').length)
-      RubyApp.queueEvent({_class:'RubyApp::Elements::Mobile::Page::LoadedEvent', source:$('div[data-role="page"]').filter(':first').attr('id')});
+      RubyApp.sendEvent({_class:'RubyApp::Elements::Mobile::Page::LoadedEvent', source:$('div[data-role="page"]').filter(':first').attr('id')});
   });
 
 = yield

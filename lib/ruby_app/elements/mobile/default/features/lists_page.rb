@@ -31,10 +31,10 @@ module RubyApp
                                 'Item 05' ].collect { |item| RubyApp::Elements::Mobile::List::ListSplitItem.new(item) }
 
               @list.item_clicked do |element, event|
-                RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('List', "You clicked the item #{event.item.item}."), :transition => 'pop')
+                RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('List', "You clicked the item #{event.item.item}."))
               end
               @list.link_clicked do |element, event|
-                RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('List', "You clicked the link #{event.item.item}."), :transition => 'pop')
+                RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('List', "You clicked the link #{event.item.item}."))
               end
 
             end

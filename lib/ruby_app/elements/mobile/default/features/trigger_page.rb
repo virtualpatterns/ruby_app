@@ -20,9 +20,9 @@ module RubyApp
               @back_button = RubyApp::Elements::Mobile::Navigation::BackButton.new
 
               self.shown do |element, event|
-                event.create_trigger(self, 2)
+                event.create_trigger(self, 1)
               end
-              self.before_hidden do |element, event|
+              self.hidden do |element, event|
                 event.destroy_trigger(self)
               end
 

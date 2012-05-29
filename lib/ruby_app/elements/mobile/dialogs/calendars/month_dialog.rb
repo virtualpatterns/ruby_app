@@ -20,6 +20,11 @@ module RubyApp
             def initialize(today = Date.today, value = Date.today)
               super()
 
+              @today_link = RubyApp::Elements::Mobile::Dialogs::ResponseDialog::CloseLink.new
+              @today_link.clicked do |element, event|
+                @response = today
+              end
+
               @month = RubyApp::Elements::Mobile::Calendars::Month.new(today, value)
               @month.changed do |element, event|
                 @response = @month.value
@@ -31,16 +36,10 @@ module RubyApp
                                                'data-iconpos' => 'left',
                                                'data-inline'  => 'true')
               @previous_link.clicked do |element, event|
-                @month.move_previous(event)
+                @month.move_previous!(event)
                 event.update_text('div[data-role="header"] h1', RubyApp::Language.locale.strftime(@month.display, '%b %Y'))
                 event.update_text("##{@previous_link.element_id} span.ui-btn-text", RubyApp::Language.locale.strftime(@month.display << 1, '%b'))
                 event.update_text("##{@next_link.element_id} span.ui-btn-text", RubyApp::Language.locale.strftime(@month.display >> 1, '%b'))
-              end
-
-              @today_link = RubyApp::Elements::Mobile::Dialogs::ResponseDialog::CloseLink.new
-              @today_link.clicked do |element, event|
-                @response = today
-                self.hide(event, element.options)
               end
 
               @next_link = RubyApp::Elements::Mobile::Button.new
@@ -48,7 +47,7 @@ module RubyApp
                                            'data-iconpos' => 'right',
                                            'data-inline'  => 'true')
               @next_link.clicked do |element, event|
-                @month.move_next(event)
+                @month.move_next!(event)
                 event.update_text('div[data-role="header"] h1', RubyApp::Language.locale.strftime(@month.display, '%b %Y'))
                 event.update_text("##{@previous_link.element_id} span.ui-btn-text", RubyApp::Language.locale.strftime(@month.display << 1, '%b'))
                 event.update_text("##{@next_link.element_id} span.ui-btn-text", RubyApp::Language.locale.strftime(@month.display >> 1, '%b'))

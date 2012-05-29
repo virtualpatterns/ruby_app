@@ -44,12 +44,12 @@ module RubyApp
             @display = @value
           end
 
-          def move_previous(event)
+          def move_previous!(event)
             @display = @display << 1
             event.update_element(self)
           end
 
-          def move_next(event)
+          def move_next!(event)
             @display = @display >> 1
             event.update_element(self)
           end

@@ -73,9 +73,15 @@ module RubyApp
 
       def initialize
         super
-        self['Cache-Control'] = 'no-cache'
+
+        self['Expires']       = Time.now.getutc.strftime('%a, %d %b %Y %H:%M:%S GMT')
+        self['Last-Modified'] = Time.now.getutc.strftime('%a, %d %b %Y %H:%M:%S GMT')
+        self['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0, post-check=0, pre-check=0'
+        self['Pragma']        = 'no-cache'
+
         @templates = []
         @content = {}
+
       end
 
   end

@@ -2,3 +2,8 @@
 /
   #{__FILE__}
 %html{self.attributes}
+  %head
+    %script
+      :plain
+        // #{__FILE__}
+        location.assign('/');

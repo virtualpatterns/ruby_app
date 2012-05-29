@@ -9,7 +9,6 @@ ruby_app:
         calendars:
           month_dialog:
             today: "Today"
-            close: "Close"
         acknowledgement_dialog:
           ok: "OK"
         confirmation_dialog:

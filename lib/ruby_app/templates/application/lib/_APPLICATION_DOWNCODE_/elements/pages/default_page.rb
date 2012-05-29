@@ -17,7 +17,7 @@ module _APPLICATION_UPCODE_
           super
 
           @information_link = RubyApp::Elements::Mobile::Navigation::NavigationLink.new
-          @information_link.attributes.merge!('class' => 'ui-btn-right',
+          @information_link.attributes.merge!('class'     => 'ui-btn-right',
                                               'data-icon' => 'info')
           @information_link.clicked do |element, event|
             RubyApp::Elements::Mobile::Pages::InformationPage.new(event.now).show(event, element.options)

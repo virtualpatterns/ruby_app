@@ -61,6 +61,10 @@ module RubyApp
         self.execute("RubyApp.confirmRefreshBrowser(#{message.to_json});")
       end
 
+      def send_message(element, message = nil)
+        self.execute("RubyApp.sendEvent({_class:'RubyApp::Element::MessagedEvent', source:#{element.element_id.to_json}, message:#{message.to_json}});")
+      end
+
       def show_page(page, options = {})
         options.merge!(:changeHash => false)
         self.execute("RubyApp.showPage(#{page.element_id.to_json}, #{options.to_json});")
@@ -153,6 +157,10 @@ module RubyApp
         self.assert_exists_selector("*:contains('#{text}')")
       end
 
+      def assert_not_exists_text(text)
+        self.assert_not_exists_selector("*:contains('#{text}')")
+      end
+
       def assert_exists_link(text)
         self.assert_exists_selector("a:contains('#{text}')")
       end
@@ -160,6 +168,11 @@ module RubyApp
       def assert_exists_selector(selector)
         _selector = ".ui-page-active #{selector}"
         self.execute("RubyApp.assertExists(#{_selector.to_json});")
+      end
+
+      def assert_not_exists_selector(selector)
+        _selector = ".ui-page-active #{selector}"
+        self.execute("RubyApp.assertNotExists(#{_selector.to_json});")
       end
 
       def assert_exists_input(text, value = nil)
@@ -177,12 +190,21 @@ module RubyApp
         self.execute("RubyApp.assertExistsValueFor(#{_selector.to_json}, #{value.to_json});")
       end
 
+      def assert(name, expression = nil)
+        self.execute("RubyApp.assert(#{name.to_json}, #{(expression ? expression : yield).to_json});")
+      end
+
       def log(message)
         self.execute("RubyApp.log(#{message.to_json});")
       end
 
-      def execute(statement)
-        @statements << statement
+      def execute(statement = nil)
+        if statement
+          @statements << statement
+        else
+          yield if block_given?
+          self.execute("RubyApp.sendEvent({_class:'RubyApp::Element::ExecutedEvent', source:$('html').attr('id')});")
+        end
       end
 
       def to_hash
@@ -200,7 +222,7 @@ module RubyApp
 
     end
 
-    class TriggeredEvent < RubyApp::Element::Event
+    class ExecutedEvent < RubyApp::Element::Event
 
       def initialize(data)
         super(data)
@@ -221,6 +243,33 @@ module RubyApp
 
     end
 
+    class MessagedEvent < RubyApp::Element::Event
+
+      attr_reader :message
+
+      def initialize(data)
+        super(data)
+        @message = data['message']
+      end
+
+    end
+
+    class UpdatedEvent < RubyApp::Element::Event
+
+      def initialize(data)
+        super(data)
+      end
+
+    end
+
+    class TriggeredEvent < RubyApp::Element::Event
+
+      def initialize(data)
+        super(data)
+      end
+
+    end
+
     class ExceptionEvent < RubyApp::Element::Event
 
       def initialize(exception)
@@ -235,8 +284,10 @@ module RubyApp
     attr_reader :attributes
 
     event :evented
-    event :triggered
     event :asserted
+    event :messaged
+    event :updated
+    event :triggered
 
     def initialize
       @attributes = {'id' => self.element_id}
@@ -254,18 +305,28 @@ module RubyApp
     protected
 
       def on_event(event)
-        on_triggered(event) if event.is_a?(RubyApp::Element::TriggeredEvent)
         on_asserted(event) if event.is_a?(RubyApp::Element::AssertedEvent)
+        on_messaged(event) if event.is_a?(RubyApp::Element::MessagedEvent)
+        on_updated(event) if event.is_a?(RubyApp::Element::UpdatedEvent)
+        on_triggered(event) if event.is_a?(RubyApp::Element::TriggeredEvent)
         evented(event)
-      end
-
-      def on_triggered(event)
-        triggered(event)
       end
 
       def on_asserted(event)
         raise RubyApp::Exceptions::AssertFailedException.new(event.name) unless event.value
         asserted(event)
+      end
+
+      def on_messaged(event)
+        messaged(event)
+      end
+
+      def on_updated(event)
+        updated(event)
+      end
+
+      def on_triggered(event)
+        triggered(event)
       end
 
   end

@@ -19,6 +19,7 @@ add_step! (RubyApp::Element::AssertedEvent)             { |event| event.assert_e
 add_step! (RubyApp::Element::AssertedEvent)             { |event| event.assert_exists_link('No') }
 add_step! (RubyApp::Element::AssertedEvent)             { |event| event.tap_link('Yes') }
 
+add_step! (RubyApp::Elements::Mobile::Page::ShownEvent)
 add_step! (RubyApp::Elements::Mobile::Page::ShownEvent) { |event| event.assert_exists_text('You responded true.') }
 add_step! (RubyApp::Element::AssertedEvent)             { |event| event.assert_exists_link('OK') }
 add_step! (RubyApp::Element::AssertedEvent)             { |event| event.tap_link('OK') }
@@ -29,6 +30,7 @@ add_step! (RubyApp::Element::AssertedEvent)             { |event| event.tap_link
 add_step! (RubyApp::Elements::Mobile::Page::ShownEvent) { |event| event.assert_exists_text('Do you confirm this?') }
 add_step! (RubyApp::Element::AssertedEvent)             { |event| event.tap_link('No') }
 
+add_step! (RubyApp::Elements::Mobile::Page::ShownEvent)
 add_step! (RubyApp::Elements::Mobile::Page::ShownEvent) { |event| event.assert_exists_text('You responded false.') }
 add_step! (RubyApp::Element::AssertedEvent)             { |event| event.assert_exists_link('OK') }
 add_step! (RubyApp::Element::AssertedEvent)             { |event| event.tap_link('OK') }
@@ -47,6 +49,7 @@ add_step! (RubyApp::Element::AssertedEvent)             { |event| event.tap_link
 add_step! (RubyApp::Elements::Mobile::Page::ShownEvent) { |event| event.assert_exists_link(Date.today.day == 15 ? 14 : 15) }
 add_step! (RubyApp::Element::AssertedEvent)             { |event| event.tap_link(Date.today.day == 15 ? 14 : 15) }
 
+add_step! (RubyApp::Elements::Mobile::Page::ShownEvent)
 add_step! (RubyApp::Elements::Mobile::Page::ShownEvent) { |event| event.assert_exists_text("You responded day #{Date.today.day == 15 ? 14 : 15}.") }
 add_step! (RubyApp::Element::AssertedEvent)             { |event| event.assert_exists_link('OK') }
 add_step! (RubyApp::Element::AssertedEvent)             { |event| event.tap_link('OK') }
@@ -57,6 +60,7 @@ add_step! (RubyApp::Element::AssertedEvent)             { |event| event.tap_link
 add_step! (RubyApp::Elements::Mobile::Page::ShownEvent) { |event| event.assert_exists_link('Today') }
 add_step! (RubyApp::Element::AssertedEvent)             { |event| event.tap_link('Today') }
 
+add_step! (RubyApp::Elements::Mobile::Page::ShownEvent)
 add_step! (RubyApp::Elements::Mobile::Page::ShownEvent) { |event| event.assert_exists_text("You responded day #{Date.today.day}.") }
 add_step! (RubyApp::Element::AssertedEvent)             { |event| event.assert_exists_link('OK') }
 add_step! (RubyApp::Element::AssertedEvent)             { |event| event.tap_link('OK') }

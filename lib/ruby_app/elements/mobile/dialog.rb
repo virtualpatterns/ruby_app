@@ -19,7 +19,7 @@ module RubyApp
         def self.show(event, dialog, options = {})
           dialog.show(event, options)
           if block_given?
-            dialog.hidden do |element, _event|
+            dialog.removed do |element, _event|
               yield _event, dialog.response
             end
           end

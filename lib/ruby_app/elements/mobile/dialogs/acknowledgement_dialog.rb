@@ -22,7 +22,6 @@ module RubyApp
             @ok_link = RubyApp::Elements::Mobile::Dialogs::ResponseDialog::CloseLink.new
             @ok_link.clicked do |element, event|
               @response = true
-              self.hide(event, element.options)
             end
 
           end

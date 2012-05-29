@@ -1,22 +1,21 @@
-require 'rubygems'
-require 'bundler/setup'
-
-require 'rake'
-
 $LOAD_PATH.unshift File.expand_path(File.join(File.dirname(__FILE__), %w[lib]))
 
 require '_APPLICATION_DOWNCODE_'
 
 namespace :_APPLICATION_DOWNCODE_ do
 
-  desc 'Create console'
-  task :console do |task|
-    system("clear; bundle exec ruby_app console")
-  end
+  namespace :process do
 
-  desc 'Run'
-  task :run => ['_APPLICATION_DOWNCODE_:cache:destroy'] do |task|
-    system("clear; bundle exec ruby_app run")
+    desc 'Create console'
+    task :console do |task|
+      system("clear; bundle exec ruby_app console")
+    end
+
+    desc 'Run'
+    task :run => ['_APPLICATION_DOWNCODE_:cache:destroy'] do |task|
+      system("clear; bundle exec ruby_app run")
+    end
+
   end
 
   namespace :cache do

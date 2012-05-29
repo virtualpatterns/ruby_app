@@ -1,7 +1,7 @@
 module RubyApp
   require 'ruby_app/mixins'
 
-  class Exception < ::Exception
+  class Exception < ::RuntimeError
     extend RubyApp::Mixins::TranslateMixin
 
     def initialize(message)

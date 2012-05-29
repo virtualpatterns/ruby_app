@@ -90,11 +90,16 @@ module RubyApp
           begin
             if event.is_a?(step._class)
               @steps_index += 1
-              RubyApp::Log.duration(RubyApp::Log::INFO, "STEP   #{step.file}:#{step.line}") do
-                step.block.call(event)
+              RubyApp::Log.duration(RubyApp::Log::INFO, "STEP   Current #{step._class} #{step.file}:#{step.line}#{step.block ? nil : ' (no block)'}") do
+                step.block.call(event) if step.block
               end
               if @steps_index == @steps.length
+                RubyApp::Log.info('-' * 80)
                 RubyApp::Log.info("STEP   Completed #{@steps.length} steps")
+                RubyApp::Log.info('-' * 80)
+              else
+                step = @steps[@steps_index]
+                RubyApp::Log.info("STEP   Next    #{step._class} #{step.file}:#{step.line}#{step.block ? nil : ' (no block)'}")
               end
             end
           rescue => exception
@@ -137,10 +142,10 @@ module RubyApp
     end
 
     def self.generate_session_id(session)
-      session_id = "id_#{SecureRandom.hex(RubyApp::Session.configuration.length)}"
+      session_id = "id_#{SecureRandom.hex(RubyApp::Session.configuration._length)}"
       RubyApp::Session.lock_sessions do
         while RubyApp::Session.get_session(session_id)
-          session_id = "id_#{SecureRandom.hex(RubyApp::Session.configuration.length)}"
+          session_id = "id_#{SecureRandom.hex(RubyApp::Session.configuration._length)}"
         end
         RubyApp::Session.sessions.store(session_id, session)
         return session_id
@@ -213,7 +218,7 @@ module RubyApp
           elsif _path =~ /\.rb/
             name = _path.gsub(String.interpolate { RubyApp::Session.configuration.scripts.path }, '').gsub(/^\//, '').gsub(/\.rb/, '')
             scripts.push({:name => name,
-                        :url  => "/quit?go=#{CGI.escape("/?script=#{name}")}"})
+                          :url  => "/quit?go=#{CGI.escape("/?script=#{name}")}"})
           end
         end
       end

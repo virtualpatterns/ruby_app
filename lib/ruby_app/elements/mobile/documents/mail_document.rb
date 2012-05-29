@@ -11,6 +11,8 @@ module RubyApp
 
           template_path(:all, File.dirname(__FILE__))
 
+          exclude_parent_template(:all)
+
           def initialize
             super
           end

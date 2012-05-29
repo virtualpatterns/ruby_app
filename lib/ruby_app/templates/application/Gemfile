@@ -1,3 +1,4 @@
-source :rubygems
+source 'http://rubygems.org'
 
-gem 'RubyApp', :path => "~/Dropbox/Projects/gems/ruby_app"
+#gem 'RubyApp', :path => File.join(File.dirname(__FILE__), %w[.. gems ruby_app])
+gem 'RubyApp'

@@ -35,17 +35,18 @@ module RubyApp
       end
 
       route(RubyApp::Mixins::RouteMixin::GET, /\/elements\/([^\.]+)\.([^\.\?]+)/) do |method, path, element_id, format|
+        #RubyApp::Log.debug("#{RubyApp::Log.prefix(self, __method__)} --> #{method} #{path} #{element_id} #{format}")
         begin
           element = RubyApp::Element.get_element(element_id)
           RubyApp::Log.duration(RubyApp::Log::INFO, "GET    #{element.class} #{format}") do
             RubyApp::Response['Content-Type'] = RubyApp::Response.get_content_type(format)
             RubyApp::Response.write_from_cache(element, format.to_sym)
-            #RubyApp::Response.write(element.render(format.to_sym))
           end
         rescue => exception
           RubyApp::Log.exception(RubyApp::Log::ERROR, exception)
           raise
         end
+        #RubyApp::Log.debug("#{RubyApp::Log.prefix(self, __method__)} <-- #{method} #{path} #{element_id} #{format}")
       end
 
       route(RubyApp::Mixins::RouteMixin::GET, /\.([^\.\?]+)/) do |method, path, format|
@@ -54,7 +55,6 @@ module RubyApp
           RubyApp::Log.duration(RubyApp::Log::INFO, "GET    #{document.class} #{format}") do
             RubyApp::Response['Content-Type'] = RubyApp::Response.get_content_type(format)
             RubyApp::Response.write_from_cache(document, format.to_sym)
-            #RubyApp::Response.write(document.render(format.to_sym))
           end
         rescue => exception
           RubyApp::Log.exception(RubyApp::Log::ERROR, exception)
@@ -69,9 +69,7 @@ module RubyApp
       route(RubyApp::Mixins::RouteMixin::POST, /.*/) do |method, path|
         begin
           #RubyApp::Request.POST.each do |name, value|
-          #  unless ['_class'].include?(name)
-          #    RubyApp::Log.debug("POST  #{name.to_sym.inspect}=#{value.inspect}")
-          #  end
+          #  RubyApp::Log.debug("POST  #{name.to_sym.inspect}=#{value.inspect}")
           #end
           event = RubyApp::Element::Event.from_hash(RubyApp::Request.POST)
           RubyApp::Log.duration(RubyApp::Log::INFO, "POST   #{event.class}") do

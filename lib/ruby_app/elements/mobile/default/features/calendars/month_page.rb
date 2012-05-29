@@ -26,7 +26,7 @@ module RubyApp
 
                 @month = RubyApp::Elements::Mobile::Calendars::Month.new(Date.today, Date.today << 1)
                 @month.changed do |element, event|
-                  RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('Month', "You selected day #{@month.value.day}."), :transition => 'pop')
+                  RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('Month', "You selected day #{@month.value.day}."))
                 end
 
               end

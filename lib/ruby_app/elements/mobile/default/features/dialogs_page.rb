@@ -28,27 +28,27 @@ module RubyApp
 
               @acknowledgement_link = RubyApp::Elements::Mobile::Button.new
               @acknowledgement_link.clicked do |element, event|
-                RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('Acknowledgement', 'Acknowledge this.'), :transition => 'pop')
+                RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('Acknowledgement', 'Acknowledge this.'))
               end
 
               @confirmation_link = RubyApp::Elements::Mobile::Button.new
               @confirmation_link.clicked do |element, event|
-                RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::ConfirmationDialog.new('Confirmation', 'Do you confirm this?'), :transition => 'pop') do |_event, response|
-                  RubyApp::Elements::Mobile::Dialog.show(_event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('Acknowledgement', "You responded #{response.inspect}."), :transition => 'pop')
+                RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::ConfirmationDialog.new('Confirmation', 'Do you confirm this?')) do |_event, response|
+                  RubyApp::Elements::Mobile::Dialog.show(_event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('Acknowledgement', "You responded #{response.inspect}."))
                 end
               end
 
               @exception_link = RubyApp::Elements::Mobile::Button.new
               @exception_link.clicked do |element, event|
-                RubyApp::Elements::Mobile::Dialogs::ExceptionDialog.show_on_exception(event, :transition => 'pop') do
+                RubyApp::Elements::Mobile::Dialogs::ExceptionDialog.show_on_exception(event) do
                   raise 'This is an exception.'
                 end
               end
 
               @month_link = RubyApp::Elements::Mobile::Button.new
               @month_link.clicked do |element, event|
-                RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::Calendars::MonthDialog.new(event.today, event.today << 1), :transition => 'pop') do |_event, response|
-                  RubyApp::Elements::Mobile::Dialog.show(_event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('Acknowledgement', "You responded day #{response.day}."), :transition => 'pop')
+                RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::Calendars::MonthDialog.new(event.today, event.today << 1)) do |_event, response|
+                  RubyApp::Elements::Mobile::Dialog.show(_event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('Acknowledgement', "You responded day #{response.day}."))
                 end
               end
 

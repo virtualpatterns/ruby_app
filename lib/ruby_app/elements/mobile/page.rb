@@ -28,14 +28,6 @@ module RubyApp
 
         end
 
-        class BeforeHiddenEvent < RubyApp::Element::Event
-
-          def initialize(data)
-            super(data)
-          end
-
-        end
-
         class HiddenEvent < RubyApp::Element::Event
 
           def initialize(data)
@@ -88,9 +80,8 @@ module RubyApp
 
         event :loaded
         event :shown
-        event :before_hidden
         event :hidden
-        event :unloaded
+        event :removed
         event :swiped
 
         def initialize
@@ -100,11 +91,10 @@ module RubyApp
 
         def show(event, options = {})
           RubyApp::Session.document.pages.push(self)
-          event.show_page(self, options)
+          event.show_page(RubyApp::Session.document.pages.last, options)
         end
 
         def hide(event, options = {})
-          event.remove_page(self)
           event.show_page(RubyApp::Session.document.pages.second_last, options)
         end
 
@@ -113,7 +103,6 @@ module RubyApp
           def on_event(event)
             on_loaded(event) if event.is_a?(RubyApp::Elements::Mobile::Page::LoadedEvent)
             on_shown(event) if event.is_a?(RubyApp::Elements::Mobile::Page::ShownEvent)
-            on_before_hidden(event) if event.is_a?(RubyApp::Elements::Mobile::Page::BeforeHiddenEvent)
             on_hidden(event) if event.is_a?(RubyApp::Elements::Mobile::Page::HiddenEvent)
             on_swiped(event) if event.is_a?(RubyApp::Elements::Mobile::Page::SwipedEvent)
             super(event)
@@ -127,16 +116,13 @@ module RubyApp
             shown(event)
           end
 
-          def on_before_hidden(event)
-            before_hidden(event)
-          end
-
           def on_hidden(event)
+            hidden(event)
             if RubyApp::Session.document.pages.last == self
               RubyApp::Session.document.pages.pop
-              unloaded(event)
+              removed(event)
+              event.remove_page(self)
             end
-            hidden(event)
           end
 
           def on_swiped(event)

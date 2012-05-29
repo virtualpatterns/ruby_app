@@ -23,7 +23,7 @@ module RubyApp
 
               @button_link = RubyApp::Elements::Mobile::Button.new
               @button_link.clicked do |element, event|
-                RubyApp::Elements::Mobile::Default::Features::NavigatedPage.new.show(event, :transition => 'slide')
+                RubyApp::Elements::Mobile::Default::Features::NavigatedPage.new.show(event)
               end
 
             end
