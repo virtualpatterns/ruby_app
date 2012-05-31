@@ -43,10 +43,10 @@ module RubyApp
 
           @metadata.merge!('viewport' => 'width=device-width, initial-scale=1')
 
-          @stylesheets.push('http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.css')
+          @stylesheets.push('http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.css')
 
-          @scripts.push('http://code.jquery.com/jquery-1.7.1.js')
-          @scripts.push('http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.js')
+          @scripts.push('http://code.jquery.com/jquery-1.7.1.min.js')
+          @scripts.push('http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.js')
 
         end
 
