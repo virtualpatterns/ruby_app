@@ -23,6 +23,10 @@ module RubyApp
       @@_application ||= nil
     end
 
+    def self.exists?
+      return @@_application
+    end
+
     def self.create!
       @@_application = ( Kernel.eval(RubyApp::Application.configuration._class) ).new
     end
@@ -32,15 +36,17 @@ module RubyApp
     end
 
     def self.create_context!(configuration_paths = [File.join(RubyApp::ROOT, %w[configuration.yml])])
-      RubyApp::Configuration.load!(configuration_paths)
-      RubyApp::Log.open!
-      RubyApp::Application.create!
-      begin
-        yield
-      ensure
-        RubyApp::Application.destroy!
-        RubyApp::Log.close!
-        RubyApp::Configuration.unload!
+      unless RubyApp::Application.exists?
+        RubyApp::Configuration.load!(configuration_paths)
+        RubyApp::Log.open!
+        RubyApp::Application.create!
+        begin
+          yield
+        ensure
+          RubyApp::Application.destroy!
+          RubyApp::Log.close!
+          RubyApp::Configuration.unload!
+        end
       end
     end
 

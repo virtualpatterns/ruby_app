@@ -17,6 +17,12 @@ module RubyApp
             super
           end
 
+          def render(format)
+            RubyApp::Request.create_context! do
+              return super(format)
+            end
+          end
+
         end
 
       end

@@ -28,6 +28,10 @@ module RubyApp
       Thread.current[:_request]
     end
 
+    def self.exists?
+      return Thread.current[:_request]
+    end
+
     def self.create!(environment = RubyApp::Application.environment)
       Thread.current[:_request] = RubyApp::Request.new(environment)
     end
@@ -37,17 +41,19 @@ module RubyApp
     end
 
     def self.create_context!
-      RubyApp::Request.create!
-      RubyApp::Response.create!
-      RubyApp::Language.load!
-      RubyApp::Session.load!
-      begin
-        yield
-      ensure
-        RubyApp::Session.unload!
-        RubyApp::Language.unload!
-        RubyApp::Response.destroy!
-        RubyApp::Request.destroy!
+      unless RubyApp::Request.exists?
+        RubyApp::Request.create!
+        RubyApp::Response.create!
+        RubyApp::Language.load!
+        RubyApp::Session.load!
+        begin
+          yield
+        ensure
+          RubyApp::Session.unload!
+          RubyApp::Language.unload!
+          RubyApp::Response.destroy!
+          RubyApp::Request.destroy!
+        end
       end
     end
 
