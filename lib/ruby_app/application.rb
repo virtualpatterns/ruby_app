@@ -24,7 +24,7 @@ module RubyApp
     end
 
     def self.exists?
-      return @@_application
+      return @@_application ||= nil
     end
 
     def self.create!
