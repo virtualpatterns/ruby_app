@@ -1,9 +1,10 @@
+- require 'pp'
 - self.content_for(:html, :page) do
   /
     #{__FILE__}
   %div{'data-role' => 'header'}
     = @back_button.render(:html)
     %h1
-      Documents
+      Configuration
   %div{'data-role' => 'content'}
-    = @documents_list.render(:html)
+    = @configuration_hash.render(:html)

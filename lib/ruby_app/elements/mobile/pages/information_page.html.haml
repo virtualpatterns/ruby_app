@@ -1,4 +1,3 @@
-- require 'chronic'
 - self.content_for(:html, :page) do
   /
     #{__FILE__}
@@ -34,11 +33,13 @@
           %code
             = RubyApp::Language.locale.strftime(@now, RubyApp::Application.configuration.format.date.long)
       %li
-        %span
-          Configuration
-        %span.ui-li-aside
-          %code
-            = ENV['RUBY_APP_CONFIGURATION'] || 'default'
+        = @configuration_link.render(:html) do |element|
+          - element.content_for(:html, :link) do
+            %span
+              Configuration
+            %span.ui-li-count
+              %code
+                = ENV['RUBY_APP_CONFIGURATION'] || 'default'
       %li
         = @scripts_link.render(:html) do |element|
           - element.content_for(:html, :link) do
