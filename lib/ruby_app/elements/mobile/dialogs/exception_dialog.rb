@@ -16,7 +16,7 @@ module RubyApp
 
             @exception = exception
 
-            @close_link = RubyApp::Elements::Mobile::Dialogs::ResponseDialog::CloseLink.new
+            @ok_link = RubyApp::Elements::Mobile::Dialogs::ResponseDialog::CloseLink.new
 
           end
 

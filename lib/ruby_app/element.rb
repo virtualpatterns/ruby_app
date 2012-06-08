@@ -132,21 +132,21 @@ module RubyApp
         self.execute("RubyApp.setCookie(#{name.to_json}, #{value.to_json}, new Date(#{expires.year}, #{expires.month - 1}, #{expires.day}, #{expires.hour}, #{expires.min}, #{expires.sec}));")
       end
 
-      def tap_link(text)
-        self.tap_selector("a:contains('#{text}')")
+      def click_link(text)
+        self.click_selector("a:contains('#{text}')")
       end
 
-      def tap_list_item(text)
-        self.tap_selector("a.item:contains('#{text}')")
+      def click_list_item(text)
+        self.click_selector("a.item:contains('#{text}')")
       end
 
-      def tap_list_link(text)
-        self.tap_selector("a.link[title*='#{text}']")
+      def click_list_link(text)
+        self.click_selector("a.link[title*='#{text}']")
       end
 
-      def tap_selector(selector)
+      def click_selector(selector)
         _selector = ".ui-page-active #{selector}"
-        self.execute("RubyApp.tap(#{_selector.to_json});")
+        self.execute("RubyApp.click(#{_selector.to_json});")
       end
 
       def swipe(direction)

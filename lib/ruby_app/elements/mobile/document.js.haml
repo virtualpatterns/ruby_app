@@ -6,7 +6,7 @@
       event.now = new Date().toString();
       event.session = RubyApp.getData('session', null);
       $(window).queue( function() {
-        // RubyApp.log('DEQUEUE event.class=' + event._class);
+        RubyApp.log('DEQUEUE event.class=' + event._class);
         request = $.ajax({type:'POST', url:location.href, data:event});
         request
           .success( function(event) {
@@ -32,7 +32,7 @@
       {
         // RubyApp.log('ENQUEUE RubyApp.showPage("' + id + '", ...)');
         $(window).queue( function() {
-          // RubyApp.log('DEQUEUE RubyApp.showPage("' + id + '", ...)');
+          RubyApp.log('DEQUEUE RubyApp.showPage("' + id + '", ...)');
           $.mobile.showPageLoadingMsg();
           request = $.ajax({type:'GET', url:'/' + RubyApp.getData('locale', 'en') + '/elements/' + id + '.html'});
           request
@@ -58,7 +58,7 @@
     this.updateElement = function(id) {
       // RubyApp.log('ENQUEUE RubyApp.updateElement("' + id + '")');
       $(window).queue( function() {
-        // RubyApp.log('DEQUEUE RubyApp.updateElement("' + id + '")');
+        RubyApp.log('DEQUEUE RubyApp.updateElement("' + id + '")');
         $.mobile.showPageLoadingMsg();
         request = $.ajax({type:'GET', url:'/' + RubyApp.getData('locale', 'en') + '/elements/' + id + '.html'});
         request
@@ -126,8 +126,8 @@
     this.setCookie = function(name, value, expires) {
       document.cookie = name + '=' + value + '; expires=' + expires.toUTCString();
     },
-    this.tap = function(selector) {
-      $(selector).tap();
+    this.click = function(selector) {
+      $(selector).click();
     },
     this.swipeLeft = function() {
       $('.ui-page-active').swipeleft();

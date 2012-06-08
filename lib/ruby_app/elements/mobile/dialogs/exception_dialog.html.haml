@@ -8,5 +8,5 @@
     %div.message
       = @exception.message
     %div.buttons
-      = @close_link.render(:html) do |element|
-        - element.content_for(:html, :link, RubyApp::Elements::Mobile::Dialogs::ExceptionDialog.translate.close)
+      = @ok_link.render(:html) do |element|
+        - element.content_for(:html, :link, RubyApp::Elements::Mobile::Dialogs::ExceptionDialog.translate.ok)

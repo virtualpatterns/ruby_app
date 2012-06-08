@@ -15,7 +15,7 @@ ruby_app:
           _yes: "Yes"
           _no: "No"
         exception_dialog:
-          close: "Close"
+          ok: "OK"
       document:
         error_message: "An error occurred exchanging data with the server.  The page will refresh so you can try again."
       inputs:

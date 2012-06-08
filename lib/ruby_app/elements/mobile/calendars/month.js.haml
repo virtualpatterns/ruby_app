@@ -1,7 +1,7 @@
 :plain
   // #{__FILE__}
   $(document).ready( function() {
-    $(document).on('tap', 'div.month a.date', function(event) {
+    $(document).on('click', 'div.month a.date', function(event) {
       event.preventDefault();
       RubyApp.sendEvent({_class:'RubyApp::Elements::Mobile::Calendars::Month::ChangedEvent', source:$(this).parents('div.month').attr('id'), value:$(this).attr('data-value')});
     });

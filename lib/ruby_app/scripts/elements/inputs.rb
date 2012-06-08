@@ -2,7 +2,7 @@ load_script! 'common/features'
 
 add_step! RubyApp::Elements::Mobile::Page::ShownEvent do |event|
   event.assert_exists_link('Inputs')
-  event.tap_link('Inputs')
+  event.click_link('Inputs')
 end
 
 add_step! RubyApp::Elements::Mobile::Page::ShownEvent do |event|
@@ -13,7 +13,7 @@ end
 add_step! RubyApp::Elements::Mobile::Page::ShownEvent do |event|
   event.assert_exists_text('You input value.')
   event.assert_exists_link('OK')
-  event.tap_link('OK')
+  event.click_link('OK')
 end
 
 add_step! RubyApp::Elements::Mobile::Page::ShownEvent do |event|
@@ -25,7 +25,7 @@ end
 add_step! RubyApp::Elements::Mobile::Page::ShownEvent do |event|
   event.assert_exists_text('You input 7380.')
   event.assert_exists_link('OK')
-  event.tap_link('OK')
+  event.click_link('OK')
 end
 
 add_step! RubyApp::Elements::Mobile::Page::ShownEvent do |event|
@@ -37,7 +37,7 @@ end
 add_step! RubyApp::Elements::Mobile::Page::ShownEvent do |event|
   event.assert_exists_text('You input value.')
   event.assert_exists_link('OK')
-  event.tap_link('OK')
+  event.click_link('OK')
 end
 
 add_step! RubyApp::Elements::Mobile::Page::ShownEvent do |event|
@@ -49,7 +49,7 @@ end
 add_step! RubyApp::Elements::Mobile::Page::ShownEvent do |event|
   event.assert_exists_text('You input value.')
   event.assert_exists_link('OK')
-  event.tap_link('OK')
+  event.click_link('OK')
 end
 
 add_step! RubyApp::Elements::Mobile::Page::ShownEvent do |event|
@@ -61,7 +61,7 @@ end
 add_step! RubyApp::Elements::Mobile::Page::ShownEvent do |event|
   event.assert_exists_text('You input true.')
   event.assert_exists_link('OK')
-  event.tap_link('OK')
+  event.click_link('OK')
 end
 
 add_step! RubyApp::Elements::Mobile::Page::ShownEvent do |event|
@@ -72,16 +72,16 @@ end
 add_step! RubyApp::Elements::Mobile::Page::ShownEvent do |event|
   event.assert_exists_text('You input false.')
   event.assert_exists_link('OK')
-  event.tap_link('OK')
+  event.click_link('OK')
 end
 
 add_step! RubyApp::Elements::Mobile::Page::ShownEvent do |event|
   event.assert_exists_input('Toggle Input')
-  event.tap_link('Back')
+  event.click_link('Back')
 end
 
 add_step! RubyApp::Elements::Mobile::Page::ShownEvent do |event|
-  event.tap_link('Back')
+  event.click_link('Back')
 end
 
 add_step! RubyApp::Elements::Mobile::Page::ShownEvent do |event|
