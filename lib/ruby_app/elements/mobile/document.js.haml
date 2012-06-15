@@ -1,12 +1,23 @@
 :plain
   // #{__FILE__}
   var RubyApp = new function() {
+    this.waitCount = 0,
+    this.showWait = function() {
+      $.mobile.showPageLoadingMsg();
+      RubyApp.waitCount++;
+    },
+    this.hideWait = function() {
+      if ( RubyApp.waitCount == 1 )
+        $.mobile.hidePageLoadingMsg();
+      RubyApp.waitCount--;
+    },
     this.sendEvent = function(event) {
       // RubyApp.log('ENQUEUE event.class=' + event._class);
       event.now = new Date().toString();
       event.session = RubyApp.getData('session', null);
       $(window).queue( function() {
         RubyApp.log('DEQUEUE event.class=' + event._class);
+        RubyApp.hideWait();
         request = $.ajax({type:'POST', url:location.href, data:event});
         request
           .success( function(event) {
@@ -21,6 +32,7 @@
             RubyApp.confirmRefreshBrowser(RubyApp.getData('error_message', null));
           } )
           .complete( function() {
+            RubyApp.hideWait();
             $(window).dequeue();
           } )
       } );
@@ -33,7 +45,7 @@
         // RubyApp.log('ENQUEUE RubyApp.showPage("' + id + '", ...)');
         $(window).queue( function() {
           RubyApp.log('DEQUEUE RubyApp.showPage("' + id + '", ...)');
-          $.mobile.showPageLoadingMsg();
+          RubyApp.showWait();
           request = $.ajax({type:'GET', url:'/' + RubyApp.getData('locale', 'en') + '/elements/' + id + '.html'});
           request
             .success( function(content) {
@@ -46,7 +58,7 @@
               RubyApp.confirmRefreshBrowser(RubyApp.getData('error_message', null));
             } )
             .complete( function() {
-              $.mobile.hidePageLoadingMsg();
+              RubyApp.hideWait();
               $(window).dequeue();
             } );
         } );
@@ -59,7 +71,7 @@
       // RubyApp.log('ENQUEUE RubyApp.updateElement("' + id + '")');
       $(window).queue( function() {
         RubyApp.log('DEQUEUE RubyApp.updateElement("' + id + '")');
-        $.mobile.showPageLoadingMsg();
+        RubyApp.showWait();
         request = $.ajax({type:'GET', url:'/' + RubyApp.getData('locale', 'en') + '/elements/' + id + '.html'});
         request
           .success( function(content) {
@@ -72,7 +84,7 @@
             RubyApp.confirmRefreshBrowser(RubyApp.getData('error_message', null));
           } )
           .complete( function() {
-            $.mobile.hidePageLoadingMsg();
+            RubyApp.hideWait();
             $(window).dequeue();
           } );
       } );
