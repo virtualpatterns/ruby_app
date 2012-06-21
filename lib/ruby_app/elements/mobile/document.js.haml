@@ -9,7 +9,8 @@
     this.hideWait = function() {
       if ( RubyApp.waitCount == 1 )
         $.mobile.hidePageLoadingMsg();
-      RubyApp.waitCount--;
+      if ( RubyApp.waitCount > 0 )
+        RubyApp.waitCount--;
     },
     this.sendEvent = function(event) {
       // RubyApp.log('ENQUEUE event.class=' + event._class);
@@ -17,7 +18,7 @@
       event.session = RubyApp.getData('session', null);
       $(window).queue( function() {
         RubyApp.log('DEQUEUE event.class=' + event._class);
-        RubyApp.hideWait();
+        RubyApp.showWait();
         request = $.ajax({type:'POST', url:location.href, data:event});
         request
           .success( function(event) {
