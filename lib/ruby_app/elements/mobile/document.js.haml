@@ -3,12 +3,16 @@
   var RubyApp = new function() {
     this.waitCount = 0,
     this.showWait = function() {
+      $('div.overlay').css('display', 'block');
       $.mobile.showPageLoadingMsg();
       RubyApp.waitCount++;
     },
     this.hideWait = function() {
       if ( RubyApp.waitCount == 1 )
+      {
         $.mobile.hidePageLoadingMsg();
+        $('div.overlay').css('display', 'none');
+      }
       if ( RubyApp.waitCount > 0 )
         RubyApp.waitCount--;
     },
@@ -106,7 +110,7 @@
     },
     this.refreshBrowser = function() {
       $(window).clearQueue();
-      location.assign(location.href);
+      location.replace(location.href);
     },
     this.confirmRefreshBrowser = function(message) {
       if (confirm(message))
@@ -114,7 +118,7 @@
     },
     this.go = function(url) {
       $(window).clearQueue();
-      location.assign(url);
+      location.replace(url);
     },
     this.updateStyle = function(selector, property, value) {
       $(selector).css(property, value);
