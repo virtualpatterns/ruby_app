@@ -48,8 +48,8 @@
       else
       {
         // RubyApp.log('ENQUEUE RubyApp.showPage("' + id + '", ...)');
-        $(window).queue( function() {
-          RubyApp.log('DEQUEUE RubyApp.showPage("' + id + '", ...)');
+        //$(window).queue( function() {
+          RubyApp.log('EXECUTE RubyApp.showPage("' + id + '", ...)');
           RubyApp.showWait();
           request = $.ajax({type:'GET', url:'/' + RubyApp.getData('locale', 'en') + '/elements/' + id + '.html'});
           request
@@ -64,9 +64,9 @@
             } )
             .complete( function() {
               RubyApp.hideWait();
-              $(window).dequeue();
+              //$(window).dequeue();
             } );
-        } );
+        //} );
       }
     },
     this.removePage = function(id) {
