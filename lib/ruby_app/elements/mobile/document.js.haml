@@ -3,18 +3,23 @@
   var RubyApp = new function() {
     this.waitCount = 0,
     this.showWait = function() {
-      $('div.overlay').css('display', 'block');
-      $.mobile.showPageLoadingMsg();
+      if ( RubyApp.waitCount == 0 )
+      {
+        $('div.overlay').css('display', 'block');
+        $.mobile.showPageLoadingMsg();
+        RubyApp.log('EXECUTE RubyApp.showWait()');
+      }
       RubyApp.waitCount++;
     },
     this.hideWait = function() {
-      if ( RubyApp.waitCount == 1 )
+      if ( RubyApp.waitCount > 0 )
+        RubyApp.waitCount--;
+      if ( RubyApp.waitCount == 0 )
       {
         $.mobile.hidePageLoadingMsg();
         $('div.overlay').css('display', 'none');
+        RubyApp.log('EXECUTE RubyApp.hideWait()');
       }
-      if ( RubyApp.waitCount > 0 )
-        RubyApp.waitCount--;
     },
     this.sendEvent = function(event) {
       // RubyApp.log('ENQUEUE event.class=' + event._class);
