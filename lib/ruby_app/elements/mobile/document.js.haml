@@ -26,8 +26,8 @@
       event.now = new Date().toString();
       event.session = RubyApp.getData('session', null);
       $(window).queue( function() {
-        RubyApp.log('DEQUEUE event.class=' + event._class);
         RubyApp.showWait();
+        RubyApp.log('DEQUEUE event.class=' + event._class);
         request = $.ajax({type:'POST', url:location.href, data:event});
         request
           .success( function(event) {
@@ -42,8 +42,8 @@
             RubyApp.confirmRefreshBrowser(RubyApp.getData('error_message', null));
           } )
           .complete( function() {
-            RubyApp.hideWait();
             $(window).dequeue();
+            RubyApp.hideWait();
           } )
       } );
     },
@@ -53,9 +53,9 @@
       else
       {
         // RubyApp.log('ENQUEUE RubyApp.showPage("' + id + '", ...)');
-        //$(window).queue( function() {
-          RubyApp.log('EXECUTE RubyApp.showPage("' + id + '", ...)');
+        $(window).queue( function() {
           RubyApp.showWait();
+          RubyApp.log('DEQUEUE RubyApp.showPage("' + id + '", ...)');
           request = $.ajax({type:'GET', url:'/' + RubyApp.getData('locale', 'en') + '/elements/' + id + '.html'});
           request
             .success( function(content) {
@@ -68,10 +68,10 @@
               RubyApp.confirmRefreshBrowser(RubyApp.getData('error_message', null));
             } )
             .complete( function() {
+              $(window).dequeue();
               RubyApp.hideWait();
-              //$(window).dequeue();
             } );
-        //} );
+        } );
       }
     },
     this.removePage = function(id) {
@@ -80,8 +80,8 @@
     this.updateElement = function(id) {
       // RubyApp.log('ENQUEUE RubyApp.updateElement("' + id + '")');
       $(window).queue( function() {
-        RubyApp.log('DEQUEUE RubyApp.updateElement("' + id + '")');
         RubyApp.showWait();
+        RubyApp.log('DEQUEUE RubyApp.updateElement("' + id + '")');
         request = $.ajax({type:'GET', url:'/' + RubyApp.getData('locale', 'en') + '/elements/' + id + '.html'});
         request
           .success( function(content) {
@@ -94,8 +94,8 @@
             RubyApp.confirmRefreshBrowser(RubyApp.getData('error_message', null));
           } )
           .complete( function() {
-            RubyApp.hideWait();
             $(window).dequeue();
+            RubyApp.hideWait();
           } );
       } );
       RubyApp.sendEvent({_class:'RubyApp::Element::UpdatedEvent', source:id});
