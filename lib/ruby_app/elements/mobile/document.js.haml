@@ -7,7 +7,7 @@
       {
         $('div.overlay').css('display', 'block');
         $.mobile.showPageLoadingMsg();
-        RubyApp.log('EXECUTE RubyApp.showWait()');
+        // RubyApp.log('EXECUTE RubyApp.showWait()');
       }
       RubyApp.waitCount++;
     },
@@ -18,7 +18,7 @@
       {
         $.mobile.hidePageLoadingMsg();
         $('div.overlay').css('display', 'none');
-        RubyApp.log('EXECUTE RubyApp.hideWait()');
+        // RubyApp.log('EXECUTE RubyApp.hideWait()');
       }
     },
     this.sendEvent = function(event) {
