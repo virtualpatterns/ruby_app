@@ -1,31 +1,45 @@
 :plain
   // #{__FILE__}
   var RubyApp = new function() {
+    this.enQueue = function(f) {
+      queue = $(window).queue('event');
+      if ( queue.length > 0 )
+        $(window).queue('event', f);
+      else
+        f();
+    },
+    this.deQueue = function() {
+      $(window).dequeue('event');
+    },
     this.waitCount = 0,
     this.showWait = function() {
       if ( RubyApp.waitCount == 0 )
       {
         $('div.overlay').css('display', 'block');
         $.mobile.showPageLoadingMsg();
-        // RubyApp.log('EXECUTE RubyApp.showWait()');
+        RubyApp.log('EXECUTE RubyApp.showWait()');
       }
       RubyApp.waitCount++;
+      RubyApp.log('        RubyApp.waitCount=' + RubyApp.waitCount);
     },
     this.hideWait = function() {
       if ( RubyApp.waitCount > 0 )
+      {
         RubyApp.waitCount--;
+        RubyApp.log('        RubyApp.waitCount=' + RubyApp.waitCount);
+      }
       if ( RubyApp.waitCount == 0 )
       {
         $.mobile.hidePageLoadingMsg();
         $('div.overlay').css('display', 'none');
-        // RubyApp.log('EXECUTE RubyApp.hideWait()');
+        RubyApp.log('EXECUTE RubyApp.hideWait()');
       }
     },
     this.sendEvent = function(event) {
-      // RubyApp.log('ENQUEUE event.class=' + event._class);
+      RubyApp.log('ENQUEUE event.class=' + event._class);
       event.now = new Date().toString();
       event.session = RubyApp.getData('session', null);
-      $(window).queue( function() {
+      RubyApp.enQueue ( function() {
         RubyApp.showWait();
         RubyApp.log('DEQUEUE event.class=' + event._class);
         request = $.ajax({type:'POST', url:location.href, data:event});
@@ -42,7 +56,7 @@
             RubyApp.confirmRefreshBrowser(RubyApp.getData('error_message', null));
           } )
           .complete( function() {
-            $(window).dequeue();
+            RubyApp.deQueue();
             RubyApp.hideWait();
           } )
       } );
@@ -52,8 +66,8 @@
         $.mobile.changePage($('#' + id), options);
       else
       {
-        // RubyApp.log('ENQUEUE RubyApp.showPage("' + id + '", ...)');
-        $(window).queue( function() {
+        RubyApp.log('ENQUEUE RubyApp.showPage("' + id + '", ...)');
+        RubyApp.enQueue ( function() {
           RubyApp.showWait();
           RubyApp.log('DEQUEUE RubyApp.showPage("' + id + '", ...)');
           request = $.ajax({type:'GET', url:'/' + RubyApp.getData('locale', 'en') + '/elements/' + id + '.html'});
@@ -68,7 +82,7 @@
               RubyApp.confirmRefreshBrowser(RubyApp.getData('error_message', null));
             } )
             .complete( function() {
-              $(window).dequeue();
+              RubyApp.deQueue();
               RubyApp.hideWait();
             } );
         } );
@@ -78,8 +92,8 @@
       $('#' + id).remove();
     },
     this.updateElement = function(id) {
-      // RubyApp.log('ENQUEUE RubyApp.updateElement("' + id + '")');
-      $(window).queue( function() {
+      RubyApp.log('ENQUEUE RubyApp.updateElement("' + id + '")');
+      RubyApp.enQueue ( function() {
         RubyApp.showWait();
         RubyApp.log('DEQUEUE RubyApp.updateElement("' + id + '")');
         request = $.ajax({type:'GET', url:'/' + RubyApp.getData('locale', 'en') + '/elements/' + id + '.html'});
@@ -94,7 +108,7 @@
             RubyApp.confirmRefreshBrowser(RubyApp.getData('error_message', null));
           } )
           .complete( function() {
-            $(window).dequeue();
+            RubyApp.deQueue();
             RubyApp.hideWait();
           } );
       } );

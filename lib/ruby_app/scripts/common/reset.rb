@@ -1,4 +1,4 @@
-add_step! RubyApp::Elements::Mobile::Page::LoadedEvent do |event|
+add_step! RubyApp::Element::Event do |event|
   self.reset_script!
-  event.refresh_browser
+  event.execute {}
 end

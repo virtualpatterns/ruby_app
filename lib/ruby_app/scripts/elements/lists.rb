@@ -1,6 +1,6 @@
 load_script! 'common/features'
 
-add_step! RubyApp::Elements::Mobile::Page::ShownEvent do |event|
+add_step! RubyApp::Element::Event do |event|
   event.assert_exists_link('Lists')
   event.click_link('Lists')
 end
@@ -37,5 +37,5 @@ add_step! RubyApp::Elements::Mobile::Page::ShownEvent do |event|
 end
 
 add_step! RubyApp::Elements::Mobile::Page::ShownEvent do |event|
-  event.refresh_browser
+  event.execute {}
 end

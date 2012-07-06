@@ -1,6 +1,6 @@
 load_script! 'common/features'
 
-add_step! (RubyApp::Elements::Mobile::Page::ShownEvent) { |event| event.assert_exists_link('Buttons') }
+add_step! (RubyApp::Element::Event)             { |event| event.assert_exists_link('Buttons') }
 add_step! (RubyApp::Element::AssertedEvent)             { |event| event.click_link('Buttons') }
 
 add_step! (RubyApp::Elements::Mobile::Page::ShownEvent) { |event| event.assert_exists_link('Button') }
@@ -11,4 +11,4 @@ add_step! (RubyApp::Elements::Mobile::Page::ShownEvent) { |event| event.assert_e
 add_step! (RubyApp::Element::AssertedEvent)             { |event| event.click_link('Back') }
 add_step! (RubyApp::Elements::Mobile::Page::ShownEvent) { |event| event.click_link('Back') }
 add_step! (RubyApp::Elements::Mobile::Page::ShownEvent) { |event| event.click_link('Back') }
-add_step! (RubyApp::Elements::Mobile::Page::ShownEvent) { |event| event.refresh_browser }
+add_step! (RubyApp::Elements::Mobile::Page::ShownEvent) { |event| event.execute {} }
