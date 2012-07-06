@@ -1,17 +1,31 @@
 :plain
   // #{__FILE__}
   var RubyApp = new function() {
-    this.enQueue = function(f) {
-      if ( $(window).queue('event').length == 0 )
+    this.queue = [],
+    this.enQueue = function(_function) {
+      //RubyApp.log('IN      RubyApp.enQueue(...) RubyApp.queue.length=' + RubyApp.queue.length);
+      if ( RubyApp.queue.length <= 0 )
       {
-        $(window).queue('event', f);
-        $(window).dequeue('event');
+        RubyApp.queue.push('next');
+        _function();
       }
       else
-        $(window).queue('event', f);
+        RubyApp.queue.push(_function);
+      //RubyApp.log('OUT     RubyApp.enQueue(...) RubyApp.queue.length=' + RubyApp.queue.length);
     },
     this.deQueue = function() {
-      $(window).dequeue('event');
+      //RubyApp.log('IN      RubyApp.deQueue() RubyApp.queue.length=' + RubyApp.queue.length);
+      _function = RubyApp.queue.shift();
+      if ( _function )
+        if ( _function === 'next' )
+        {
+          _function = RubyApp.queue.shift();
+          if ( _function )
+            _function();
+        }
+        else
+          _function();
+      //RubyApp.log('OUT     RubyApp.deQueue() RubyApp.queue.length=' + RubyApp.queue.length);
     },
     this.waitCount = 0,
     this.showWait = function() {
