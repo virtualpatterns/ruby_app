@@ -2,11 +2,13 @@
   // #{__FILE__}
   var RubyApp = new function() {
     this.enQueue = function(f) {
-      queue = $(window).queue('event');
-      if ( queue.length > 0 )
+      if ( $(window).queue('event').length == 0 )
+      {
         $(window).queue('event', f);
+        $(window).dequeue('event');
+      }
       else
-        f();
+        $(window).queue('event', f);
     },
     this.deQueue = function() {
       $(window).dequeue('event');
