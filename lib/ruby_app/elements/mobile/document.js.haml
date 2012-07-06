@@ -3,7 +3,7 @@
   var RubyApp = new function() {
     this.queue = [],
     this.enQueue = function(_function) {
-      //RubyApp.log('IN      RubyApp.enQueue(...) RubyApp.queue.length=' + RubyApp.queue.length);
+      RubyApp.log('IN      RubyApp.enQueue(...) RubyApp.queue.length=' + RubyApp.queue.length);
       if ( RubyApp.queue.length <= 0 )
       {
         RubyApp.queue.push('next');
@@ -11,21 +11,20 @@
       }
       else
         RubyApp.queue.push(_function);
-      //RubyApp.log('OUT     RubyApp.enQueue(...) RubyApp.queue.length=' + RubyApp.queue.length);
+      RubyApp.log('OUT     RubyApp.enQueue(...) RubyApp.queue.length=' + RubyApp.queue.length);
     },
     this.deQueue = function() {
-      //RubyApp.log('IN      RubyApp.deQueue() RubyApp.queue.length=' + RubyApp.queue.length);
+      RubyApp.log('IN      RubyApp.deQueue() RubyApp.queue.length=' + RubyApp.queue.length);
       _function = RubyApp.queue.shift();
       if ( _function )
         if ( _function === 'next' )
-        {
-          _function = RubyApp.queue.shift();
-          if ( _function )
-            _function();
-        }
+          RubyApp.deQueue();
         else
+        {
+          RubyApp.queue.push('next');
           _function();
-      //RubyApp.log('OUT     RubyApp.deQueue() RubyApp.queue.length=' + RubyApp.queue.length);
+        }
+      RubyApp.log('OUT     RubyApp.deQueue() RubyApp.queue.length=' + RubyApp.queue.length);
     },
     this.waitCount = 0,
     this.showWait = function() {
@@ -33,22 +32,18 @@
       {
         $('div.overlay').css('display', 'block');
         $.mobile.showPageLoadingMsg();
-        RubyApp.log('EXECUTE RubyApp.showWait()');
+        // RubyApp.log('EXECUTE RubyApp.showWait()');
       }
       RubyApp.waitCount++;
-      RubyApp.log('        RubyApp.waitCount=' + RubyApp.waitCount);
     },
     this.hideWait = function() {
       if ( RubyApp.waitCount > 0 )
-      {
         RubyApp.waitCount--;
-        RubyApp.log('        RubyApp.waitCount=' + RubyApp.waitCount);
-      }
       if ( RubyApp.waitCount == 0 )
       {
         $.mobile.hidePageLoadingMsg();
         $('div.overlay').css('display', 'none');
-        RubyApp.log('EXECUTE RubyApp.hideWait()');
+        // RubyApp.log('EXECUTE RubyApp.hideWait()');
       }
     },
     this.sendEvent = function(event) {
