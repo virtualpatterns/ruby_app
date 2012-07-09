@@ -26,7 +26,7 @@
     this.showWait = function() {
       if ( RubyApp.waitCount == 0 )
       {
-        $('div.overlay').css('display', 'block');
+        $('div.ui-overlay').css('display', 'block');
         $.mobile.showPageLoadingMsg();
       }
       RubyApp.waitCount++;
@@ -37,7 +37,7 @@
       if ( RubyApp.waitCount == 0 )
       {
         $.mobile.hidePageLoadingMsg();
-        $('div.overlay').css('display', 'none');
+        $('div.ui-overlay').css('display', 'none');
       }
     },
     this.sendEvent = function(event) {
@@ -208,7 +208,7 @@
 
   $(window).load(function() {
     RubyApp.sendEvent({_class:'RubyApp::Elements::Mobile::Document::LoadedEvent', source:$('html').attr('id')});
-    if ($('div[data-role="page"]').length)
+    if ($('div[data-role="page"][id]').length)
       RubyApp.sendEvent({_class:'RubyApp::Elements::Mobile::Page::LoadedEvent', source:$('div[data-role="page"]').filter(':first').attr('id')});
   });
 

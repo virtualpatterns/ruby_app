@@ -15,6 +15,8 @@
         - element.content_for(:html, :link, 'Calendars')
       = @dialogs_link.render(:html) do |element|
         - element.content_for(:html, :link, 'Dialogs')
+      = @document_link.render(:html) do |element|
+        - element.content_for(:html, :link, 'Document')
       = @inputs_link.render(:html) do |element|
         - element.content_for(:html, :link, 'Inputs')
       = @lists_link.render(:html) do |element|
