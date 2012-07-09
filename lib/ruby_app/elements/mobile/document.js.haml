@@ -26,7 +26,7 @@
     this.showWait = function() {
       if ( RubyApp.waitCount == 0 )
       {
-        $('div.ui-overlay').css('display', 'block');
+        $('div.overlay').css('display', 'block');
         $.mobile.showPageLoadingMsg();
       }
       RubyApp.waitCount++;
@@ -37,7 +37,7 @@
       if ( RubyApp.waitCount == 0 )
       {
         $.mobile.hidePageLoadingMsg();
-        $('div.ui-overlay').css('display', 'none');
+        $('div.overlay').css('display', 'none');
       }
     },
     this.sendEvent = function(event) {
