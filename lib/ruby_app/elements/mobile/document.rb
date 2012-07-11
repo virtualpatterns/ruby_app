@@ -46,6 +46,8 @@ module RubyApp
           @stylesheets.push('http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css')
 
           @scripts.push('http://code.jquery.com/jquery-1.7.1.min.js')
+          @scripts.push('http://code.jquery.com/ui/1.8.21/jquery-ui.min.js')
+          @scripts.push('/ruby_app/resources/jquery.ui.touch-punch.min.js')
           @scripts.push('/ruby_app/resources/elements/mobile/document.js')
           @scripts.push('http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js')
 
