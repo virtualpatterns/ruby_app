@@ -72,7 +72,7 @@ module RubyApp
             RubyApp::Log.debug("POST  #{name.to_sym.inspect}=#{value.inspect}")
           end
           event = RubyApp::Element::Event.from_hash(RubyApp::Request.POST)
-          RubyApp::Log.duration(RubyApp::Log::INFO, "POST   #{event.class}") do
+          RubyApp::Log.duration(RubyApp::Log::INFO, "EVENT  #{event.class}") do
             RubyApp::Session.process_event!(event)
             RubyApp::Response['Content-Type'] = 'application/json'
             RubyApp::Response.write(Yajl::Encoder.new.encode(event.to_hash))
