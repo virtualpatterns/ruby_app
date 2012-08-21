@@ -162,10 +162,9 @@ module RubyApp
         session = Kernel.eval(RubyApp::Session.configuration._class).new
         session.load_script!(script_path) if script_path
         RubyApp::Log.debug("SESSION RubyApp::Session.session_id=#{session.session_id.inspect}")
-        RubyApp::Log.debug("SESSION RubyApp::Request.environment['REMOTE_ADDR']=#{RubyApp::Request.environment['REMOTE_ADDR'].inspect}")
-        RubyApp::Log.debug("SESSION RubyApp::Request.environment['HTTP-X-FORWARDED-FOR']=#{RubyApp::Request.environment['HTTP-X-FORWARDED-FOR'].inspect}")
-        RubyApp::Log.debug("SESSION RubyApp::Request.environment['HTTP_REFERER']=#{RubyApp::Request.environment['HTTP_REFERER'].inspect}")
-        RubyApp::Log.debug("SESSION RubyApp::Request.environment['HTTP_USER_AGENT']=#{RubyApp::Request.environment['HTTP_USER_AGENT'].inspect}")
+        RubyApp::Session.configuration.log.each do |variable|
+          RubyApp::Log.debug("SESSION RubyApp::Request.environment['#{variable}']=#{RubyApp::Request.environment[variable].inspect}")
+        end
       end
       Thread.current[:_session] = session
     end
