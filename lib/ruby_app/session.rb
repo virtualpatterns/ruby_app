@@ -184,7 +184,8 @@ module RubyApp
             while true
               RubyApp::Session.sessions.values.each do |session|
                 if session.expired?
-                  RubyApp::Log.debug("QUIT  #{session.session_id.inspect}")
+                  RubyApp::Log.debug("SESSION session.session_id=#{session.session_id.inspect}")
+                  RubyApp::Log.debug("SESSION session.quit!")
                   session.quit!
                 end
               end
