@@ -163,10 +163,7 @@ module RubyApp
         session.load_script!(script_path) if script_path
         RubyApp::Log.debug("SESSION RubyApp::Session.session_id=#{session.session_id.inspect}")
         RubyApp::Log.debug("SESSION RubyApp::Request.environment['REMOTE_ADDR']=#{RubyApp::Request.environment['REMOTE_ADDR'].inspect}")
-        RubyApp::Log.debug("SESSION RubyApp::Request.environment['REMOTE_HOST']=#{RubyApp::Request.environment['REMOTE_HOST'].inspect}")
-        RubyApp::Log.debug("SESSION RubyApp::Request.environment['LOCAL_ADDR']=#{RubyApp::Request.environment['LOCAL_ADDR'].inspect}")
-        RubyApp::Log.debug("SESSION RubyApp::Request.environment['SERVER_NAME']=#{RubyApp::Request.environment['SERVER_NAME'].inspect}")
-        RubyApp::Log.debug("SESSION RubyApp::Request.environment['SERVER_PORT']=#{RubyApp::Request.environment['SERVER_PORT'].inspect}")
+        RubyApp::Log.debug("SESSION RubyApp::Request.environment['HTTP-X-FORWARDED-FOR']=#{RubyApp::Request.environment['HTTP-X-FORWARDED-FOR'].inspect}")
         RubyApp::Log.debug("SESSION RubyApp::Request.environment['HTTP_REFERER']=#{RubyApp::Request.environment['HTTP_REFERER'].inspect}")
         RubyApp::Log.debug("SESSION RubyApp::Request.environment['HTTP_USER_AGENT']=#{RubyApp::Request.environment['HTTP_USER_AGENT'].inspect}")
       end
