@@ -161,6 +161,9 @@ module RubyApp
       unless session
         session = Kernel.eval(RubyApp::Session.configuration._class).new
         session.load_script!(script_path) if script_path
+        RubyApp::Log.debug("SESSION RubyApp::Session.session_id=#{session.session_id}")
+        RubyApp::Log.debug("SESSION RubyApp::Request.environment['REMOTE_ADDR']=#{RubyApp::Request.environment['REMOTE_ADDR']}")
+        RubyApp::Log.debug("SESSION RubyApp::Request.environment['REMOTE_PORT']=#{RubyApp::Request.environment['REMOTE_PORT']}")
       end
       Thread.current[:_session] = session
     end
@@ -195,14 +198,14 @@ module RubyApp
           end
         end
 
-        RubyApp::Log.debug(RubyApp::Log.prefix(self, __method__))
+        RubyApp::Log.debug("SESSION #{RubyApp::Log.prefix(self, __method__)}")
 
       end
     end
 
     def self.stop_thread!
       if @@_thread ||= nil
-        RubyApp::Log.debug(RubyApp::Log.prefix(self, __method__))
+        RubyApp::Log.debug("SESSION #{RubyApp::Log.prefix(self, __method__)}")
         @@_thread.exit
         @@_thread = nil
       end
