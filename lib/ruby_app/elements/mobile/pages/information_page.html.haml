@@ -43,6 +43,9 @@
           %code
             = RubyApp::Language.locale.strftime(@now, RubyApp::Application.configuration.format.date.long)
       %li
+        = @environment_link.render(:html) do |element|
+          - element.content_for(:html, :link, 'Environment')
+      %li
         = @configuration_link.render(:html) do |element|
           - element.content_for(:html, :link) do
             %span

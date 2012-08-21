@@ -9,6 +9,7 @@ module RubyApp
         require 'ruby_app/elements/mobile/navigation/navigation_link'
         require 'ruby_app/elements/mobile/page'
         require 'ruby_app/elements/mobile/pages/information/configuration_page'
+        require 'ruby_app/elements/mobile/pages/information/environment_page'
         require 'ruby_app/elements/mobile/pages/information/sessions_page'
         require 'ruby_app/elements/mobile/pages/information/scripts_page'
 
@@ -22,6 +23,11 @@ module RubyApp
             @now = now
 
             @back_button = RubyApp::Elements::Mobile::Navigation::BackButton.new
+
+            @environment_link = RubyApp::Elements::Mobile::Navigation::NavigationLink.new
+            @environment_link.clicked do |element, event|
+              RubyApp::Elements::Mobile::Pages::Information::EnvironmentPage.new.show(event, element.options)
+            end
 
             @configuration_link = RubyApp::Elements::Mobile::Navigation::NavigationLink.new
             @configuration_link.clicked do |element, event|
