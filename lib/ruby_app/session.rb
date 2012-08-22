@@ -90,20 +90,20 @@ module RubyApp
           begin
             if event.is_a?(step._class)
               @steps_index += 1
-              RubyApp::Log.duration(RubyApp::Log::INFO, "STEP   Current #{step._class} #{step.file}:#{step.line}#{step.block ? nil : ' (no block)'}") do
+              RubyApp::Log.duration(RubyApp::Log::INFO, "STEP      Current #{step._class} #{step.file}:#{step.line}#{step.block ? nil : ' (no block)'}") do
                 step.block.call(event) if step.block
               end
               if @steps_index == @steps.length
                 RubyApp::Log.info('-' * 80)
-                RubyApp::Log.info("STEP   Completed #{@steps.length} steps")
+                RubyApp::Log.info("STEP      Completed #{@steps.length} steps")
                 RubyApp::Log.info('-' * 80)
               else
                 step = @steps[@steps_index]
-                RubyApp::Log.info("STEP   Next    #{step._class} #{step.file}:#{step.line}#{step.block ? nil : ' (no block)'}")
+                RubyApp::Log.info("STEP      Next    #{step._class} #{step.file}:#{step.line}#{step.block ? nil : ' (no block)'}")
               end
             end
           rescue => exception
-            RubyApp::Log.info("STEP   Exception occurred at #{step.file}:#{step.line}")
+            RubyApp::Log.info("STEP      Exception occurred at #{step.file}:#{step.line}")
             @steps_index = @steps.length
             raise
           end

@@ -17,7 +17,7 @@ module RubyApp
     class Formatter < ::Logger::Formatter
 
       def call(severity, time, application, message)
-        return "#{severity.ljust(5, ' ')} | #{time.strftime('%Y-%m-%d %H:%M:%S %Z')} | #{Socket.gethostname} | #{Process.pid} | #{RubyApp::Session.exists? ? RubyApp::Session.session_id : '-'} | #{message}\n"
+        return "#{severity.ljust(5, ' ')} | #{time.strftime('%Y-%m-%d %H:%M:%S %Z')} | #{Socket.gethostname} | #{Process.pid} | #{RubyApp::Session.exists? ? RubyApp::Session.session_id : '                       '} | #{message}\n"
       end
 
     end
