@@ -31,21 +31,21 @@ module RubyApp
                     request = @consumer.begin(identifier)
                     self.process_request(request)
                     url = request.redirect_url(RubyApp::Request.url, RubyApp::Request.url)
-                    RubyApp::Log.debug("OPENID --> #{url.inspect}")
+                    RubyApp::Log.debug("OPENID    --> #{url.inspect}")
                     event.go(url)
                   else
-                    RubyApp::Log.debug("OPENID <-- #{RubyApp::Request.url.inspect}")
+                    RubyApp::Log.debug("OPENID    <-- #{RubyApp::Request.url.inspect}")
                     RubyApp::Request.query.each do |name, value|
-                      RubyApp::Log.debug("OPENID #{name}=#{value}")
+                      RubyApp::Log.debug("OPENID    #{name}=#{value}")
                     end
                     response = @consumer.complete(RubyApp::Request.query, RubyApp::Request.url)
                     case response.status
                       when ::OpenID::Consumer::SUCCESS
                         RubyApp::Session.identity = self.create_identity_from_response(response)
-                        RubyApp::Log.info("OPENID RubyApp::Session.identity.url=#{RubyApp::Session.identity.url.inspect}")
+                        RubyApp::Log.info("OPENID    RubyApp::Session.identity.url=#{RubyApp::Session.identity.url.inspect}")
                       when ::OpenID::Consumer::FAILURE
-                        RubyApp::Log.error("OPENID #{response.class}")
-                        RubyApp::Log.error("OPENID #{response.message.inspect}")
+                        RubyApp::Log.error("OPENID    #{response.class}")
+                        RubyApp::Log.error("OPENID    #{response.message.inspect}")
                     end
                     RubyApp::Session.documents.pop
                     event.go('/')
