@@ -5,15 +5,15 @@
     %div.node
       - if value.is_a?(Hash)
         %code
-          #{name}: (Hash)
+          & #{name}: (Hash)
         = RubyApp::Elements::Mobile::Hash.new(value).render(:html)
       - elsif value.is_a?(Array)
         %code
-          #{name}: (Array)
+          & #{name}: (Array)
         - value.each do |item|
           %div.item
             %code
-              \- #{item.inspect}
+              & \- #{item.inspect}
       - else
         %code
-          #{name}: #{value.inspect}
+          & #{name}: #{value.inspect}
