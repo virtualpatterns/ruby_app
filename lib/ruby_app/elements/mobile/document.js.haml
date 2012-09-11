@@ -202,8 +202,8 @@
       return value == undefined ? _default : value;
     },
     this.log = function(message) {
-      if ( console != null && console.log != null )
-        console.log(message);
+      if ( window.console )
+        window.console.log(message);
     }
   };
 
