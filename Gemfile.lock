@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    RubyApp (0.5.86)
+    RubyApp (0.5.87)
       BlueCloth
       chronic
       chronic_duration
@@ -23,7 +23,7 @@ GEM
   remote: http://rubygems.org/
   specs:
     BlueCloth (1.0.1)
-    chronic (0.7.0)
+    chronic (0.8.0)
     chronic_duration (0.9.6)
       numerizer (~> 0.1.1)
     facets (2.9.3)
