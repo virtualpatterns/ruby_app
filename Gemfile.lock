@@ -16,6 +16,7 @@ PATH
       ruby-event
       ruby-openid
       sass
+      system_timer
       term-ansicolor
       terminal-table
       yajl-ruby
@@ -48,6 +49,7 @@ GEM
     ruby-event (1.0.0)
     ruby-openid (2.2.0)
     sass (3.2.1)
+    system_timer (1.2.4)
     term-ansicolor (1.0.7)
     terminal-table (1.4.5)
     yajl-ruby (1.1.0)
