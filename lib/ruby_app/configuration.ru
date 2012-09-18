@@ -1,4 +1,4 @@
-#\ --port 8008 --pid ./rack.pid
+#\ --port 8000 --pid ./rack.pid
 require 'rubygems'
 require 'bundler/setup'
 
@@ -19,8 +19,8 @@ map '/ruby_app/resources' do
   run Rack::File.new(File.join(RubyApp::ROOT, %w[resources]))
 end
 
-map '/favicon.ico' do
-  run Rack::File.new(File.join(RubyApp::ROOT, %w[resources favicon.ico]))
+map '/google_button.ico' do
+  run Rack::File.new(File.join(RubyApp::ROOT, %w[resources google_button.ico]))
 end
 
 map '/' do

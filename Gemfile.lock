@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    RubyApp (0.5.86)
+    RubyApp (0.5.87)
       BlueCloth
       chronic
       chronic_duration
@@ -9,6 +9,7 @@ PATH
       fileutils
       haml
       json
+      koala
       mime-types
       r18n-core
       rack
@@ -23,15 +24,22 @@ GEM
   remote: http://rubygems.org/
   specs:
     BlueCloth (1.0.1)
-    chronic (0.7.0)
+    chronic (0.8.0)
     chronic_duration (0.9.6)
       numerizer (~> 0.1.1)
     facets (2.9.3)
+    faraday (0.8.4)
+      multipart-post (~> 1.1)
     fileutils (0.7)
       rmagick (>= 2.13.1)
     haml (3.1.7)
     json (1.7.5)
+    koala (1.5.0)
+      faraday (~> 0.7)
+      multi_json (~> 1.3)
     mime-types (1.19)
+    multi_json (1.3.6)
+    multipart-post (1.1.5)
     numerizer (0.1.1)
     r18n-core (1.1.1)
     rack (1.4.1)

@@ -12,6 +12,8 @@
       - else
         You are not logged in.
     %div{'data-role' => 'controlgroup'}
+      = @facebook_authentication_link.render(:html) do |element|
+        - element.content_for(:html, :link, 'Facebook')
       = @google_authentication_link.render(:html) do |element|
         - element.content_for(:html, :link, 'Google')
       = @my_open_id_authentication_link.render(:html) do |element|

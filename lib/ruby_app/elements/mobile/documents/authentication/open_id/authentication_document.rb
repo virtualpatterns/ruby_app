@@ -35,9 +35,6 @@ module RubyApp
                     event.go(url)
                   else
                     RubyApp::Log.debug("OPENID    <-- #{RubyApp::Request.url.inspect}")
-                    RubyApp::Request.query.each do |name, value|
-                      RubyApp::Log.debug("OPENID    #{name}=#{value}")
-                    end
                     response = @consumer.complete(RubyApp::Request.query, RubyApp::Request.url)
                     case response.status
                       when ::OpenID::Consumer::SUCCESS
