@@ -9,12 +9,14 @@ PATH
       fileutils
       haml
       json
+      koala
       mime-types
       r18n-core
       rack
       ruby-event
       ruby-openid
       sass
+      system_timer
       term-ansicolor
       terminal-table
       yajl-ruby
@@ -27,11 +29,18 @@ GEM
     chronic_duration (0.9.6)
       numerizer (~> 0.1.1)
     facets (2.9.3)
+    faraday (0.8.4)
+      multipart-post (~> 1.1)
     fileutils (0.7)
       rmagick (>= 2.13.1)
     haml (3.1.7)
     json (1.7.5)
+    koala (1.5.0)
+      faraday (~> 0.7)
+      multi_json (~> 1.3)
     mime-types (1.19)
+    multi_json (1.3.6)
+    multipart-post (1.1.5)
     numerizer (0.1.1)
     r18n-core (1.1.1)
     rack (1.4.1)
@@ -40,6 +49,7 @@ GEM
     ruby-event (1.0.0)
     ruby-openid (2.2.0)
     sass (3.2.1)
+    system_timer (1.2.4)
     term-ansicolor (1.0.7)
     terminal-table (1.4.5)
     yajl-ruby (1.1.0)

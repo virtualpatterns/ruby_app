@@ -28,8 +28,8 @@ map '/_APPLICATION_DOWNCODE_/resources' do
   run Rack::File.new(File.join(_APPLICATION_UPCODE_::ROOT, %w[resources]))
 end
 
-map '/favicon.ico' do
-  run Rack::File.new(File.join(RubyApp::ROOT, %w[resources favicon.ico]))
+map '/google_button.ico' do
+  run Rack::File.new(File.join(RubyApp::ROOT, %w[resources google_button.ico]))
 end
 
 map '/' do
