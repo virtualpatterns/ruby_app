@@ -20,7 +20,7 @@ module RubyApp
 
               @back_button = RubyApp::Elements::Mobile::Navigation::BackButton.new
 
-              @environment_hash = RubyApp::Elements::Mobile::Hash.new(RubyApp::Request.environment)
+              @environment_hash = RubyApp::Elements::Mobile::Hash.new(RubyApp::Request.environment.merge(ENV))
 
             end
 
