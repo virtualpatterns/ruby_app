@@ -32,7 +32,7 @@ module RubyApp
             def on_changed(event)
               @duration = event.value ? ChronicDuration.parse(event.value) : nil
               @value = @duration ? ChronicDuration.output(@duration) : nil
-              event.update_value("##{self.element_id}", @value)
+              event.update_value("##{self.element_id}", @value, false)
               changed(event)
             end
 

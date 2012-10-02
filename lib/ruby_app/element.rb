@@ -114,18 +114,18 @@ module RubyApp
         self.execute("RubyApp.updateText(#{_selector.to_json}, #{value.to_json});")
       end
 
-      def update_value(selector, value)
+      def update_value(selector, value, change = true)
         _selector = ".ui-page-active #{selector}"
-        self.execute("RubyApp.updateValue(#{_selector.to_json}, #{value.to_json});")
+        self.execute("RubyApp.updateValue(#{_selector.to_json}, #{value.to_json}, #{change.to_json});")
       end
 
-      def update_input(text, value)
-        self.update_value_for("label:contains('#{text}')", value)
+      def update_input(text, value, change = true)
+        self.update_value_for("label:contains('#{text}')", value, change)
       end
 
-      def update_value_for(selector, value)
+      def update_value_for(selector, value, change = true)
         _selector = ".ui-page-active #{selector}"
-        self.execute("RubyApp.updateValueFor(#{_selector.to_json}, #{value.to_json});")
+        self.execute("RubyApp.updateValueFor(#{_selector.to_json}, #{value.to_json}, #{change.to_json});")
       end
 
       def set_cookie(name, value, expires = Time.now + 365*24*60*60)
