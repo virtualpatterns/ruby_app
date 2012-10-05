@@ -14,18 +14,13 @@ namespace :ruby_app do
     puts RubyApp::VERSION
   end
 
-  desc 'Display commit difference between current branch and staging'
-  task :changes do |task|
-    system("git checkout development; git pull origin development; git log --pretty=format:'%H %s' staging..HEAD")
-  end
-
   desc 'Push to master, release, and increment version'
   task :release do |task|
       system('git push origin master && rake release')
       version_file = File.join(RubyApp::ROOT, %w[version.rb])
       RubyApp::VERSION =~ /(\d+)\.(\d+)\.(\d+)/
       system("sed 's|[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*|#{$1}.#{$2}.#{$3.to_i + 1}|g' < '#{version_file}' > '#{version_file}.out'; rm '#{version_file}'; mv '#{version_file}.out' '#{version_file}'")
-      system('git commit --all --message=\'Incrementing version\'')
+      system("git commit --all --message=\'Version #{RubyApp::VERSION}\'")
   end
 
   namespace :process do
