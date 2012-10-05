@@ -165,6 +165,10 @@ module RubyApp
         self.assert_exists_selector("a:contains('#{text}')")
       end
 
+      def assert_not_exists_link(text)
+        self.assert_not_exists_selector("a:contains('#{text}')")
+      end
+
       def assert_exists_selector(selector)
         _selector = ".ui-page-active #{selector}"
         self.execute("RubyApp.assertExists(#{_selector.to_json});")

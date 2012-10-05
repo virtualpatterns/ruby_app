@@ -9,19 +9,14 @@ require 'ruby_app'
 
 namespace :ruby_app do
 
-  desc 'Create console'
-  task :console do |task|
-    system('cd ./lib/ruby_app && clear && bundle exec ../../bin/ruby_app console')
-  end
-
-  desc 'Run'
-  task :run => ['ruby_app:cache:destroy'] do |task|
-    system('cd ./lib/ruby_app && clear && bundle exec ../../bin/ruby_app run')
-  end
-
   desc 'Get version'
   task :version do |task|
     puts RubyApp::VERSION
+  end
+
+  desc 'Display commit difference between current branch and staging'
+  task :changes do |task|
+    system("git checkout development; git pull origin development; git log --pretty=format:'%H %s' staging..HEAD")
   end
 
   desc 'Push to master, release, and increment version'
@@ -33,19 +28,18 @@ namespace :ruby_app do
       system('git commit --all --message=\'Incrementing version\'')
   end
 
-  desc 'List all scripts and their url\'s'
-  task :scripts do |task|
-    RubyApp::Application.create_context! do
-      table = Terminal::Table.new(:title => 'Steps',
-                                  :headings => ['Script',
-                                                'Url']) do |table|
-        RubyApp::Session.get_scripts.each do |script|
-          table.add_row([script.name,
-                         script.url])
-        end
-        puts table
-      end
+  namespace :process do
+
+    desc 'Create console'
+    task :console do |task|
+      system('cd ./lib/ruby_app && clear && bundle exec ../../bin/ruby_app console')
     end
+
+    desc 'Run'
+    task :run => ['ruby_app:cache:destroy'] do |task|
+      system('cd ./lib/ruby_app && clear && bundle exec ../../bin/ruby_app run')
+    end
+
   end
 
   namespace :cache do
