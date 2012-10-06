@@ -30,7 +30,7 @@ module RubyApp
                                 'Item 04',
                                 'Item 05' ].collect { |item| RubyApp::Elements::Mobile::List::ListSplitItem.new(item) }
 
-              item = RubyApp::Elements::Mobile::List::ListSplitItem.new('Item --')
+              item = RubyApp::Elements::Mobile::List::ListSplitItem.new('Item 06')
               item.attributes.merge!('disabled' => true)
               @list.items += [ item ]
 
