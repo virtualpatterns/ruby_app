@@ -1,11 +1,7 @@
 PATH
   remote: .
   specs:
-<<<<<<< HEAD
-    RubyApp (0.5.95)
-=======
     RubyApp (0.6.00)
->>>>>>> origin/development
       BlueCloth
       chronic
       chronic_duration
