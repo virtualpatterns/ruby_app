@@ -30,6 +30,10 @@ module RubyApp
                                 'Item 04',
                                 'Item 05' ].collect { |item| RubyApp::Elements::Mobile::List::ListSplitItem.new(item) }
 
+              item = RubyApp::Elements::Mobile::List::ListSplitItem.new('Item 06')
+              item.attributes.merge!('disabled' => true)
+              @list.items += [ item ]
+
               @list.item_clicked do |element, event|
                 RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('List', "You clicked the item #{event.item.item}."))
               end
