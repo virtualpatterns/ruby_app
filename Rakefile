@@ -30,7 +30,7 @@ namespace :ruby_app do
       version_file = File.join(RubyApp::ROOT, %w[version.rb])
       RubyApp::VERSION =~ /(\d+)\.(\d+)\.(\d+)/
       system("sed 's|[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*|#{$1}.#{$2}.#{$3.to_i + 1}|g' < '#{version_file}' > '#{version_file}.out'; rm '#{version_file}'; mv '#{version_file}.out' '#{version_file}'")
-      system("git commit --all --message=\'Version #{RubyApp::VERSION}\'; git checkout development")
+      system("git commit --all --message=\'Version #{$1}.#{$2}.#{$3.to_i + 1}\'; git checkout development")
   end
 
   namespace :process do
