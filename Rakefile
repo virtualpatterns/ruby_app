@@ -19,9 +19,14 @@ namespace :ruby_app do
     system("git checkout development; git pull origin development; git log --pretty=format:'%H %s' production..HEAD")
   end
 
+  desc 'Push to development'
+  task :push do |task|
+      system('git checkout development; git pull origin development; git push origin development')
+  end
+
   desc 'Push to production, release, and increment version'
   task :release do |task|
-      system('git checkout development; git pull origin development; git push origin development; git checkout production; git pull origin production; git merge origin/development; git push origin production; rake release')
+      system('git checkout production; git pull origin production; git merge origin/development; git push origin production; rake release')
       version_file = File.join(RubyApp::ROOT, %w[lib ruby_app version.rb])
       RubyApp::VERSION =~ /(\d+)\.(\d+)\.(\d+)/
       system("sed 's|[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*|#{$1}.#{$2}.#{$3.to_i + 1}|g' < '#{version_file}' > '#{version_file}.out'; rm '#{version_file}'; mv '#{version_file}.out' '#{version_file}'")
