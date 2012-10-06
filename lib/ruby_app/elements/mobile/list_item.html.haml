@@ -1,5 +1,9 @@
 /
   #{__FILE__}
 %li.item{self.attributes}
-  %a.item{:href => '#'}
+  - unless self.attributes['disabled']
+    %a.item{:href => '#'}
+      = yield(:item) || self.item
+  - else
+    %span.item.ui-disabled
     = yield(:item) || self.item
