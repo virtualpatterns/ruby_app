@@ -8,5 +8,6 @@ lib/ruby_app/elements/mobile/documents/authentication/open_id/associations
 lib/ruby_app/elements/mobile/documents/authentication/open_id/nonces
 lib/ruby_app/elements/mobile/documents/authentication/open_id/temp
 *.gem
+*.lock
 *.log
 *.pid
