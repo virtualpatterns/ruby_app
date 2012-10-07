@@ -133,15 +133,15 @@ module RubyApp
       end
 
       def click_link(text)
-        self.click_selector("a:contains('#{text}')")
+        self.click_selector("a:visible:contains('#{text}')")
       end
 
       def click_list_item(text)
-        self.click_selector("a.item:contains('#{text}')")
+        self.click_selector("a.item:visible:contains('#{text}')")
       end
 
       def click_list_link(text)
-        self.click_selector("a.link[title*='#{text}']")
+        self.click_selector("a.link:visible[title*='#{text}']")
       end
 
       def click_selector(selector)
@@ -154,19 +154,19 @@ module RubyApp
       end
 
       def assert_exists_text(text)
-        self.assert_exists_selector("*:contains('#{text}')")
+        self.assert_exists_selector("*:visible:contains('#{text}')")
       end
 
       def assert_not_exists_text(text)
-        self.assert_not_exists_selector("*:contains('#{text}')")
+        self.assert_not_exists_selector("*:visible:contains('#{text}')")
       end
 
       def assert_exists_link(text)
-        self.assert_exists_selector("a:contains('#{text}')")
+        self.assert_exists_selector("a:visible:contains('#{text}')")
       end
 
       def assert_not_exists_link(text)
-        self.assert_not_exists_selector("a:contains('#{text}')")
+        self.assert_not_exists_selector("a:visible:contains('#{text}')")
       end
 
       def assert_exists_selector(selector)
