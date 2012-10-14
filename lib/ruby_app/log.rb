@@ -64,14 +64,21 @@ module RubyApp
         path = String.interpolate { RubyApp::Log.configuration.path }
         FileUtils.mkdir_p(File.dirname(path))
         @@_log = RubyApp::Log.new(path)
+        RubyApp::Log.debug("LOG       #{RubyApp::Log.prefix(self, __method__)}")
       end
     end
 
     def self.close!
       if @@_log ||= nil
+        RubyApp::Log.debug("LOG       #{RubyApp::Log.prefix(self, __method__)}")
         @@_log.close
         @@_log = nil
       end
+    end
+
+    def self.reopen!
+      RubyApp::Log.close!
+      RubyApp::Log.open!
     end
 
     private

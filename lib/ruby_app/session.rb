@@ -192,14 +192,6 @@ module RubyApp
           end
         end
 
-        at_exit do
-          begin
-            RubyApp::Session.stop_thread!
-          rescue => exception
-            RubyApp::Log.exception(RubyApp::Log::ERROR, exception)
-          end
-        end
-
         RubyApp::Log.debug("SESSION   #{RubyApp::Log.prefix(self, __method__)}")
 
       end
