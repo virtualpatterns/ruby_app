@@ -5,6 +5,7 @@ require 'facets/string/interpolate'
 require 'fileutils'
 require 'logger'
 require 'socket'
+require 'thread'
 
 module RubyApp
   require 'ruby_app'
@@ -27,7 +28,7 @@ module RubyApp
       begin
         return yield
       ensure
-        self.log(severity, "#{message} #{Time.now - start}s")
+        RubyApp::Log.get.log(severity, "#{message} #{Time.now - start}s")
       end
     end
 
@@ -37,26 +38,35 @@ module RubyApp
       ensure
         GC.start
         count = ObjectSpace.each_object { |item| }
-        self.log(severity, "#{message} count=#{count}")
+        RubyApp::Log.get.log(severity, "#{message} count=#{count}")
       end
     end
 
     def exception(severity, exception)
-      self.log(severity, '-' * 80)
-      self.log(severity, "exception=#{exception.class.inspect} #{exception.message}")
-      self.log(severity, '-' * 80)
+      logger = RubyApp::Log.get
+      logger.log(severity, '-' * 80)
+      logger.log(severity, "exception=#{exception.class.inspect} #{exception.message}")
+      logger.log(severity, '-' * 80)
       exception.backtrace.each do |line|
-        self.log(severity, line)
+        logger.log(severity, line)
       end
-      self.log(severity, '-' * 80)
+      logger.log(severity, '-' * 80)
     end
 
     def self.prefix(object, method)
       return "#{object.is_a?(Class) ? object : object.class}#{object.is_a?(Class) ? '.' : '#'}#{method}"
     end
-
+    
     def self.get
-      ( @@_log ||= nil ) || ( @@_standard_log ||= RubyApp::Log.new($stdout) )
+      RubyApp::Log.lock do
+        ( @@_log ||= nil ) || ( @@_standard_log ||= RubyApp::Log.new($stdout) )
+      end
+    end
+
+    def self.lock
+      ( @@_lock ||= ::Mutex.new ).synchronize do
+        yield
+      end
     end
 
     def self.open!
@@ -77,8 +87,10 @@ module RubyApp
     end
 
     def self.reopen!
-      RubyApp::Log.close!
-      RubyApp::Log.open!
+      RubyApp::Log.lock do
+        RubyApp::Log.close!
+        RubyApp::Log.open!
+      end
     end
 
     private

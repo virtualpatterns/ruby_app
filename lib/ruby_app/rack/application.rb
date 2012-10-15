@@ -23,6 +23,9 @@ module RubyApp
         Signal.trap('EXIT') do
           begin
             RubyApp::Session.stop_thread!
+            RubyApp::Application.destroy!
+            RubyApp::Log.close!
+            RubyApp::Configuration.unload!
           rescue => exception
             RubyApp::Log.exception(RubyApp::Log::ERROR, exception)
           end
