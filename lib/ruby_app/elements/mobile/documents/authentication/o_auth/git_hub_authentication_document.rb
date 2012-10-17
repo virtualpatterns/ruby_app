@@ -26,6 +26,12 @@ module RubyApp
                 super(access_key, secret_key, _scope, _options)
               end
 
+              def create_identity_from_access_token(access_token)
+                user = JSON.parse(access_token.get('/user').body)
+                RubyApp::Log.debug("GITHUB    user=#{user.inspect}")
+                RubyApp::Session.identity = RubyApp::Session::Identity.new(user['email'])
+              end
+
             end
 
           end

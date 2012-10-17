@@ -50,10 +50,6 @@ module RubyApp
 
               end
 
-              def create_identity_from_me(me)
-                RubyApp::Session::Identity.new(me['email'])
-              end
-
             end
 
           end
