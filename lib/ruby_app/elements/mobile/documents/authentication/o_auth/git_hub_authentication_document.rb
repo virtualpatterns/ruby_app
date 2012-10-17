@@ -9,9 +9,9 @@ module RubyApp
         module Authentication
 
           module OAuth
-            require 'ruby_app/elements/mobile/documents/authentication/o_auth/authentication_document'
+            require 'ruby_app/elements/mobile/documents/authentication/o_auth/email_authentication_document'
 
-            class GitHubAuthenticationDocument < RubyApp::Elements::Mobile::Documents::Authentication::OAuth::AuthenticationDocument
+            class GitHubAuthenticationDocument < RubyApp::Elements::Mobile::Documents::Authentication::OAuth::EmailAuthenticationDocument
 
               template_path(:all, File.dirname(__FILE__))
 
@@ -29,7 +29,7 @@ module RubyApp
               def create_identity_from_access_token(access_token)
                 user = JSON.parse(access_token.get('/user').body)
                 RubyApp::Log.debug("GITHUB    user=#{user.inspect}")
-                RubyApp::Session.identity = RubyApp::Session::Identity.new(user['email'])
+                return self.create_identity_from_email(user['email'])
               end
 
             end
