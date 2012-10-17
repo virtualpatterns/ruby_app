@@ -9,9 +9,9 @@ module RubyApp
         module Authentication
 
           module OpenId
-            require 'ruby_app/elements/mobile/documents/authentication/open_id/sreg_authentication_document'
+            require 'ruby_app/elements/mobile/documents/authentication/open_id/s_reg_authentication_document'
 
-            class MyOpenIdAuthenticationDocument < RubyApp::Elements::Mobile::Documents::Authentication::OpenId::SregAuthenticationDocument
+            class MyOpenIdAuthenticationDocument < RubyApp::Elements::Mobile::Documents::Authentication::OpenId::SRegAuthenticationDocument
 
               template_path(:all, File.dirname(__FILE__))
 

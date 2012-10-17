@@ -17,11 +17,15 @@ module RubyApp
               template_path(:all, File.dirname(__FILE__))
 
               def initialize
-                super('email')
+                super(['email'])
               end
 
               def create_identity_from_me(me)
-                RubyApp::Session::Identity.new(me['email'])
+                return self.create_identity_from_email(me['email'])
+              end
+
+              def create_identity_from_email(email)
+                return RubyApp::Session::Identity.new(email)
               end
 
             end

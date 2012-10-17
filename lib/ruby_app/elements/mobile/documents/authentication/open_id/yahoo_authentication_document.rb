@@ -28,9 +28,9 @@ module RubyApp
               def create_identity_from_response(response)
                 ax_response = ::OpenID::AX::FetchResponse.from_success_response(response)
                 if ax_response
-                  self.create_identity_from_email(ax_response.data[RubyApp::Elements::Mobile::Documents::Authentication::OpenId::YahooAuthenticationDocument.configuration.attributes.email].first)
+                  return self.create_identity_from_email(ax_response.data[RubyApp::Elements::Mobile::Documents::Authentication::OpenId::YahooAuthenticationDocument.configuration.attributes.email].first)
                 else
-                  super(response)
+                  return super(response)
                 end
               end
 

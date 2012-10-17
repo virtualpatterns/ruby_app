@@ -17,7 +17,7 @@ module RubyApp
             require 'ruby_app'
             require 'ruby_app/elements/mobile/documents/authentication/open_id/email_authentication_document'
 
-            class SregAuthenticationDocument < RubyApp::Elements::Mobile::Documents::Authentication::OpenId::EmailAuthenticationDocument
+            class SRegAuthenticationDocument < RubyApp::Elements::Mobile::Documents::Authentication::OpenId::EmailAuthenticationDocument
 
               template_path(:all, File.dirname(__FILE__))
 
@@ -34,9 +34,9 @@ module RubyApp
               def create_identity_from_response(response)
                 sreg_response = ::OpenID::SReg::Response.from_success_response(response)
                 unless sreg_response.empty?
-                  self.create_identity_from_email(sreg_response.data['email'])
+                  return self.create_identity_from_email(sreg_response.data['email'])
                 else
-                  super(response)
+                  return super(response)
                 end
               end
 
