@@ -1,4 +1,5 @@
 load_script! 'default'
+load_script! 'elements/authentications/facebook'
 load_script! 'elements/authentications/o_auth/git_hub'
 load_script! 'elements/buttons'
 load_script! 'elements/calendars/month'

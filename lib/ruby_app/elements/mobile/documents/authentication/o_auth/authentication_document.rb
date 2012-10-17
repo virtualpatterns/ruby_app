@@ -39,18 +39,12 @@ module RubyApp
                     code = RubyApp::Request.query['code']
                     access_token = @client.auth_code.get_token(code, :redirect_uri => RubyApp::Request.url)
                     RubyApp::Log.debug("OAUTH     token=#{access_token.token.inspect}")
-                    user = JSON.parse(access_token.get('/user').body)
-                    RubyApp::Log.debug("OAUTH     user=#{user.inspect}")
-                    RubyApp::Session.identity = self.create_identity_from_user(user)
+                    RubyApp::Session.identity = self.create_identity_from_access_token(access_token)
                     RubyApp::Session.documents.pop
                     event.go('/')
                   end
                 end
 
-              end
-
-              def create_identity_from_user(user)
-                RubyApp::Session::Identity.new(user['email'])
               end
 
             end
