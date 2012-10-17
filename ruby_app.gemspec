@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'json'
   s.add_dependency 'koala'
   s.add_dependency 'mime-types'
+  s.add_dependency 'oauth2'
   s.add_dependency 'r18n-core'
   s.add_dependency 'rack'
   s.add_dependency 'ruby-event'
