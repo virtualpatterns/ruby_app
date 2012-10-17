@@ -21,17 +21,17 @@ module RubyApp
 
               template_path(:all, File.dirname(__FILE__))
 
-              def initialize(access_key, secret_key, scope, options)
+              def initialize(access_key, secret_key, scopes, options)
                 super()
 
                 self.loaded do |element, event|
 
                   unless @client
-                    RubyApp::Log.debug("OAUTH     scope=#{scope.inspect}")
+                    RubyApp::Log.debug("OAUTH     scopes=#{scopes.inspect}")
                     RubyApp::Log.debug("OAUTH     options=#{options.inspect}")
                     @client = ::OAuth2::Client.new(access_key, secret_key, options)
                     url = @client.auth_code.authorize_url(:redirect_uri => RubyApp::Request.url,
-                                                          :scope        => scope.join(','))
+                                                          :scope        => scopes.is_a?(Array) ? scopes.join(',') : scopes)
                     RubyApp::Log.debug("OAUTH     --> #{url.inspect}")
                     event.go(url)
                   else

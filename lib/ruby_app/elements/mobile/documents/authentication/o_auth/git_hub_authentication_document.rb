@@ -17,13 +17,13 @@ module RubyApp
 
               def initialize(access_key = ENV['GITHUB_ACCESS_KEY'] || RubyApp::Elements::Mobile::Documents::Authentication::OAuth::GitHubAuthenticationDocument.configuration.access_key,
                              secret_key = ENV['GITHUB_SECRET_KEY'] || RubyApp::Elements::Mobile::Documents::Authentication::OAuth::GitHubAuthenticationDocument.configuration.secret_key,
-                             scope      = [],
+                             scopes      = [],
                              options    = {})
-                _scope = ['user'] + scope
+                _scopes = scopes.is_a?(Array) ? ( ['user'] + scopes ) : ( "user,#{scopes}")
                 _options = {:site           => RubyApp::Elements::Mobile::Documents::Authentication::OAuth::GitHubAuthenticationDocument.configuration.url,
                             :authorize_url  => RubyApp::Elements::Mobile::Documents::Authentication::OAuth::GitHubAuthenticationDocument.configuration.authorize_url,
                             :token_url      => RubyApp::Elements::Mobile::Documents::Authentication::OAuth::GitHubAuthenticationDocument.configuration.access_token_url}.merge(options)
-                super(access_key, secret_key, _scope, _options)
+                super(access_key, secret_key, _scopes, _options)
               end
 
               def create_identity_from_access_token(access_token)

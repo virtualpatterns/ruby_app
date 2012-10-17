@@ -17,7 +17,7 @@ module RubyApp
               template_path(:all, File.dirname(__FILE__))
 
               def initialize
-                super('email')
+                super(['email'])
               end
 
               def create_identity_from_me(me)

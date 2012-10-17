@@ -15,8 +15,8 @@ module RubyApp
 
               template_path(:all, File.dirname(__FILE__))
 
-              def initialize(access_key, secret_key, scope, options)
-                super(access_key, secret_key, scope, options)
+              def initialize(access_key, secret_key, scopes, options)
+                super(access_key, secret_key, scopes, options)
               end
 
               def create_identity_from_email(email)
