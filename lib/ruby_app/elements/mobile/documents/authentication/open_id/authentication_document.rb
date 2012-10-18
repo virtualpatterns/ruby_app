@@ -25,7 +25,6 @@ module RubyApp
                 super()
 
                 self.loaded do |element, event|
-
                   unless @consumer
                     @consumer = ::OpenID::Consumer.new(RubyApp::Session.data, nil)
                     request = @consumer.begin(identifier)
@@ -38,20 +37,23 @@ module RubyApp
                     response = @consumer.complete(RubyApp::Request.query, RubyApp::Request.url)
                     case response.status
                       when ::OpenID::Consumer::SUCCESS
-                        RubyApp::Session.identity = self.create_identity_from_response(response)
+                        self.process_response(response)
                         RubyApp::Log.info("SESSION   RubyApp::Session.identity.url=#{RubyApp::Session.identity.url.inspect}")
                       when ::OpenID::Consumer::FAILURE
                         RubyApp::Log.error("OPENID    #{response.class}")
                         RubyApp::Log.error("OPENID    #{response.message.inspect}")
                     end
-                    RubyApp::Session.documents.pop
-                    event.go('/')
+                    self.hide(event)
                   end
                 end
 
               end
 
               def process_request(request)
+              end
+
+              def process_response(response)
+                RubyApp::Session.identity = self.create_identity_from_response(response)
               end
 
               def create_identity_from_response(response)

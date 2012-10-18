@@ -30,32 +30,27 @@ module RubyApp
 
                 @github_authentication_link = RubyApp::Elements::Mobile::Button.new
                 @github_authentication_link.clicked do |element, event|
-                  RubyApp::Session.documents.push(RubyApp::Elements::Mobile::Documents::Authentication::OAuth::GitHubAuthenticationDocument.new)
-                  event.refresh_browser
+                  RubyApp::Elements::Mobile::Documents::Authentication::OAuth::GitHubAuthenticationDocument.new.show(event)
                 end
 
                 @facebook_authentication_link = RubyApp::Elements::Mobile::Button.new
                 @facebook_authentication_link.clicked do |element, event|
-                  RubyApp::Session.documents.push(RubyApp::Elements::Mobile::Documents::Authentication::Facebook::EmailAuthenticationDocument.new)
-                  event.refresh_browser
+                  RubyApp::Elements::Mobile::Documents::Authentication::Facebook::EmailAuthenticationDocument.new.show(event)
                 end
 
                 @google_authentication_link = RubyApp::Elements::Mobile::Button.new
                 @google_authentication_link.clicked do |element, event|
-                  RubyApp::Session.documents.push(RubyApp::Elements::Mobile::Documents::Authentication::OpenId::GoogleAuthenticationDocument.new)
-                  event.refresh_browser
+                  RubyApp::Elements::Mobile::Documents::Authentication::OpenId::GoogleAuthenticationDocument.new.show(event)
                 end
 
                 @my_open_id_authentication_link = RubyApp::Elements::Mobile::Button.new
                 @my_open_id_authentication_link.clicked do |element, event|
-                  RubyApp::Session.documents.push(RubyApp::Elements::Mobile::Documents::Authentication::OpenId::MyOpenIdAuthenticationDocument.new)
-                  event.refresh_browser
+                  RubyApp::Elements::Mobile::Documents::Authentication::OpenId::MyOpenIdAuthenticationDocument.new.show(event)
                 end
 
                 @yahoo_authentication_link = RubyApp::Elements::Mobile::Button.new
                 @yahoo_authentication_link.clicked do |element, event|
-                  RubyApp::Session.documents.push(RubyApp::Elements::Mobile::Documents::Authentication::OpenId::YahooAuthenticationDocument.new)
-                  event.refresh_browser
+                  RubyApp::Elements::Mobile::Documents::Authentication::OpenId::YahooAuthenticationDocument.new.show(event)
                 end
 
               end
