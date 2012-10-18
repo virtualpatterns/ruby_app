@@ -25,7 +25,6 @@ module RubyApp
                 super()
 
                 self.loaded do |element, event|
-
                   unless @client
                     RubyApp::Log.debug("OAUTH     scopes=#{scopes.inspect}")
                     RubyApp::Log.debug("OAUTH     options=#{options.inspect}")
@@ -39,12 +38,15 @@ module RubyApp
                     code = RubyApp::Request.query['code']
                     access_token = @client.auth_code.get_token(code, :redirect_uri => RubyApp::Request.url)
                     RubyApp::Log.debug("OAUTH     token=#{access_token.token.inspect}")
-                    RubyApp::Session.identity = self.create_identity_from_access_token(access_token)
-                    RubyApp::Session.documents.pop
-                    event.go('/')
+                    self.process_access_token(access_token)
+                    self.hide(event)
                   end
                 end
 
+              end
+
+              def process_access_token(access_token)
+                RubyApp::Session.identity = self.create_identity_from_access_token(access_token)
               end
 
             end

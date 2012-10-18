@@ -57,6 +57,16 @@ module RubyApp
           return @pages.last
         end
 
+        def show(event, url = '/')
+          RubyApp::Session.documents.push(self)
+          event.go(url)
+        end
+
+        def hide(event, url = '/')
+          RubyApp::Session.documents.pop
+          event.go(url)
+        end
+
         protected
 
           def on_event(event)

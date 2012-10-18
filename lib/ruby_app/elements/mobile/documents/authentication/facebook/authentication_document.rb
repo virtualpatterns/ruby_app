@@ -25,7 +25,6 @@ module RubyApp
                 super()
 
                 self.loaded do |element, event|
-
                   unless @authentication
                     RubyApp::Log.debug("FACEBOOK  permissions=#{permissions.inspect}")
                     @authentication = ::Koala::Facebook::OAuth.new(ENV['FACEBOOK_ACCESS_KEY'] || RubyApp::Elements::Mobile::Documents::Authentication::Facebook::AuthenticationDocument.configuration.access_key,
@@ -40,15 +39,18 @@ module RubyApp
                     code = RubyApp::Request.query['code']
                     token = @authentication.get_access_token(code)
                     RubyApp::Log.debug("FACEBOOK  token=#{token.inspect}")
-                    graph = ::Koala::Facebook::API.new(token)
-                    me = graph.get_object('me')
-                    RubyApp::Log.debug("FACEBOOK  me=#{me.inspect}")
-                    RubyApp::Session.identity = self.create_identity_from_me(me)
-                    RubyApp::Session.documents.pop
-                    event.go('/')
+                    self.process_token(token)
+                    self.hide(event)
                   end
                 end
 
+              end
+
+              def process_token(token)
+                graph = ::Koala::Facebook::API.new(token)
+                me = graph.get_object('me')
+                RubyApp::Log.debug("FACEBOOK  me=#{me.inspect}")
+                RubyApp::Session.identity = self.create_identity_from_me(me)
               end
 
             end
