@@ -12,7 +12,6 @@ module RubyApp
         require 'ruby_app/elements/mobile/pages/information/cookies_page'
         require 'ruby_app/elements/mobile/pages/information/environment_page'
         require 'ruby_app/elements/mobile/pages/information/sessions_page'
-        require 'ruby_app/elements/mobile/pages/information/scripts_page'
 
         class InformationPage < RubyApp::Elements::Mobile::Page
 
@@ -38,11 +37,6 @@ module RubyApp
             @configuration_link = RubyApp::Elements::Mobile::Navigation::NavigationLink.new
             @configuration_link.clicked do |element, event|
               RubyApp::Elements::Mobile::Pages::Information::ConfigurationPage.new.show(event, element.options)
-            end
-
-            @scripts_link = RubyApp::Elements::Mobile::Navigation::NavigationLink.new
-            @scripts_link.clicked do |element, event|
-              RubyApp::Elements::Mobile::Pages::Information::ScriptsPage.new.show(event, element.options)
             end
 
             @sessions_link = RubyApp::Elements::Mobile::Navigation::NavigationLink.new
