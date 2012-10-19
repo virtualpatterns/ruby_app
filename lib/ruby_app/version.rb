@@ -1,4 +1,4 @@
 module RubyApp
-  VERSION = "0.6.38"
+  VERSION = "0.6.39"
   ROOT    = File.expand_path(File.dirname(__FILE__))
 end

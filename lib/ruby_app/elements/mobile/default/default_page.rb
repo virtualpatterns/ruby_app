@@ -10,6 +10,7 @@ module RubyApp
         require 'ruby_app/elements/mobile/navigation/page_button'
         require 'ruby_app/elements/mobile/page'
         require 'ruby_app/elements/mobile/pages/information_page'
+        require 'ruby_app/elements/mobile/pages/scripts_page'
 
         class DefaultPage < RubyApp::Elements::Mobile::Page
 
@@ -25,6 +26,9 @@ module RubyApp
             @information_link.clicked do |element, event|
               RubyApp::Elements::Mobile::Pages::InformationPage.new(event.now).show(event, element.options)
             end
+
+            @scripts_link = RubyApp::Elements::Mobile::Navigation::PageButton.new
+            @scripts_link.page = RubyApp::Elements::Mobile::Pages::ScriptsPage
 
           end
 
