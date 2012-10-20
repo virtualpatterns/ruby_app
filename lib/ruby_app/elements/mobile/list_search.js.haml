@@ -1,0 +1,9 @@
+:plain
+  // #{__FILE__}
+  $(document).ready( function() {
+    $(document).on('change', 'li.search input.search', function(event) {
+      event.preventDefault();
+      RubyApp.sendEvent({_class:'RubyApp::Elements::Mobile::List::SearchedEvent', source:$(this).parents('ul.list').attr('id'), value:$(this).val()});
+    });
+  });
+= yield

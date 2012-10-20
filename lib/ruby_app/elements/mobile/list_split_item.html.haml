@@ -1,6 +1,6 @@
 /
   #{__FILE__}
-%li.item{self.attributes}
+%li.split-item{self.attributes}
   - unless self.attributes['disabled']
     %a.item{:href => '#'}
       = yield(:item) || self.item
