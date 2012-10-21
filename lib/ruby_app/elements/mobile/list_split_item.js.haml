@@ -1,0 +1,13 @@
+:plain
+  // #{__FILE__}
+  $(document).ready( function() {
+    $(document).on('click', 'li.split-item a.item', function(event) {
+      event.preventDefault();
+      RubyApp.sendEvent({_class:'RubyApp::Elements::Mobile::List::ItemClickedEvent', source:$(this).parents('ul.list').attr('id'), item:$(this).parents('li.split-item').attr('id')});
+    });
+    $(document).on('click', 'li.split-item a.link', function(event) {
+      event.preventDefault();
+      RubyApp.sendEvent({_class:'RubyApp::Elements::Mobile::List::LinkClickedEvent', source:$(this).parents('ul.list').attr('id'), item:$(this).parents('li.split-item').attr('id')});
+    });
+  });
+= yield

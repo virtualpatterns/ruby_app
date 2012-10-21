@@ -88,18 +88,38 @@ module RubyApp
 
         end
 
+        class SearchedEvent < RubyApp::Element::Event
+
+          attr_reader :value
+
+          def initialize(data)
+            super(data)
+            @value = data['value'].strip
+            @value = @value.empty? ? nil : @value
+          end
+
+          def to_hash
+            super.merge(:value => @value)
+          end
+
+        end
+
         template_path(:all, File.dirname(__FILE__))
 
         attr_accessor :items
+        attr_accessor :search_value
 
         event :item_clicked
         event :link_clicked
+
+        event :searched
 
         def initialize
           super
           self.attributes.merge!('data-role' => 'listview')
 
           @items = []
+          @search_value = nil
 
         end
 
@@ -108,6 +128,7 @@ module RubyApp
           def on_event(event)
             on_item_clicked(event) if event.is_a?(RubyApp::Elements::Mobile::List::ItemClickedEvent)
             on_link_clicked(event) if event.is_a?(RubyApp::Elements::Mobile::List::LinkClickedEvent)
+            on_searched(event) if event.is_a?(RubyApp::Elements::Mobile::List::SearchedEvent)
             super(event)
           end
 
@@ -117,6 +138,11 @@ module RubyApp
 
           def on_link_clicked(event)
             link_clicked(event)
+          end
+
+          def on_searched(event)
+            @search_value = event.value
+            searched(event)
           end
 
       end

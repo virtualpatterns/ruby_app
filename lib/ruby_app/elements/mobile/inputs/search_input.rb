@@ -7,13 +7,13 @@ module RubyApp
       module Inputs
         require 'ruby_app/elements/mobile/input'
 
-        class EmailInput < RubyApp::Elements::Mobile::Input
+        class SearchInput < RubyApp::Elements::Mobile::Input
 
           template_path(:all, File.dirname(__FILE__))
 
           def initialize
             super
-            self.attributes.merge!('type' => 'email')
+            self.attributes.merge!('type' => 'search')
           end
 
         end

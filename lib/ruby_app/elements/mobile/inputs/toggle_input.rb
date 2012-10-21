@@ -24,7 +24,7 @@ module RubyApp
 
           def initialize
             super
-            self.attributes.delete(:type)
+            self.attributes.delete('type')
             self.attributes.merge!('data-role' => 'slider')
 
             @value = false

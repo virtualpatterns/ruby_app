@@ -4,23 +4,26 @@
 %html{self.attributes}
   %head
     - self.metadata.each do |name, value|
-      %meta{:name => name,
-            :content => value}
+      %meta{'name'    => name,
+            'content' => value}
     - self.links.each do |name, value|
-      %link{:rel => name,
-            :href => value}
+      %link{'rel'     => name,
+            'href'    => value}
     - self.stylesheets.each do |stylesheet|
-      %link{:rel => 'stylesheet',
-            :href => stylesheet}
-    %link{:rel => 'stylesheet',
-          :href => "/#{RubyApp::Language.locale.code}/document.css"}
+      %link{'rel'     => 'stylesheet',
+            'href'    => stylesheet}
+    %link{'rel'       => 'stylesheet',
+          'href'      => "/#{RubyApp::Language.locale.code}/document.css"}
     - self.scripts.each do |script|
-      %script{:src => script}
-    %script{:src => "/#{RubyApp::Language.locale.code}/document.js"}
+      %script{'src'   => script}
+    %script{'src'     => "/#{RubyApp::Language.locale.code}/document.js"}
 
-    %meta{:name => :session, :content => RubyApp::Session.session_id}
-    %meta{:name => :locale, :content => RubyApp::Language.locale.code}
-    %meta{:name => :error_message, :content => RubyApp::Elements::Mobile::Document.translate.error_message}
+    %meta{'name'      => 'session',        
+          'content'   => RubyApp::Session.session_id}
+    %meta{'name'      => 'locale',         
+          'content'   => RubyApp::Language.locale.code}
+    %meta{'name'      => 'error_message',  
+          'content'   => RubyApp::Elements::Mobile::Document.translate.error_message}
 
   %body
     - self.pages.reverse.each do |page|

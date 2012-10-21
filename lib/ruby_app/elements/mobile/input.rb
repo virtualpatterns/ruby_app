@@ -36,7 +36,7 @@ module RubyApp
 
         def initialize
           super
-          self.attributes.merge!(:type => :text)
+          self.attributes.merge!('type' => 'text')
 
           @value = nil
 

@@ -1,10 +1,4 @@
-:sass
-  /* #{__FILE__}
-  ul.list
-    li.item
-      a.link
-        span.ui-btn-inner
-          span.ui-btn.ui-btn-icon-notext.ui-btn-corner-all.ui-shadow
-            margin-left: 14px
-            margin-top: -14px
+= RubyApp::Elements::Mobile::List::ListItem.render(:css)
+= RubyApp::Elements::Mobile::List::ListDivider.render(:css)
+= RubyApp::Elements::Mobile::List::ListSplitItem.render(:css)
 = yield
