@@ -43,7 +43,8 @@ module RubyApp
               @list.items += [ item ]
 
               @list.searched do |element, event|
-                RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('List', "You input #{event.value}."))
+                # RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('List', "You input #{event.value}."))
+                event.update_element(@list)
               end
               @list.item_clicked do |element, event|
                 RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('List', "You clicked the item #{event.item.item}."))
