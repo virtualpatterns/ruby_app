@@ -22,7 +22,9 @@ module RubyApp
               @back_button = RubyApp::Elements::Mobile::Navigation::BackButton.new
 
               @list = RubyApp::Elements::Mobile::List.new
-              @list.items += [  RubyApp::Elements::Mobile::List::ListSearch.new ]
+              @list.attributes.merge!('data-filter'             => 'true',
+                                      'data-filter-placeholder' => 'search')
+              @list.search_value = 'default'
               @list.items += [  RubyApp::Elements::Mobile::List::ListDivider.new('List') ]
               @list.items += [  'Item 01',
                                 'Item 02',

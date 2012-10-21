@@ -13,7 +13,7 @@ module RubyApp
 
           def initialize
             super
-            self.attributes.merge!(:type => :date)
+            self.attributes.merge!('type' => 'date')
           end
 
         end

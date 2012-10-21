@@ -183,14 +183,31 @@
     this.assertNotExists = function(selector) {
       RubyApp.assert('selector=' + selector, $(selector).length <= 0);
     },
+    this.assertExistsValue = function(selector, value) {
+      var _value = $(selector).val();
+      RubyApp.assert('selector=' + selector + ', value=' + value, _value == value);
+    },
+    this.assertNotExistsValue = function(selector, value) {
+      var _value = $(selector).val();
+      RubyApp.assert('selector=' + selector + ', value=' + value, _value != value);
+    },
     this.assertExistsFor = function(selector) {
       var _for = $(selector).attr('for');
       RubyApp.assert('selector=' + selector + ', for=' + _for, $('#' + _for).length > 0);
+    },
+    this.assertNotExistsFor = function(selector) {
+      var _for = $(selector).attr('for');
+      RubyApp.assert('selector=' + selector + ', for=' + _for, $('#' + _for).length <= 0);
     },
     this.assertExistsValueFor = function(selector, value) {
       var _for = $(selector).attr('for');
       var _value = $('#' + _for).val();
       RubyApp.assert('selector=' + selector + ', for=' + _for + ', value=' + value, _value == value);
+    },
+    this.assertNotExistsValueFor = function(selector, value) {
+      var _for = $(selector).attr('for');
+      var _value = $('#' + _for).val();
+      RubyApp.assert('selector=' + selector + ', for=' + _for + ', value=' + value, _value != value);
     },
     this.assert = function(name, value) {
       RubyApp.sendEvent({_class:'RubyApp::Element::AssertedEvent', source:$('html').attr('id'), name:name, value:eval(value)});

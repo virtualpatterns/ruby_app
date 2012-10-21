@@ -119,6 +119,11 @@ module RubyApp
         self.execute("RubyApp.updateValue(#{_selector.to_json}, #{value.to_json}, #{change.to_json});")
       end
 
+      def update_search(text, value, change = true)
+        _selector = ".ui-page-active form.ui-listview-filter input[placeholder='#{text}']"
+        self.execute("RubyApp.updateValue(#{_selector.to_json}, #{value.to_json}, #{change.to_json});")
+      end
+
       def update_input(text, value, change = true)
         self.update_value_for("label:contains('#{text}')", value, change)
       end
@@ -179,9 +184,24 @@ module RubyApp
         self.execute("RubyApp.assertNotExists(#{_selector.to_json});")
       end
 
-      def assert_exists_input(text, value = nil)
-        self.assert_exists_selector_for("label:contains('#{text}')") unless value
-        self.assert_exists_selector_value_for("label:contains('#{text}')", value) if value
+      def assert_exists_selector_value(selector)
+        _selector = ".ui-page-active #{selector}"
+        self.execute("RubyApp.assertExistsValue(#{_selector.to_json}, #{value.to_json});")
+      end
+
+      def assert_not_exists_selector_value(selector)
+        _selector = ".ui-page-active #{selector}"
+        self.execute("RubyApp.assertNotExistsValue(#{_selector.to_json}, #{value.to_json});")
+      end
+
+      def assert_exists_search(text, value = nil)
+        self.assert_exists_selector("form.ui-listview-filter input[placeholder='#{text}']") unless value
+        self.assert_exists_selector_value("form.ui-listview-filter input[placeholder='#{text}']", value) if value
+      end
+
+      def assert_not_exists_search(text, value = nil)
+        self.assert_not_exists_selector("form.ui-listview-filter input[placeholder='#{text}']") unless value
+        self.assert_not_exists_selector_value("form.ui-listview-filter input[placeholder='#{text}']", value) if value
       end
 
       def assert_exists_selector_for(selector)
@@ -189,9 +209,29 @@ module RubyApp
         self.execute("RubyApp.assertExistsFor(#{_selector.to_json});")
       end
 
+      def assert_not_exists_selector_for(selector)
+        _selector = ".ui-page-active #{selector}"
+        self.execute("RubyApp.assertNotExistsFor(#{_selector.to_json});")
+      end
+
       def assert_exists_selector_value_for(selector, value)
         _selector = ".ui-page-active #{selector}"
         self.execute("RubyApp.assertExistsValueFor(#{_selector.to_json}, #{value.to_json});")
+      end
+
+      def assert_not_exists_selector_value_for(selector, value)
+        _selector = ".ui-page-active #{selector}"
+        self.execute("RubyApp.assertNotExistsValueFor(#{_selector.to_json}, #{value.to_json});")
+      end
+
+      def assert_exists_input(text, value = nil)
+        self.assert_exists_selector_for("label:contains('#{text}')") unless value
+        self.assert_exists_selector_value_for("label:contains('#{text}')", value) if value
+      end
+
+      def assert_not_exists_input(text, value = nil)
+        self.assert_not_exists_selector_for("label:contains('#{text}')") unless value
+        self.assert_not_exists_selector_value_for("label:contains('#{text}')", value) if value
       end
 
       def assert(name, expression = nil)

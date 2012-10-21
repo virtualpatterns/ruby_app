@@ -41,19 +41,6 @@ module RubyApp
 
         end
 
-        class ListSearch < RubyApp::Elements::Mobile::List::ListItem
-
-          template_path(:all, File.dirname(__FILE__))
-
-          exclude_parent_template(:html)
-
-          def initialize
-            super(nil)
-            self.attributes.merge!('type' => 'search')
-          end
-
-        end
-
         class ListSplitItem < RubyApp::Elements::Mobile::List::ListItem
 
           template_path(:all, File.dirname(__FILE__))
@@ -120,6 +107,7 @@ module RubyApp
         template_path(:all, File.dirname(__FILE__))
 
         attr_accessor :items
+        attr_accessor :search_value
 
         event :item_clicked
         event :link_clicked
@@ -131,6 +119,7 @@ module RubyApp
           self.attributes.merge!('data-role' => 'listview')
 
           @items = []
+          @search_value = nil
 
         end
 
@@ -152,6 +141,7 @@ module RubyApp
           end
 
           def on_searched(event)
+            @search_value = event.value
             searched(event)
           end
 
