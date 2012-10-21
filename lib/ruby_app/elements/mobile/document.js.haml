@@ -104,8 +104,12 @@
         request = $.ajax({type:'GET', url:'/' + RubyApp.getData('locale', 'en') + '/elements/' + id + '.html'});
         request
           .success( function(content) {
+            $('#' + id).prev('form.ui-listview-filter').remove();
             $('#' + id).replaceWith(content);
             $('#' + id).parent().trigger('create');
+            $('form.ui-listview-filter input').each( function() {
+              $(this).val($(this).parents('form.ui-listview-filter').next('ul.list').attr('data-search-value'));
+            });
             RubyApp.log('SUCCESS RubyApp.updateElement("' + id + '")');
           } )
           .error( function(request, message, exception) {
