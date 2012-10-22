@@ -27,17 +27,25 @@ module RubyApp
 
               def process_request(request)
                 ax_request = ::OpenID::AX::FetchRequest.new
-                ax_request.add(::OpenID::AX::AttrInfo.new(RubyApp::Elements::Mobile::Documents::Authentication::OpenId::AxAuthenticationDocument.configuration.attributes.email, 'Email', true))
+                self.process_ax_request(ax_request)
                 request.add_extension(ax_request)
+              end
+
+              def process_ax_request(ax_request)
+                ax_request.add(::OpenID::AX::AttrInfo.new(RubyApp::Elements::Mobile::Documents::Authentication::OpenId::AxAuthenticationDocument.configuration.attributes.email, 'Email', true))
               end
 
               def create_identity_from_response(response)
                 ax_response = ::OpenID::AX::FetchResponse.from_success_response(response)
                 if ax_response
-                  return self.create_identity_from_email(ax_response.data[RubyApp::Elements::Mobile::Documents::Authentication::OpenId::AxAuthenticationDocument.configuration.attributes.email].first)
+                  return self.create_identity_from_ax_response(ax_response)
                 else
                   return super(response)
                 end
+              end
+
+              def create_identity_from_ax_response(ax_response)
+                return self.create_identity_from_email(ax_response.data[RubyApp::Elements::Mobile::Documents::Authentication::OpenId::AxAuthenticationDocument.configuration.attributes.email].first)
               end
 
             end
