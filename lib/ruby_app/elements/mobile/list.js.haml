@@ -1,8 +1,8 @@
 :plain
   // #{__FILE__}
   $(document).on('pageinit', function() {
-    $('ul.list').listview('option', 'filterCallback', function() { return false; });
-    $('form.ui-listview-filter input').each( function() {
+    $('ul.list:visible').listview('option', 'filterCallback', function() { return false; });
+    $('form.ui-listview-filter input:visible').each( function() {
       $(this).val($(this).parents('form.ui-listview-filter').next('ul.list').attr('data-search-value'));
     });
   });
