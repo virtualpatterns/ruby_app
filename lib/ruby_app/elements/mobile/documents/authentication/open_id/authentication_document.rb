@@ -38,7 +38,6 @@ module RubyApp
                     case response.status
                       when ::OpenID::Consumer::SUCCESS
                         self.process_response(response)
-                        RubyApp::Log.info("SESSION   RubyApp::Session.identity.url=#{RubyApp::Session.identity.url.inspect}")
                       when ::OpenID::Consumer::FAILURE
                         RubyApp::Log.error("OPENID    #{response.class}")
                         RubyApp::Log.error("OPENID    #{response.message.inspect}")
