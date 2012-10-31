@@ -4,7 +4,7 @@
     $(document).on('change', 'input', function(event) {
       event.preventDefault();
       if ($(this).attr('id'))
-        RubyApp.sendEvent({_class:'RubyApp::Elements::Mobile::Input::ChangedEvent', source:$(this).attr('id'), value:$(this).val()});
+        RubyApp.sendEvent({_class:'RubyApp::Elements::Mobile::Input::ChangedEvent', source:$(this).attr('id'), value:$(this).val()}, false);
     });
   });
 = yield
