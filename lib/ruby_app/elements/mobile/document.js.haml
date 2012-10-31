@@ -40,12 +40,14 @@
         $('div.overlay').css('display', 'none');
       }
     },
-    this.sendEvent = function(event) {
+    this.sendEvent = function(event, wait) {
       RubyApp.log('ENQUEUE event.class=' + event._class);
       event.now = new Date().toString();
       event.session = RubyApp.getData('session', null);
+      var _wait = wait == undefined ? true : wait;
       RubyApp.enQueue ( function() {
-        RubyApp.showWait();
+        if (_wait)
+          RubyApp.showWait();
         RubyApp.log('DEQUEUE event.class=' + event._class);
         request = $.ajax({type:'POST', url:location.href, data:event});
         request
@@ -62,7 +64,8 @@
           } )
           .complete( function() {
             RubyApp.deQueue();
-            RubyApp.hideWait();
+            if (_wait)
+                RubyApp.hideWait();
           } )
       } );
     },

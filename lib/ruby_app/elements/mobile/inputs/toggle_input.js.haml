@@ -3,7 +3,7 @@
   $(document).ready( function() {
     $(document).on('change', 'select[data-role="slider"]', function(event) {
       event.preventDefault();
-      RubyApp.sendEvent({_class:'RubyApp::Elements::Mobile::Inputs::ToggleInput::ChangedEvent', source:$(this).attr('id'), value:$(this).val()});
+      RubyApp.sendEvent({_class:'RubyApp::Elements::Mobile::Inputs::ToggleInput::ChangedEvent', source:$(this).attr('id'), value:$(this).val()}, false);
     });
   });
 = yield
