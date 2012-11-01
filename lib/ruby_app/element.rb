@@ -78,6 +78,10 @@ module RubyApp
         self.execute("RubyApp.updateElement(#{element.element_id.to_json});")
       end
 
+      def update_element?(element)
+        return @statements.include?("RubyApp.updateElement(#{element.element_id.to_json});")
+      end
+
       def create_trigger(element, interval)
         self.execute("RubyApp.createTrigger(#{element.element_id.to_json}, #{(interval * 1000).to_json});")
       end
