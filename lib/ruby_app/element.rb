@@ -238,6 +238,24 @@ module RubyApp
         self.assert_not_exists_selector_value_for("label:contains('#{text}')", value) if value
       end
 
+      def assert_is_text_visible(text)
+        self.assert_is_selector_visible("*:visible:contains('#{text}')")
+      end
+
+      def assert_not_is_text_visible(text)
+        self.assert_not_is_selector_visible("*:visible:contains('#{text}')")
+      end
+
+      def assert_is_selector_visible(selector)
+        _selector = ".ui-page-active #{selector}:last"
+        self.execute("RubyApp.assertIsVisible(#{_selector.to_json});")
+      end
+
+      def assert_not_is_selector_visible(selector)
+        _selector = ".ui-page-active #{selector}:last"
+        self.execute("RubyApp.assertNotIsVisible(#{_selector.to_json});")
+      end
+
       def assert(name, expression = nil)
         self.execute("RubyApp.assert(#{name.to_json}, #{(expression ? expression : yield).to_json});")
       end
