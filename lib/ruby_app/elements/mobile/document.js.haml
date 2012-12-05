@@ -184,6 +184,19 @@
     this.swipeRight = function() {
       $('.ui-page-active').swiperight();
     },
+    this.isVisible = function(selector) {
+      var windowTop = $(window).scrollTop();
+      var windowBottom = windowTop + $(window).height();
+      var elementTop = $(selector).offset().top;
+      var elementBottom = elementTop + $(selector).height();
+
+      RubyApp.log('windowTop=' + windowTop);
+      RubyApp.log('windowBottom=' + windowBottom);
+      RubyApp.log('elementTop=' + elementTop);
+      RubyApp.log('elementBottom=' + elementBottom);
+
+      return ((elementBottom >= windowTop) && (elementTop <= windowBottom) && (elementBottom <= windowBottom) &&  (elementTop >= windowTop) );
+    },
     this.assertExists = function(selector) {
       RubyApp.assert('selector=' + selector, $(selector).length > 0);
     },
@@ -215,6 +228,12 @@
       var _for = $(selector).attr('for');
       var _value = $('#' + _for).val();
       RubyApp.assert('selector=' + selector + ', for=' + _for + ', value=' + value, _value != value);
+    },
+    this.assertIsVisible = function(selector) {
+      RubyApp.assert('selector=' + selector + ', visible', RubyApp.isVisible(selector) == true);
+    },
+    this.assertNotIsVisible = function(selector) {
+      RubyApp.assert('selector=' + selector + ', not visible', RubyApp.isVisible(selector) == false);
     },
     this.assert = function(name, value) {
       RubyApp.sendEvent({_class:'RubyApp::Element::AssertedEvent', source:$('html').attr('id'), name:name, value:eval(value)});

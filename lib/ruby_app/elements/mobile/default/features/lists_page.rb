@@ -42,6 +42,14 @@ module RubyApp
               item.attributes.merge!('disabled' => true)
               @list.items += [ item ]
 
+              (0..91).each do |index|
+                @list.items += [ RubyApp::Elements::Mobile::List::ListItem.new('Filler') ]
+              end
+
+              item = RubyApp::Elements::Mobile::List::ListItem.new('Item 09')
+              item.attributes.merge!('class' => 'hidden')
+              @list.items += [ item ]
+
               @list.searched do |element, event|
                 RubyApp::Elements::Mobile::Dialog.show(event, RubyApp::Elements::Mobile::Dialogs::AcknowledgementDialog.new('List', "You input #{event.value}."))
                 event.update_element(@list)

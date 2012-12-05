@@ -30,6 +30,13 @@ add_step! (RubyApp::Element::AssertedEvent)             { |event| event.click_li
 
 add_step! (RubyApp::Elements::Mobile::Page::ShownEvent) { |event| event.assert_not_exists_link('Item 08') }
 
+add_step! (RubyApp::Element::AssertedEvent)             { |event| event.assert_is_text_visible('Item 01') }
+add_step! (RubyApp::Element::AssertedEvent)             { |event| event.assert_not_is_text_visible('Item 09') }
+add_step! (RubyApp::Element::AssertedEvent)             { |event| event.execute('$("body").scrollTop(10000);')
+                                                                  event.execute {} }
+add_step! (RubyApp::Element::ExecutedEvent)             { |event| event.assert_not_is_text_visible('Item 01') }
+add_step! (RubyApp::Element::AssertedEvent)             { |event| event.assert_is_text_visible('Item 09') }
+
 add_step! (RubyApp::Element::AssertedEvent)             { |event| event.click_link('Back') }
 add_step! (RubyApp::Elements::Mobile::Page::ShownEvent) { |event| event.click_link('Back') }
 add_step! (RubyApp::Elements::Mobile::Page::ShownEvent) { |event| event.execute {} }
