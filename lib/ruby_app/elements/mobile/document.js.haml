@@ -189,12 +189,6 @@
       var windowBottom = windowTop + $(window).height();
       var elementTop = $(selector).offset().top;
       var elementBottom = elementTop + $(selector).height();
-
-      RubyApp.log('windowTop=' + windowTop);
-      RubyApp.log('windowBottom=' + windowBottom);
-      RubyApp.log('elementTop=' + elementTop);
-      RubyApp.log('elementBottom=' + elementBottom);
-
       return ((elementBottom >= windowTop) && (elementTop <= windowBottom) && (elementBottom <= windowBottom) &&  (elementTop >= windowTop) );
     },
     this.assertExists = function(selector) {
