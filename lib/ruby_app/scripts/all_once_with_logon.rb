@@ -1,0 +1,6 @@
+load_script! 'elements/authentications/facebook'
+load_script! 'elements/authentications/o_auth/git_hub'
+load_script! 'elements/authentications/open_id/google'
+load_script! 'elements/authentications/open_id/my_open_id'
+load_script! 'elements/authentications/open_id/yahoo'
+load_script! 'all_once'
