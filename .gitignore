@@ -11,3 +11,5 @@ lib/ruby_app/elements/mobile/documents/authentication/open_id/temp
 *.log
 *.pid
 Gemfile.lock
+ruby_app.sublime-project
+ruby_app.sublime-workspace
