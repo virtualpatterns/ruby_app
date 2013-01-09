@@ -15,16 +15,16 @@ module RubyApp
 
           module OAuth
             require 'ruby_app'
-            require 'ruby_app/elements/mobile/document'
+            require 'ruby_app/elements/mobile/documents/authentication/authentication_document'
 
-            class AuthenticationDocument < RubyApp::Elements::Mobile::Document
+            class AuthenticationDocument < RubyApp::Elements::Mobile::Documents::Authentication::AuthenticationDocument
 
               template_path(:all, File.dirname(__FILE__))
 
               def initialize(access_key, secret_key, scopes, options)
                 super()
 
-                self.loaded do |element, event|
+                self.page.loaded do |element, event|
                   unless @client
                     RubyApp::Log.debug("OAUTH     scopes=#{scopes.inspect}")
                     RubyApp::Log.debug("OAUTH     options=#{options.inspect}")

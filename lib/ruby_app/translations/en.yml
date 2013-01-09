@@ -25,6 +25,8 @@ ruby_app:
       navigation:
         back_button:
           back: "Back"
+        close_button:
+          close: "Close"
   exceptions:
     assert_failed_exception:
       message: "The assertion %1 failed"

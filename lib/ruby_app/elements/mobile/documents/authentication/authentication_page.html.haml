@@ -1,0 +1,7 @@
+- self.content_for(:html, :page) do
+  /
+    #{__FILE__}
+  %div{'data-role' => 'header'}
+    %h1
+    = @close_button.render(:html)
+  %div{'data-role' => 'content'}
