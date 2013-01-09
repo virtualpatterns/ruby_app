@@ -15,16 +15,16 @@ module RubyApp
 
           module OpenId
             require 'ruby_app'
-            require 'ruby_app/elements/mobile/document'
+            require 'ruby_app/elements/mobile/documents/authentication/authentication_document'
 
-            class AuthenticationDocument < RubyApp::Elements::Mobile::Document
+            class AuthenticationDocument < RubyApp::Elements::Mobile::Documents::Authentication::AuthenticationDocument
 
               template_path(:all, File.dirname(__FILE__))
 
               def initialize(identifier)
                 super()
 
-                self.loaded do |element, event|
+                self.page.loaded do |element, event|
                   unless @consumer
                     @consumer = ::OpenID::Consumer.new(RubyApp::Session.data, nil)
                     request = @consumer.begin(identifier)
@@ -41,6 +41,7 @@ module RubyApp
                       when ::OpenID::Consumer::FAILURE
                         RubyApp::Log.error("OPENID    #{response.class}")
                         RubyApp::Log.error("OPENID    #{response.message.inspect}")
+                        raise RubyApp::Exceptions::AuthenticationFailedException.new(response.message)
                     end
                     self.hide(event)
                   end

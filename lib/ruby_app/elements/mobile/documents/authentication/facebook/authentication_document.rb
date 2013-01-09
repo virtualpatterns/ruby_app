@@ -15,16 +15,16 @@ module RubyApp
 
           module Facebook
             require 'ruby_app'
-            require 'ruby_app/elements/mobile/document'
+            require 'ruby_app/elements/mobile/documents/authentication/authentication_document'
 
-            class AuthenticationDocument < RubyApp::Elements::Mobile::Document
+            class AuthenticationDocument < RubyApp::Elements::Mobile::Documents::Authentication::AuthenticationDocument
 
               template_path(:all, File.dirname(__FILE__))
 
               def initialize(permissions)
                 super()
 
-                self.loaded do |element, event|
+                self.page.loaded do |element, event|
                   unless @authentication
                     RubyApp::Log.debug("FACEBOOK  permissions=#{permissions.inspect}")
                     @authentication = ::Koala::Facebook::OAuth.new(ENV['FACEBOOK_ACCESS_KEY'] || RubyApp::Elements::Mobile::Documents::Authentication::Facebook::AuthenticationDocument.configuration.access_key,
