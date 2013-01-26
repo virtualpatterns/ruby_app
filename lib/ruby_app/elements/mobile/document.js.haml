@@ -243,6 +243,7 @@
   };
 
   $(window).load(function() {
+    new FastClick(document.body);
     RubyApp.sendEvent({_class:'RubyApp::Elements::Mobile::Document::LoadedEvent', source:$('html').attr('id')});
     if ($('div[data-role="page"][id]').length)
       RubyApp.sendEvent({_class:'RubyApp::Elements::Mobile::Page::LoadedEvent', source:$('div[data-role="page"]').filter(':first').attr('id')});
