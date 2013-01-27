@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  s.add_dependency 'BlueCloth'
+  s.add_dependency 'bluecloth'
   s.add_dependency 'chronic'
   s.add_dependency 'chronic_duration'
   s.add_dependency 'facets'
