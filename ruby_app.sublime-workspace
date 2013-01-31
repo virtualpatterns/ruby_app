@@ -36,6 +36,7 @@
 	},
 	"file_history":
 	[
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/document.js.haml",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/ruby_app.gemspec",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/default/features/change_page.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/page.rb",
@@ -51,7 +52,6 @@
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/default/features/trigger_page.html.haml",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/navigation/back_button.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/navigation/hide_button.rb",
-		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/document.js.haml",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/input.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/list.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/resources/elements/mobile/document/fastclick.js",
@@ -179,6 +179,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"RubyApp.waitCount",
+			"RubyApp.queue",
+			"},",
 			"trigger",
 			"navigat",
 			"Navigat",
