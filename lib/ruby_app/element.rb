@@ -283,7 +283,7 @@ module RubyApp
       end
 
       def self.from_hash(data)
-        Kernel.eval(data['_class']).new(data)
+        data['_class'].to_class.new(data)
       end
 
     end

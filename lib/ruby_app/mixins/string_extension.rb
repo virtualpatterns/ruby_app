@@ -8,6 +8,14 @@ module RubyApp
         return self =~ /(true|t|yes|y|on)/ ? true : false
       end
 
+      def to_class
+        _class = Object
+        self.split('::').each do |name|
+          _class = _class.const_get(name)
+        end
+        return _class
+      end
+
     end
 
   end
