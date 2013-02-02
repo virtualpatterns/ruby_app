@@ -26,8 +26,7 @@ namespace :ruby_app do
 
   desc 'Push to production, release, and increment version'
   task :release do |task|
-      # system('git checkout production; git pull origin production; git merge origin/development; git push origin production; rake release; git checkout development')
-      system('git checkout production; git pull origin production; git merge origin/development; git push origin production; git checkout development')
+      system('git checkout production; git pull origin production; git merge origin/development; git push origin production; rake release; git checkout development')
       version_file = File.join(RubyApp::ROOT, %w[version.rb])
       RubyApp::VERSION =~ /(\d+)\.(\d+)\.(\d+)/
       system("sed 's|[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*|#{$1}.#{$2}.#{$3.to_i + 1}|g' < '#{version_file}' > '#{version_file}.out'; rm '#{version_file}'; mv '#{version_file}.out' '#{version_file}'")
