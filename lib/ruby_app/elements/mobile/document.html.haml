@@ -24,8 +24,9 @@
           'content'   => RubyApp::Language.locale.code}
     %meta{'name'      => 'error_message',  
           'content'   => RubyApp::Elements::Mobile::Document.translate.error_message}
-
+    = yield :head
   %body
     - self.pages.reverse.each do |page|
       = page.render(:html)
     %div.overlay
+    = yield :body
