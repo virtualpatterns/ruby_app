@@ -43,14 +43,14 @@ module RubyApp
 
           @metadata.merge!('viewport' => 'width=device-width, initial-scale=1')
 
-          @stylesheets.push('http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css')
+          @stylesheets.push('//code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css')
 
-          @scripts.push('http://code.jquery.com/jquery-1.8.3.min.js')
-          @scripts.push('http://code.jquery.com/ui/1.9.2/jquery-ui.min.js')
+          @scripts.push('//code.jquery.com/jquery-1.8.3.min.js')
+          @scripts.push('//code.jquery.com/ui/1.9.2/jquery-ui.min.js')
           @scripts.push('/ruby_app/resources/elements/mobile/document/jquery.ui.touch-punch.min.js')
           @scripts.push('/ruby_app/resources/elements/mobile/document/fastclick.js')
           @scripts.push('/ruby_app/resources/elements/mobile/document/document.js')
-          @scripts.push('http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js')
+          @scripts.push('//code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js')
 
         end
 
