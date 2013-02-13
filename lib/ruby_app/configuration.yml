@@ -6,6 +6,7 @@ default:
         date:
           long: '%b %d %H:%M %Z'
           short: '%a %b %-d'
+      root: '/ruby_app'
     elements: &default_ruby_app_elements
       mobile:
         documents:

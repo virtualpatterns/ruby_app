@@ -13,11 +13,13 @@
       %link{'rel'     => 'stylesheet',
             'href'    => stylesheet}
     %link{'rel'       => 'stylesheet',
-          'href'      => "/#{RubyApp::Language.locale.code}/document.css"}
+          'href'      => "#{RubyApp::base}/#{RubyApp::Language.locale.code}/document.css"}
     - self.scripts.each do |script|
       %script{'src'   => script}
-    %script{'src'     => "/#{RubyApp::Language.locale.code}/document.js"}
+    %script{'src'     => "#{RubyApp::base}/#{RubyApp::Language.locale.code}/document.js"}
 
+    %meta{'name'      => 'base',
+          'content'   => RubyApp::base}
     %meta{'name'      => 'session',        
           'content'   => RubyApp::Session.session_id}
     %meta{'name'      => 'locale',         

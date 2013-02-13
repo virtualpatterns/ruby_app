@@ -7,6 +7,8 @@ require 'rack'
 require 'ruby_app'
 require 'ruby_app/rack'
 
+RubyApp::base = '/root'
+
 use Rack::ShowExceptions
 use Rack::Reloader
 
@@ -15,15 +17,15 @@ use Rack::Reloader
 
 use RubyApp::Rack::Application, :configuration_paths  => [File.join(RubyApp::ROOT, %w[configuration.yml])]
 
-map '/ruby_app/resources' do
+map "#{RubyApp::base}/ruby_app/resources" do
   run Rack::File.new(File.join(RubyApp::ROOT, %w[resources]))
 end
 
-map '/favicon.ico' do
+map "#{RubyApp::base}/favicon.ico" do
   run Rack::File.new(File.join(RubyApp::ROOT, %w[resources favicon.ico]))
 end
 
-map '/' do
+map "#{RubyApp::base}/" do
   use RubyApp::Rack::Request
   use RubyApp::Rack::Response
   use RubyApp::Rack::Language
