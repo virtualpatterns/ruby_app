@@ -5,7 +5,7 @@
 		[
 			[
 				"A",
-				"Authentication"
+				"API"
 			]
 		]
 	},
@@ -15,11 +15,15 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 360.0,
+		"height": 327.0,
 		"selected_items":
 		[
+			[
+				"package",
+				"Package Control: Install Package"
+			]
 		],
-		"width": 392.0
+		"width": 449.0
 	},
 	"console":
 	{
@@ -37,7 +41,26 @@
 	"file_history":
 	[
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/document.js.haml",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/click.js.haml",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/scripts/standard_logon.rb",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/scripts/phantom.rb",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/scripts/standard_continuous.rb",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/document.rb",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/documents/authentication/o_auth/google_authentication_document.rb",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/configuration.yml",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/documents/authentication/o_auth/authentication_document.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/ruby_app.gemspec",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/default/features/authentications/default_page.rb",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/documents/authentication/facebook/authentication_document.rb",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/documents/authentication/google/authentication_document.rb",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/documents/authentication/google/email_authentication_document.rb",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/documents/authentication/o_auth/git_hub_authentication_document.rb",
+		"/Users/fficnar/Dropbox/Projects/.bash_env",
+		"/Users/fficnar/Dropbox/Projects/.bash_aliases",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/pages/information/session_page.html.haml",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/default/features/authentications/default_page.html.haml",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/session.rb",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/documents/authentication/facebook/email_authentication_document.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/default/features/change_page.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/page.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/default/features/default_page.rb",
@@ -56,9 +79,7 @@
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/list.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/resources/elements/mobile/document/fastclick.js",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/resources/elements/mobile/document/fastclick.js.html",
-		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/document.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/documents/authentication/authentication_page.html.haml",
-		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/documents/authentication/facebook/authentication_document.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/documents/authentication/authentication_document.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/documents/authentication/authentication_page.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/navigation/close_button.rb",
@@ -80,12 +101,9 @@
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/translations/en.yml",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/navigation/back_button.html.haml",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/default/features/navigated_page.rb",
-		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/documents/authentication/o_auth/authentication_document.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/default/default_page.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/documents/authentication/open_id/authentication_document.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/documents/mail_document.html.haml",
-		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/documents/authentication/facebook/email_authentication_document.rb",
-		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/configuration.yml",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/documents/authentication/open_id/yahoo_authentication_document.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/rack/response.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/exceptions.rb",
@@ -149,16 +167,7 @@
 		"/Users/fficnar/Dropbox/Projects/gems/ruby_app/lib/ruby_app/elements/mobile/navigation/back_button.html.haml",
 		"/Users/fficnar/Dropbox/Projects/gems/ruby_app/lib/ruby_app/elements/mobile/documents/authentication/o_auth/git_hub_authentication_document.rb",
 		"/Users/fficnar/Dropbox/Projects/gems/ruby_app/lib/ruby_app/elements/mobile/documents/authentication/facebook/authentication_document.rb",
-		"/Users/fficnar/Dropbox/Projects/gems/ruby_app/lib/ruby_app/elements/mobile/documents/authentication/facebook/email_authentication_document.rb",
-		"/Users/fficnar/Dropbox/Projects/pike/tasks/migrations.rb",
-		"/Users/fficnar/Dropbox/Projects/pike/tasks/data.rb",
-		"/Users/fficnar/Dropbox/Projects/pike/tasks/process.rb",
-		"/Users/fficnar/Dropbox/Projects/pike/Rakefile",
-		"/Users/fficnar/Dropbox/Projects/pike/configuration.yml",
-		"/Users/fficnar/Dropbox/Projects/pike/lib/pike/elements/documents/authentication/o_auth/git_hub_authentication_document.rb",
-		"/Users/fficnar/Dropbox/Projects/.bash_aliases",
-		"/Users/fficnar/Dropbox/Projects/pike/pike.sublime-project",
-		"/Users/fficnar/Dropbox/Projects/pike/pike.staging.20121018235257.tar.gz"
+		"/Users/fficnar/Dropbox/Projects/gems/ruby_app/lib/ruby_app/elements/mobile/documents/authentication/facebook/email_authentication_document.rb"
 	],
 	"find":
 	{
@@ -166,7 +175,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 93.0,
 		"where_history":
 		[
 			"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app",
@@ -176,9 +185,28 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": false,
+		"case_sensitive": true,
 		"find_history":
 		[
+			"http:",
+			"GITHUB_",
+			"GitHub",
+			"GITHUB",
+			"ty.url",
+			"Facebook",
+			"GOOGLE  _",
+			"FACEBOOK",
+			"Facebook",
+			"FACEBOOK",
+			"Facebook",
+			"facebook",
+			"Facebook",
+			"GITHUB",
+			"GitHub",
+			"GITHUB",
+			"GitHub",
+			"GITHUB",
+			"GitHub",
 			"RubyApp.waitCount",
 			"RubyApp.queue",
 			"},",
@@ -198,6 +226,8 @@
 		"regex": false,
 		"replace_history":
 		[
+			"Google",
+			"GOOGLE  ",
 			"MessageListItem",
 			""
 		],
@@ -261,6 +291,22 @@
 		"selected_items":
 		[
 			[
+				"docum",
+				"lib/ruby_app/elements/mobile/document.js.haml"
+			],
+			[
+				"click",
+				"lib/ruby_app/elements/mobile/click.js.haml"
+			],
+			[
+				"docu",
+				"lib/ruby_app/elements/mobile/document.js.haml"
+			],
+			[
+				"document",
+				"lib/ruby_app/elements/mobile/document.js.haml"
+			],
+			[
 				"authentication_page",
 				"lib/ruby_app/elements/mobile/default/features/authentication_success_page.rb"
 			],
@@ -307,6 +353,6 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 440.0,
+	"side_bar_width": 336.0,
 	"status_bar_visible": true
 }
