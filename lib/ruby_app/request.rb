@@ -12,20 +12,20 @@ module RubyApp
     attr_reader :environment
 
     def language
-      self.fullpath =~ /^\/([^\/\?]+)/
+      self.path.gsub(/^#{RubyApp.root.nil_if('/')}/,'') =~ /^\/([^\/\?]+)/
       return $1
     end
 
     def query
-      ::Rack::Utils.parse_query(self.query_string)
+      return ::Rack::Utils.parse_query(self.query_string)
     end
 
     def parameters
-      self.params
+      return self.params
     end
 
     def self.get
-      Thread.current[:_request]
+      return Thread.current[:_request]
     end
 
     def self.exists?
@@ -33,11 +33,11 @@ module RubyApp
     end
 
     def self.create!(environment = RubyApp::Application.environment)
-      Thread.current[:_request] = RubyApp::Request.new(environment)
+      return Thread.current[:_request] = RubyApp::Request.new(environment)
     end
 
     def self.destroy!
-      Thread.current[:_request] = nil
+      return Thread.current[:_request] = nil
     end
 
     def self.create_context!

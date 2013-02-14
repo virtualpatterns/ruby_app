@@ -1,5 +1,6 @@
 require 'ruby_app/mixins/array_extension'
 require 'ruby_app/mixins/class_extension'
+require 'ruby_app/mixins/object_extension'
 require 'ruby_app/mixins/string_extension'
 
 require 'ruby_app/mixins/configuration_mixin'

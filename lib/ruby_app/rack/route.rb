@@ -14,7 +14,8 @@ module RubyApp
       extend RubyApp::Mixins::RouteMixin
 
       def call(environment)
-        RubyApp::Rack::Route.do_route(RubyApp::Request.request_method, RubyApp::Request.path)
+        RubyApp::Log.debug("ROUTE     #{RubyApp::Request.request_method} #{RubyApp::Request.path.gsub(/^#{RubyApp.root.nil_if('/')}/,'')}")
+        RubyApp::Rack::Route.do_route(RubyApp::Request.request_method, RubyApp::Request.path.gsub(/^#{RubyApp.root.nil_if('/')}/,''))
       end
 
       route(RubyApp::Mixins::RouteMixin::GET, /\/quit/) do |method, path|
@@ -63,7 +64,7 @@ module RubyApp
       end
 
       route(RubyApp::Mixins::RouteMixin::GET, /.*/) do |method, path|
-        RubyApp::Rack::Route.do_route(RubyApp::Mixins::RouteMixin::GET, '/.html')
+        RubyApp::Rack::Route.do_route(RubyApp::Mixins::RouteMixin::GET, "/.html")
       end
 
       route(RubyApp::Mixins::RouteMixin::POST, /.*/) do |method, path|

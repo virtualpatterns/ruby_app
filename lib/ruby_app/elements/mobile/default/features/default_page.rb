@@ -13,6 +13,7 @@ module RubyApp
           require 'ruby_app/elements/mobile/default/features/dialogs_page'
           require 'ruby_app/elements/mobile/default/features/document_document'
           require 'ruby_app/elements/mobile/default/features/inputs_page'
+          require 'ruby_app/elements/mobile/default/features/language_page'
           require 'ruby_app/elements/mobile/default/features/lists_page'
           require 'ruby_app/elements/mobile/default/features/message_page'
           require 'ruby_app/elements/mobile/default/features/navigation/default_page'
@@ -52,6 +53,9 @@ module RubyApp
 
               @inputs_link = RubyApp::Elements::Mobile::Navigation::PageButton.new
               @inputs_link.page = RubyApp::Elements::Mobile::Default::Features::InputsPage
+
+              @language_link = RubyApp::Elements::Mobile::Navigation::PageButton.new
+              @language_link.page = RubyApp::Elements::Mobile::Default::Features::LanguagePage
 
               @lists_link = RubyApp::Elements::Mobile::Navigation::PageButton.new
               @lists_link.page = RubyApp::Elements::Mobile::Default::Features::ListsPage

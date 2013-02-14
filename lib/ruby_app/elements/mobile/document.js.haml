@@ -1,5 +1,8 @@
 :plain
   // #{__FILE__}
+  String.prototype.blank_if = function(value) {
+    return this == value ? '' : this;
+  };
   var RubyApp = new function() {
     var queue = [];
     this.enQueue = function(_function) {
@@ -78,7 +81,7 @@
         RubyApp.enQueue ( function() {
           RubyApp.showWait();
           RubyApp.log('DEQUEUE RubyApp.showPage("' + id + '", ...)');
-          request = $.ajax({type:'GET', url:'/' + RubyApp.getData('locale', 'en') + '/elements/' + id + '.html'});
+          request = $.ajax({type:'GET', url:RubyApp.getData('root', '/').blank_if('/') + '/' + RubyApp.getData('locale', 'en') + '/elements/' + id + '.html'});
           request
             .success( function(content) {
               $('body').prepend(content);
@@ -104,7 +107,7 @@
       RubyApp.enQueue ( function() {
         RubyApp.showWait();
         RubyApp.log('DEQUEUE RubyApp.updateElement("' + id + '")');
-        request = $.ajax({type:'GET', url:'/' + RubyApp.getData('locale', 'en') + '/elements/' + id + '.html'});
+        request = $.ajax({type:'GET', url:RubyApp.getData('root', '/').blank_if('/') + '/' + RubyApp.getData('locale', 'en') + '/elements/' + id + '.html'});
         request
           .success( function(content) {
             $('#' + id).prev('form.ui-listview-filter').remove();

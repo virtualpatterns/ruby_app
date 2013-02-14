@@ -1,0 +1,40 @@
+---
+ruby_app:
+  element:
+    exception_event:
+      message: "%1.  La page sera actualisée afin que vous puissiez essayer de nouveau."
+  elements:
+    mobile:
+      default:
+        features:
+          language_page:
+            content: C'est le contenu de la page en français.
+      dialogs:
+        calendars:
+          month_dialog:
+            today: "Aujourd'hui"
+        acknowledgement_dialog:
+          ok: "OK"
+        confirmation_dialog:
+          _yes: "Oui"
+          _no: "Non"
+        exception_dialog:
+          ok: "OK"
+      document:
+        error_message: "Une erreur s'est produite échanger des données avec le serveur. La page sera actualisée afin que vous puissiez essayer de nouveau."
+      inputs:
+        toggle_input:
+          _on: "Actif"
+          _off: "Inactif"
+      navigation:
+        back_button:
+          back: "Reculer"
+        close_button:
+          close: "Fermer"
+  exceptions:
+    assert_failed_exception:
+      message: "Le %1 assertion a échoué"
+    element_invalid_exception:
+      message: "L'id de l'élément %1 est invalide ou a été recyclé"
+    session_invalid_exception:
+      message: "L'identifiant de session %1 est invalide ou a expiré"

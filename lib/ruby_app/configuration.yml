@@ -37,6 +37,7 @@ default:
       default: 'en'
       paths:
         - '#{RubyApp::ROOT}/translations'
+
     log: &default_ruby_app_log
       path: '#{RubyApp::ROOT}/process/log/application.log'
     response: &response
@@ -59,3 +60,4 @@ default:
       scripts:
         enabled: true
         path: '#{RubyApp::ROOT}/scripts'
+        

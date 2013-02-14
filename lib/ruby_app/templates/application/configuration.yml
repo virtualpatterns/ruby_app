@@ -6,6 +6,33 @@ default:
         date:
           long: '%b %d %H:%M %Z'
           short: '%a %b %-d'
+    elements:
+      mobile:
+        documents:
+          authentication:
+            facebook:
+              authentication_document:
+                access_key: 'ABC'
+                secret_key: '123'
+            o_auth:
+              git_hub_authentication_document:
+                access_key: 'ABC'
+                secret_key: '123'
+                url: 'https://api.github.com'
+                authorize_url: 'https://github.com/login/oauth/authorize'
+                access_token_url: 'https://github.com/login/oauth/access_token'
+            open_id:
+              ax_authentication_document:
+                attributes:
+                  email: 'http://schema.openid.net/contact/email'
+              google_authentication_document:
+                identifier: 'https://www.google.com/accounts/o8/id'
+              my_open_id_authentication_document:
+                identifier: 'http://myopenid.com'
+              yahoo_authentication_document:
+                attributes:
+                  email: 'http://axschema.org/contact/email'
+                identifier: 'https://www.yahoo.com'
     language:
       default: 'en'
       paths:
@@ -22,26 +49,15 @@ default:
         write?: false
     session:
       _class: '_APPLICATION_UPCODE_::Session'
-      expires: 900
+      expires: 1200
       interval: 15
       _length: 10
+      log:
+        - 'REMOTE_ADDR'
+        - 'HTTP_X_FORWARDED_FOR'
+        - 'HTTP_REFERER'
+        - 'HTTP_USER_AGENT'
       scripts:
         enabled: false
         path: '#{_APPLICATION_UPCODE_::ROOT}/scripts'
-    elements:
-      mobile:
-        documents:
-          authentication:
-            open_id:
-              ax_authentication_document:
-                attributes:
-                  email: 'http://schema.openid.net/contact/email'
-              google_authentication_document:
-                identifier: 'https://www.google.com/accounts/o8/id'
-              my_open_id_authentication_document:
-                identifier: 'http://myopenid.com'
-              yahoo_authentication_document:
-                attributes:
-                  email: 'http://axschema.org/contact/email'
-                identifier: 'https://www.yahoo.com'
   _APPLICATION_DOWNCODE_:

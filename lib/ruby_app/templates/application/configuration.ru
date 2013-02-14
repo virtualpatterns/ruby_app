@@ -11,6 +11,8 @@ require 'ruby_app/rack'
 
 require '_APPLICATION_DOWNCODE_'
 
+RubyApp.root = '/'
+
 use Rack::ShowExceptions
 use Rack::Reloader
 
@@ -20,19 +22,19 @@ use Rack::Reloader
 use RubyApp::Rack::Application, :configuration_paths  => [ File.join(RubyApp::ROOT, %w[configuration.yml]),
                                                            File.join(_APPLICATION_UPCODE_::ROOT, %w[configuration.yml])]
 
-map '/ruby_app/resources' do
+map '#{RubyApp.root.nil_if('/')}/ruby_app/resources' do
   run Rack::File.new(File.join(RubyApp::ROOT, %w[resources]))
 end
 
-map '/_APPLICATION_DOWNCODE_/resources' do
+map '#{RubyApp.root.nil_if('/')}/_APPLICATION_DOWNCODE_/resources' do
   run Rack::File.new(File.join(_APPLICATION_UPCODE_::ROOT, %w[resources]))
 end
 
-map '/google_button.ico' do
-  run Rack::File.new(File.join(RubyApp::ROOT, %w[resources google_button.ico]))
+map '#{RubyApp.root.nil_if('/')}/favicon.ico' do
+  run Rack::File.new(File.join(RubyApp::ROOT, %w[resources favicon.ico]))
 end
 
-map '/' do
+map '#{RubyApp.root.nil_if('/')}/' do
   use RubyApp::Rack::Request
   use RubyApp::Rack::Response
   use RubyApp::Rack::Language
