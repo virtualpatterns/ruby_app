@@ -2,12 +2,12 @@ module RubyApp
   VERSION = "0.6.61"
   ROOT    = File.expand_path(File.dirname(__FILE__))
 
-  def self.base
-    @@_base ||= '/'
+  def self.root
+    @@_root ||= '/'
   end
 
-  def self.base=(value)
-    @@_base = value
+  def self.root=(value)
+    @@_root = value
   end
 
 end

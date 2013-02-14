@@ -16,7 +16,9 @@ module RubyApp
           #  RubyApp::Log.debug("#{RubyApp::Log.prefix(self, __method__)} RubyApp::Request.environment[#{name.inspect}]=#{value.inspect}")
           #end
           #RubyApp::Log.debug("#{RubyApp::Log.prefix(self, __method__)} RubyApp::Request.request_method=#{RubyApp::Request.request_method.inspect}")
-          #RubyApp::Log.debug("#{RubyApp::Log.prefix(self, __method__)} RubyApp::Request.path=#{RubyApp::Request.path.inspect}")
+          # RubyApp::Log.debug("REQUEST   RubyApp::Request.path=#{RubyApp::Request.path.inspect}")
+          RubyApp::Log.debug("REQUEST   RubyApp::Request.url=#{RubyApp::Request.url.inspect}")
+          RubyApp::Log.debug("REQUEST   RubyApp::Request.query_string=#{RubyApp::Request.query_string.inspect}")
           #RubyApp::Request.query.each do |name, value|
           #  RubyApp::Log.debug("#{RubyApp::Log.prefix(self, __method__)} RubyApp::Request.query[#{name.inspect}]=#{value.inspect}")
           #end

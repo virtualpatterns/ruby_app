@@ -215,7 +215,7 @@ module RubyApp
           elsif _path =~ /\.rb/
             name = _path.gsub(String.interpolate { RubyApp::Session.configuration.scripts.path }, '').gsub(/^\//, '').gsub(/\.rb/, '')
             scripts.push({:name => name,
-                          :url  => "/quit?go=#{CGI.escape("/?script=#{name}")}"})
+                          :url  => "#{RubyApp::root}/quit?go=#{CGI.escape("#{RubyApp::root}?script=#{name}")}"})
           end
         end
       end

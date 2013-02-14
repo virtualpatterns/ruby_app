@@ -14,10 +14,11 @@ module RubyApp
       extend RubyApp::Mixins::RouteMixin
 
       def call(environment)
-        RubyApp::Rack::Route.do_route(RubyApp::Request.request_method, RubyApp::Request.path)
+        RubyApp::Log.debug("ROUTE     #{RubyApp::Request.request_method} #{RubyApp::Request.path.gsub(/^#{RubyApp::root}/,'')}")
+        RubyApp::Rack::Route.do_route(RubyApp::Request.request_method, RubyApp::Request.path.gsub(/^#{RubyApp::root}/,''))
       end
 
-      route(RubyApp::Mixins::RouteMixin::GET, /#{RubyApp::base}\/quit/) do |method, path|
+      route(RubyApp::Mixins::RouteMixin::GET, /\/quit/) do |method, path|
         begin
           RubyApp::Log.duration(RubyApp::Log::INFO, "GET       /quit") do
             RubyApp::Session.quit!
@@ -34,7 +35,7 @@ module RubyApp
         end
       end
 
-      route(RubyApp::Mixins::RouteMixin::GET, /#{RubyApp::base}\/elements\/([^\.]+)\.([^\.\?]+)/) do |method, path, element_id, format|
+      route(RubyApp::Mixins::RouteMixin::GET, /\/elements\/([^\.]+)\.([^\.\?]+)/) do |method, path, element_id, format|
         #RubyApp::Log.debug("#{RubyApp::Log.prefix(self, __method__)} --> #{method} #{path} #{element_id} #{format}")
         begin
           element = RubyApp::Element.get_element(element_id)
@@ -63,7 +64,7 @@ module RubyApp
       end
 
       route(RubyApp::Mixins::RouteMixin::GET, /.*/) do |method, path|
-        RubyApp::Rack::Route.do_route(RubyApp::Mixins::RouteMixin::GET, "#{RubyApp::base}/.html")
+        RubyApp::Rack::Route.do_route(RubyApp::Mixins::RouteMixin::GET, "/.html")
       end
 
       route(RubyApp::Mixins::RouteMixin::POST, /.*/) do |method, path|

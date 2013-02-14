@@ -26,8 +26,8 @@ module RubyApp
 
                 self.page.loaded do |element, event|
                   unless @client
-                    RubyApp::Log.debug("OAUTH     scopes=#{scopes.inspect}")
-                    RubyApp::Log.debug("OAUTH     options=#{options.inspect}")
+                    # RubyApp::Log.debug("OAUTH     scopes=#{scopes.inspect}")
+                    # RubyApp::Log.debug("OAUTH     options=#{options.inspect}")
                     @client = ::OAuth2::Client.new(access_key, secret_key, options)
                     url = @client.auth_code.authorize_url(:redirect_uri => RubyApp::Request.url,
                                                           :scope        => scopes.is_a?(Array) ? scopes.join(',') : scopes)
