@@ -6,7 +6,6 @@ default:
         date:
           long: '%b %d %H:%M %Z'
           short: '%a %b %-d'
-      root: '/ruby_app'
     elements: &default_ruby_app_elements
       mobile:
         documents:
@@ -38,6 +37,7 @@ default:
       default: 'en'
       paths:
         - '#{RubyApp::ROOT}/translations'
+
     log: &default_ruby_app_log
       path: '#{RubyApp::ROOT}/process/log/application.log'
     response: &response
@@ -60,3 +60,4 @@ default:
       scripts:
         enabled: true
         path: '#{RubyApp::ROOT}/scripts'
+        
