@@ -12,7 +12,7 @@ module RubyApp
       def call(environment)
         RubyApp::Language.load!(RubyApp::Request.language)
         begin
-          RubyApp::Log.debug("LANGUAGE  #{RubyApp::Language.locale.code}")
+          # RubyApp::Log.debug("LANGUAGE  #{RubyApp::Language.locale.code}")
           return @application.call(environment)
         ensure
           RubyApp::Language.unload!

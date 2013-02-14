@@ -13,10 +13,10 @@
       %link{'rel'     => 'stylesheet',
             'href'    => stylesheet}
     %link{'rel'       => 'stylesheet',
-          'href'      => "#{RubyApp.root}/#{RubyApp::Language.locale.code}/document.css"}
+          'href'      => "#{RubyApp.root.nil_if('/')}/#{RubyApp::Language.locale.code}/document.css"}
     - self.scripts.each do |script|
       %script{'src'   => script}
-    %script{'src'     => "#{RubyApp.root}/#{RubyApp::Language.locale.code}/document.js"}
+    %script{'src'     => "#{RubyApp.root.nil_if('/')}/#{RubyApp::Language.locale.code}/document.js"}
 
     %meta{'name'      => 'root',
           'content'   => RubyApp.root}

@@ -18,8 +18,8 @@ module RubyApp
 
               self.metadata.merge!('apple-mobile-web-app-capable'          => 'yes',
                                    'apple-mobile-web-app-status-bar-style' => 'black')
-              self.links.merge!('apple-touch-icon'          => '/ruby_app/resources/elements/mobile/platforms/ios/document/apple-touch-icon.png',
-                                'apple-touch-startup-image' => '/ruby_app/resources/elements/mobile/platforms/ios/document/apple-touch-startup-image.png')
+              self.links.merge!('apple-touch-icon'          => "#{RubyApp.root.nil_if('/')}/ruby_app/resources/elements/mobile/platforms/ios/document/apple-touch-icon.png",
+                                'apple-touch-startup-image' => "#{RubyApp.root.nil_if('/')}/ruby_app/resources/elements/mobile/platforms/ios/document/apple-touch-startup-image.png")
 
             end
 
