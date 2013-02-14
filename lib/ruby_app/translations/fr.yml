@@ -5,6 +5,10 @@ ruby_app:
       message: "%1.  La page sera actualisée afin que vous puissiez essayer de nouveau."
   elements:
     mobile:
+      default:
+        features:
+          language_page:
+            content: C'est le contenu de la page en français.
       dialogs:
         calendars:
           month_dialog:

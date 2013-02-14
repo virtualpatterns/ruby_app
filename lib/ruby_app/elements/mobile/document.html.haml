@@ -3,6 +3,8 @@
   #{__FILE__}
 %html{self.attributes}
   %head
+    %meta{'charset'   => 'UTF-8'}
+
     - self.metadata.each do |name, value|
       %meta{'name'    => name,
             'content' => value}
