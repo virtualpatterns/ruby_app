@@ -43,14 +43,14 @@ module RubyApp
 
           @metadata.merge!('viewport' => 'width=device-width, initial-scale=1')
 
-          @stylesheets.push("#{RubyApp::root}/ruby_app/resources/elements/mobile/document/jquery.mobile-1.1.0/jquery.mobile-1.1.0.min.css")
+          @stylesheets.push("#{RubyApp.root}/ruby_app/resources/elements/mobile/document/jquery.mobile-1.1.0/jquery.mobile-1.1.0.min.css")
 
-          @scripts.push("#{RubyApp::root}/ruby_app/resources/elements/mobile/document/jquery-1.8.3.min.js")
-          @scripts.push("#{RubyApp::root}/ruby_app/resources/elements/mobile/document/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.min.js")
-          @scripts.push("#{RubyApp::root}/ruby_app/resources/elements/mobile/document/jquery.ui.touch-punch-0.2.2.min.js")
-          @scripts.push("#{RubyApp::root}/ruby_app/resources/elements/mobile/document/fastclick-0.5.6.js")
-          @scripts.push("#{RubyApp::root}/ruby_app/resources/elements/mobile/document/document.js")
-          @scripts.push("#{RubyApp::root}/ruby_app/resources/elements/mobile/document/jquery.mobile-1.1.0/jquery.mobile-1.1.0.min.js")
+          @scripts.push("#{RubyApp.root}/ruby_app/resources/elements/mobile/document/jquery-1.8.3.min.js")
+          @scripts.push("#{RubyApp.root}/ruby_app/resources/elements/mobile/document/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.min.js")
+          @scripts.push("#{RubyApp.root}/ruby_app/resources/elements/mobile/document/jquery.ui.touch-punch-0.2.2.min.js")
+          @scripts.push("#{RubyApp.root}/ruby_app/resources/elements/mobile/document/fastclick-0.5.6.js")
+          @scripts.push("#{RubyApp.root}/ruby_app/resources/elements/mobile/document/document.js")
+          @scripts.push("#{RubyApp.root}/ruby_app/resources/elements/mobile/document/jquery.mobile-1.1.0/jquery.mobile-1.1.0.min.js")
 
         end
 
@@ -58,12 +58,12 @@ module RubyApp
           return @pages.last
         end
 
-        def show(event, url = RubyApp::root)
+        def show(event, url = RubyApp.root)
           RubyApp::Session.documents.push(self)
           event.go(url)
         end
 
-        def hide(event, url = RubyApp::root)
+        def hide(event, url = RubyApp.root)
           RubyApp::Session.documents.pop
           event.go(url)
         end

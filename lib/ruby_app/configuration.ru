@@ -11,7 +11,7 @@ require 'ruby_app/rack'
 
 # Placeholder for template application require
 
-RubyApp::root = '/root'
+RubyApp.root = '/'
 
 use Rack::ShowExceptions
 use Rack::Reloader
@@ -22,7 +22,7 @@ use Rack::Reloader
 use RubyApp::Rack::Application, :configuration_paths  => [File.join(RubyApp::ROOT, %w[configuration.yml])]
 # Placeholder for template application configuration path
 
-map "#{RubyApp::root}/ruby_app/resources" do
+map "#{RubyApp.root}/ruby_app/resources" do
   run Rack::File.new(File.join(RubyApp::ROOT, %w[resources]))
 end
 
@@ -30,11 +30,11 @@ end
 
 
 
-map "#{RubyApp::root}/favicon.ico" do
+map "#{RubyApp.root}/favicon.ico" do
   run Rack::File.new(File.join(RubyApp::ROOT, %w[resources favicon.ico]))
 end
 
-map "#{RubyApp::root}/" do
+map "#{RubyApp.root}/" do
   use RubyApp::Rack::Request
   use RubyApp::Rack::Response
   use RubyApp::Rack::Language
