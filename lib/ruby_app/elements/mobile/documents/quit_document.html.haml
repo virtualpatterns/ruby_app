@@ -3,6 +3,7 @@
   #{__FILE__}
 %html{self.attributes}
   %head
+    %meta{'charset' => 'UTF-8'}
     %script
       :plain
         location.replace('#{RubyApp.root}');
