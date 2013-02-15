@@ -56,7 +56,7 @@ namespace :ruby_app do
 
     desc 'Run the test script on the local environment'
     task :local do |task|
-      Rake::Task['ruby_app:test:url'].invoke('http://localhost:8000/root')
+      Rake::Task['ruby_app:test:url'].invoke("http://localhost:8000/ruby_app")
     end
 
   end
