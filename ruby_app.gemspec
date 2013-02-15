@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'chronic_duration'
   s.add_dependency 'facets'
   s.add_dependency 'fileutils'
-  s.add_dependency 'haml'
+  s.add_dependency 'haml',              '3.1.8'
   s.add_dependency 'json'
   s.add_dependency 'koala'
   s.add_dependency 'mime-types'

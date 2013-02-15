@@ -10,4 +10,8 @@ module RubyApp
     @@_root = value
   end
 
+  def self.root_or_nil
+    return @@_root.nil_if('/')
+  end
+
 end
