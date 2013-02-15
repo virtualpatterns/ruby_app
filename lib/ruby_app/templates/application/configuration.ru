@@ -22,19 +22,19 @@ use Rack::Reloader
 use RubyApp::Rack::Application, :configuration_paths  => [ File.join(RubyApp::ROOT, %w[configuration.yml]),
                                                            File.join(_APPLICATION_UPCODE_::ROOT, %w[configuration.yml])]
 
-map '#{RubyApp.root.nil_if('/')}/ruby_app/resources' do
+map '#{RubyApp.root_or_nil}/ruby_app/resources' do
   run Rack::File.new(File.join(RubyApp::ROOT, %w[resources]))
 end
 
-map '#{RubyApp.root.nil_if('/')}/_APPLICATION_DOWNCODE_/resources' do
+map '#{RubyApp.root_or_nil}/_APPLICATION_DOWNCODE_/resources' do
   run Rack::File.new(File.join(_APPLICATION_UPCODE_::ROOT, %w[resources]))
 end
 
-map '#{RubyApp.root.nil_if('/')}/favicon.ico' do
+map '#{RubyApp.root_or_nil}/favicon.ico' do
   run Rack::File.new(File.join(RubyApp::ROOT, %w[resources favicon.ico]))
 end
 
-map '#{RubyApp.root.nil_if('/')}/' do
+map '#{RubyApp.root_or_nil}/' do
   use RubyApp::Rack::Request
   use RubyApp::Rack::Response
   use RubyApp::Rack::Language
