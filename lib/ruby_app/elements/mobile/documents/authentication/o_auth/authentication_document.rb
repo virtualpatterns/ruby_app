@@ -29,7 +29,7 @@ module RubyApp
                     # RubyApp::Log.debug("OAUTH     scopes=#{scopes.inspect}")
                     # RubyApp::Log.debug("OAUTH     options=#{options.inspect}")
                     @client = ::OAuth2::Client.new(access_key, secret_key, options)
-                    url = @client.auth_code.authorize_url(:redirect_uri => RubyApp::Request.url,
+                    url = @client.auth_code.authorize_url(:redirect_uri => RubyApp::Request.environment[RubyApp::Elements::Mobile::Documents::Authentication::AuthenticationDocument.configuration.return_to],
                                                           :scope        => scopes.is_a?(Array) ? scopes.join(',') : scopes)
                     RubyApp::Log.debug("OAUTH     --> #{url.inspect}")
                     event.go(url)

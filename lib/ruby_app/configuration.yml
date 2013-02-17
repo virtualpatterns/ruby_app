@@ -10,6 +10,8 @@ default:
       mobile:
         documents:
           authentication:
+            authentication_document:
+              return_to: HTTP_REFERER
             facebook:
               authentication_document:
                 access_key: 'ABC'
@@ -17,10 +19,10 @@ default:
             o_auth:
               git_hub_authentication_document:
                 access_key: 'ABC'
+                access_token_url: 'https://github.com/login/oauth/access_token'
+                authorize_url: 'https://github.com/login/oauth/authorize'
                 secret_key: '123'
                 url: 'https://api.github.com'
-                authorize_url: 'https://github.com/login/oauth/authorize'
-                access_token_url: 'https://github.com/login/oauth/access_token'
             open_id:
               ax_authentication_document:
                 attributes:

@@ -29,7 +29,7 @@ module RubyApp
                     @consumer = ::OpenID::Consumer.new(RubyApp::Session.data, nil)
                     request = @consumer.begin(identifier)
                     self.process_request(request)
-                    url = request.redirect_url(RubyApp::Request.url, RubyApp::Request.url)
+                    url = request.redirect_url(RubyApp::Request.url, RubyApp::Request.environment[RubyApp::Elements::Mobile::Documents::Authentication::AuthenticationDocument.configuration.return_to])
                     RubyApp::Log.debug("OPENID    --> #{url.inspect}")
                     event.go(url)
                   else
