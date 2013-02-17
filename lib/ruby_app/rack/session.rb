@@ -17,7 +17,7 @@ module RubyApp
           #RubyApp::Log.debug("#{RubyApp::Log.prefix(self, __method__)}                    (now)=#{Time.now.inspect}")
           RubyApp::Response.set_cookie('_session', { :value    => RubyApp::Session.session_id,
                                                      :expires  => RubyApp::Session.expires,
-                                                     :path     => '/'})
+                                                     :path     => RubyApp.root})
           return @application.call(environment)
         ensure
           RubyApp::Session.unload!
