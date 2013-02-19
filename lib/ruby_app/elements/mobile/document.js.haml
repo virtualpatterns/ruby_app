@@ -43,9 +43,10 @@
         $('div.overlay').css('display', 'none');
       }
     };
+    now = null;
     this.sendEvent = function(event, wait) {
       RubyApp.log('ENQUEUE event.class=' + event._class);
-      event.now = new Date().toString();
+      event.now = RubyApp.now == undefined ? new Date().toString() : RubyApp.now;
       event.session = RubyApp.getData('session', null);
       var _wait = wait == undefined ? true : wait;
       RubyApp.enQueue ( function() {

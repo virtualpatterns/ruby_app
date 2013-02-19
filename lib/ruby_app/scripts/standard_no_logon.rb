@@ -1,3 +1,4 @@
+load_script! 'now'
 load_script! 'default'
 load_script! 'elements/buttons'
 load_script! 'elements/calendars/month'
