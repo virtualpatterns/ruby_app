@@ -69,9 +69,9 @@ module RubyApp
 
       route(RubyApp::Mixins::RouteMixin::POST, /.*/) do |method, path|
         begin
-          #RubyApp::Request.POST.each do |name, value|
+          # RubyApp::Request.POST.each do |name, value|
           #  RubyApp::Log.debug("POST      #{name.to_sym.inspect}=#{value.inspect}")
-          #end
+          # end
           event = RubyApp::Element::Event.from_hash(RubyApp::Request.POST)
           RubyApp::Log.duration(RubyApp::Log::INFO, "EVENT     #{event.class}") do
             RubyApp::Session.process_event!(event)
