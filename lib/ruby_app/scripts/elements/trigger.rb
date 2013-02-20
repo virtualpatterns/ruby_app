@@ -1,18 +1,8 @@
 load_script! 'common/features'
 
-add_step! RubyApp::Element::Event do |event|
-  event.assert_exists_link('Trigger')
-  event.click_link('Trigger')
-end
-
-add_step! RubyApp::Element::TriggeredEvent do |event|
-  event.click_link('Back')
-end
-
-add_step! RubyApp::Elements::Mobile::Page::ShownEvent do |event|
-  event.click_link('Back')
-end
-
-add_step! RubyApp::Elements::Mobile::Page::ShownEvent do |event|
-  event.execute {}
-end
+add_step! (RubyApp::Element::Event)                       { |event| event.assert_exists_link('Trigger') }
+add_step! (RubyApp::Element::AssertedEvent)               { |event| event.click_link('Trigger') }
+add_step! (RubyApp::Element::TriggeredEvent)              { |event| event.trigger_element(event.source) }
+add_step! (RubyApp::Element::TriggeredEvent)              { |event| event.click_link('Back') }
+add_step! (RubyApp::Elements::Mobile::Page::ShownEvent)   { |event| event.click_link('Back') }
+add_step! (RubyApp::Elements::Mobile::Page::ShownEvent)   { |event| event.execute {} }

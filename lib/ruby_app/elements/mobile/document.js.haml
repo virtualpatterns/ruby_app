@@ -143,6 +143,9 @@
         RubyApp.log('SUCCESS RubyApp.destroyTrigger("' + id + '")');
       }
     };
+    this.triggerElement = function(id) {
+      RubyApp.sendEvent({_class:'RubyApp::Element::TriggeredEvent', source:id});
+    };
     this.refreshBrowser = function() {
       $(window).clearQueue();
       location.replace(location.href);
