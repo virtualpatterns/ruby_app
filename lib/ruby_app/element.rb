@@ -53,6 +53,10 @@ module RubyApp
         self.source.send(:on_event, self)
       end
 
+      def now=(value)
+        self.execute("RubyApp.now = #{value.to_json};")
+      end
+
       def refresh_browser
         self.execute("RubyApp.refreshBrowser();")
       end
@@ -88,6 +92,10 @@ module RubyApp
 
       def destroy_trigger(element)
         self.execute("RubyApp.destroyTrigger(#{element.element_id.to_json});")
+      end
+
+      def trigger_element(element)
+        self.execute("RubyApp.triggerElement(#{element.element_id.to_json});")
       end
 
       def quit!

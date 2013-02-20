@@ -28,6 +28,7 @@ module RubyApp
 
               self.triggered do |element, event|
                 event.update_text('div.message', "Triggered at #{RubyApp::Language.locale.strftime(Time.now, RubyApp::Application.configuration.format.date.long)}")
+                event.destroy_trigger(self)
               end
 
             end
