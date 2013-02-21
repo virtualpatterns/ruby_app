@@ -16,7 +16,23 @@ module RubyApp
     attr_reader :options, :environment
 
     def initialize
+
       @environment = {}
+
+      RubyApp::Log.debug("LOG       RubyApp::Application.root = #{RubyApp::Application.root.inspect}")
+
+    end
+
+    def self.root
+      @@_root ||= '/'
+    end
+
+    def self.root=(value)
+      @@_root = value
+    end
+
+    def self.root_or_nil
+      return @@_root.nil_if('/')
     end
 
     def self.get

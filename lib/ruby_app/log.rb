@@ -14,6 +14,8 @@ module RubyApp
     extend RubyApp::Mixins::ConfigurationMixin
     extend RubyApp::Mixins::DelegateMixin
 
+    attr_reader :path
+
     class Formatter < ::Logger::Formatter
 
       def call(severity, time, application, message)
@@ -85,7 +87,11 @@ module RubyApp
 
       def initialize(path)
         super(path)
+
         self.formatter = RubyApp::Log::Formatter.new
+
+        @path = path
+
       end
 
   end
