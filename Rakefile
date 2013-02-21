@@ -47,16 +47,25 @@ namespace :ruby_app do
 
   end
 
-  namespace :test do
+  namespace :script do
 
-    desc 'Run the test script through PhantomJS on a given url'
-    task :url, :url do |task, arguments|
-      system("phantomjs lib/ruby_app/scripts/phantom.js #{arguments.url}")
+    desc 'Run a given script through PhantomJS on a given url'
+    task :run, :url, :script do |task, arguments|
+      system("phantomjs --ignore-ssl-errors=true lib/ruby_app/scripts/phantom/phantom.js #{arguments.url} #{arguments.script}")
     end
 
-    desc 'Run the test script on the local environment'
-    task :local do |task|
-      Rake::Task['ruby_app:test:url'].invoke("http://localhost:8000/ruby_app")
+    namespace :standard_no_logon do
+
+      desc 'Run the script through PhantomJS on a given url'
+      task :run, :url do |task, arguments|
+        Rake::Task['ruby_app:script:run'].invoke(arguments.url, 'phantom/standard_no_logon')
+      end
+
+      desc 'Run the script on the local environment'
+      task :local do |task|
+        Rake::Task['ruby_app:script:standard_no_logon:run'].invoke('http://localhost:8000')
+      end
+
     end
 
   end
