@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"Authen",
+				"AuthenticationDocument"
+			],
+			[
+				"Open",
+				"OpenId"
+			],
+			[
 				"A",
 				"API"
 			]
@@ -40,20 +48,37 @@
 	},
 	"file_history":
 	[
-		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/scripts/phantom.js",
-		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/session.rb",
-		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/rack/session.rb",
-		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/scripts/phantom.rb",
-		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/Rakefile",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/scripts/now.rb",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/scripts/elements/trigger.rb",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/default/features/trigger_page.rb",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/element.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/document.js.haml",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/session.rb",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/document.rb",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/rack/route.rb",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/scripts/standard_no_logon.rb",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/scripts/default.rb",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/scripts/phantom.js",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/document.html.haml",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/scripts/phantom.rb",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/scripts/standard_all.rb",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/scripts/standard_logon.rb",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/scripts/standard_continuous.rb",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/scripts/standard.rb",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/documents/authentication/open_id/authentication_document.rb",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/configuration.yml",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/templates/application/configuration.yml",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/documents/authentication/facebook/authentication_document.rb",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/documents/authentication/o_auth/authentication_document.rb",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/documents/authentication/authentication_document.rb",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/documents/authentication/open_id/google_authentication_document.rb",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/request.rb",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/rack/session.rb",
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/Rakefile",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/configuration.ru",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/rack/language.rb",
-		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/rack/route.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/version.rb",
-		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/document.html.haml",
-		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/document.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/platforms/ios/document.rb",
-		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/request.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/templates/application/configuration.ru",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/ruby_app.gemspec",
@@ -67,8 +92,6 @@
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/default/features/language_page.html.haml",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/scripts/elements/lists.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/scripts/common/features/authentications.rb",
-		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/scripts/elements/trigger.rb",
-		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/scripts/standard.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/translations/en.yml",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/translations/fr.yml",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/default/features/default_page.rb",
@@ -81,10 +104,8 @@
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/default/features/dialogs_page.css.haml",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/default/features/language_page.js.haml",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/default/features/language_page.rb",
-		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/scripts/standard_logon.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/documents/mail_document.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/documents/quit_document.rb",
-		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/documents/authentication/o_auth/authentication_document.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/rack/request.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/language.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/mixins.rb",
@@ -106,8 +127,6 @@
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/templates/application/Gemfile",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/templates/application/console.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/bin/console.rb",
-		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/templates/application/configuration.yml",
-		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/configuration.yml",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/mixins/route_mixin.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/log.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/rack/application.rb",
@@ -118,10 +137,8 @@
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/resources/elements/mobile/document/jquery.mobile-1.1.1.zip",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/resources/elements/mobile/document/fastclick.js",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/click.js.haml",
-		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/scripts/standard_continuous.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/documents/authentication/o_auth/google_authentication_document.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/default/features/authentications/default_page.rb",
-		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/documents/authentication/facebook/authentication_document.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/documents/authentication/google/authentication_document.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/documents/authentication/google/email_authentication_document.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/documents/authentication/o_auth/git_hub_authentication_document.rb",
@@ -133,7 +150,6 @@
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/default/features/change_page.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/page.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/navigation/page_button.rb",
-		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/element.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/default/features/trigger_page.js.haml",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/default/features/change_page.html.haml",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/default/features/trigger_page.html.haml",
@@ -143,7 +159,6 @@
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/list.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/resources/elements/mobile/document/fastclick.js.html",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/documents/authentication/authentication_page.html.haml",
-		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/documents/authentication/authentication_document.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/documents/authentication/authentication_page.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/navigation/close_button.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/default/default_document.rb",
@@ -160,14 +175,7 @@
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/navigation/close_button.html.haml",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/default/features/navigated_page.rb",
-		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/default/default_page.rb",
-		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/documents/authentication/open_id/authentication_document.rb",
-		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/documents/authentication/open_id/yahoo_authentication_document.rb",
-		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/rack/response.rb",
-		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/exceptions.rb",
-		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/exceptions/authentication_failed_exception.rb",
-		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/exceptions/assert_failed_exception.rb",
-		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/.gitignore"
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/default/default_page.rb"
 	],
 	"find":
 	{
@@ -178,6 +186,7 @@
 		"height": 93.0,
 		"where_history":
 		[
+			"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/scripts",
 			"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app",
 			"<open files>",
 			"/Users/fficnar/Dropbox/Projects/pike"
@@ -188,6 +197,9 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"end",
+			"do",
+			"==",
 			"RubyApp.root.nil_if('/')",
 			"Haml",
 			"lists",
@@ -319,20 +331,32 @@
 		"selected_items":
 		[
 			[
-				"session",
-				"lib/ruby_app/rack/session.rb"
+				"route",
+				"lib/ruby_app/rack/route.rb"
+			],
+			[
+				"ele",
+				"lib/ruby_app/element.rb"
+			],
+			[
+				"doc",
+				"lib/ruby_app/elements/mobile/document.html.haml"
 			],
 			[
 				"document",
 				"lib/ruby_app/elements/mobile/document.js.haml"
 			],
 			[
-				"lang",
-				"lib/ruby_app/rack/language.rb"
+				"element.rb",
+				"lib/ruby_app/element.rb"
 			],
 			[
-				"route",
-				"lib/ruby_app/rack/route.rb"
+				"session",
+				"lib/ruby_app/rack/session.rb"
+			],
+			[
+				"lang",
+				"lib/ruby_app/rack/language.rb"
 			],
 			[
 				"mess",

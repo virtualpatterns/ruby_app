@@ -12,7 +12,7 @@ module RubyApp
     attr_reader :environment
 
     def language
-      self.path.gsub(/^#{RubyApp.root_or_nil}/,'') =~ /^\/([^\/\?]+)/
+      self.path.gsub(/^#{RubyApp::Application.root_or_nil}/,'') =~ /^\/([^\/\?]+)/
       return $1
     end
 
