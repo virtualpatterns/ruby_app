@@ -47,8 +47,6 @@ module RubyApp
 
           @scripts.push("#{RubyApp::Application.root_or_nil}/ruby_app/resources/elements/mobile/document/jquery-1.8.3.min.js")
           @scripts.push("#{RubyApp::Application.root_or_nil}/ruby_app/resources/elements/mobile/document/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.min.js")
-          # @scripts.push("#{RubyApp::Application.root_or_nil}/ruby_app/resources/elements/mobile/document/jquery.ui.touch-punch-0.2.2.min.js")
-          # @scripts.push("#{RubyApp::Application.root_or_nil}/ruby_app/resources/elements/mobile/document/fastclick-0.5.6.js")
           @scripts.push("#{RubyApp::Application.root_or_nil}/ruby_app/resources/elements/mobile/document/document.js")
           @scripts.push("#{RubyApp::Application.root_or_nil}/ruby_app/resources/elements/mobile/document/jquery.mobile-1.3.0/jquery.mobile-1.3.0.min.js")
 
