@@ -32,7 +32,7 @@ module RubyApp
     end
 
     def self.root_or_nil
-      return @@_root.nil_if('/')
+      return self.root.nil_if('/')
     end
 
     def self.get
