@@ -52,7 +52,7 @@
       RubyApp.enQueue ( function() {
         if (_wait)
           RubyApp.showWait();
-        RubyApp.log('DEQUEUE event.class=' + event._class);
+        // RubyApp.log('DEQUEUE event.class=' + event._class);
         request = $.ajax({type:'POST', url:location.href, data:event});
         request
           .success( function(event) {
@@ -81,7 +81,7 @@
         RubyApp.log('ENQUEUE RubyApp.showPage("' + id + '", ...)');
         RubyApp.enQueue ( function() {
           RubyApp.showWait();
-          RubyApp.log('DEQUEUE RubyApp.showPage("' + id + '", ...)');
+          // RubyApp.log('DEQUEUE RubyApp.showPage("' + id + '", ...)');
           request = $.ajax({type:'GET', url:RubyApp.getData('root', '/').blank_if('/') + '/' + RubyApp.getData('locale', 'en') + '/elements/' + id + '.html'});
           request
             .success( function(content) {
@@ -107,7 +107,7 @@
       RubyApp.log('ENQUEUE RubyApp.updateElement("' + id + '")');
       RubyApp.enQueue ( function() {
         RubyApp.showWait();
-        RubyApp.log('DEQUEUE RubyApp.updateElement("' + id + '")');
+        // RubyApp.log('DEQUEUE RubyApp.updateElement("' + id + '")');
         request = $.ajax({type:'GET', url:RubyApp.getData('root', '/').blank_if('/') + '/' + RubyApp.getData('locale', 'en') + '/elements/' + id + '.html'});
         request
           .success( function(content) {
@@ -246,6 +246,9 @@
     this.log = function(message) {
       if ( window.console )
         window.console.log(message);
+    };
+    this.alert = function(message) {
+      alert(message);
     };
   };
 

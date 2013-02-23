@@ -97,6 +97,10 @@ module RubyApp
                 RubyApp::Log.info('-' * 80)
                 RubyApp::Log.info("STEP      Completed #{@steps.length} steps")
                 RubyApp::Log.info('-' * 80)
+                event.log('-' * 80)
+                event.log("Completed #{@steps.length} steps")
+                event.log('-' * 80)
+                event.alert("Completed #{@steps.length} steps.")
               else
                 step = @steps[@steps_index]
                 RubyApp::Log.info("STEP      Next    #{step._class} #{step.file}:#{step.line}#{step.block ? nil : ' (no block)'}")

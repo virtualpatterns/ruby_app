@@ -57,6 +57,10 @@ module RubyApp
         self.execute("RubyApp.now = #{value.to_json};")
       end
 
+      def alert(message)
+        self.execute("RubyApp.alert(#{message.to_json});")
+      end
+
       def refresh_browser
         self.execute("RubyApp.refreshBrowser();")
       end
