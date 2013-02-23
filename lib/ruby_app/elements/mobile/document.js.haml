@@ -45,7 +45,7 @@
     };
     now = null;
     this.sendEvent = function(event, wait) {
-      RubyApp.log('ENQUEUE event.class=' + event._class);
+      // RubyApp.log('ENQUEUE event.class=' + event._class);
       event.now = RubyApp.now == undefined ? new Date().toString() : RubyApp.now;
       event.session = RubyApp.getData('session', null);
       var _wait = wait == undefined ? true : wait;
@@ -60,7 +60,7 @@
               RubyApp.log('EVAL    ' + statement)
               eval(statement);
             } );
-            RubyApp.log('SUCCESS event.class=' + event._class);
+            // RubyApp.log('SUCCESS event.class=' + event._class);
           } )
           .error( function(request, message, exception) {
             RubyApp.log('ERROR   event.class=' + event._class + ' message=' + message);
@@ -78,7 +78,7 @@
         $.mobile.changePage($('#' + id), options);
       else
       {
-        RubyApp.log('ENQUEUE RubyApp.showPage("' + id + '", ...)');
+        // RubyApp.log('ENQUEUE RubyApp.showPage("' + id + '", ...)');
         RubyApp.enQueue ( function() {
           RubyApp.showWait();
           // RubyApp.log('DEQUEUE RubyApp.showPage("' + id + '", ...)');
@@ -87,7 +87,7 @@
             .success( function(content) {
               $('body').prepend(content);
               $.mobile.changePage($('#' + id), options);
-              RubyApp.log('SUCCESS RubyApp.showPage("' + id + '", ...)');
+              // RubyApp.log('SUCCESS RubyApp.showPage("' + id + '", ...)');
             } )
             .error( function(request, message, exception) {
               RubyApp.log('ERROR   RubyApp.showPage("' + id + '", ...) message=' + message);
@@ -104,7 +104,7 @@
       $('#' + id).remove();
     };
     this.updateElement = function(id) {
-      RubyApp.log('ENQUEUE RubyApp.updateElement("' + id + '")');
+      // RubyApp.log('ENQUEUE RubyApp.updateElement("' + id + '")');
       RubyApp.enQueue ( function() {
         RubyApp.showWait();
         // RubyApp.log('DEQUEUE RubyApp.updateElement("' + id + '")');
@@ -117,7 +117,7 @@
             $('form.ui-listview-filter input').each( function() {
               $(this).val($(this).parents('form.ui-listview-filter').next('ul.list').attr('data-search-value'));
             });
-            RubyApp.log('SUCCESS RubyApp.updateElement("' + id + '")');
+            // RubyApp.log('SUCCESS RubyApp.updateElement("' + id + '")');
           } )
           .error( function(request, message, exception) {
             RubyApp.log('ERROR   RubyApp.updateElement("' + id + '") message=' + message);
@@ -140,7 +140,6 @@
       if ($('#' + id)[0]._trigger) {
         window.clearInterval($('#' + id)[0]._trigger);
         $('#' + id)[0]._trigger = undefined;
-        RubyApp.log('SUCCESS RubyApp.destroyTrigger("' + id + '")');
       }
     };
     this.triggerElement = function(id) {
