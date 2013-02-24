@@ -34,13 +34,13 @@ module RubyApp
       if RubyApp::Response.configuration.cache.formats.include?(format)
         cache = element.get_cache(format)
         if RubyApp::Response.configuration.cache.read? && File.exists?(cache)
-          #RubyApp::Log.debug("#{RubyApp::Log.prefix(self, __method__)} READ  #{cache.inspect}")
+          RubyApp::Log.info("READ      #{cache.inspect}")
           self.write(File.read(cache))
         else
           content = element.render(format)
           if RubyApp::Response.configuration.cache.write? && !File.exists?(cache)
             FileUtils.mkdir_p(File.dirname(cache))
-            #RubyApp::Log.debug("#{RubyApp::Log.prefix(self, __method__)} WRITE #{cache.inspect}")
+            RubyApp::Log.info("WRITE     #{cache.inspect}")
             File.open(cache, 'w') do |file|
               file.write(content)
               file.flush

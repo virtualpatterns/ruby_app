@@ -36,7 +36,6 @@ module RubyApp
       end
 
       route(RubyApp::Mixins::RouteMixin::GET, /\/elements\/([^\.]+)\.([^\.\?]+)/) do |method, path, element_id, format|
-        #RubyApp::Log.debug("#{RubyApp::Log.prefix(self, __method__)} --> #{method} #{path} #{element_id} #{format}")
         begin
           element = RubyApp::Element.get_element(element_id)
           RubyApp::Log.duration(RubyApp::Log::INFO, "GET       #{element.class} #{format}") do
@@ -47,7 +46,6 @@ module RubyApp
           RubyApp::Log.exception(RubyApp::Log::ERROR, exception)
           raise
         end
-        #RubyApp::Log.debug("#{RubyApp::Log.prefix(self, __method__)} <-- #{method} #{path} #{element_id} #{format}")
       end
 
       route(RubyApp::Mixins::RouteMixin::GET, /\.([^\.\?]+)/) do |method, path, format|
