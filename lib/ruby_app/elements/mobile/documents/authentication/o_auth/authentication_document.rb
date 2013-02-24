@@ -31,13 +31,13 @@ module RubyApp
                     @client = ::OAuth2::Client.new(access_key, secret_key, options)
                     url = @client.auth_code.authorize_url(:redirect_uri => RubyApp::Request.environment[RubyApp::Elements::Mobile::Documents::Authentication::AuthenticationDocument.configuration.return_to],
                                                           :scope        => scopes.is_a?(Array) ? scopes.join(',') : scopes)
-                    RubyApp::Log.debug("OAUTH     --> #{url.inspect}")
+                    RubyApp::Log.info("OAUTH     --> #{url.inspect}")
                     event.go(url)
                   else
-                    RubyApp::Log.debug("OAUTH     <-- #{RubyApp::Request.url.inspect}")
+                    RubyApp::Log.info("OAUTH     <-- #{RubyApp::Request.url.inspect}")
                     code = RubyApp::Request.query['code']
                     access_token = @client.auth_code.get_token(code, :redirect_uri => RubyApp::Request.url)
-                    RubyApp::Log.debug("OAUTH     token=#{access_token.token.inspect}")
+                    # RubyApp::Log.debug("OAUTH     token=#{access_token.token.inspect}")
                     self.process_token(access_token)
                     self.hide(event)
                   end

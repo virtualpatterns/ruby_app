@@ -31,10 +31,10 @@ module RubyApp
                     self.process_request(request)
                     url = request.redirect_url(RubyApp::Request.environment[RubyApp::Elements::Mobile::Documents::Authentication::AuthenticationDocument.configuration.return_to], 
                                                RubyApp::Request.environment[RubyApp::Elements::Mobile::Documents::Authentication::AuthenticationDocument.configuration.return_to])
-                    RubyApp::Log.debug("OPENID    --> #{url.inspect}")
+                    RubyApp::Log.info("OPENID    --> #{url.inspect}")
                     event.go(url)
                   else
-                    RubyApp::Log.debug("OPENID    <-- #{RubyApp::Request.url.inspect}")
+                    RubyApp::Log.info("OPENID    <-- #{RubyApp::Request.url.inspect}")
                     response = @consumer.complete(RubyApp::Request.query, 
                                                   RubyApp::Request.environment[RubyApp::Elements::Mobile::Documents::Authentication::AuthenticationDocument.configuration.return_to])
                     case response.status

@@ -28,7 +28,7 @@ module RubyApp
 
               def create_identity_from_token(token)
                 user = JSON.parse(token.get('/user').body)
-                RubyApp::Log.debug("GITHUB    user=#{user.inspect}")
+                # RubyApp::Log.debug("GITHUB    user=#{user.inspect}")
                 return self.create_identity_from_email(user['email'])
               end
 

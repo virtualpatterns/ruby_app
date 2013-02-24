@@ -19,7 +19,9 @@ module RubyApp
 
       @environment = {}
 
-      RubyApp::Log.debug("LOG       RubyApp::Application.root = #{RubyApp::Application.root.inspect}")
+      RubyApp::Log.info("LOG       RubyApp::Application.root                    = #{RubyApp::Application.root.inspect}")
+      RubyApp::Log.info("LOG       RubyApp::Response.configuration.cache.read?  = #{RubyApp::Response.configuration.cache.read?}")
+      RubyApp::Log.info("LOG       RubyApp::Response.configuration.cache.write? = #{RubyApp::Response.configuration.cache.write?}")
 
     end
 

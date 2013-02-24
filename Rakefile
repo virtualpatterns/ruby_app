@@ -77,12 +77,13 @@ namespace :ruby_app do
       system('find . | grep \'\\.cache\'')
     end
 
-    desc 'Remove all cached files'
+    desc 'Delete all cached files'
     task :destroy do
       puts 'Removing cached files ...'
       system('find . -name \'.cache\' | xargs rm -rv')
     end
 
   end
+
 
 end
