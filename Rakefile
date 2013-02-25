@@ -37,12 +37,17 @@ namespace :ruby_app do
 
     desc 'Create console'
     task :console do |task|
-      system('cd ./lib/ruby_app && clear && bundle exec ../../bin/ruby_app console')
+      system('cd ./lib/ruby_app; clear; bundle exec ../../bin/ruby_app console')
     end
 
     desc 'Run'
     task :run => ['ruby_app:cache:destroy'] do |task|
-      system('cd ./lib/ruby_app && clear && bundle exec ../../bin/ruby_app run')
+      system('cd ./lib/ruby_app; clear; bundle exec ../../bin/ruby_app run')
+    end
+
+    desc 'Run with coverage'
+    task :run_with_coverage => ['ruby_app:cache:destroy'] do |task|
+      system("cd ./lib/ruby_app; clear; bundle exec rcov --output ../../coverage --sort coverage --threshold 100 --exclude /.rvm ../../bin/ruby_app -- run; open ../../coverage/index.html")
     end
 
   end
