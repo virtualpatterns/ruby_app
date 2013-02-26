@@ -16,8 +16,8 @@ RubyApp::Application.root = '/'
 use Rack::ShowExceptions
 use Rack::Reloader
 
-#use RubyApp::Rack::Duration
-#use RubyApp::Rack::Memory
+#use RubyApp::Rack::Duration, :interval => 1000
+#use RubyApp::Rack::Memory,   :interval => 1000
 
 use RubyApp::Rack::Application, :configuration_paths  => [ File.join(RubyApp::ROOT, %w[configuration.yml]),
                                                            File.join(_APPLICATION_UPCODE_::ROOT, %w[configuration.yml])]

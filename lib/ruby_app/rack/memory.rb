@@ -5,12 +5,20 @@ module RubyApp
 
     class Memory
 
-      def initialize(application)
+      def initialize(application, options = {})
         @application = application
+        @options = {:interval => 5}.merge(options)
+        @count = 0
       end
 
       def call(environment)
-        RubyApp::Log.memory(RubyApp::Log::DEBUG, RubyApp::Log.prefix(self, __method__)) do
+        if @count.modulo(@options[:interval]) == 0
+          @count = 1
+          RubyApp::Log.memory(RubyApp::Log::DEBUG, 'MEMORY   ') do
+            return @application.call(environment)
+          end
+        else
+          @count += 1
           return @application.call(environment)
         end
       end

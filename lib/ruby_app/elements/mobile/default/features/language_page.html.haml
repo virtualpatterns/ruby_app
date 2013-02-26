@@ -7,3 +7,8 @@
       Language
   %div{'data-role' => 'content'}
     = RubyApp::Elements::Mobile::Default::Features::LanguagePage.translate.content
+    %br
+    %br
+    %code
+      Date.today&nbsp;=&nbsp;
+      = RubyApp::Elements::Mobile::Default::Features::LanguagePage.localize(Date.today, :human)

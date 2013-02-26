@@ -4,12 +4,15 @@ add_step! (RubyApp::Element::Event)                     { |event| event.assert_e
 add_step! (RubyApp::Element::AssertedEvent)             { |event| event.click_link('Lists') }
 
 add_step! (RubyApp::Elements::Mobile::Page::ShownEvent) { |event| event.assert_exists_search('search') }
+add_step! (RubyApp::Element::AssertedEvent)             { |event| event.assert_not_exists_search('null') }
 add_step! (RubyApp::Element::AssertedEvent)             { |event| event.update_search('search', 'value') }
 add_step! (RubyApp::Elements::Mobile::Page::ShownEvent) { |event| event.assert_exists_text('You input value.') }
 add_step! (RubyApp::Element::AssertedEvent)             { |event| event.assert_exists_link('OK') }
 add_step! (RubyApp::Element::AssertedEvent)             { |event| event.click_link('OK') }
+add_step! (RubyApp::Elements::Mobile::Page::ShownEvent) { |event| event.assert_exists_search('search', 'value') }
+add_step! (RubyApp::Element::AssertedEvent)             { |event| event.assert_not_exists_search('search', 'null') }
 
-add_step! (RubyApp::Elements::Mobile::Page::ShownEvent) { |event| event.assert_exists_link('Item 01') }
+add_step! (RubyApp::Element::AssertedEvent)             { |event| event.assert_exists_link('Item 01') }
 add_step! (RubyApp::Element::AssertedEvent)             { |event| event.click_list_item('Item 01') }
 add_step! (RubyApp::Elements::Mobile::Page::ShownEvent) { |event| event.assert_exists_text('You clicked the item Item 01.') }
 add_step! (RubyApp::Element::AssertedEvent)             { |event| event.assert_exists_link('OK') }

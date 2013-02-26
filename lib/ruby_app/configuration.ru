@@ -16,8 +16,8 @@ RubyApp::Application.root = '/'
 use Rack::ShowExceptions
 use Rack::Reloader
 
-#use RubyApp::Rack::Duration
-#use RubyApp::Rack::Memory
+use RubyApp::Rack::Duration,  :interval => 5
+use RubyApp::Rack::Memory,    :interval => 100
 
 use RubyApp::Rack::Application, :configuration_paths  => [File.join(RubyApp::ROOT, %w[configuration.yml])]
 # Placeholder for template application configuration path
