@@ -103,7 +103,7 @@ module RubyApp
       end
 
       def quit!
-        self.go('/quit')
+        self.go("#{RubyApp::Application.root_or_nil}/quit")
       end
 
       def go(url)
@@ -200,12 +200,12 @@ module RubyApp
         self.execute("RubyApp.assertNotExists(#{_selector.to_json});")
       end
 
-      def assert_exists_selector_value(selector)
+      def assert_exists_selector_value(selector, value = nil)
         _selector = ".ui-page-active #{selector}"
         self.execute("RubyApp.assertExistsValue(#{_selector.to_json}, #{value.to_json});")
       end
 
-      def assert_not_exists_selector_value(selector)
+      def assert_not_exists_selector_value(selector, value = nil)
         _selector = ".ui-page-active #{selector}"
         self.execute("RubyApp.assertNotExistsValue(#{_selector.to_json}, #{value.to_json});")
       end

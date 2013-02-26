@@ -22,3 +22,5 @@
         - element.content_for(:html, :link, 'myOpenID')
       = @yahoo_authentication_link.render(:html) do |element|
         - element.content_for(:html, :link, 'Yahoo!')
+      = @null_authentication_link.render(:html) do |element|
+        - element.content_for(:html, :link, 'Null')

@@ -5,6 +5,8 @@
     %h1
       RubyApp
   %div{'data-role' => 'content'}
+    %div.content
+      Nullam in mi mi, ac aliquet orci. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aenean vestibulum, est at rhoncus scelerisque, orci odio posuere justo, ac scelerisque nunc arcu tincidunt neque. Sed viverra vehicula ornare.
     %div{'data-role' => 'controlgroup'}
       = @features_link.render(:html) do |element|
         - element.content_for(:html, :link, 'Features')

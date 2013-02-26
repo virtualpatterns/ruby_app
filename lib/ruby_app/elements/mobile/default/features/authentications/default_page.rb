@@ -12,6 +12,7 @@ module RubyApp
             require 'ruby_app'
             require 'ruby_app/elements/mobile/button'
             require 'ruby_app/elements/mobile/documents/authentication/facebook/email_authentication_document'
+            require 'ruby_app/elements/mobile/documents/authentication/null/authentication_document'
             require 'ruby_app/elements/mobile/documents/authentication/o_auth/git_hub_authentication_document'
             require 'ruby_app/elements/mobile/documents/authentication/open_id/google_authentication_document'
             require 'ruby_app/elements/mobile/documents/authentication/open_id/my_open_id_authentication_document'
@@ -51,6 +52,11 @@ module RubyApp
                 @yahoo_authentication_link = RubyApp::Elements::Mobile::Button.new
                 @yahoo_authentication_link.clicked do |element, event|
                   RubyApp::Elements::Mobile::Documents::Authentication::OpenId::YahooAuthenticationDocument.new.show(event)
+                end
+
+                @null_authentication_link = RubyApp::Elements::Mobile::Button.new
+                @null_authentication_link.clicked do |element, event|
+                  RubyApp::Elements::Mobile::Documents::Authentication::Null::AuthenticationDocument.new.show(event)
                 end
 
               end
