@@ -14,7 +14,7 @@ module RubyApp
       def call(environment)
         if @count.modulo(@options[:interval]) == 0
           @count = 1
-          RubyApp::Log.memory(RubyApp::Log::DEBUG, 'MEMORY   ') do
+          RubyApp::Log.memory(RubyApp::Log::DEBUG, 'MEMORY    ') do
             return @application.call(environment)
           end
         else

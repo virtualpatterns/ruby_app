@@ -37,17 +37,26 @@ namespace :ruby_app do
 
     desc 'Create console'
     task :console do |task|
-      system('cd ./lib/ruby_app; clear; bundle exec ../../bin/ruby_app console')
+      system('cd ./lib/ruby_app; bundle exec irb -r ./console.rb --back-trace-limit 100')
     end
 
-    desc 'Run'
-    task :run => ['ruby_app:cache:destroy'] do |task|
-      system('cd ./lib/ruby_app; clear; bundle exec ../../bin/ruby_app run')
-    end
+    namespace :server do
 
-    desc 'Run with coverage'
-    task :run_with_coverage => ['ruby_app:cache:destroy'] do |task|
-      system("cd ./lib/ruby_app; clear; bundle exec rcov --output ../../coverage --sort coverage --threshold 100 --exclude /.rvm ../../bin/ruby_app -- run; open ../../coverage/index.html")
+      desc 'Start the server'
+      task :start, [:daemonize] => ['ruby_app:cache:destroy'] do |task, arguments|
+        daemonize = arguments.daemonize ? arguments.daemonize.to_b : true
+        system("cd ./lib/ruby_app; mkdir -p ./process/thin/log ./process/thin/pid; bundle exec thin --rackup configuration.ru --port 8000 --log ./process/thin/log/thin.log --pid ./process/thin/pid/thin.pid #{daemonize ? '--daemonize' : nil} start")
+      end
+
+      desc 'Stop the server'
+      task :stop do |task|
+        system('cd ./lib/ruby_app; for pid in ./process/thin/pid/*.pid; do bundle exec thin --pid $pid stop; done')
+      end
+
+      desc 'Restart the server'
+      task :restart => ['ruby_app:process:server:stop',
+                        'ruby_app:process:server:start']
+
     end
 
   end
@@ -84,7 +93,6 @@ namespace :ruby_app do
 
     desc 'Delete all cached files'
     task :destroy do
-      puts 'Removing cached files ...'
       system('find . -name \'.cache\' | xargs rm -rv')
     end
 
