@@ -28,6 +28,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'oauth2'
   s.add_dependency 'r18n-core'
   s.add_dependency 'rack'
+  s.add_dependency 'rake'
   s.add_dependency 'ruby-event'
   s.add_dependency 'ruby-openid'
   s.add_dependency 'sass'
@@ -36,6 +37,4 @@ Gem::Specification.new do |s|
   s.add_dependency 'thin'
   s.add_dependency 'yajl-ruby'
 
-  s.add_development_dependency 'rake'
-  s.add_development_dependency 'simplecov'
 end
