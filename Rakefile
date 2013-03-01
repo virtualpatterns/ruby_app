@@ -93,7 +93,6 @@ namespace :ruby_app do
 
     desc 'Delete all cached files'
     task :destroy do
-      puts 'Removing cached files ...'
       system('find . -name \'.cache\' | xargs rm -rv')
     end
 

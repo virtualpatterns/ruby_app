@@ -14,7 +14,7 @@ namespace :_APPLICATION_DOWNCODE_ do
     namespace :server do
 
       desc 'Start the server'
-      task :start, [:daemonize] => ['ruby_app:cache:destroy'] do |task, arguments|
+      task :start, [:daemonize] => ['_APPLICATION_DOWNCODE_:cache:destroy'] do |task, arguments|
         daemonize = arguments.daemonize ? arguments.daemonize.to_b : true
         system("mkdir -p ./process/thin/log ./process/thin/pid; bundle exec thin --rackup configuration.ru --port 8000 --log ./process/thin/log/thin.log --pid ./process/thin/pid/thin.pid #{daemonize ? '--daemonize' : nil} start")
       end
@@ -41,7 +41,6 @@ namespace :_APPLICATION_DOWNCODE_ do
 
     desc 'Remove all cached files'
     task :destroy do
-      puts 'Removing cached files ...'
       system('find . -name \'.cache\' | xargs rm -rv')
     end
 
