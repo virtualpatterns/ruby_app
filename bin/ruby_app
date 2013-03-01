@@ -17,8 +17,6 @@ usage: ruby_app <command> <arguments>
 
 Available commands include:
   create application    Create a basic application in the current folder named <arguments>.
-  console               Open an interactive console
-  run                   Run the application identified by the configuration.ru in <arguments>
 
 USAGE
 end
@@ -100,16 +98,6 @@ def create_application
   copy_folder(source, full_folder, replacements)
 end
 
-def console
-  argument = $*[1]
-  system("irb --back-trace-limit 100 -r #{argument || ( File.exists?(File.join(FileUtils.pwd, %w[console.rb])) ? File.join(FileUtils.pwd, %w[console.rb]) : File.join(File.dirname(__FILE__), %w[console.rb]) )}")
-end
-
-def run
-  argument = $*[1]
-  Rack::Server.start(:config => argument || File.join(FileUtils.pwd, %w[configuration.ru]))
-end
-
 def downcode(value)
   value = value.gsub(/::/, '/')
   value = value.gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2')
@@ -135,10 +123,6 @@ else
           puts "Blank or unrecognized command '#{$*[1].downcase}'"
           puts usage
       end
-    when 'console'
-      console
-    when 'run'
-      run
     else
       puts "Blank or unrecognized command '#{$*[0].downcase}'"
       puts usage

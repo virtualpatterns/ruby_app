@@ -1,4 +1,3 @@
-#\ --port 8000 --pid ./rack.pid
 # Placeholder for template application LOAD_PATH.unshift ...
 
 require 'rubygems'
