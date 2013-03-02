@@ -16,10 +16,10 @@ module RubyApp
 
     class Identity
 
-      attr_reader :url
+      attr_reader :uri
 
-      def initialize(url)
-        @url = url
+      def initialize(uri)
+        @uri = uri
       end
 
     end
