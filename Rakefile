@@ -54,8 +54,8 @@ namespace :ruby_app do
       end
 
       desc 'Restart the server'
-      task :restart => ['ruby_app:process:server:stop',
-                        'ruby_app:process:server:start']
+      task :restart, [:daemonize] => ['ruby_app:process:server:stop',
+                                      'ruby_app:process:server:start']
 
     end
 

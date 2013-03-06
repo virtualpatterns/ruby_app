@@ -36,7 +36,7 @@ module RubyApp
                   else
                     RubyApp::Log.info("OAUTH     <-- #{RubyApp::Request.url.inspect}")
                     code = RubyApp::Request.query['code']
-                    access_token = @client.auth_code.get_token(code, :redirect_uri => RubyApp::Request.url)
+                    access_token = @client.auth_code.get_token(code, :redirect_uri => RubyApp::Request.environment[RubyApp::Elements::Mobile::Documents::Authentication::AuthenticationDocument.configuration.return_to])
                     # RubyApp::Log.debug("OAUTH     token=#{access_token.token.inspect}")
                     self.process_token(access_token)
                     self.hide(event)
