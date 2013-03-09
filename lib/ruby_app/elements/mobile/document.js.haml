@@ -60,7 +60,7 @@
         request
           .success( function(event) {
             $.each(event.statements, function(index, statement) {
-              RubyApp.log('EVAL    ' + statement)
+              // RubyApp.log('EVAL    ' + statement)
               eval(statement);
             } );
             // RubyApp.log('SUCCESS event.class=' + event._class);
@@ -239,6 +239,7 @@
       RubyApp.assert('selector=' + selector + ', not visible', RubyApp.isVisible(selector) == false);
     };
     this.assert = function(name, value) {
+      RubyApp.log('ASSERT  ' + name + ' is ' + value)
       RubyApp.sendEvent({_class:'RubyApp::Element::AssertedEvent', source:$('html').attr('id'), name:name, value:eval(value)});
     };
     this.getData = function(name, _default) {
