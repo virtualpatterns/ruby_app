@@ -45,11 +45,13 @@ namespace :ruby_app do
       desc 'Start the server'
       task :start, [:daemonize] => ['ruby_app:cache:destroy'] do |task, arguments|
         daemonize = arguments.daemonize ? arguments.daemonize.to_b : true
+        puts "Starting ..."
         system("cd ./lib/ruby_app; mkdir -p ./process/thin/log ./process/thin/pid; bundle exec thin --rackup configuration.ru --port 8000 --log ./process/thin/log/thin.log --pid ./process/thin/pid/thin.pid #{daemonize ? '--daemonize' : nil} start")
       end
 
       desc 'Stop the server'
       task :stop do |task|
+        puts "Stopping ..."
         system('cd ./lib/ruby_app; for pid in ./process/thin/pid/*.pid; do bundle exec thin --pid $pid stop; done')
       end
 

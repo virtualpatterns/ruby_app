@@ -3,6 +3,9 @@
   String.prototype.blank_if = function(value) {
     return this == value ? '' : this;
   };
+  Date.prototype.tomorrow = function() {
+    return new Date(Date.now() + 24 * 60 * 60 * 1000);
+  };
   var RubyApp = new function() {
     var queue = [];
     this.enQueue = function(_function) {

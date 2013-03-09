@@ -127,7 +127,11 @@ module RubyApp
 
       def update_text(selector, value)
         _selector = ".ui-page-active #{selector}"
-        self.execute("RubyApp.updateText(#{_selector.to_json}, #{value.to_json});")
+        self.update_document_text(_selector, value)
+      end
+
+      def update_document_text(selector, value)
+        self.execute("RubyApp.updateText(#{selector.to_json}, #{value.to_json});")
       end
 
       def update_value(selector, value, change = true)
