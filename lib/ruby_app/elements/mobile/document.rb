@@ -43,7 +43,7 @@ module RubyApp
 
           @metadata.merge!('viewport' => 'width=device-width, initial-scale=1')
 
-          @links.merge('icon' => "#{RubyApp::Application.root_or_nil}/ruby_app/resources/elements/mobile/document/icon.ico")
+          @links.merge!('icon' => "#{RubyApp::Application.root_or_nil}/ruby_app/resources/elements/mobile/document/icon.ico")
 
           @stylesheets.push("#{RubyApp::Application.root_or_nil}/ruby_app/resources/elements/mobile/document/jquery.mobile-1.3.0/jquery.mobile-1.3.0.min.css")
 
