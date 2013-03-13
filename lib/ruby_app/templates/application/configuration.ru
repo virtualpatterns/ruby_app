@@ -29,10 +29,6 @@ map '#{RubyApp::Application.root_or_nil}/_APPLICATION_DOWNCODE_/resources' do
   run Rack::File.new(File.join(_APPLICATION_UPCODE_::ROOT, %w[resources]))
 end
 
-map '#{RubyApp::Application.root_or_nil}/favicon.ico' do
-  run Rack::File.new(File.join(RubyApp::ROOT, %w[resources favicon.ico]))
-end
-
 map '#{RubyApp::Application.root_or_nil}/' do
   use RubyApp::Rack::Request
   use RubyApp::Rack::Response
