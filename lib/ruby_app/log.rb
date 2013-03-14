@@ -29,7 +29,7 @@ module RubyApp
       begin
         return yield
       ensure
-        self.log(severity, "#{message}#{Time.now - start}s")
+        self.log(severity, "#{message} #{Time.now - start}s")
       end
     end
 
@@ -39,7 +39,7 @@ module RubyApp
       ensure
         GC.start
         count = ObjectSpace.each_object { |item| }
-        self.log(severity, "#{message}#{count} objects")
+        self.log(severity, "#{message} #{count} objects")
       end
     end
 
