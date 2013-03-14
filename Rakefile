@@ -37,7 +37,7 @@ namespace :ruby_app do
 
     desc 'Create console'
     task :console do |task|
-      system('cd ./lib/ruby_app; bundle exec irb -r ./console.rb --back-trace-limit 100')
+      system('cd ./lib/ruby_app; bundle exec pry -r ./console.rb')
     end
 
     namespace :server do
