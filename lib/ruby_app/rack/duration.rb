@@ -14,7 +14,7 @@ module RubyApp
       def call(environment)
         if @count.modulo(@options[:interval]) == 0
           @count = 1
-          RubyApp::Log.duration(RubyApp::Log::INFO, 'DURATION  ') do
+          RubyApp::Log.duration(RubyApp::Log::INFO, 'DURATION ') do
             return @application.call(environment)
           end
         else
