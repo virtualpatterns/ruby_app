@@ -48,6 +48,7 @@
 	},
 	"file_history":
 	[
+		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/document.js.haml",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/Rakefile",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/ruby_app.gemspec",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/scripts/phantom/phantom.js",
@@ -82,7 +83,6 @@
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/documents/authentication/open_id/authentication_document.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/documents/authentication/authentication_document.css.haml",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/session.rb",
-		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/elements/mobile/document.js.haml",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/element.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/scripts/standard_all.rb",
 		"/Users/fficnar/Dropbox/Projects/Ruby/gems/ruby_app/lib/ruby_app/resources/elements/mobile/document/jquery.ui.touch-punch-0.2.2.min.js",
@@ -352,15 +352,15 @@
 		"selected_items":
 		[
 			[
+				"document",
+				"lib/ruby_app/elements/mobile/document.js.haml"
+			],
+			[
 				"phan",
 				"lib/ruby_app/scripts/phantom/phantom.js"
 			],
 			[
 				"documet",
-				"lib/ruby_app/elements/mobile/document.rb"
-			],
-			[
-				"document",
 				"lib/ruby_app/elements/mobile/document.rb"
 			],
 			[

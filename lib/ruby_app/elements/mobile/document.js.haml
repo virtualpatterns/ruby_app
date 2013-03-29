@@ -48,6 +48,7 @@
     };
     now = null;
     this.sendEvent = function(event, wait) {
+      var _start = new Date();
       // RubyApp.log('ENQUEUE event.class=' + event._class);
       event.now = RubyApp.now == undefined ? new Date().toString() : RubyApp.now;
       event.session = RubyApp.getData('session', null);
@@ -63,10 +64,12 @@
               // RubyApp.log('EVAL    ' + statement)
               eval(statement);
             } );
-            // RubyApp.log('SUCCESS event.class=' + event._class);
+            var _stop = new Date();
+            RubyApp.log('SUCCESS ' + event._class + ' ' + ((_stop - _start) / 1000) + 's');
           } )
           .error( function(request, message, exception) {
-            RubyApp.log('ERROR   event.class=' + event._class + ' message=' + message);
+            var _stop = new Date();
+            RubyApp.log('ERROR   ' + event._class + ' ' + message + ' ' + ((_stop - _start) / 1000) + 's');
             RubyApp.confirmRefreshBrowser(RubyApp.getData('error_message', null));
           } )
           .complete( function() {
@@ -81,6 +84,7 @@
         $.mobile.changePage($('#' + id), options);
       else
       {
+        var _start = new Date();
         // RubyApp.log('ENQUEUE RubyApp.showPage("' + id + '", ...)');
         RubyApp.enQueue ( function() {
           RubyApp.showWait();
@@ -90,10 +94,12 @@
             .success( function(content) {
               $('body').prepend(content);
               $.mobile.changePage($('#' + id), options);
-              // RubyApp.log('SUCCESS RubyApp.showPage("' + id + '", ...)');
+              var _stop = new Date();
+              RubyApp.log('SUCCESS RubyApp.showPage("' + id + '", ...) ' + ((_stop - _start) / 1000) + 's');
             } )
             .error( function(request, message, exception) {
-              RubyApp.log('ERROR   RubyApp.showPage("' + id + '", ...) message=' + message);
+              var _stop = new Date();
+              RubyApp.log('ERROR   RubyApp.showPage("' + id + '", ...) ' + message + ' ' + ((_stop - _start) / 1000) + 's');
               RubyApp.confirmRefreshBrowser(RubyApp.getData('error_message', null));
             } )
             .complete( function() {
@@ -107,6 +113,7 @@
       $('#' + id).remove();
     };
     this.updateElement = function(id) {
+      var _start = new Date();
       // RubyApp.log('ENQUEUE RubyApp.updateElement("' + id + '")');
       RubyApp.enQueue ( function() {
         RubyApp.showWait();
@@ -120,10 +127,12 @@
             $('form.ui-listview-filter input').each( function() {
               $(this).val($(this).parents('form.ui-listview-filter').next('ul.list').attr('data-search-value'));
             });
-            // RubyApp.log('SUCCESS RubyApp.updateElement("' + id + '")');
+            var _stop = new Date();
+            RubyApp.log('SUCCESS RubyApp.updateElement("' + id + '") ' + ((_stop - _start) / 1000) + 's');
           } )
           .error( function(request, message, exception) {
-            RubyApp.log('ERROR   RubyApp.updateElement("' + id + '") message=' + message);
+            var _stop = new Date();
+            RubyApp.log('ERROR   RubyApp.updateElement("' + id + '") ' + message + ' ' + ((_stop - _start) / 1000) + 's');
             RubyApp.confirmRefreshBrowser(RubyApp.getData('error_message', null));
           } )
           .complete( function() {
@@ -239,7 +248,7 @@
       RubyApp.assert('selector=' + selector + ', not visible', RubyApp.isVisible(selector) == false);
     };
     this.assert = function(name, value) {
-      RubyApp.log('ASSERT  ' + name + ' is ' + value)
+      // RubyApp.log('ASSERT  ' + name + ' is ' + value)
       RubyApp.sendEvent({_class:'RubyApp::Element::AssertedEvent', source:$('html').attr('id'), name:name, value:eval(value)});
     };
     this.getData = function(name, _default) {
