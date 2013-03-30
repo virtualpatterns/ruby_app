@@ -49,14 +49,14 @@
     now = null;
     this.sendEvent = function(event, wait) {
       var _start = new Date();
-      // RubyApp.log('ENQUEUE event.class=' + event._class);
+      // RubyApp.log('ENQUEUE ' + event._class);
       event.now = RubyApp.now == undefined ? new Date().toString() : RubyApp.now;
       event.session = RubyApp.getData('session', null);
       var _wait = wait == undefined ? true : wait;
       RubyApp.enQueue ( function() {
         if (_wait)
           RubyApp.showWait();
-        // RubyApp.log('DEQUEUE event.class=' + event._class);
+        // RubyApp.log('DEQUEUE ' + event._class);
         request = $.ajax({type:'POST', url:location.href, data:event});
         request
           .success( function(event) {
@@ -85,21 +85,21 @@
       else
       {
         var _start = new Date();
-        // RubyApp.log('ENQUEUE RubyApp.showPage("' + id + '", ...)');
+        // RubyApp.log('ENQUEUE RubyApp.showPage(...)');
         RubyApp.enQueue ( function() {
           RubyApp.showWait();
-          // RubyApp.log('DEQUEUE RubyApp.showPage("' + id + '", ...)');
+          // RubyApp.log('DEQUEUE RubyApp.showPage(...)');
           request = $.ajax({type:'GET', url:RubyApp.getData('root', '/').blank_if('/') + '/' + RubyApp.getData('locale', 'en') + '/elements/' + id + '.html'});
           request
             .success( function(content) {
               $('body').prepend(content);
               $.mobile.changePage($('#' + id), options);
               var _stop = new Date();
-              RubyApp.log('SUCCESS RubyApp.showPage("' + id + '", ...) ' + ((_stop - _start) / 1000) + 's');
+              RubyApp.log('SUCCESS RubyApp.showPage(...) ' + ((_stop - _start) / 1000) + 's');
             } )
             .error( function(request, message, exception) {
               var _stop = new Date();
-              RubyApp.log('ERROR   RubyApp.showPage("' + id + '", ...) ' + message + ' ' + ((_stop - _start) / 1000) + 's');
+              RubyApp.log('ERROR   RubyApp.showPage(...) ' + message + ' ' + ((_stop - _start) / 1000) + 's');
               RubyApp.confirmRefreshBrowser(RubyApp.getData('error_message', null));
             } )
             .complete( function() {
@@ -114,10 +114,10 @@
     };
     this.updateElement = function(id) {
       var _start = new Date();
-      // RubyApp.log('ENQUEUE RubyApp.updateElement("' + id + '")');
+      // RubyApp.log('ENQUEUE RubyApp.updateElement(...)');
       RubyApp.enQueue ( function() {
         RubyApp.showWait();
-        // RubyApp.log('DEQUEUE RubyApp.updateElement("' + id + '")');
+        // RubyApp.log('DEQUEUE RubyApp.updateElement(...)');
         request = $.ajax({type:'GET', url:RubyApp.getData('root', '/').blank_if('/') + '/' + RubyApp.getData('locale', 'en') + '/elements/' + id + '.html'});
         request
           .success( function(content) {
@@ -128,11 +128,11 @@
               $(this).val($(this).parents('form.ui-listview-filter').next('ul.list').attr('data-search-value'));
             });
             var _stop = new Date();
-            RubyApp.log('SUCCESS RubyApp.updateElement("' + id + '") ' + ((_stop - _start) / 1000) + 's');
+            RubyApp.log('SUCCESS RubyApp.updateElement(...) ' + ((_stop - _start) / 1000) + 's');
           } )
           .error( function(request, message, exception) {
             var _stop = new Date();
-            RubyApp.log('ERROR   RubyApp.updateElement("' + id + '") ' + message + ' ' + ((_stop - _start) / 1000) + 's');
+            RubyApp.log('ERROR   RubyApp.updateElement(...) ' + message + ' ' + ((_stop - _start) / 1000) + 's');
             RubyApp.confirmRefreshBrowser(RubyApp.getData('error_message', null));
           } )
           .complete( function() {
