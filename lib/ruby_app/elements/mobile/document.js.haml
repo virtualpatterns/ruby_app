@@ -65,13 +65,13 @@
                 // RubyApp.log('EVAL    ' + statement)
                 eval(statement);
               } );
-              var _stop = new Date();
-              RubyApp.log('SUCCESS ' + event._class + ' ' + ((_stop - _start) / 1000) + 's');
             };
             if (event.delay > 0)
               window.setTimeout(onSuccess, event.delay);
             else
               onSuccess();
+            var _stop = new Date();
+            RubyApp.log('SUCCESS ' + event._class + ' ' + ((_stop - _start) / 1000) + 's');
           } )
           .error( function(request, message, exception) {
             var _stop = new Date();
