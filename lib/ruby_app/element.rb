@@ -42,6 +42,7 @@ module RubyApp
           @session = nil
           @source = nil
         end
+        @delay = 0
         @statements = []
       end
 
@@ -51,6 +52,11 @@ module RubyApp
 
       def process!
         self.source.send(:on_event, self)
+      end
+
+      def delay(duration)
+        @delay = duration
+        return self
       end
 
       def now=(value)
@@ -294,6 +300,7 @@ module RubyApp
           '_class' => self.class.to_s,
           'now' => @now,
           'source' => @source ? @source.element_id : nil,
+          'delay' => @delay,
           'statements' => @statements
         }
       end
